@@ -1,8 +1,12 @@
 package study;
 
 
+import org.assertj.core.internal.Integers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.platform.commons.util.StringUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,5 +30,11 @@ public class SetTest {
     void size(){
         int size = numbers.size();
         assertThat(size).isEqualTo(3);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1,2,3})
+    void contain(Integer input) {
+        assertThat(numbers.contains(input)).isTrue();
     }
 }
