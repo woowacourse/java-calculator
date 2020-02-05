@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringTest {
+
     @DisplayName("spilt()에 대한 test")
     @Test
     void One() {
