@@ -7,9 +7,11 @@ import util.ExpressionParser;
 
 public class ExpressionParserTest {
 	@Test
-	void removeBlank() {
-		String values = "1 + 2   + 3";
-		String expected = "1+2+3";
-		Assertions.assertThat(ExpressionParser.removeBlank(values)).isEqualTo(expected);
+	void splitExpression() {
+		String values = "1 + 2 + 3";
+		String[] expected = {"1", "+", "2", "+", "3"};
+		String[] notExpected = {"1", "+", "2", "3"};
+		Assertions.assertThat(ExpressionParser.splitWithBlank(values)).isEqualTo(expected);
+		Assertions.assertThat(ExpressionParser.splitWithBlank(values)).isNotEqualTo(notExpected);
 	}
 }
