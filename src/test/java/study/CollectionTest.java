@@ -27,10 +27,9 @@ public class CollectionTest {
 		Assertions.assertThat(numbers.size()).isEqualTo(3);
 	}
 
-	@Test
-	void containsTest() {
-		Assertions.assertThat(numbers.contains(1)).isTrue();
-		Assertions.assertThat(numbers.contains(2)).isTrue();
-		Assertions.assertThat(numbers.contains(3)).isTrue();
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3})
+	void containsTestDeleteDup(int number) {
+		Assertions.assertThat(numbers.contains(number)).isTrue();
 	}
 }
