@@ -1,5 +1,7 @@
 package study;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +9,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
@@ -29,7 +32,13 @@ public class SetTest {
 
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3})
-	void isContain_ShouldReutrnTrueForNumberInSet(int number) {
-		Assertions.assertThat(numbers.contains(number));
+	void isContain_ShouldReturnTrueForNumberInSet(int number) {
+		assertTrue(numbers.contains(number));
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1:true", "4:false"}, delimiter = ':')
+	void isContain_ShouldReturnTrueForNumberInSetElseFalse(int input, boolean expected) {
+		Assertions.assertThat(numbers.contains(input)).isEqualTo(expected);
 	}
 }
