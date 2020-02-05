@@ -1,6 +1,7 @@
 package study;
 
 import static org.assertj.core.api.Assertions.*;
+//import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,12 +25,17 @@ public class StringTest {
     @Test
     void charAt() {
         String value = "abc";
+
         assertThatThrownBy(() -> {
             value.charAt(4);
         }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("String index out of range:");
 
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> {
+                    value.charAt(4);
+                }).withMessageContaining("String index out of range:");
     }
 
-
 }
+
