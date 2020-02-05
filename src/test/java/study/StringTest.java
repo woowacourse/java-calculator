@@ -28,4 +28,14 @@ public class StringTest {
 		String substringResult = value.substring(1, 4);
 		assertThat(substringResult).isEqualTo("1,2");
 	}
+
+	@Test
+	void charAt() {
+		value = "abc";
+		assertThatThrownBy(() -> {
+			for (int i = 0; i <= 3; i++) {
+				value.charAt(i);
+			}
+		}).isInstanceOf(StringIndexOutOfBoundsException.class).hasMessageContaining("String index out of range: 3");
+	}
 }
