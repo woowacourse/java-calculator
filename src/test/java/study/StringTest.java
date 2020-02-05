@@ -1,5 +1,6 @@
 package study;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class StringTest {
@@ -29,5 +30,15 @@ public class StringTest {
         String value = "abc";
         char c = value.charAt(2);
         System.out.println(c);
+    }
+
+    @Test
+    void charAtException() {
+        String value = "abc";
+
+        Assertions.assertThatThrownBy(() -> {
+            char c = value.charAt(5);
+        }).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 5");
     }
 }
