@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class StringTest {
+class StringTest {
     @Test
     @DisplayName("#split() : return String Array using standard")
     void split() {
