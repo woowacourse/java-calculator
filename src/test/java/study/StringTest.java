@@ -17,5 +17,11 @@ public class StringTest {
         Assertions.assertThat(onlyOne.split(",")).containsExactly("1");
     }
 
+    @Test
+    void secondRequire() {
+        String oneAndTwoWithBracket = "(1,2)";
+
+        Assertions.assertThat(oneAndTwoWithBracket.substring(1,4)).isEqualTo("1,2");
+    }
 
 }
