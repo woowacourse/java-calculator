@@ -13,4 +13,11 @@ public class StringTest {
         String[] temp = {"1", "2"};
         Assertions.assertThat(result).containsExactly(temp);
     }
+
+    @Test
+    void substring() {
+        String value = "(1,2)";
+        String result = value.substring(1, value.length() - 1);
+        Assertions.assertThat(result).contains("1,2");
+    }
 }
