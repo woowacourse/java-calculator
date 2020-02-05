@@ -27,7 +27,7 @@ class EquationFilterTest {
         //given
         List<String> equation = Arrays.asList("1", "+", "3", "*", "5");
         //when
-        List<String> operations = EquationFilter.getOperations(equation);
+        List<String> operations = EquationFilter.getOperators(equation);
         //then
         assertThat(operations).containsExactly("+", "*");
     }

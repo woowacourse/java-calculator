@@ -14,7 +14,7 @@ public class EquationFilter {
                 .collect(toList());
     }
 
-    public static List<String> getOperations(List<String> input) {
+    public static List<String> getOperators(List<String> input) {
         return input.stream()
                 .filter(EquationFilter::isNotNumber)
                 .collect(toList());
