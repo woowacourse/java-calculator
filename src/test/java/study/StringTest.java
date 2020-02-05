@@ -24,4 +24,12 @@ public class StringTest {
         Assertions.assertThat(oneAndTwoWithBracket.substring(1,4)).isEqualTo("1,2");
     }
 
+    @Test
+    void thirdRequire() throws StringIndexOutOfBoundsException{
+        String abc = "abc";
+
+        Assertions.assertThat(abc.charAt(0)).isEqualTo('a');
+        Assertions.assertThat(abc.charAt(1)).isEqualTo('b');
+        Assertions.assertThat(abc.charAt(2)).isEqualTo('c');
+    }
 }
