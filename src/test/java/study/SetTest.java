@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
@@ -33,5 +34,11 @@ public class SetTest {
     @ValueSource(ints = {1, 1, 2, 3})
     void containTest(int number) {
         assertTrue(numbers.contains(number));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"ravie-RAVIE", "Lavine-LAVINE", "orange-ORANKE", "dog-DoG"}, delimiter = '-')
+    void equalUpperCase(String input, String upperCase){
+        Assertions.assertThat(upperCase).isEqualTo(input.toUpperCase());
     }
 }
