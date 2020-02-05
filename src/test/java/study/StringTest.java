@@ -20,4 +20,11 @@ public class StringTest {
 		Assertions.assertThat(result).containsExactly("1");
 	}
 
+	@Test
+	void splitRemoveBrace() {
+		String value = "(1,2)";
+		String result = value.substring(1, 4);
+		Assertions.assertThat(result).isEqualTo("1,2");
+	}
+
 }
