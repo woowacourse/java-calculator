@@ -11,5 +11,6 @@ public class StringTest {
 		String[] result = value.split(",");
 		assertThat(result).contains("1");
 		assertThat(result).contains("2");
+		assertThat(result).containsExactly("1", "2");
 	}
 }
