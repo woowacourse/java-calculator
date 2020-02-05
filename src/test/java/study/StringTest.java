@@ -12,9 +12,10 @@ public class StringTest {
         String oneAndTwo = "1,2";
         String onlyOne = "1";
 
-        Assertions.assertThat(stringWithOneTwo.split(",")).contains("1");
-        Assertions.assertThat(stringWithOneTwo.split(",")).contains("2");
-        Assertions.assertThat(stringWithOnlyOne.split(",")).containsExactly("1");
+        Assertions.assertThat(oneAndTwo.split(",")).contains("1");
+        Assertions.assertThat(oneAndTwo.split(",")).contains("2");
+        Assertions.assertThat(onlyOne.split(",")).containsExactly("1");
     }
+
 
 }
