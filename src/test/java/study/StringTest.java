@@ -23,4 +23,11 @@ public class StringTest {
         String substring = value.substring(1, value.length()-1);
         System.out.println(substring);
     }
+
+    @Test
+    void charAt() {
+        String value = "abc";
+        char c = value.charAt(2);
+        System.out.println(c);
+    }
 }
