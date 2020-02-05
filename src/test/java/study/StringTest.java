@@ -26,4 +26,12 @@ public class StringTest {
 		System.out.println(result[0]);
 		Assertions.assertThat(result).containsExactly("1");
 	}
+
+	@Test
+	void subStringTest() {
+		String value = "(1, 2)";
+		String result = value.substring(1, value.length() - 1);
+		System.out.println(result);
+		Assertions.assertThat(result).isEqualTo("1, 2");
+	}
 }
