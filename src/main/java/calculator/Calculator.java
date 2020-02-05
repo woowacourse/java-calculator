@@ -1,11 +1,10 @@
 package calculator;
 
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class Calculator {
     private Set opertors;
+    private Queue<String> equation;
 
     public Calculator() {
         opertors = new HashSet<>();
@@ -18,5 +17,10 @@ public class Calculator {
     private String inputEquation(){
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    public Queue makeQueue(String inputString) {
+        String[] elements = inputString.split("\\s+", 0);
+        return new LinkedList<>(Arrays.asList(elements));
     }
 }
