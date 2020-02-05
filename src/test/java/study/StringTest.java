@@ -36,6 +36,5 @@ public class StringTest {
                     value.charAt(4);
                 }).withMessageContaining("String index out of range:");
     }
-
 }
 
