@@ -1,3 +1,16 @@
+/*
+ * Copyright (c) 2019 by tiger, DDoring
+ * All rights reserved.
+ *
+ * StringTest.java
+ * String 클래스에 대한 학습 테스트
+ *
+ * @author      tiger, DDoring
+ * @version     1.0
+ * @date        05 Feb 2020
+ *
+ */
+
 package study;
 
 import static org.assertj.core.api.Assertions.*;
