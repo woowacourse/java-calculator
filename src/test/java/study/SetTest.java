@@ -17,4 +17,9 @@ public class SetTest {
         numbers.add(3);
     }
 
+    @Test
+    void setSizeTest() {
+        int setSize = numbers.size();
+        System.out.println("Set(변수명 numbers)의 크기 : "+setSize);
+    }
 }
