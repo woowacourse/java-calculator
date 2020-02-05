@@ -1,5 +1,6 @@
 package study;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -7,6 +8,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class StringTest {
     @Test
+    @DisplayName("#split() : return String Array using standard")
     void split() {
         String value = "1,2";
         String[] result = value.split(",");
@@ -15,6 +17,7 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("#charAt() : return char when indexing within bound")
     void subString() {
         String value = "(1,2)";
         String result = value.substring(1, 4);
@@ -23,6 +26,7 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("#charAt() : return char when indexing within bound")
     void charAtIndexInBound() {
         String value = "abc";
         char result = value.charAt(1);
@@ -31,12 +35,13 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("#charAt() : throw IndexOutOfBoundsException when indexing out of bound")
     void charAtIndexOutOfBound() {
         String value = "abc";
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> {
-                    char anonymousChar = value.charAt(3);;
+                    char anonymousChar = value.charAt(3);
                 }
             ).withMessage("String index out of range: 3");
     }
