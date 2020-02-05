@@ -22,4 +22,10 @@ public class StringTest {
         assertThat(result2).containsExactly("1");
     }
 
+    @Test
+    void substring() {
+        String value3 = "(1,2)";
+        String result3 = value3.substring(1,4);
+        assertThat(result3).contains("1,2");
+    }
 }
