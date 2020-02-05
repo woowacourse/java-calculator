@@ -23,21 +23,23 @@ public class SetTest {
         numbers.add(3);
     }
 
+    @DisplayName("요구사항1: Set 사이즈 테스트")
     @Test
     void size() {
         assertThat(numbers.size()).isEqualTo(3);
     }
 
+    @DisplayName("요구사항2: Set의 값 포함여부 테스트")
     @ParameterizedTest
     @ValueSource(ints = {1,2,3})
     void contains(int number) {
         assertThat(numbers.contains(number)).isTrue();
     }
 
-    @DisplayName("결과 값이 다른 테스트")
+    @DisplayName("요구사항3: 요구사항2에서 결과 값이 다른 경우 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"1", "2", "4"})
-    void containsThrow(int input) {
-        assertThat(numbers.contains(input)).isTrue();
+    @CsvSource(value = {"1,true", "2,true", "3,true", "4,false"})
+    void containsCsv(int value, boolean expected) {
+        assertThat(numbers.contains(value)).isEqualTo(expected);
     }
 }
