@@ -1,5 +1,6 @@
 package study;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class StringTest {
 
     @Test
+    @DisplayName("String 분할")
     void split() {
         String value = "1,2";
         String[] result = value.split(",");
@@ -18,6 +20,7 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("String 추출")
     void subString() {
         String value = "(1,2)";
         String letter = value.substring(1, 4);
@@ -25,6 +28,7 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("인덱스를 벗어나는 경우")
     void charAt() {
         assertThatThrownBy(() -> {
             String value = "abc";
