@@ -1,4 +1,4 @@
-package calculator;
+package domain;
 
 public class Calculator {
 	int	add(int number1, int number2) {
