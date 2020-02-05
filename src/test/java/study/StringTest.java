@@ -19,4 +19,13 @@ public class StringTest {
         String result = value.substring(1, value.length()-1);
         assertThat(result).isEqualTo("1,2");
     }
+
+    @Test
+    void indexCheck(){
+        assertThatThrownBy(() -> {
+            String value = "abc";
+            char result2 = value.charAt(5);
+        }).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("Index: 2, Size: 2");
+    }
 }
