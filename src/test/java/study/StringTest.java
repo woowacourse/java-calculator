@@ -14,8 +14,17 @@ class StringTest {
         //when
         String[] result = string.split(",");
         //then
-        assertThat(result).contains("1","2");
+        assertThat(result).contains("1", "2");
     }
 
-
+    @DisplayName("substring() test")
+    @Test
+    void name() {
+        //given
+        String string = "(1,2)";
+        //when
+        String result = string.substring(1, 4);
+        //then
+        assertThat(result).isEqualTo("1,2");
+    }
 }
