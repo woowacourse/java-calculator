@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringTest {
@@ -41,5 +42,15 @@ class StringTest {
         }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("String index out of range: 3");
         //then
+    }
+
+    @DisplayName("charAt() 범위 벗어난 인자값 입력시 Exception test")
+    @Test
+    void Three2() {
+        String string = "abc";
+
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> string.charAt(3))
+                .withMessageMatching("String index out of range: \\d+");
     }
 }
