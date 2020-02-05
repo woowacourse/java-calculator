@@ -3,6 +3,8 @@ package study;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringTest {
 
@@ -40,6 +42,19 @@ public class StringTest {
         assertThat(value.charAt(0)).isEqualTo('a');
         assertThat(value.charAt(1)).isEqualTo('b');
         assertThat(value.charAt(2)).isEqualTo('c');
+    }
+
+    @Test
+    void charAtUsingIndexOutOfBounds() {
+        String value = "abc";
+
+        assertThatThrownBy(() -> value.charAt(value.length()))
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("range: " + value.length());
+
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> value.charAt(value.length()))
+                .withMessageContaining("range: " + value.length());
     }
 
 }
