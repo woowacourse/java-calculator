@@ -32,4 +32,14 @@ public class StringTest {
 
         assertThat(result).isEqualTo(expectedValue);
     }
+
+    @Test
+    void charAt() {
+        String value = "abc";
+
+        assertThat(value.charAt(0)).isEqualTo('a');
+        assertThat(value.charAt(1)).isEqualTo('b');
+        assertThat(value.charAt(2)).isEqualTo('c');
+    }
+
 }
