@@ -8,9 +8,10 @@ public class EquationFilter {
 
     private static final String NUMBER_FORMAT = "\\d+";
 
-    public static List<String> getNumbers(List<String> input) {
+    public static List<Double> getNumbers(List<String> input) {
         return input.stream()
                 .filter(EquationFilter::isNumber)
+                .map(Double::parseDouble)
                 .collect(toList());
     }
 

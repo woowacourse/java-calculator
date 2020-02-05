@@ -16,9 +16,9 @@ class EquationFilterTest {
         //given
         List<String> equation = Arrays.asList("1", "+", "3", "*", "5");
         //when
-        List<String> numbers = EquationFilter.getNumbers(equation);
+        List<Double> numbers = EquationFilter.getNumbers(equation);
         //then
-        assertThat(numbers).containsExactly("1", "3", "5");
+        assertThat(numbers).containsExactly(1D, 3D, 5D);
     }
 
     @DisplayName("입력받은 수식에서 연산자만 골라내기")
