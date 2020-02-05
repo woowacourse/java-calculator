@@ -34,4 +34,21 @@ public class StringTest {
 		System.out.println(result);
 		Assertions.assertThat(result).isEqualTo("1, 2");
 	}
+
+	@Test
+	void chatAtStringTest() {
+		String value = "abc";
+		char result = value.charAt(0);
+		System.out.println(result);
+		Assertions.assertThat(result).isEqualTo('a');
+	}
+
+	@Test
+	void chatAtErrorTest() {
+		Assertions.assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+			.isThrownBy(() -> {
+				String value = "abc";
+				char result = value.charAt(3);
+			});
+	}
 }
