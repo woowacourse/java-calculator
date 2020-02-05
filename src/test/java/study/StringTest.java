@@ -9,11 +9,12 @@ import java.util.ArrayList;
 public class StringTest {
     @Test
     void firstRequire() {
-        String stringWithOneTwo = "1,2";
-        String stringWithOnlyOne = "1";
+        String oneAndTwo = "1,2";
+        String onlyOne = "1";
 
         Assertions.assertThat(stringWithOneTwo.split(",")).contains("1");
         Assertions.assertThat(stringWithOneTwo.split(",")).contains("2");
         Assertions.assertThat(stringWithOnlyOne.split(",")).containsExactly("1");
     }
+
 }
