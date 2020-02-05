@@ -17,8 +17,17 @@ public class StringTest {
     @Test
     void substring() {
         String subValues = "(1,2)";
-        String resultValue = subValues.substring(1,4);
+        String resultValue = subValues.substring(1, 4);
         assertThat(resultValue).doesNotContain("(", ")");
+    }
+
+    @Test
+    void charAt() {
+        String value = "abc";
+        assertThatThrownBy(() -> {
+            value.charAt(4);
+        }).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range:");
 
     }
 
