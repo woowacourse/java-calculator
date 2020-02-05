@@ -3,8 +3,6 @@ package study;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -42,5 +40,19 @@ public class StringTest {
         }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("String index out of range: 4");
     }
+
+    @Test
+    @DisplayName("요구사항 3 - assertThatExceptionOfType, withMessageMatching 사용")
+    public void testException2() {
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> {
+                    String value4 = "abc";
+                    value4.charAt(4);
+                }).withMessageMatching("String index out of range: \\d+");
+    }
+
+
+
+
 
 }
