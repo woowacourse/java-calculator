@@ -44,5 +44,6 @@ public class StringTest {
                 .isThrownBy(()->{
                     value.charAt(3);
                 }).withMessageContaining("range");
+
     }
 }

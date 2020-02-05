@@ -47,4 +47,11 @@ public class SetTest {
         assertTrue(Sets.isContain(input));
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1:1","2:2","3:4"}, delimiter = ':')
+//    @CsvSource(value = {"1","2","3"})
+    void toLowerCase_ (String input, String expected) {
+//        String actual = input.toLowerCase();
+        assertThat(input).isEqualTo(expected);
+    }
 }
