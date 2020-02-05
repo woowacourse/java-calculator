@@ -25,6 +25,10 @@ public class StringTest {
         String[] result = value.split(",");
         Assertions.assertThat(result).contains("1");
         Assertions.assertThat(result).contains("2");
+
+        String one = "1";
+        String[] oneArray = one.split(",");
+        Assertions.assertThat(oneArray).containsExactly("1");
     }
 
     @Test
