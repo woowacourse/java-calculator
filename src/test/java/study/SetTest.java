@@ -24,20 +24,20 @@ public class SetTest {
     }
 
     @Test
-    void methodStudy_SizeOfSet_IsThree() {
+    void sizeOfSet_ShouldBeEqualToThree() {
         int result = numbers.size();
         assertThat(result).isEqualTo(3);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
-    void methodStudy_Contains_ValuesOfSet(int number) {
+    void set_ShouldContainsNumbers(int number) {
         assertThat(numbers.contains((number))).isTrue();
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0:true", "1:true", "2:true", "3:true", "4:false"}, delimiter = ':')
-    void methodStudy_Contains_ValuesOfSet2(int input, boolean expected) {
+    @CsvSource(value = {"0:false", "1:true", "2:true", "3:true", "4:false"}, delimiter = ':')
+    void set_ShouldContainsNumbers(int input, boolean expected) {
         assertThat(numbers.contains(input)).isEqualTo(expected);
     }
 }

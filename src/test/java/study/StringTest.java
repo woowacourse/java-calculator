@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringTest {
     @Test
-    void split1() {
+    void split_ShouldContainsOneAndTwo() {
         String value = "1,2";
         String[] result = value.split(",");
         assertThat(result).contains("1");
@@ -16,14 +16,14 @@ public class StringTest {
     }
 
     @Test
-    void split2() {
+    void split_ShouldContainsExactlyOne() {
         String value = "1";
         String[] result = value.split(",");
         assertThat(result).containsExactly("1");
     }
 
     @Test
-    void split3() {
+    void substring_ShouldRemoveParentheses() {
         String value = "(1,2)";
         String result = value.substring(1,4);
         assertThat(result).isEqualTo("1,2");
@@ -31,7 +31,7 @@ public class StringTest {
 
     @Test
     @DisplayName("Find String index out of bounds exception")
-    void methodStudy_StringOutOfBounds_ExceptionThrown() {
+    void charAt_ShouldThrowStringOutOfBoundsException(){
         String value = "abc";
         int index = 5;
         assertThatThrownBy(() -> {
