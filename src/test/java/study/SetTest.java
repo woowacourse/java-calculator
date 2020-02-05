@@ -1,9 +1,13 @@
 package study;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SetTest {
     private Set<Integer> numbers;
@@ -17,5 +21,9 @@ class SetTest {
         numbers.add(3);
     }
 
-
+    @DisplayName("size 실행 테스트 요구사항 1")
+    @Test
+    void size() {
+        assertThat(numbers).hasSize(3);
+    }
 }
