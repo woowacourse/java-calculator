@@ -20,4 +20,12 @@ public class StringTest {
 
         Assertions.assertThat(result2).containsExactly("1");
     }
+
+    @Test
+    void subString() {
+        String twoValue = "(1,2)";
+        String resultTwo = twoValue.substring(1, 4);
+
+        Assertions.assertThat(resultTwo).contains("1,2");
+    }
 }
