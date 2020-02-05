@@ -22,4 +22,17 @@ public class StringTest {
         String result = value.substring(1, value.length() - 1);
         Assertions.assertThat(result).contains("1, 2");
     }
+
+    @Test
+    @DisplayName("charAt Test")
+    void charAt() {
+        Assertions.assertThatThrownBy(() -> {
+            String value = "abc";
+            char charOfIndexZero = value.charAt(0);
+            char charOfIndexOne = value.charAt(1);
+            char charOfIndexTwo = value.charAt(2);
+            char charOfIndexThree = value.charAt(3);
+        }).isInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 3");
+    }
 }
