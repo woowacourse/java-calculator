@@ -14,4 +14,11 @@ public class StringTest {
 		result = value.split(",");
 		assertThat(result).contains("1").contains("2");
 	}
+
+	@Test
+	void splitNumber() {
+		value = "1";
+		result = value.split(",");
+		assertThat(result).containsExactly("1");
+	}
 }
