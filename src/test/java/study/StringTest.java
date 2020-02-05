@@ -1,12 +1,13 @@
 package study;
 
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringTest {
 
     @Test
-    void splitWithDelimiter(){
+    void splitWithDelimiter() {
         String value = "1,2";
         String[] result = value.split(",");
 
@@ -19,5 +20,16 @@ public class StringTest {
         String[] result = value.split(",");
 
         assertThat(result).containsExactly(value);
+    }
+
+    @Test
+    void substring() {
+        String expectedValue = "1,2";
+        String prefix = "(";
+        String suffix = ")";
+        String combinedValue = prefix + expectedValue + suffix;
+        String result = combinedValue.substring(prefix.length(), combinedValue.length() - suffix.length());
+
+        assertThat(result).isEqualTo(expectedValue);
     }
 }
