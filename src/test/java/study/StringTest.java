@@ -14,4 +14,12 @@ public class StringTest {
         Assertions.assertThat(result).contains("2");
         Assertions.assertThat(result).containsExactly("1", "2");
     }
+
+    @Test
+    @DisplayName("substring Test")
+    void substring() {
+        String value = "(1, 2)";
+        String result = value.substring(1, value.length() - 1);
+        Assertions.assertThat(result).contains("1, 2");
+    }
 }
