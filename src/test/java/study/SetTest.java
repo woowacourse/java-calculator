@@ -1,12 +1,15 @@
 package study;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("Set Methods Test")
 public class SetTest {
@@ -24,6 +27,14 @@ public class SetTest {
 	@Test
 	@DisplayName("size() works properly")
 	void size() {
-		Assertions.assertThat(numbers.size()).isEqualTo(4);
+		assertThat(numbers.size()).isEqualTo(4);
 	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3})
+	@DisplayName("contains() works properly")
+	void contains(int number) {
+		assertThat(numbers.contains(number)).isTrue();
+	}
+
 }
