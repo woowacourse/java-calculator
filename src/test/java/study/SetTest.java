@@ -5,11 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SetTest {
@@ -37,4 +39,10 @@ public class SetTest {
         assertTrue(numbers.contains(number));
     }
 
+    @ParameterizedTest
+    @DisplayName("contains test 2")
+    @CsvSource(value = {"1:true", "2: true", "3:true", "4:false"}, delimiter = ':')
+    void contains_CanCheckTrueAndFalse(int index, boolean expected) {
+        assertThat(numbers.contains(index)).isEqualTo(expected);
+    }
 }
