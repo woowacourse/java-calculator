@@ -1,6 +1,7 @@
 package study;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class StringTest {
@@ -27,4 +28,13 @@ public class StringTest {
 		Assertions.assertThat(result).isEqualTo("1,2");
 	}
 
+	@Test
+	@DisplayName("StringIndexOutOfBoundsException Test")
+	void getCharPosition() {
+		Assertions.assertThatThrownBy(() -> {
+			String value = "abc";
+			char result = value.charAt(4);
+		}).isInstanceOf(StringIndexOutOfBoundsException.class)
+			.hasMessage("String index out of range: %s", 4);
+	}
 }
