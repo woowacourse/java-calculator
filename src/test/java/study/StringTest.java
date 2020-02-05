@@ -21,4 +21,11 @@ public class StringTest {
 		result = value.split(",");
 		assertThat(result).containsExactly("1");
 	}
+
+	@Test
+	void substring() {
+		value = "(1,2)";
+		String substringResult = value.substring(1, 4);
+		assertThat(substringResult).isEqualTo("1,2");
+	}
 }
