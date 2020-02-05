@@ -3,9 +3,13 @@ package study;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SetTest {
     private Set numbers;
@@ -23,5 +27,11 @@ public class SetTest {
     void sizeTest() {
         int size = numbers.size();
         Assertions.assertThat(size).isEqualTo(4);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 1, 2, 3})
+    void containTest(int number) {
+        assertTrue(numbers.contains(number));
     }
 }
