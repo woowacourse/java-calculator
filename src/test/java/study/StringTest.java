@@ -20,4 +20,16 @@ public class StringTest {
         String result = value.substring(1,4);
         Assertions.assertThat(result).contains("1,2");
     }
+
+    @DisplayName("지정 위치의 문자를 가져온다.")
+    @Test
+    void charAt() {
+        String value = "abc";
+        assertThatThrownBy(() -> {
+            value.charAt(3);
+        }).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range");
+
+    }
+
 }
