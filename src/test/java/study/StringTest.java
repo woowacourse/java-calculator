@@ -10,28 +10,46 @@ public class StringTest {
     @Test
     @DisplayName("#split() : return String Array using standard")
     void split() {
-        String value = "1,2";
-        String[] result = value.split(",");
+        //given
+        String component = "1";
+        String standard = ",";
+        String valueWithStandard = component + standard + "2";
 
-        assertThat(result).contains("1");
+        //when
+        String[] result = valueWithStandard.split(standard);
+
+        //then
+        assertThat(result).contains(component);
     }
 
     @Test
     @DisplayName("#charAt() : return char when indexing within bound")
     void subString() {
-        String value = "(1,2)";
-        String result = value.substring(1, 4);
+        //given
+        String startingWrapper = "(";
+        String endingWrapper = ")";
+        String value = "1,2";
+        String valueWithWrapper =  startingWrapper + value +endingWrapper;
 
-        assertThat(result).isEqualTo("1,2");
+        //when
+        String result = valueWithWrapper.substring(startingWrapper.length(), valueWithWrapper.length() - endingWrapper.length());
+
+        //then
+        assertThat(result).isEqualTo(value);
     }
 
     @Test
     @DisplayName("#charAt() : return char when indexing within bound")
     void charAtIndexInBound() {
-        String value = "abc";
-        char result = value.charAt(1);
+        //given
+        char target = 'b';
+        String value = "a" + target + "c";
 
-        assertThat(result).isEqualTo('b');
+        //when
+        char result = value.charAt(value.indexOf(target));
+
+        //then
+        assertThat(result).isEqualTo(target);
     }
 
     @Test
@@ -41,8 +59,8 @@ public class StringTest {
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> {
-                    char anonymousChar = value.charAt(3);
+                    value.charAt(value.length());
                 }
-            ).withMessage("String index out of range: 3");
+            ).withMessage("String index out of range: " + value.length());
     }
 }
