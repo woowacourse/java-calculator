@@ -1,6 +1,6 @@
 package domain;
 
-public class Calculator {
+public class Operator {
 	int	add(int number1, int number2) {
 		return number1 + number2;
 	}
