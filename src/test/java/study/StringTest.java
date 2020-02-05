@@ -28,4 +28,14 @@ public class StringTest {
 
         Assertions.assertThat(resultTwo).contains("1,2");
     }
+
+    @Test
+    @DisplayName("문자열의 최대 index 를 벗어난 위치의 문자를 얻으려고할 때")
+    void charAt() {
+        String threeValue = "abc";
+        assertThatThrownBy(()->{
+            threeValue.charAt(4);
+        }).isInstanceOf(IndexOutOfBoundsException.class)
+            .hasMessageContaining("String index out");
+    }
 }
