@@ -1,12 +1,14 @@
 package study;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class StringTest {
+
+    /**
+     * 요구사항 1. string split, contain 테스트
+     */
     @Test
     void split(){
         String value = "1,2";
@@ -15,6 +17,9 @@ public class StringTest {
         assertThat(result).contains("2");
     }
 
+    /**
+     * 요구사항 2. string substring 테스트
+     */
     @Test
     void splitSubstring(){
         String value = "(1,2)";
@@ -22,6 +27,9 @@ public class StringTest {
         assertThat(result).isEqualTo("1,2");
     }
 
+    /**
+     * 요구사항 3. IndexOutOfBound 테스트
+     */
     @Test
     void indexCheck(){
         assertThatThrownBy(() -> {

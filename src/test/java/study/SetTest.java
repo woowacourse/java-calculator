@@ -1,13 +1,11 @@
 package study;
 
 
-import org.assertj.core.internal.Integers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.platform.commons.util.StringUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,18 +25,30 @@ public class SetTest {
         numbers.add(3);
     }
 
+    /**
+     * 요구사항 1. set size 테스트
+     */
     @Test
     void size(){
         int size = numbers.size();
         assertThat(size).isEqualTo(3);
     }
 
+    /**
+     * 요구사항 2. set contain 테스트
+     * @param input
+     */
     @ParameterizedTest
     @ValueSource(ints = {1,2,3})
     void contain(Integer input) {
         assertThat(numbers.contains(input)).isTrue();
     }
 
+    /**
+     * 요구사항 3. set value match 테스트
+     * @param input
+     * @param expected
+     */
     @ParameterizedTest
     @CsvSource(value = {"1:true", "2:true", "3:true", "4:false"}, delimiter = ':')
     void pairValue(int input, Boolean expected){
