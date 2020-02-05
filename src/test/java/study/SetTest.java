@@ -5,6 +5,7 @@ import org.assertj.core.internal.Integers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.platform.commons.util.StringUtils;
 
@@ -37,4 +38,12 @@ public class SetTest {
     void contain(Integer input) {
         assertThat(numbers.contains(input)).isTrue();
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false"}, delimiter = ':')
+    void pairValue(int input, Boolean expected){
+        Boolean result = numbers.contains(input) ? true : false;
+        assertThat(result).isEqualTo(expected);
+    }
+
 }
