@@ -9,4 +9,11 @@ public class StringTest {
         String[] result = value.split(",");
         System.out.println(result[0] + ":" + result[1]);
     }
+
+    @Test
+    void splitArray() {
+        String value = "1";
+        String[] splitArr = value.split(",");
+        System.out.println(splitArr[0]);
+    }
 }
