@@ -25,4 +25,11 @@ public class SetTest {
         int result = numbers.size();
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    void methodStudy_Contains_ValuesOfSet() {
+        assertThat(numbers.contains((1))).isTrue();
+        assertThat(numbers.contains((2))).isTrue();
+        assertThat(numbers.contains((3))).isTrue();
+    }
 }
