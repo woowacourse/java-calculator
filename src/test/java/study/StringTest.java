@@ -4,6 +4,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.assertj.core.api.Assertions;
 
+/**
+ * 클래스 이름 : StringTest.java
+ *
+ * @author S.W.PARK
+ * @author K.S.KIM
+ * @version 1.0
+ * <p>
+ * 날짜 : 2020.02.05 수요일
+ */
+
 public class StringTest {
     @Test
     @DisplayName("String Test")

@@ -14,6 +14,16 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * 클래스 이름 : SetTest.java
+ *
+ * @author S.W.PARK
+ * @author K.S.KIM
+ * @version 1.0
+ * <p>
+ * 날짜 : 2020.02.05 수요일
+ */
+
 public class SetTest {
     private Set numbers;
 
