@@ -3,6 +3,8 @@ package study;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,7 +19,6 @@ class SetTest {
     void setUp() {
         numbers = new HashSet<>();
         numbers.addAll(initNumbers);
-
     }
 
     @Test
@@ -29,5 +30,15 @@ class SetTest {
                 .size();
 
         assertThat(numbers.size()).isEqualTo(expectedSize);
+
+    }
+
+    @ParameterizedTest
+    //todo: refac hardcoding
+    @ValueSource(ints = {1,2,3})
+    @DisplayName("#contains() : return true if set contains valueSource")
+    void contains(Integer input) {
+        assertThat(numbers.contains(input)).isTrue();
+
     }
 }
