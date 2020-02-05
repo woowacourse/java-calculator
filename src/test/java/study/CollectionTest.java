@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class CollectionTest {
@@ -31,5 +32,11 @@ public class CollectionTest {
 	@ValueSource(ints = {1, 2, 3})
 	void containsTestDeleteDup(int number) {
 		Assertions.assertThat(numbers.contains(number)).isTrue();
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1 true","4 false","2 true"}, delimiter = ' ')
+	void containsWithFalseResultTest(int input, boolean expected) {
+		Assertions.assertThat(numbers.contains(input)).isEqualTo(expected);
 	}
 }
