@@ -16,6 +16,10 @@ public class StringTest {
 //         String value = "1";
 //         String[] result = value.split(",");
 //         assertThat(result).containsExactly("1");
+        // 요구사항 2
+//         String value = "(1,2)";
+//         String result = value.substring(1, value.length() - 1);
+//         System.out.println(result);
     }
 
 }
