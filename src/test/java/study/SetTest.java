@@ -24,7 +24,6 @@ public class SetTest {
         numbers.add(1);
         numbers.add(2);
         numbers.add(3);
-        Sets sets = new Sets(numbers);
     }
 
     @Test
@@ -44,7 +43,7 @@ public class SetTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void parameterContain(int input) {
-        assertTrue(Sets.isContain(input));
+        assertTrue(numbers.contains(input));
     }
 
     @ParameterizedTest
