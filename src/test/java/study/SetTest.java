@@ -42,16 +42,14 @@ public class SetTest {
 
     @DisplayName("메소드내 입력 값이 많아짐을 줄이기 위한 ParameterizedTest")
     @ParameterizedTest
-    @ValueSource(ints = {1,2,3})
+    @ValueSource(ints = {1, 2, 3})
     void parameterContain(int input) {
         assertTrue(Sets.isContain(input));
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:1","2:2","3:4"}, delimiter = ':')
-//    @CsvSource(value = {"1","2","3"})
-    void toLowerCase_ (String input, String expected) {
-//        String actual = input.toLowerCase();
-        assertThat(input).isEqualTo(expected);
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false"}, delimiter = ':')
+    void toLowerCase(int input, boolean expected) {
+        assertThat(numbers.contains(input)).isEqualTo(expected);
     }
 }

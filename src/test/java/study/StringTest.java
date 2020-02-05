@@ -21,9 +21,9 @@ public class StringTest {
     @Test
     void substring() {
         String value = "(1,2)";
-        String result = value.substring(1,4);
+        String result = value.substring(1, 4);
         assertThat(result).isEqualTo("1,2");
-        assertThat(result).doesNotContain("(",")");
+        assertThat(result).doesNotContain("(", ")");
     }
 
     @DisplayName("String Test")
@@ -35,13 +35,13 @@ public class StringTest {
         assertThat(value.charAt(1)).isEqualTo('b');
         assertThat(value.charAt(2)).isEqualTo('c');
 
-        assertThatThrownBy(()->{
+        assertThatThrownBy(() -> {
             value.charAt(3);
         }).isInstanceOf(IndexOutOfBoundsException.class)
-          .hasMessageContaining("index");
+                .hasMessageContaining("index");
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
-                .isThrownBy(()->{
+                .isThrownBy(() -> {
                     value.charAt(3);
                 }).withMessageContaining("range");
 

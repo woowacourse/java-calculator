@@ -33,7 +33,7 @@ public class CalculatorTest {
         assertThat(Calculator.divide(12, 4)).isEqualTo(3);
         assertThat(Calculator.divide(10, 5)).isEqualTo(2);
 
-        assertThatThrownBy(()->{
+        assertThatThrownBy(() -> {
             Calculator.divide(12, 0);
         }).isInstanceOf(ArithmeticException.class);
     }
