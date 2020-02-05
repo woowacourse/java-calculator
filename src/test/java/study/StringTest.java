@@ -2,14 +2,15 @@ package study;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class StringTest {
     @Test
     void split() {
         String value = "1,2";
         String[] result = value.split(",");
+
         assertThat(result).contains("1");
     }
 
@@ -17,13 +18,26 @@ public class StringTest {
     void subString() {
         String value = "(1,2)";
         String result = value.substring(1, 4);
+
         assertThat(result).isEqualTo("1,2");
     }
 
     @Test
-    void charAtSuccess() {
+    void charAtIndexInBound() {
         String value = "abc";
         char result = value.charAt(1);
+
         assertThat(result).isEqualTo('b');
+    }
+
+    @Test
+    void charAtIndexOutOfBound() {
+        String value = "abc";
+
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> {
+                    char anonymousChar = value.charAt(3);;
+                }
+            ).withMessage("String index out of range: 3");
     }
 }
