@@ -3,33 +3,39 @@ package study;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class StringTest {
+
     @Test
     void split() {
-        String value = "1,2";
-        String[] result = value.split(",");
-        System.out.println(result[0] + ":" + result[1]);
+        String[] result = "1,2".split(",");
+        Assertions.assertThat(result).contains("2");
+        Assertions.assertThat(result).containsExactly("1", "2");
+        assertThat(result).contains("2","1");
+        assertThat(result).containsExactly("1","2");
     }
 
     @Test
     void splitArray() {
-        String value = "1";
-        String[] splitArr = value.split(",");
-        System.out.println(splitArr[0]);
+        String[] splitArr = "1".split(",");
+        Assertions.assertThat(splitArr).contains("1");
+        Assertions.assertThat(splitArr).containsExactly("1");
+        assertThat(splitArr).contains("1");
+        assertThat(splitArr).containsExactly("1");
     }
 
     @Test
     void subString() {
         String value = "(1,2)";
         String substring = value.substring(1, value.length()-1);
-        System.out.println(substring);
+        assertThat(substring).contains("1");
     }
 
     @Test
     void charAt() {
-        String value = "abc";
-        char c = value.charAt(2);
-        System.out.println(c);
+        char c = "abc".charAt(2);
+        assertThat(c).isEqualTo('c');
     }
 
     @Test
