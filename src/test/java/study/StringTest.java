@@ -23,4 +23,18 @@ public class StringTest {
         String letter = value.substring(1, 4);
         assertThat(letter).isEqualTo("1,2");
     }
+
+    @Test
+    void charAt() {
+        assertThatThrownBy(() -> {
+            String value = "abc";
+            char letter = value.charAt(13);
+        }).hasMessageContaining("13");
+
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> {
+                    String value = "abc";
+                    char letter = value.charAt(13);
+                }).withMessageMatching("String index out of range: \\d+");
+    }
 }
