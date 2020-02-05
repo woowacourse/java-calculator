@@ -12,4 +12,12 @@ public class StringTest {
 		Assertions.assertThat(result).contains("2");
 		Assertions.assertThat(result).contains("3");
 	}
+
+	@Test
+	void splitOnlyOne() {
+		String value = "1";
+		String[] result = value.split(",");
+		Assertions.assertThat(result).containsExactly("1");
+	}
+
 }
