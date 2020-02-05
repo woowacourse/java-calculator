@@ -50,9 +50,4 @@ public class StringTest {
                     value4.charAt(4);
                 }).withMessageMatching("String index out of range: \\d+");
     }
-
-
-
-
-
 }
