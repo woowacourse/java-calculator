@@ -16,4 +16,11 @@ public class StringTest {
         String[] splitArr = value.split(",");
         System.out.println(splitArr[0]);
     }
+
+    @Test
+    void subString() {
+        String value = "(1,2)";
+        String substring = value.substring(1, value.length()-1);
+        System.out.println(substring);
+    }
 }
