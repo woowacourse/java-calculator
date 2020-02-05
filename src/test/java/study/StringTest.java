@@ -1,9 +1,13 @@
 package study;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class StringTest {
     @Test
@@ -28,4 +32,15 @@ public class StringTest {
         String result3 = value3.substring(1,4);
         assertThat(result3).contains("1,2");
     }
+
+    @Test
+    @DisplayName("요구사항 3 - assertThatThrownBy, hasMessageContaining 사용")
+    public void testException() {
+        assertThatThrownBy(() -> {
+            String value4 = "abc";
+            value4.charAt(4);
+        }).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 4");
+    }
+
 }
