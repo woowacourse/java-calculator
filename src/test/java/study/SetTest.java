@@ -2,8 +2,11 @@ package study;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
     private Set numbers;
@@ -21,5 +24,11 @@ public class SetTest {
     void setSizeTest() {
         int setSize = numbers.size();
         System.out.println("Set(변수명 numbers)의 크기 : "+setSize);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "2", "3"})
+    void contains(String input) {
+        Assertions.assertThat(numbers.contains(Integer.parseInt(input))).isTrue();
     }
 }
