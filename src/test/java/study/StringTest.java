@@ -38,15 +38,20 @@ public class StringTest {
         Assertions.assertThat(result).contains("1,2");
     }
 
-    @DisplayName("지정 위치의 문자를 가져온다.")
+    @DisplayName("Correct Input")
     @Test
     void charAt() {
-        String value = "abc";
+        Assertions.assertThat("abc".charAt(2)).isEqualTo('c');
+    }
+
+    @DisplayName("Incorrect Input : String Index Out Of Bounds Exception Handler")
+    @Test
+    void charAt_StringIndexOutOfBoundsException() {
         assertThatThrownBy(() -> {
-            value.charAt(3);
+            "abc".charAt(3);
         }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("String index out of range");
-
     }
+
 
 }
