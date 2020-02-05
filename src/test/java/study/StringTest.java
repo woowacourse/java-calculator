@@ -1,6 +1,7 @@
 package study;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -8,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StringTest {
 
     @Test
+    @DisplayName("split 메소드가 잘 작동하는지 알아보는 학습 테스트")
     void split() {
         String[] result = "1,2".split(",");
         Assertions.assertThat(result).contains("2");
@@ -17,6 +19,7 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("delimiter가 없는 상태에서 split 메소드 잘 작동하는지 알아보는 학습 테스트")
     void splitArray() {
         String[] splitArr = "1".split(",");
         Assertions.assertThat(splitArr).contains("1");
@@ -26,6 +29,7 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("substring 메소드가 잘 작동하는지 확인하는 테스트")
     void subString() {
         String value = "(1,2)";
         String substring = value.substring(1, value.length()-1);
@@ -33,18 +37,19 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("charAt 메소드가 잘 작동하는지 확인하는 테스트")
     void charAt() {
         char c = "abc".charAt(2);
         assertThat(c).isEqualTo('c');
     }
 
     @Test
+    @DisplayName("charAt 메소드에서 범위를 넘어선 값이 입력됐을때 발생하는 Exception을 확인하는 학습테스트")
     void charAtException() {
-        String value = "abc";
 
         Assertions.assertThatThrownBy(() -> {
-            char c = value.charAt(5);
-        }).isInstanceOf(IndexOutOfBoundsException.class)
+            "abc".charAt(5);
+        }).isInstanceOf(StringIndexOutOfBoundsException.class)
                 .hasMessageContaining("String index out of range: 5");
     }
 }
