@@ -25,11 +25,16 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("out of bounds unit test")
     void thirdRequire() throws StringIndexOutOfBoundsException{
         String abc = "abc";
 
         Assertions.assertThat(abc.charAt(0)).isEqualTo('a');
         Assertions.assertThat(abc.charAt(1)).isEqualTo('b');
         Assertions.assertThat(abc.charAt(2)).isEqualTo('c');
+
+        Assertions.assertThatThrownBy(()->{
+            abc.charAt(3);
+        }).isInstanceOf(IndexOutOfBoundsException.class);
     }
 }
