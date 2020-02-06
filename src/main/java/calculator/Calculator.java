@@ -3,20 +3,13 @@ package calculator;
 import java.util.*;
 
 public class Calculator {
-    private Set opertors;
     private final static String plus = "+";
     private final static String minus = "-";
     private final static String multiply = "*";
     private final static String divide = "/";
     private final static String end = "q";
 
-    public Calculator() {
-        opertors = new HashSet<>();
-        opertors.add("+");
-        opertors.add("-");
-        opertors.add("/");
-        opertors.add("*");
-    }
+    public Calculator() {}
 
     public void start() {
         Integer result = null;
