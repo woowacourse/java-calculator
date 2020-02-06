@@ -3,10 +3,10 @@ package view;
 import java.util.Scanner;
 
 public class InputView {
-    final static Scanner SCANNER = new Scanner(System.in);
+    private final static Scanner SCANNER = new Scanner(System.in);
 
-    public static void inputCalculation() {
+    public static String inputCalculation() {
         OutputView.printInputCalculationMessage();
-        String value = SCANNER.nextLine();
+        return SCANNER.nextLine();
     }
 }
