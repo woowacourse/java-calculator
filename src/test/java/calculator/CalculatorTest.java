@@ -3,6 +3,7 @@ package calculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class CalculatorTest {
     Calculator tester = new Calculator();
@@ -12,4 +13,10 @@ public class CalculatorTest {
         String givenSample = "2 + 3 * 4 / 2";
         Assertions.assertThat(tester.calculate(givenSample)).isEqualTo(10);
     }
+
+//    @parameterizedTest
+//    @CsvSource({"2 + 3 * 4 / 2,10"})
+//    void testCalculator(String input, String expected){
+//
+//    }
 }
