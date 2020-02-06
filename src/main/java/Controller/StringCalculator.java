@@ -1,6 +1,5 @@
 package Controller;
 
-import View.InputView;
 import View.OutputView;
 
 import java.util.ArrayList;
@@ -16,20 +15,23 @@ public class StringCalculator {
         OutputView.printOutputMessage(calculate());
     }
 
+    /**
+     * 입력값 예외처리 후 숫자와 연산자를 분리
+     */
     public void initializeInputs() {
         String[] inputs = InputException.checkException();
-        for (int i = 0; i < inputs.length; i++) {
+        for (String val : inputs) {
             try {
-                numbers.add(Integer.parseInt(inputs[i]));
-            } catch (Exception e){
-                operators.add(Operator.getEnumFromString(inputs[i]));
+                numbers.add(Integer.parseInt(val));
+            } catch (Exception e) {
+                operators.add(Operator.getEnumFromString(val));
             }
         }
     }
 
     public double calculate() {
         result = numbers.remove(0);
-        for (int i = 0; i < operators.size(); i++){
+        for (int i = 0; i < operators.size(); i++) {
             result = operators.get(i).compute(result, numbers.get(i));
         }
         return result;
