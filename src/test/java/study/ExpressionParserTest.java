@@ -14,4 +14,18 @@ public class ExpressionParserTest {
 		Assertions.assertThat(ExpressionParser.splitWithBlank(values)).isEqualTo(expected);
 		Assertions.assertThat(ExpressionParser.splitWithBlank(values)).isNotEqualTo(notExpected);
 	}
+
+	@Test
+	void isNumber() {
+		String[] expected = {"123", "-123"};
+		String[] notExpected = {"- 123", "123asd", "-"};
+
+		for (String testTerm: expected) {
+			Assertions.assertThat(ExpressionParser.isNumber(testTerm)).isTrue();
+		}
+
+		for (String testTerm: notExpected) {
+			Assertions.assertThat(ExpressionParser.isNumber(testTerm)).isFalse();
+		}
+	}
 }
