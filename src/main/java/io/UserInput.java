@@ -1,4 +1,4 @@
-package calculator;
+package io;
 
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ public class UserInput {
         userInput = sc.nextLine();
         if(checkAllInputError())
             return userInput.split(" ");
-        System.out.println("잘못됨");
+        OutputView.inputError();
         return getNumbersAndOperator();
     }
 
@@ -27,7 +27,7 @@ public class UserInput {
 
     private boolean checkNumberOrNot(String target) {
         try {
-            Integer.parseInt(target);
+            Double.parseDouble(target);
         } catch (NumberFormatException e) {
             return false;
         }
