@@ -8,6 +8,8 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("Set Collection API - study test")
 public class SetTest {
@@ -30,10 +32,9 @@ public class SetTest {
 	}
 
 	@DisplayName("Set Collection API - contains() test")
-	@Test
-	void testContains() {
-		assertThat(numbers.contains(1)).isTrue();
-		assertThat(numbers.contains(2)).isTrue();
-		assertThat(numbers.contains(3)).isTrue();
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3})
+	void testContains(int input) {
+		assertThat(numbers.contains(input)).isTrue();
 	}
 }
