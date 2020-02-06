@@ -2,6 +2,8 @@ package calculator.spliter;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -21,23 +23,13 @@ class RawEquationSplitterTest {
         assertThat(result).containsExactly("2", "+", "3", "*", "4");
     }
 
-    @DisplayName("입려받은 분리된 식의 숫자 위치가 올바른지 확인하기")
-    @Test
-    void split() {
-        String equation = "2 3 * 4";
-
+    @DisplayName("입력받은 분리된 식의 구성요소들의 위치가 올바른지 확인하기")
+    @ParameterizedTest
+    @CsvSource(value = {"2 3 * 4,숫자", "2 % 3 * +,연산자"})
+    void split(String equation, String exceptionMessage) {
         assertThatThrownBy(() -> RawEquationSplitter.split(equation))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("식이 올바르지 않습니다. 숫자의 위치를 확인하세요.");
+                .hasMessage("식이 올바르지 않습니다. %s의 위치를 확인하세요.", exceptionMessage);
     }
 
-    @DisplayName("입려받은 분리된 식의 연산자 위치가 올바른지 확인하기")
-    @Test
-    void split2() {
-        String equation = "2 % 3 * +";
-
-        assertThatThrownBy(() -> RawEquationSplitter.split(equation))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("식이 올바르지 않습니다. 연산자의 위치를 확인하세요.");
-    }
 }
