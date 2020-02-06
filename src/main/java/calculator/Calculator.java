@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.domain.Equation;
-import calculator.domain.EquationFactory;
+import calculator.domain.EquationParser;
 import calculator.util.RawEquationSplitter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -32,7 +32,7 @@ public class Calculator {
 
     private double calculate(RawEquationDTO rawEquationDTO) {
         List<String> spiltEquation = RawEquationSplitter.split(rawEquationDTO.getRawEquation());
-        Equation equation = EquationFactory.parseEquation(spiltEquation);
+        Equation equation = EquationParser.parseEquation(spiltEquation);
         return equation.getResult();
     }
 }

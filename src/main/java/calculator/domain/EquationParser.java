@@ -4,7 +4,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class EquationFactory {
+public class EquationParser {
 
     private static final String NUMBER_FORMAT = "\\d+";
 
@@ -21,14 +21,14 @@ public class EquationFactory {
 
     private static List<Double> getNumbers(List<String> input) {
         return input.stream()
-                .filter(EquationFactory::isNumber)
+                .filter(EquationParser::isNumber)
                 .map(Double::parseDouble)
                 .collect(toList());
     }
 
     private static List<String> getOperators(List<String> input) {
         return input.stream()
-                .filter(EquationFactory::isNotNumber)
+                .filter(EquationParser::isNotNumber)
                 .collect(toList());
     }
 
