@@ -1,5 +1,7 @@
 package calculator.view;
 
+import calculator.view.dto.RawEquationDTO;
+
 import java.util.Scanner;
 
 public final class InputView {
@@ -10,16 +12,11 @@ public final class InputView {
         this.scanner = scanner;
     }
 
-    public String inputEquation() {
+    public RawEquationDTO inputEquation() {
         System.out.print("식을 입력하세요 : ");
-        String equation = scanner.nextLine();
-        validate(equation);
-        return equation;
+        RawEquationDTO rawEquationDTO = new RawEquationDTO(scanner.nextLine());
+        return rawEquationDTO;
     }
 
-    private void validate(String equation) {
-        if (equation.trim().isEmpty()) {
-            throw new IllegalArgumentException("입력값이 비어있습니다.");
-        }
-    }
+
 }
