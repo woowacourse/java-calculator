@@ -21,4 +21,12 @@ public class StringCalculator {
             }
         }
     }
+
+    public double calculate() {
+        result = numbers.remove(0);
+        for (int i = 0; i < operators.size(); i++){
+            result = operators.get(i).compute(result, numbers.get(i));
+        }
+        return result;
+    }
 }
