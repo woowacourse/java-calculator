@@ -35,6 +35,9 @@ public class Calculator {
             } catch (NumberFormatException e2) {
                 System.out.println("잘못된 수식이 입력되었습니다.");
                 continue;
+            } catch (InputMismatchException e3) {
+                System.out.println("잘못된 수식이 입력되었습니다.");
+                continue;
             }
             if (result != null) {
                 System.out.println(result);
@@ -57,7 +60,7 @@ public class Calculator {
         return new LinkedList<>(Arrays.asList(elements));
     }
 
-    public int execute(Queue<String> equation) throws ArithmeticException, NumberFormatException {
+    public int execute(Queue<String> equation) throws ArithmeticException, NumberFormatException, InputMismatchException {
         int result = validateNumber(equation.poll());
         while (!equation.isEmpty()) {
             String operator = equation.poll();
