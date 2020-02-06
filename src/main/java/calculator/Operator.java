@@ -12,22 +12,36 @@ public enum Operator {
         this.symbol = symbol;
     }
 
-    public double calculate(double input1, double input2) {
-        if (this == PLUS) {
+    public String toString() {
+        return this.symbol;
+    }
+
+    public static double calculate(String operator, double input1, double input2) {
+        checkValidSymbol(operator);
+        if (operator == PLUS.symbol) {
             return input1 + input2;
-        } else if (this == MINUS) {
+        } else if (operator == MINUS.symbol) {
             return input1 - input2;
-        } else if (this == MULTIPLY) {
+        } else if (operator == MULTIPLY.symbol) {
             return input1 * input2;
-        } else if (this == DIVIDE) {
-            checkZeroDivide(input2);
+        } else if (operator == DIVIDE.symbol) {
+            checkZero(input2);
             return input1 / input2;
         }
     }
 
-    private void checkZeroDivide(double input) {
-        if (this == DIVIDE && input == 0) {
+    private static void checkZero(double input) {
+        if (input == 0) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+    }
+
+    private static void checkValidSymbol(String symbol) {
+        Operator[] operators = Operator.values();
+        for (Operator operator : operators) {
+            if (operator.toString() != symbol) {
+                throw new IllegalArgumentException("사칙연산 연산자만 계산 가능합니다");
+            }
         }
     }
 }
