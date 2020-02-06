@@ -18,15 +18,15 @@ public class Expression {
         this.expression = inputStringArray;
     }
 
-    public String[] splitInput(String input) {
+    private String[] splitInput(String input) {
         return input.split(" ");
     }
 
-    public boolean isCorrectStringArray(String[] input) {
+    private boolean isCorrectStringArray(String[] input) {
         return isOperatorAtOddIndex(input) && isNumberAtEvenIndex(input) && isOddLength(input);
     }
 
-    public boolean isOperatorAtOddIndex(String[] input) {
+    private boolean isOperatorAtOddIndex(String[] input) {
         boolean ret = true;
 
         for (int i = 1; i < input.length && ret == true; i += 2) {
@@ -40,7 +40,7 @@ public class Expression {
         return input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/");
     }
 
-    public boolean isNumberAtEvenIndex(String[] input) {
+    private boolean isNumberAtEvenIndex(String[] input) {
         boolean ret = true;
 
         for (int i = 0; i < input.length && ret == true; i += 2) {
@@ -62,10 +62,6 @@ public class Expression {
 
     private boolean isOddLength(String[] input) {
         return input.length % 2 == 1;
-    }
-
-    public int getExpressionLength() {
-        return expression.length;
     }
 
     public Operand getOperand(int position) {
@@ -95,6 +91,5 @@ public class Expression {
     private int getOperatorIndexByPosition(int position) {
         return (position - 1) * 2 + 1;
     }
-
 
 }
