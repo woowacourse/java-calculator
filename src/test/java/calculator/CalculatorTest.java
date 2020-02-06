@@ -1,9 +1,9 @@
 package calculator;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class CalculatorTest {
     Calculator tester = new Calculator();
@@ -14,9 +14,9 @@ public class CalculatorTest {
         Assertions.assertThat(tester.calculate(givenSample)).isEqualTo(10);
     }
 
-//    @parameterizedTest
-//    @CsvSource({"2 + 3 * 4 / 2,10"})
-//    void testCalculator(String input, String expected){
-//
-//    }
+    @ParameterizedTest
+    @CsvFileSource(resources = "/result.csv", numLinesToSkip = 1)
+    void testCalculator(String input, String expected) {
+        Assertions.assertThat(tester.calculate(input)).isEqualTo(Integer.parseInt(expected));
+    }
 }
