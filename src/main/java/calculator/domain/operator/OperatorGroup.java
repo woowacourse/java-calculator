@@ -9,17 +9,17 @@ public enum OperatorGroup {
     MULTIPLE("*", (a, b) -> a * b),
     DIVIDE("/", (a, b) -> a / b);
 
-    private final OperationStarategy operationStarategy;
+    private final OperationStrategy operationStrategy;
     private final String delimiter;
 
-    OperatorGroup(String delimiter, OperationStarategy operationStarategy) {
+    OperatorGroup(String delimiter, OperationStrategy operationStrategy) {
         this.delimiter = delimiter;
-        this.operationStarategy = operationStarategy;
+        this.operationStrategy = operationStrategy;
     }
 
     public static double operate(double a, String inputOperator, double b) {
         return findOperationStrategy(inputOperator)
-                .operationStarategy
+                .operationStrategy
                 .operate(a, b);
     }
 
