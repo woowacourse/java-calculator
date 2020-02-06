@@ -16,4 +16,14 @@ public class StringTest {
 		final String[] actual2 = value2.split(",");
 		assertThat(actual2).containsExactly("1");
 	}
+
+	@Test
+	void testSubstring() {
+		final int BRACKET_LENGTH = 1;
+		final String value = "(1,2)";
+		final String actual = value.substring(BRACKET_LENGTH, value.length() - BRACKET_LENGTH);
+		final String expected = "1,2";
+
+		assertThat(actual).isEqualTo(expected);
+	}
 }
