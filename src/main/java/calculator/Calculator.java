@@ -1,19 +1,32 @@
 /*
- * Copyright (c) 2019 by 이름
+ * Copyright (c) 2019 by tiger,DDoring
  * All rights reserved.
  *
- * 클래스명.java
- * 클래스 설명
+ * Calculator.java
+ * 계산을 담당하는 클래스
  *
- * @author      이름
+ * @author      tiger,DDoring
  * @version     1.0
- * @date        dd mm yyyy
+ * @date        06 Feb 2020
  *
  */
 
 package calculator;
 
 public class Calculator {
+    public double plus(double x, double y) {
+        return x + y;
+    }
 
+    public double minus(double x, double y) {
+        return x - y;
+    }
 
+    public double mul(double x, double y) {
+        return x * y;
+    }
+
+    public double div(double x, double y) {
+        return x / y;
+    }
 }
