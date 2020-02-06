@@ -20,4 +20,17 @@ public class StringTest {
 		value = value.substring(1, 4);
 		assertThat(value).isEqualTo("1,2");
 	}
+
+	@Test
+	void charAt() {
+		String value = "abc";
+		assertThatThrownBy(() -> {
+			value.charAt(3);
+		}).isInstanceOf(StringIndexOutOfBoundsException.class)
+				.hasMessageContaining("String index out of range: ");
+		assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+				.isThrownBy(() -> {
+					value.charAt(12);
+				}).withMessageMatching("String index out of range: \\d+");
+	}
 }
