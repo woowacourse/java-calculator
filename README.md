@@ -1,19 +1,39 @@
 ### 클래스
 
-* Calculator.java - 연산을 수행하는 Calculator 클래스
-* InputView.java
-* OutputView.java 
-* Operator.java - 연산자 처리 Enum type 클래스
-* Number.java - 숫자 처리 Enum type 클래스
-* CalculatorInputString.java - Calculator 어플리케이션에서 입력받는 모든 문자열 타입
-* CalculatorApplication.java - main method
+- calculate 패키지
+  - Calculator.java - 연산을 수행하는 Calculator 클래스
+
+
+
+- view 패키지
+  - InputView.java
+  - OutputView.java 
+
+  
+
+- domain 패키지
+
+  - Operator.java - 연산자 처리 Enum type 클래스
+  - Number.java - 숫자 처리 Enum type 클래스
+
+  - InputString.java - Calculator 어플리케이션에서 입력받는 모든 문자열 타입
+
+
+
+- parser 패키지
+  - StringParser.java - 입력된 수식을 파싱하는 책임
+
+
+
+- Application.java - main method
 
 ### 기능 리스트
 
 
 
-- [X] [기능] 문자열 입력 요구문 출력
-- [ ] [기능] 문자열을 입력받는다.
+- [x] [기능] 문자열 입력 요구문 출력
+- [x] [기능] 문자열을 입력받는다.
+- [ ] [테스트] 문자열 입력 테스트ㅁ
 - [ ] [예외] 공백만 입력되었을 경우
 - [ ] [기능] 입력 문자의 공백을 기준으로 분리한다.
 - [ ] [예외] 분리된 입력 문자에서 불필요한 공백을 제거한다.
@@ -25,6 +45,8 @@
 - [ ] [기능] 연산을 수행한다.
 - [ ] [기능] 결과값을 출력한다.
 - [ ] [예외] 결과값의 범위가 상정한 출력 범위를 넘어설 경우
+
+
 
 ### 요구사항
 
