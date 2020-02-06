@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Calculator {
     private Set opertors;
-    private Queue<String> equation;
     private final static String plus = "+";
     private final static String minus = "-";
     private final static String multiply = "*";
@@ -18,7 +17,13 @@ public class Calculator {
         opertors.add("*");
     }
 
-    private String inputEquation(){
+    public void start() {
+        String inputEq = inputEquation();
+        Queue<String> equation = makeQueue(inputEq);
+        System.out.println(execute(equation));
+    }
+
+    private String inputEquation() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
@@ -28,7 +33,7 @@ public class Calculator {
         return new LinkedList<>(Arrays.asList(elements));
     }
 
-    public int execute() {
+    public int execute(Queue<String> equation) {
         int result = Integer.parseInt(equation.poll());
         while (!equation.isEmpty()) {
             String operator = equation.poll();
