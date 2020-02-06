@@ -5,16 +5,18 @@ import View.OutputView;
 
 public class InputException {
 
-    public static void checkException() {
+    public static String[] checkException() {
         OutputView.printInputMessage();
         String[] inputs = InputView.input();
         try {
             validateFirstAndLast(inputs);
             validateRepeat(inputs);
+            validateOperators(inputs);
+            return inputs;
         } catch (Exception e) {
             OutputView.printInputExceptionMessage();
-            checkException();
         }
+        return checkException();
     }
 
     /**
