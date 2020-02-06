@@ -11,28 +11,28 @@ import java.util.List;
 
 public class Calculator {
     private final InputView inputView;
-    private RawEquationDTO equation;
 
     public Calculator(InputView inputView) {
         this.inputView = inputView;
     }
 
     public void run() {
-        init();
-        OutputView.showResult(operate());
-    }
-
-    private void init() {
         try {
-            this.equation = inputView.inputEquation();
-        } catch (IllegalArgumentException e) {
-            init();
+            RawEquationDTO rawEquationDTO = inputEquation();
+            OutputView.showResult(calculate(rawEquationDTO));
+        } catch (RuntimeException e) {
+            OutputView.showExceptionMessage(e);
+            run();
         }
     }
 
-    private double operate() {
-        List<String> spiltedEquation = RawEquationSplitter.split(equation.getRawEquation());
-        Equation equation = EquationFactory.parseEquation(spiltedEquation);
+    private RawEquationDTO inputEquation() {
+        return inputView.inputEquation();
+    }
+
+    private double calculate(RawEquationDTO rawEquationDTO) {
+        List<String> spiltEquation = RawEquationSplitter.split(rawEquationDTO.getRawEquation());
+        Equation equation = EquationFactory.parseEquation(spiltEquation);
         return equation.getResult();
     }
 }

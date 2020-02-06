@@ -28,7 +28,7 @@ class RawEquationSplitterTest {
 
         assertThatThrownBy(() -> RawEquationSplitter.split(equation))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자의 위치가 잘못되었습니다.");
+                .hasMessage("식이 올바르지 않습니다. 숫자의 위치를 확인하세요.");
     }
 
     @DisplayName("입려받은 분리된 식의 연산자 위치가 올바른지 확인하기")
@@ -38,6 +38,6 @@ class RawEquationSplitterTest {
 
         assertThatThrownBy(() -> RawEquationSplitter.split(equation))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("연산자의 위치가 잘못되었습니다.");
+                .hasMessage("식이 올바르지 않습니다. 연산자의 위치를 확인하세요.");
     }
 }

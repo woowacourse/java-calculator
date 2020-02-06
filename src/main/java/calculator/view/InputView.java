@@ -14,8 +14,7 @@ public final class InputView {
 
     public RawEquationDTO inputEquation() {
         System.out.print("식을 입력하세요 : ");
-        RawEquationDTO rawEquationDTO = new RawEquationDTO(scanner.nextLine());
-        return rawEquationDTO;
+        return new RawEquationDTO(scanner.nextLine());
     }
 
 

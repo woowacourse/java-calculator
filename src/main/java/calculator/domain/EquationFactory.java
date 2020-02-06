@@ -32,8 +32,4 @@ public class EquationFactory {
     private static boolean isNumber(String maybeNumber) {
         return maybeNumber.matches(NUMBER_FORMAT);
     }
-
-    public static void validateEquation() {
-
-    }
 }

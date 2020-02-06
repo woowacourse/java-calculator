@@ -10,7 +10,7 @@ public class RawEquationSplitter {
     public static List<String> split(String inputString) {
         String[] result = inputString.split(BLANK);
         validate(result);
-        return Arrays.asList(inputString.split(BLANK));
+        return Arrays.asList(result);
     }
 
     private static void validate(String[] equation) {
@@ -21,10 +21,10 @@ public class RawEquationSplitter {
 
     private static void checkPosition(String[] equation, int i) {
         if (i % 2 != 0 && isNumber(equation[i])) {
-            throw new IllegalArgumentException("숫자의 위치가 잘못되었습니다.");
+            throw new IllegalArgumentException("식이 올바르지 않습니다. 숫자의 위치를 확인하세요.");
         }
         if (i % 2 == 0 && isNotNumber(equation[i])) {
-            throw new IllegalArgumentException("연산자의 위치가 잘못되었습니다.");
+            throw new IllegalArgumentException("식이 올바르지 않습니다. 연산자의 위치를 확인하세요.");
         }
     }
 
