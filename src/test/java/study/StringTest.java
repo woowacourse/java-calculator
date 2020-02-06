@@ -2,9 +2,12 @@ package study;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("String API - study test")
 public class StringTest {
+	@DisplayName("String API - split() test")
 	@Test
 	void testSplit() {
 		final String value = "1,2";
@@ -17,6 +20,7 @@ public class StringTest {
 		assertThat(actual2).containsExactly("1");
 	}
 
+	@DisplayName("String API - substring() test")
 	@Test
 	void testSubstring() {
 		final int BRACKET_LENGTH = 1;
@@ -27,6 +31,7 @@ public class StringTest {
 		assertThat(actual).isEqualTo(expected);
 	}
 
+	@DisplayName("String API - charAt() test")
 	@Test
 	void testCharAt() {
 		final String value = "abc";

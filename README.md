@@ -6,8 +6,8 @@
 - ### String 클래스에 대한 학습 테스트
 
   - [x] split()
-  - [ ] substring()
-  - [ ] charAt()
+  - [x] substring()
+  - [x] charAt()
 
 ## 우아한테크코스 코드리뷰
 
