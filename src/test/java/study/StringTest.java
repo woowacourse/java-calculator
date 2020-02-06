@@ -2,6 +2,7 @@ package study;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class StringTest {
@@ -22,6 +23,7 @@ public class StringTest {
 	}
 
 	@Test
+	@DisplayName("문자열 인덱스 범위를 벗어난 접근 예외 발생확인 테스트")
 	void charAt() {
 		String value = "abc";
 		assertThatThrownBy(() -> {
