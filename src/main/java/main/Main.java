@@ -13,11 +13,15 @@
 
 package main;
 
+import validator.InputValidator;
 import view.InputView;
 
 public class Main {
     public static void main(String[] args) {
         InputView input = new InputView();
-        String inputString = input.inputStringFromUser();
+        String inputString;
+        do {
+            inputString = input.inputStringFromUser();
+        } while(! new InputValidator().checkInput(inputString));
     }
 }
