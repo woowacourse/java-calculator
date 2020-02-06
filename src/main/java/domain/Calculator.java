@@ -11,9 +11,9 @@ public class Calculator {
     private final List<Double> numbers = new ArrayList<>();
     private final List<Character> operators = new ArrayList<>();
     private final BiFunction<Double, Double, Double> ADDITION = (a, b) -> a + b;
-    private final BiFunction<Double, Double, Double> SUBTRACTION = (a, b) -> a + b;
-    private final BiFunction<Double, Double, Double> MULTIPLICATION = (a, b) -> a + b;
-    private final BiFunction<Double, Double, Double> DIVISION = (a, b) -> a + b;
+    private final BiFunction<Double, Double, Double> SUBTRACTION = (a, b) -> a - b;
+    private final BiFunction<Double, Double, Double> MULTIPLICATION = (a, b) -> a * b;
+    private final BiFunction<Double, Double, Double> DIVISION = (a, b) -> a / b;
     private final Map<Character, BiFunction<Double, Double, Double>> calculateFunctionMap = new HashMap<>();
 
 
