@@ -9,6 +9,10 @@
   - [x] substring()
   - [x] charAt()
 
+- ### Set Collection에 대한 학습 테스트
+  - [x] size()
+  - [ ] contains()
+
 ## 우아한테크코스 코드리뷰
 
 * [온라인 코드 리뷰 과정](https://github.com/woowacourse/woowacourse-docs/blob/master/maincourse/README.md)
