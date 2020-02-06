@@ -1,6 +1,15 @@
 package com.woowacourse.calculator.view;
 
 import java.util.Scanner;
+/**
+ * 클래스 이름 : InputView.java
+ *
+ * @author S.W.PARK
+ * @author K.S.KIM
+ * @version 1.0
+ * <p>
+ * 날짜 : 2020.02.06 목요일
+ */
 
 public class InputView {
     private static final String INPUT_EQUATION_GUIDE_MESSAGE = "수식을 입력해주세요 (e.g. 2 + 3 - 5): ";

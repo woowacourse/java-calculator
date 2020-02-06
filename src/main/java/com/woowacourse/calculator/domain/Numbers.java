@@ -3,6 +3,16 @@ package com.woowacourse.calculator.domain;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * 클래스 이름 : Numbers.java
+ *
+ * @author S.W.PARK
+ * @author K.S.KIM
+ * @version 1.0
+ * <p>
+ * 날짜 : 2020.02.06 목요일
+ */
+
 public class Numbers {
     private static final int ZERO = 0;
 
