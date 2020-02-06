@@ -1,23 +1,20 @@
 package domain;
 
 public class Calculator {
-    public Calculator() {
 
-    }
-
-    public double addition(double a, double b) {
+    public static double addition(double a, double b) {
         return a + b;
     }
 
-    public double subtraction(double a, double b) {
+    public static double subtraction(double a, double b) {
         return  a - b;
     }
 
-    public double multiplication(double a, double b) {
+    public static double multiplication(double a, double b) {
         return  a * b;
     }
 
-    public double division(double a, double b) {
+    public static double division(double a, double b) {
         return  a / b;
     }
 }
