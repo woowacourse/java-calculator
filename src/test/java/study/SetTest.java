@@ -1,9 +1,12 @@
 package study;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SetTest {
 	private Set numbers;
@@ -15,5 +18,11 @@ public class SetTest {
 		numbers.add(1);
 		numbers.add(2);
 		numbers.add(3);
+	}
+
+	@Test
+	void size() {
+		int size = numbers.size();
+		assertThat(size).isEqualTo(3);
 	}
 }
