@@ -1,7 +1,8 @@
 package study;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class StringTest {
@@ -27,11 +28,17 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("String 범위 확인")
     void charAt() {
         Assertions.assertThatThrownBy(()-> {
             String value = "abc";
             char value2 = value.charAt(4);
-        }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining("String index out of range: 4");
+        }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining("index out of range: 4");
 
+        Assertions.assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> {
+                    String value = "abc";
+                    char value2 = value.charAt(2);
+                }).withMessageMatching("String index out of range: \\d+");
     }
 }
