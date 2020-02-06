@@ -28,7 +28,7 @@ public class SetTest {
 	@Test
 	@DisplayName("size() works properly")
 	void size() {
-		assertThat(numbers.size()).isEqualTo(4);
+		assertThat(numbers).hasSize(4);
 	}
 
 	@ParameterizedTest
