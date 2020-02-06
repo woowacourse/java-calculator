@@ -21,6 +21,7 @@ public class Calculator {
     public void start() {
         Integer result = null;
         while (true) {
+            System.out.println("\n계산할 수식을 입력해주세요. (숫자와 연산자는 공백으로 구분)\n ex. 1 + 2");
             String inputEq = inputEquation();
             if (!validateString(inputEq)) {
                 System.out.println("빈 문자열입니다. 다시 입력해주세요.");
@@ -33,10 +34,10 @@ public class Calculator {
                 System.out.println("0으로 나눌 수 없습니다. 다시 입력해주세요.");
                 continue;
             } catch (NumberFormatException e2) {
-                System.out.println("잘못된 수식이 입력되었습니다.");
+                System.out.println("잘못된 수식이 입력되었습니다. 다시 입력해주세요.");
                 continue;
             } catch (InputMismatchException e3) {
-                System.out.println("잘못된 수식이 입력되었습니다.");
+                System.out.println("잘못된 수식이 입력되었습니다. 다시 입력해주세요.");
                 continue;
             }
             if (result != null) {
