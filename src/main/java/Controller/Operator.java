@@ -39,4 +39,12 @@ public enum Operator {
         return result;
     }
 
+    public static Operator getEnumFromString(String sign){
+        for (Operator op : Operator.values()){
+            if (op.sign.equals(sign)){
+                return op;
+            }
+        } return null;
+    }
+
 }
