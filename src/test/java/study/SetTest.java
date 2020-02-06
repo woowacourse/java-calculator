@@ -7,6 +7,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
 	private Set numbers;
@@ -26,10 +28,9 @@ public class SetTest {
 		assertThat(size).isEqualTo(3);
 	}
 
-	@Test
-	void contains() {
-		assertThat(numbers.contains(1)).isTrue();
-		assertThat(numbers.contains(2)).isTrue();
-		assertThat(numbers.contains(3)).isTrue();
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3})
+	void contains(int input) {
+		assertThat(numbers.contains(input)).isTrue();
 	}
 }
