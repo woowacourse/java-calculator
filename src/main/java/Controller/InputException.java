@@ -10,6 +10,7 @@ public class InputException {
         String[] inputs = InputView.input();
         try {
             validateFirstAndLast(inputs);
+            validateRepeat(inputs);
         } catch (Exception e) {
             OutputView.printInputExceptionMessage();
             checkException();
@@ -24,6 +25,19 @@ public class InputException {
     public static void validateFirstAndLast(String[] inputs) throws Exception {
         if (!isInteger(inputs[0]) || !isInteger(inputs[inputs.length - 1])) {
             throw new Exception();
+        }
+    }
+
+    /**
+     * 숫자나 연산자 반복 여부 유효성 검사
+     * @param inputs
+     * @throws Exception
+     */
+    private static void validateRepeat(String[] inputs) throws Exception {
+        for (int i = 1; i < inputs.length; i++) {
+            if (!(isInteger(inputs[i - 1]) ^ isInteger(inputs[i]))) {
+                throw new Exception();
+            }
         }
     }
 
