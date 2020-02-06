@@ -1,7 +1,7 @@
-import domain.Controller;
+import domain.Calculator;
 
 public class Main {
     public static void main(String[] args) {
-        new Controller();
+        new Calculator();
     }
 }

@@ -1,20 +1,42 @@
 package domain;
 
+import view.InputView;
+import view.OutputView;
+
+import java.util.*;
+
 public class Calculator {
 
-    public static double addition(double a, double b) {
-        return a + b;
+    public List<Double> getNumbers() {
+        return numbers;
     }
 
-    public static double subtraction(double a, double b) {
-        return  a - b;
+    public List<Character> getOperators() {
+        return operators;
     }
 
-    public static double multiplication(double a, double b) {
-        return  a * b;
+    private final List<Double> numbers = new ArrayList<>();
+    private final List<Character> operators = new ArrayList<>();
+
+    public void run() {
+        splitFormula(InputView.inputFormula());
+        OutputView.printResult(runCalculator());
     }
 
-    public static double division(double a, double b) {
-        return  a / b;
+    public void splitFormula(String formula) {
+        String[] formulas = formula.split(" ");
+        for (int i = 0; i < formulas.length; i++) {
+            if (i % 2 == 0) {
+                numbers.add(Double.parseDouble(formulas[i]));
+                continue;
+            }
+            operators.add(formulas[i].charAt(0));
+        }
+    }
+
+    public double runCalculator() {
+        double result = numbers.remove(0);
+
+        return result;
     }
 }

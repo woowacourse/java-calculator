@@ -2,34 +2,40 @@ package calculator;
 
 import domain.Calculator;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CalculatorTest {
+    Calculator controller = new Calculator();
+    String formula;
 
-    private Calculator calculator = new Calculator();
-
-    @DisplayName("덧셈 테스트")
-    @Test
-    void addition() {
-        Assertions.assertThat(calculator.addition(4,5)).isEqualTo(9);
+    @BeforeAll
+    void setUp() {
+        formula = "3 + 2 - 1";
     }
 
-    @DisplayName("뺄셈 테스트")
+    @DisplayName("계산식 분할 테스트")
     @Test
-    void subtraction() {
-        Assertions.assertThat(calculator.subtraction(4,5)).isEqualTo(-1);
+    void splitFormula() {
+        double[] numbers = {3, 2, 1};
+        char[] operators = {'+', '-'};
+
+        controller.splitFormula(formula);
+
+        double[] targetNumbers = controller.getNumbers().stream().mapToDouble(Double::doubleValue).toArray();
+        Assertions.assertThat(numbers).isEqualTo(targetNumbers);
+
+        char[] targetOperators = new char[controller.getOperators().size()];
+        for (int i = 0; i < controller.getOperators().size(); i++) {
+            targetOperators[i] = controller.getOperators().get(i);
+        }
+        Assertions.assertThat(operators).isEqualTo(targetOperators);
     }
 
-    @DisplayName("곱셈 테스트")
+    @DisplayName("컬랙션 분할 후 계산 테스트")
     @Test
-    void multiplication() {
-        Assertions.assertThat(calculator.multiplication(4,5)).isEqualTo(20);
-    }
+    public void runCalculator() {
 
-    @DisplayName("나눗셈 테스트")
-    @Test
-    void division() {
-        Assertions.assertThat(calculator.division(20,5)).isEqualTo(4);
     }
 }
