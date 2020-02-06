@@ -1,8 +1,8 @@
 package calculator;
 
 import calculator.domain.Equation;
-import calculator.filter.EquationFilter;
-import calculator.spliter.StringSplitter;
+import calculator.domain.EquationFactory;
+import calculator.spliter.RawEquationSplitter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import calculator.view.dto.RawEquationDTO;
@@ -31,8 +31,8 @@ public class Calculator {
     }
 
     private double operate() {
-        List<String> spiltedEquation = StringSplitter.split(equation.getRawEquation());
-        Equation equation = EquationFilter.parseEquation(spiltedEquation);
+        List<String> spiltedEquation = RawEquationSplitter.split(equation.getRawEquation());
+        Equation equation = EquationFactory.parseEquation(spiltedEquation);
         return equation.getResult();
     }
 }

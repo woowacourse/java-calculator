@@ -1,6 +1,5 @@
-package calculator.filter;
+package calculator.domain;
 
-import calculator.domain.Equation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class EquationFilterTest {
+class EquationFactoryTest {
 
     @DisplayName("입력받은 수식에서 식 분리하기")
     @Test
@@ -17,7 +16,7 @@ class EquationFilterTest {
         //given
         List<String> input = Arrays.asList("1", "+", "3", "*", "5");
         //when
-        Equation equation = EquationFilter.parseEquation(input);
+        Equation equation = EquationFactory.parseEquation(input);
         //then
         assertThat(equation).isEqualTo(new Equation(Arrays.asList(1D, 3D, 5D), Arrays.asList("+", "*")));
     }

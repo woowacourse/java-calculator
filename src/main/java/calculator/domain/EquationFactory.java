@@ -1,12 +1,10 @@
-package calculator.filter;
-
-import calculator.domain.Equation;
+package calculator.domain;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class EquationFilter {
+public class EquationFactory {
 
     private static final String NUMBER_FORMAT = "\\d+";
 
@@ -16,14 +14,14 @@ public class EquationFilter {
 
     private static List<Double> getNumbers(List<String> input) {
         return input.stream()
-                .filter(EquationFilter::isNumber)
+                .filter(EquationFactory::isNumber)
                 .map(Double::parseDouble)
                 .collect(toList());
     }
 
     private static List<String> getOperators(List<String> input) {
         return input.stream()
-                .filter(EquationFilter::isNotNumber)
+                .filter(EquationFactory::isNotNumber)
                 .collect(toList());
     }
 

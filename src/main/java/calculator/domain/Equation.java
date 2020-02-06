@@ -21,7 +21,7 @@ public class Equation {
         while (numbers.size() != 1) {
             numbers.addFirst(OperatorGroup.operate(numbers.pollFirst(), operators.poll(), numbers.pollFirst()));
         }
-        return numbers.getFirst();
+        return numbers.pollFirst();
     }
 
     @Override
