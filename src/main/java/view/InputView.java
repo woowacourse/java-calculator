@@ -16,7 +16,7 @@ package view;
 import java.util.Scanner;
 
 public class InputView {
-    public String inputStringFromUser(){
+    public String inputStringFromUser() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }

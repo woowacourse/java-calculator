@@ -13,14 +13,11 @@
 
 package main;
 
-import validator.InputValidator;
 import view.InputView;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         InputView input = new InputView();
         String inputString = input.inputStringFromUser();
-        //트루 반환하면 계산 시작~~
-        new InputValidator(inputString).checkInput();
     }
 }

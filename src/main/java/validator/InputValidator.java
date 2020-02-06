@@ -22,25 +22,21 @@ public class InputValidator {
     private final int EVEN = 0;
     private final int ODD = 1;
 
-    private String[] inputArr;
+    public boolean checkInput(String inputString) {
+        String[] inputArr = inputString.split(BLANK);
 
-    public InputValidator(String inputString){
-        inputArr = inputString.split(BLANK);
+        return isCorrectLength(inputArr) && isCorrectIndex(inputArr);
     }
 
-    public boolean checkInput() {
-        return isCorrectLength() && isCorrectIndex();
-    }
-
-    private boolean isCorrectLength() {
+    public boolean isCorrectLength(String[] inputArr) {
         return inputArr.length % 2 == ODD;
     }
 
-    private boolean isCorrectIndex() {
+    private boolean isCorrectIndex(String[] inputArr) {
         List<String> evenArr = getEvenOrOddArr(EVEN, inputArr);
         List<String> oddArr = getEvenOrOddArr(ODD, inputArr);
 
-        if(!(isCorrectEvanIndex(evenArr) && isCorrectOddIndex(oddArr))){
+        if (!(isCorrectEvanIndex(evenArr) && isCorrectOddIndex(oddArr))) {
             return false;
         }
         return true;
@@ -56,21 +52,21 @@ public class InputValidator {
         return evenOrOddList;
     }
 
-    private boolean isCorrectEvanIndex(List<String> evenArr) {
-        for(String number : evenArr) {
+    public boolean isCorrectEvanIndex(List<String> evenArr) {
+        for (String number : evenArr) {
             try {
                 Integer.parseInt(number);
             } catch (NumberFormatException e) {
                 return false;
             }
         }
-       return true;
+        return true;
     }
 
-    private boolean isCorrectOddIndex(List<String> oddArr) {
-        String[] signs = {"+","-","*","/"};
-        for(String operator : oddArr) {
-            if(!Arrays.asList(signs).contains(operator)){
+    public boolean isCorrectOddIndex(List<String> oddArr) {
+        String[] signs = {"+", "-", "*", "/"};
+        for (String operator : oddArr) {
+            if (!Arrays.asList(signs).contains(operator)) {
                 return false;
             }
         }
