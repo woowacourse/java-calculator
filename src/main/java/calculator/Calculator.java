@@ -27,7 +27,7 @@ public class Calculator {
     }
 
     private RawEquationDTO inputEquation() {
-        return inputView.inputEquation();
+        return new RawEquationDTO(inputView.inputEquation());
     }
 
     private double calculate(RawEquationDTO rawEquationDTO) {

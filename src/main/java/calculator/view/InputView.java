@@ -1,7 +1,5 @@
 package calculator.view;
 
-import calculator.view.dto.RawEquationDTO;
-
 import java.util.Scanner;
 
 public final class InputView {
@@ -12,9 +10,9 @@ public final class InputView {
         this.scanner = scanner;
     }
 
-    public RawEquationDTO inputEquation() {
+    public String inputEquation() {
         System.out.print("식을 입력하세요 : ");
-        return new RawEquationDTO(scanner.nextLine());
+        return scanner.nextLine();
     }
 
 
