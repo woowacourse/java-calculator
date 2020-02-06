@@ -14,7 +14,7 @@ public class InputException {
             validateOperators(inputs);
             return inputs;
         } catch (Exception e) {
-            OutputView.printInputExceptionMessage();
+            OutputView.printInputExceptionMessage(e);
         }
         return checkException();
     }
@@ -27,7 +27,7 @@ public class InputException {
      */
     public static void validateFirstAndLast(String[] inputs) throws Exception {
         if (!isInteger(inputs[0]) || !isInteger(inputs[inputs.length - 1])) {
-            throw new Exception();
+            throw new Exception("식의 처음과 마지막은 숫자여야 합니다.");
         }
     }
 
@@ -40,7 +40,7 @@ public class InputException {
     private static void validateRepeat(String[] inputs) throws Exception {
         for (int i = 1; i < inputs.length; i++) {
             if (!(isInteger(inputs[i - 1]) ^ isInteger(inputs[i]))) {
-                throw new Exception();
+                throw new Exception("연속된 숫자 또는 연산자입니다.");
             }
         }
     }
@@ -57,7 +57,7 @@ public class InputException {
                     || Operator.MINUS.isOperator(inputs[i])
                     || Operator.MULTIPLY.isOperator(inputs[i])
                     || Operator.DIVIDE.isOperator(inputs[i]))) {
-                throw new Exception();
+                throw new Exception("올바른 연산자가 아닙니다.");
             }
         }
     }
