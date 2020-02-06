@@ -17,7 +17,7 @@ public enum Operator {
     }
 
     public static double calculate(String operator, double input1, double input2) {
-        checkValidSymbol(operator);
+        checkIfOperator(operator);
         if (operator == PLUS.symbol) {
             return input1 + input2;
         } else if (operator == MINUS.symbol) {
@@ -36,7 +36,7 @@ public enum Operator {
         }
     }
 
-    private static void checkValidSymbol(String symbol) {
+    public static void checkIfOperator(String symbol) {
         Operator[] operators = Operator.values();
         for (Operator operator : operators) {
             if (operator.toString() != symbol) {

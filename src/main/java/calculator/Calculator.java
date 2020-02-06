@@ -1,7 +1,13 @@
 package calculator;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Calculator {
     public double calculate (String input) {
-        return 0.0;
+        List<String> splittedStrings = Arrays.asList(input.split(" "));
+
     }
 }
