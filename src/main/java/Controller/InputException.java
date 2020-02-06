@@ -41,6 +41,22 @@ public class InputException {
         }
     }
 
+    /**
+     * 올바른 연산자 인지 유효성 검사
+     * @param inputs
+     * @throws Exception
+     */
+    public static void validateOperators(String[] inputs) throws Exception {
+        for (int i = 1; i < inputs.length; i+=2) {
+            if (!(Operator.PLUS.isOperator(inputs[i])
+                || Operator.MINUS.isOperator(inputs[i])
+                || Operator.MULTIPLY.isOperator(inputs[i])
+                || Operator.DIVIDE.isOperator(inputs[i]))){
+                throw new Exception();
+            }
+        }
+    }
+
     public static boolean isInteger(String value) {
         try {
             Integer.parseInt(value);

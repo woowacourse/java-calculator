@@ -1,16 +1,14 @@
 package StringCalculatorTest;
 
-import org.junit.jupiter.api.BeforeEach;
+import Controller.Operator;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputExceptionTest {
 
-    private static String[] str = {"+","3","3"};
+    private static String[] str = {"1","/","3","@"};
 
     @Test
     void validateFirstAndLast()  {
@@ -24,6 +22,17 @@ public class InputExceptionTest {
         for (int i = 1; i < str.length; i++) {
             result = !(isInteger(str[i - 1]) ^ isInteger(str[i]));
             assertThat(result).isFalse();
+        }
+    }
+
+    @Test
+    void validateOperators() {
+        for (int i = 1; i < str.length; i += 2) {
+            boolean result = Operator.PLUS.isOperator(str[i])
+                    || Operator.MINUS.isOperator(str[i])
+                    || Operator.MULTIPLY.isOperator(str[i])
+                    || Operator.DIVIDE.isOperator(str[i]);
+            assertThat(result).isTrue();
         }
     }
 

@@ -13,10 +13,7 @@ public enum Operator {
     }
 
     public boolean isOperator(String sign){
-        return (sign.equals(Operator.PLUS.sign)
-                || sign.equals(Operator.MINUS.sign)
-                || sign.equals(Operator.MULTIPLY.sign)
-                || sign.equals(Operator.DIVIDE.sign));
+        return this.sign.equals(sign);
     }
 
     public double compute(double result, int number){
