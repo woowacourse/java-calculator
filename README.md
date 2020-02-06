@@ -11,7 +11,7 @@
 
 - ### Set Collection에 대한 학습 테스트
   - [x] size()
-  - [ ] contains()
+  - [x] contains()
 
 ## 우아한테크코스 코드리뷰
 

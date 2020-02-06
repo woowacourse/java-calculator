@@ -28,4 +28,12 @@ public class SetTest {
 		final int expected = 3;
 		assertThat(numbers).hasSize(expected);
 	}
+
+	@DisplayName("Set Collection API - contains() test")
+	@Test
+	void testContains() {
+		assertThat(numbers.contains(1)).isTrue();
+		assertThat(numbers.contains(2)).isTrue();
+		assertThat(numbers.contains(3)).isTrue();
+	}
 }
