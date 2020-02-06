@@ -21,7 +21,7 @@ public class InputException {
     }
 
     public static void validateSpace(String[] inputs) throws Exception {
-        if (inputs.length == 0){
+        if (inputs.length == 0) {
             throw new Exception("식이 입력되지 않았습니다.");
         }
     }
@@ -60,10 +60,7 @@ public class InputException {
      */
     public static void validateOperators(String[] inputs) throws Exception {
         for (int i = 1; i < inputs.length; i += 2) {
-            if (!(Operator.PLUS.isOperator(inputs[i])
-                    || Operator.MINUS.isOperator(inputs[i])
-                    || Operator.MULTIPLY.isOperator(inputs[i])
-                    || Operator.DIVIDE.isOperator(inputs[i]))) {
+            if (Operator.getEnumFromString(inputs[i]) == null) {
                 throw new Exception("올바른 연산자가 아닙니다.");
             }
         }
