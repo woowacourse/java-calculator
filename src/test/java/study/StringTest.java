@@ -35,5 +35,16 @@ public class StringTest {
 		final char expected = 'a';
 
 		assertThat(actual).isEqualTo(expected);
+
+		final int outOfBoundIndex = 3;
+		assertThatThrownBy(() -> {
+			value.charAt(outOfBoundIndex);
+		}).isInstanceOf(StringIndexOutOfBoundsException.class)
+			.hasMessage("String index out of range: %d", outOfBoundIndex);
+
+		assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+			.isThrownBy(() -> {
+				value.charAt(outOfBoundIndex);
+			}).withMessage("String index out of range: %d", outOfBoundIndex);
 	}
 }
