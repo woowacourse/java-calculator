@@ -16,6 +16,7 @@ package main;
 import calculator.Calculator;
 import validator.InputValidator;
 import view.InputView;
+import view.OutputView;
 
 public class Main {
     public static void main(String[] args) {
@@ -44,5 +45,7 @@ public class Main {
                 sum = calculator.div(sum, Double.parseDouble(inputArr[i+1]));
             }
         }
+
+        new OutputView().print(sum);
     }
 }
