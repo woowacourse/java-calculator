@@ -6,18 +6,17 @@ import java.util.*;
 
 public class Controller {
 
-    private final String formula;
+    public List<Double> getNumbers() {
+        return numbers;
+    }
+    public List<Character> getOperators() {
+        return operators;
+    }
+
     private final List<Double> numbers = new ArrayList<>();
     private final List<Character> operators = new ArrayList<>();
 
-    public Controller() {
-        formula = InputView.inputFormula();
-        // 스플릿
-        // 계산
-        // 출력
-    }
-
-    private void splitFormula() {
+    public void splitFormula(String formula) {
         String[] formulas = formula.split(" ");
         for(int i = 0; i < formulas.length; i++){
             if(i % 2 == 0) {
