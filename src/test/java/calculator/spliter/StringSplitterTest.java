@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringSplitterTest {
 
@@ -15,8 +16,21 @@ class StringSplitterTest {
         //given
         String input = "2 + 3 * 4";
         //when
-        List<String> result = StringSplitter.stringSplitter(input);
+        List<String> result = StringSplitter.split(input);
         //then
         assertThat(result).containsExactly("2", "+", "3", "*", "4");
+    }
+
+    @DisplayName("숫자와 연산자가 벌갈아 잘 나오는지 체크 테스트")
+    @Test
+    void split() {
+        //given
+        String equation = "2 3 * 4";
+        //when
+        assertThatThrownBy(() -> {
+            StringSplitter.split(equation);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자의 위치가 잘못되었습니다.");
+        //then
     }
 }

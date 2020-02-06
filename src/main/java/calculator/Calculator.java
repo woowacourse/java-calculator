@@ -31,7 +31,7 @@ public class Calculator {
     }
 
     private double operate() {
-        List<String> spiltedEquation = StringSplitter.stringSplitter(equation.getRawEquation());
+        List<String> spiltedEquation = StringSplitter.split(equation.getRawEquation());
         Equation equation = EquationFilter.parseEquation(spiltedEquation);
         return equation.getResult();
     }
