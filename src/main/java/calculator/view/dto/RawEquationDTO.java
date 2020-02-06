@@ -1,7 +1,7 @@
 package calculator.view.dto;
 
 public class RawEquationDTO {
-    private String rawEquation;
+    private final String rawEquation;
 
     public RawEquationDTO(String rawEquation) {
         validate(rawEquation);

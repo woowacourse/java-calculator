@@ -2,15 +2,14 @@ package calculator.domain;
 
 import calculator.operator.OperatorGroup;
 
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
 
 public class Equation {
-    private Deque<Double> numbers;
-    private Queue<String> operators;
+    private final Queue<Double> numbers;
+    private final Queue<String> operators;
 
     public Equation(List<Double> numbers, List<String> operators) {
         this.numbers = new LinkedList<>(numbers);
@@ -18,10 +17,15 @@ public class Equation {
     }
 
     public double getResult() {
-        while (numbers.size() != 1) {
-            numbers.addFirst(OperatorGroup.operate(numbers.pollFirst(), operators.poll(), numbers.pollFirst()));
+        double result = numbers.poll();
+        while (isNotEmpty()) {
+            result = OperatorGroup.operate(result, operators.poll(), numbers.poll());
         }
-        return numbers.pollFirst();
+        return result;
+    }
+
+    private boolean isNotEmpty() {
+        return !numbers.isEmpty();
     }
 
     @Override

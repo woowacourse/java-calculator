@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class EquationFactoryTest {
 
@@ -21,4 +22,13 @@ class EquationFactoryTest {
         assertThat(equation).isEqualTo(new Equation(Arrays.asList(1D, 3D, 5D), Arrays.asList("+", "*")));
     }
 
+    @DisplayName("입력받은 수식의 숫자갯수와 연산자 갯수가 올바르지 않은 경우")
+    @Test
+    void getNumbers2() {
+        List<String> input = Arrays.asList("1", "+");
+
+        assertThatThrownBy(() -> EquationFactory.parseEquation(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("식이 올바르지 않습니다.\n숫자와 연산자의 개수를 확인해 주세요.");
+    }
 }
