@@ -22,6 +22,10 @@ public class Calculator {
         Integer result = null;
         while (true) {
             String inputEq  = inputEquation();
+            if (!validateString(inputEq)) {
+                System.out.println("빈 문자열입니다. 다시 입력해주세요.");
+                continue;
+            }
             Queue<String> equation = makeQueue(inputEq);
             try {
                 result = execute(equation);
@@ -39,6 +43,10 @@ public class Calculator {
     private String inputEquation() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    public boolean validateString(String inputEq) {
+        return inputEq != null && !inputEq.equals("");
     }
 
     public Queue makeQueue(String inputString) {
