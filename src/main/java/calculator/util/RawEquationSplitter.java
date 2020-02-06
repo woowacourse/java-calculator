@@ -1,4 +1,4 @@
-package calculator.spliter;
+package calculator.util;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,11 +19,11 @@ public class RawEquationSplitter {
         }
     }
 
-    private static void checkPosition(String[] equation, int i) {
-        if (i % 2 != 0 && isNumber(equation[i])) {
+    private static void checkPosition(String[] equation, int index) {
+        if (index % 2 != 0 && isNumber(equation[index])) {
             throw new IllegalArgumentException("식이 올바르지 않습니다. 숫자의 위치를 확인하세요.");
         }
-        if (i % 2 == 0 && isNotNumber(equation[i])) {
+        if (index % 2 == 0 && isNotNumber(equation[index])) {
             throw new IllegalArgumentException("식이 올바르지 않습니다. 연산자의 위치를 확인하세요.");
         }
     }

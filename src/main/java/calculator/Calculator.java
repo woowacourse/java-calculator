@@ -2,7 +2,7 @@ package calculator;
 
 import calculator.domain.Equation;
 import calculator.domain.EquationFactory;
-import calculator.spliter.RawEquationSplitter;
+import calculator.util.RawEquationSplitter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import calculator.view.dto.RawEquationDTO;

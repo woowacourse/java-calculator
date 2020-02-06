@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import calculator.operator.OperatorGroup;
+import calculator.domain.operator.OperatorGroup;
 
 import java.util.LinkedList;
 import java.util.List;

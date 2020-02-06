@@ -1,4 +1,4 @@
-package calculator.spliter;
+package calculator.util;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

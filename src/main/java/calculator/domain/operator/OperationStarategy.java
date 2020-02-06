@@ -1,4 +1,4 @@
-package calculator.operator;
+package calculator.domain.operator;
 
 @FunctionalInterface
 public interface OperationStarategy {
