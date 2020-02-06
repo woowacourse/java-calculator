@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
     private Set numbers;
+    private int numbers_size;
 
     @BeforeEach
     void setUp() {
@@ -20,12 +21,12 @@ public class SetTest {
         numbers.add(1);
         numbers.add(2);
         numbers.add(3);
+        numbers_size = 3;
     }
 
     @Test
     void setSizeTest() {
-        int setSize = numbers.size();
-        System.out.println("Set(변수명 numbers)의 크기 : "+setSize);
+        Assertions.assertThat(numbers.size()).isEqualTo(numbers_size);
     }
 
     @ParameterizedTest
