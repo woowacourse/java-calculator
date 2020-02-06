@@ -26,4 +26,14 @@ public class StringTest {
 
 		assertThat(actual).isEqualTo(expected);
 	}
+
+	@Test
+	void testCharAt() {
+		final String value = "abc";
+		final int index = 0;
+		final char actual = value.charAt(index);
+		final char expected = 'a';
+
+		assertThat(actual).isEqualTo(expected);
+	}
 }
