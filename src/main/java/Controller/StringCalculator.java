@@ -11,6 +11,11 @@ public class StringCalculator {
     private List<Operator> operators = new ArrayList<>();
     private double result;
 
+    public void run() {
+        initializeInputs();
+        OutputView.printOutputMessage(calculate());
+    }
+
     public void initializeInputs() {
         String[] inputs = InputException.checkException();
         for (int i = 0; i < inputs.length; i++) {
