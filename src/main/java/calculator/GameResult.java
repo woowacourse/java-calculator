@@ -6,24 +6,24 @@ import java.util.HashMap;
 
 public class GameResult {
     private static double result;
-    private static HashMap<Character, Operator> map = new HashMap<>();
-
-    static {
-        map.put('+', new Add());
-        map.put('-', new Subtract());
-        map.put('*', new Multiply());
-        map.put('/', new Divide());
-    }
+    private static HashMap<String, Operator> map = new HashMap<>();
 
     GameResult(String result) {
         this.result = Double.parseDouble(result);
     }
 
-    void resultCalculator(String operator, String number) {
-        result = map.get(operator.charAt(0)).calculate(result, Double.parseDouble(number));
+    static {
+        map.put("+", new Add());
+        map.put("-", new Subtract());
+        map.put("*", new Multiply());
+        map.put("/", new Divide());
     }
 
-    void getFinalResult() {
-        OutputView.answer(result);
+    void resultCalculator(String operator, String number) {
+        result = map.get(operator).calculate(result, Double.parseDouble(number));
+    }
+
+    double getFinalResult() {
+        return result;
     }
 }
