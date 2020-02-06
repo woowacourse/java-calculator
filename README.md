@@ -5,7 +5,7 @@
 
 - ### String 클래스에 대한 학습 테스트
 
-  - [ ] split()
+  - [x] split()
   - [ ] substring()
   - [ ] charAt()
 
