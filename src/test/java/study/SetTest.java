@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
@@ -28,7 +29,6 @@ public class SetTest {
     @DisplayName("Set Size Test")
     void size() {
         // 요구사항 1
-        setUp();
         assertThat(numbers.size()).isEqualTo(3);
     }
 
@@ -38,5 +38,13 @@ public class SetTest {
     void contains(int num) {
         // 요구사항 2
         assertThat(numbers.contains(num)).isTrue();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:1", "2:2", "3:3", "4:5"}, delimiter = ':')
+    @DisplayName("Set Csv Source Test")
+    void csv(int num, int testNum){
+        // 요구사항 3
+        assertThat(num).isEqualTo(testNum);
     }
 }
