@@ -2,7 +2,6 @@ package study;
 
 import org.junit.jupiter.api.BeforeEach;
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,9 @@ public class SetTest {
     @DisplayName("Set Size Test")
     void size() {
         // 요구사항 1
-        assertThat(numbers.size()).isEqualTo(3);
+        int inputNum = 3;
+        assertThat(numbers.size()).isEqualTo(inputNum);
+        System.out.println("numbers' size is " + inputNum);
     }
 
     @ParameterizedTest
@@ -38,13 +39,15 @@ public class SetTest {
     void contains(int num) {
         // 요구사항 2
         assertThat(numbers.contains(num)).isTrue();
+        System.out.println(num + " is in ValueSource");
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1:1", "2:2", "3:3", "4:5"}, delimiter = ':')
     @DisplayName("Set Csv Source Test")
-    void csv(int num, int testNum){
+    void csv(int num, int expectedNum){
         // 요구사항 3
-        assertThat(num).isEqualTo(testNum);
+        assertThat(num).isEqualTo(expectedNum);
+        System.out.println(num + " is equal to expected result.");
     }
 }
