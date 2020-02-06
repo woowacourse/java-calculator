@@ -8,6 +8,7 @@ public class Calculator {
     private final static String minus = "-";
     private final static String multiply = "*";
     private final static String divide = "/";
+    private final static String end = "q";
 
     public Calculator() {
         opertors = new HashSet<>();
@@ -18,9 +19,21 @@ public class Calculator {
     }
 
     public void start() {
-        String inputEq = inputEquation();
-        Queue<String> equation = makeQueue(inputEq);
-        System.out.println(execute(equation));
+        Integer result = null;
+        while (true) {
+            String inputEq  = inputEquation();
+            Queue<String> equation = makeQueue(inputEq);
+            try {
+                result = execute(equation);
+            }catch (ArithmeticException e){
+                System.out.println("0으로 나눌 수 없습니다. 다시 입력해주세요.");
+                continue;
+            }
+            if (result != null) {
+                System.out.println(result);
+                break;
+            }
+        }
     }
 
     private String inputEquation() {
@@ -33,7 +46,7 @@ public class Calculator {
         return new LinkedList<>(Arrays.asList(elements));
     }
 
-    public int execute(Queue<String> equation) {
+    public int execute(Queue<String> equation) throws ArithmeticException {
         int result = Integer.parseInt(equation.poll());
         while (!equation.isEmpty()) {
             String operator = equation.poll();
@@ -43,7 +56,7 @@ public class Calculator {
         return result;
     }
 
-    public int calculate(int result, String operator, int operand) {
+    public int calculate(int result, String operator, int operand) throws ArithmeticException {
         switch (operator) {
             case plus:
                 return add(result, operand);
@@ -71,6 +84,10 @@ public class Calculator {
     }
 
     public int divide(int a, int b) {
-        return a / b;
+        try {
+            return a / b;
+        }catch (ArithmeticException e){
+            throw e;
+        }
     }
 }
