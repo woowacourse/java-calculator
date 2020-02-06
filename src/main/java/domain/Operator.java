@@ -6,13 +6,13 @@ public enum Operator {
 	MULTIPLICATION("*"),
 	DIVISION("/");
 
-	private String symbol;
+	private String operator;
 
-	Operator(String symbol) {
-		this.symbol = symbol;
+	Operator(String operator) {
+		this.operator = operator;
 	}
 
-	public String getSymbol() {
-		return symbol;
+	public String getOperator() {
+		return operator;
 	}
 }
