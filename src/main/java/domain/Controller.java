@@ -2,8 +2,7 @@ package domain;
 
 import view.InputView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Controller {
 
@@ -19,7 +18,14 @@ public class Controller {
     }
 
     private void splitFormula() {
-
+        String[] formulas = formula.split(" ");
+        for(int i = 0; i < formulas.length; i++){
+            if(i % 2 == 0) {
+                numbers.add(Double.parseDouble(formulas[i]));
+                continue;
+            }
+            operators.add(formulas[i].charAt(0));
+        }
     }
 
     private double runCalculator() {
