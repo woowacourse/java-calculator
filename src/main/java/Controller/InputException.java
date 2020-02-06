@@ -9,6 +9,7 @@ public class InputException {
         OutputView.printInputMessage();
         String[] inputs = InputView.input();
         try {
+            validateSpace(inputs);
             validateFirstAndLast(inputs);
             validateRepeat(inputs);
             validateOperators(inputs);
@@ -17,6 +18,12 @@ public class InputException {
             OutputView.printInputExceptionMessage(e);
         }
         return checkException();
+    }
+
+    public static void validateSpace(String[] inputs) throws Exception {
+        if (inputs.length == 0){
+            throw new Exception("식이 입력되지 않았습니다.");
+        }
     }
 
     /**
