@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 @DisplayName("Set Collection API - study test")
 public class SetTest {
@@ -33,8 +33,8 @@ public class SetTest {
 
 	@DisplayName("Set Collection API - contains() test")
 	@ParameterizedTest
-	@ValueSource(ints = {1, 2, 3})
-	void testContains(int input) {
-		assertThat(numbers.contains(input)).isTrue();
+	@CsvSource(value = {"1,true", "2,true", "3,true", "4,false"})
+	void testContains(int input, boolean expected) {
+		assertThat(numbers.contains(input)).isEqualTo(expected);
 	}
 }
