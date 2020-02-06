@@ -82,3 +82,10 @@
     - multiply
     - divide
     - result return 
+    
+### TO - DO MORE
+
+- 테스트 코드 작성
+- 리팩토링
+- Java code convention
+- readme 정리
