@@ -1,9 +1,14 @@
 package calculator;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Calculator {
-    private static final int INITIAL_VALUE = 0;
+
+    Queue<Integer> operatorQueue = new LinkedList<>();
+    Queue<Integer> numberQueue = new LinkedList<>();
+
     private static final int CHECK_EVEN_NUMBER_MODULAR = 2;
     private static final int EVEN_NUMBER = 1;
     public void main(String[] args) {
