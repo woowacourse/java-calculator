@@ -35,5 +35,6 @@ public class StringTest {
                 String val = "ab";
                 val.charAt(2);
         }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining("2");
+        System.out.println("ㅁㄴㅇ");
     }
 }

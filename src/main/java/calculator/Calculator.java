@@ -10,17 +10,10 @@ public class Calculator {
     private static Scanner sc = new Scanner(System.in);
     static List<Integer> nums = new ArrayList<>();
     static List<String> opers = new ArrayList<>();
+    private String value;
 
-    static void init(String[] valueArray) { // 숫자와 연산자를 나누어서 각 리스트를 만드는 함수.
-        for(int i = 0; i < valueArray.length; i++) {
-            if(i % 2 == 0) {
-                System.out.println(valueArray[i]);
-                nums.add(Input.inputNumber(valueArray[i]));
-            }else if(i % 2 == 1) {
-                System.out.println(valueArray[i]);
-                opers.add(Input.inputOperator(valueArray[i]));
-            }
-        }
+    static void init(String[] valueArray) { // 숫자와 연산자를 나누어서 각 리스트를 만드는 함수
+        value = Input.inputValue();
     }
 
     static int operation(int currNum, String oper) { // 연산자에 따른 연산을 하는 함수.
@@ -50,6 +43,7 @@ public class Calculator {
     public static void main(String[] args) {
         String[] valueArray = Input.inputExpression();
         init(valueArray);
+
         int answer = nums.remove(0);
         answer = calculate(answer);
         System.out.println("Answer is " + calculate(answer));

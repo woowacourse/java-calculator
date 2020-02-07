@@ -5,10 +5,29 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import exception.Exception;
+
 public class Input {
     static Scanner sc = new Scanner(System.in);
     private static final String PATTERN = "(^[0-9]*$)";
-    private static final String PATTS = "[+-*/]";
+    private static final String PATTS = "[+-*/]$";
+    private String value;
+    private Exception exception = new Exception();
+
+    public static String inputValue() {
+        System.out.println("Enter Value : ");
+        value = sc.nextLine();
+        if (!exception.isNumber()) {
+            System.out.println("숫자가 아닙니다.");
+            return inputValue();
+        } else if (!exception.isValidOperator()) {
+            System.out.println("정확한 연산자가 아닙니다.");
+            return inputValue();
+        } else if() {
+
+        }
+        return value;
+    }
 
     public static String[] inputExpression() {
         System.out.println("Enter the Expression");
