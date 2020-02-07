@@ -12,17 +12,36 @@ public class Calculator {
         String[] values = scanner.nextLine().split(" ");
         returnValue = Integer.parseInt(values[0]);
         for (int i = INDEX_INIT; i < values.length; i++) {
-            //check 함수
+            check(i, values[i]);
         }
         System.out.println(returnValue);
     }
 
     private static void check(int i, String value) {
         if (i % 2 == EVEN) {
-            //계산하는 함수
+            calculate(Integer.parseInt(value));
         }
         if (i % 2 == ODD) {
             nowSign = value;
+        }
+    }
+
+    private static void calculate(int nowNumber) {
+        if (nowSign.equals("+")) {
+            //덧셈 함수
+            return;
+        }
+        if (nowSign.equals("-")) {
+            //뺄셈 함수
+            return;
+        }
+        if (nowSign.equals("*")) {
+            //곱하기 함수
+            return;
+        }
+        if (nowSign.equals("/")) {
+            //더하기 함수
+            return;
         }
     }
 }
