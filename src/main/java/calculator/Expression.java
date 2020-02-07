@@ -52,7 +52,7 @@ public class Expression {
 
     private boolean isNumber(String input) {
         try {
-            Integer.parseInt(input);
+            Double.parseDouble(input);
         } catch (NumberFormatException e) {
             return false;
         }

@@ -1,13 +1,13 @@
 package calculator;
 
 public class Operand {
-    private int value;
+    private double value;
 
     public Operand(String input) {
-        value = Integer.parseInt(input);
+        value = Double.parseDouble(input);
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 }
