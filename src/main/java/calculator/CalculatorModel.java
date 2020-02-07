@@ -7,10 +7,11 @@ public class CalculatorModel {
     private static final int STANDARD_NUMBER = 0;
     private static final UserInput userInput = new UserInput();
 
-    public void runCalculator() {
+    public void runCalculator() throws IllegalAccessException {
         String[] userInputArray = userInput.getNumbersAndOperator();
 
         GameResult gameResult = new GameResult(userInputArray[STANDARD_NUMBER]);
+
         for (int i = 1; i < userInputArray.length; i += 2) {
             gameResult.resultCalculator(userInputArray[i], userInputArray[i + 1]);
         }

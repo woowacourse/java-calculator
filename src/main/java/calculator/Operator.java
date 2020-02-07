@@ -1,33 +1,25 @@
 package calculator;
 
-public interface Operator {
-    double calculate(double a, double b);
-}
+import java.util.Arrays;
 
-class Add implements Operator {
-    @Override
-    public double calculate(double a, double b) {
-        return a + b;
-    }
-}
+public enum Operator {
 
-class Subtract implements Operator {
-    @Override
-    public double calculate(double a, double b) {
-        return a - b;
-    }
-}
+    PLUS("+"),
+    SUBTRACT("-"),
+    MULTIPLY("*"),
+    DIVIDE("/");
 
-class Multiply implements Operator {
-    @Override
-    public double calculate(double a, double b) {
-        return a * b;
-    }
-}
+    private String operator;
 
-class Divide implements Operator {
-    @Override
-    public double calculate(double a, double b) {
-        return a / b;
+    Operator(String operator) {
+        this.operator = operator;
     }
+
+    public static Operator of(String operator) throws IllegalAccessException {
+        return Arrays.stream(values())
+                .filter(op -> op.operator.equals(operator))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException());
+    }
+
 }

@@ -9,6 +9,7 @@ public class Application {
             model.runCalculator();
         } catch (Exception e) {
             OutputView.programError();
+            main(args);
         }
     }
 }

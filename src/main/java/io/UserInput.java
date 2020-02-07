@@ -1,5 +1,7 @@
 package io;
 
+import calculator.Operator;
+
 import java.util.Scanner;
 
 public class UserInput {
@@ -18,16 +20,16 @@ public class UserInput {
 
     private boolean checkAllInputError() {
         String[] inputArray = userInput.split(BLANK);
-        if (!((inputArray.length % 2) == 1) || !checkNumberOrNot(inputArray[0]))
+        if (!((inputArray.length % 2) == 1) || !isNumber(inputArray[0]))
             return false;
         for (int i = 1; i < inputArray.length; i += 2) {
-            if (!checkOperatorOrNot(inputArray[i]) || !checkNumberOrNot(inputArray[i + 1]))
+            if (!isOperator(inputArray[i]) || !isNumber(inputArray[i + 1]))
                 return false;
         }
         return true;
     }
 
-    private boolean checkNumberOrNot(String target) {
+    private boolean isNumber(String target) {
         try {
             Double.parseDouble(target);
         } catch (NumberFormatException e) {
@@ -36,7 +38,13 @@ public class UserInput {
         return true;
     }
 
-    private boolean checkOperatorOrNot(String target) {
-        return target.equals("+") || target.equals("-") || target.equals("*") || target.equals("/");
+    private boolean isOperator(String target) {
+//        return target.equals(Operator.PLUS) || target.equals(Operator.SUBTRACT) || target.equals(Operator) || target.equals("/");
+        try {
+            Operator.of(target);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }

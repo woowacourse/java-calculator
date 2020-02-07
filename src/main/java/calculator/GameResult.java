@@ -1,26 +1,29 @@
 package calculator;
 
-import io.OutputView;
-
 import java.util.HashMap;
+import java.util.function.BiFunction;
 
 public class GameResult {
     private static double result;
-    private static HashMap<String, Operator> map = new HashMap<>();
+
+    private static HashMap<Operator, BiFunction<Double, Double, Double>> map = new HashMap<Operator, BiFunction<Double, Double, Double>>();
 
     GameResult(String result) {
         this.result = Double.parseDouble(result);
     }
 
     static {
-        map.put("+", new Add());
-        map.put("-", new Subtract());
-        map.put("*", new Multiply());
-        map.put("/", new Divide());
+        map.put(Operator.PLUS, (a, b) -> a + b);
+        map.put(Operator.SUBTRACT, (a, b) -> a - b);
+        map.put(Operator.MULTIPLY, (a, b) -> a * b);
+        map.put(Operator.DIVIDE, (a, b) -> a / b);
     }
 
-    void resultCalculator(String operator, String number) {
-        result = map.get(operator).calculate(result, Double.parseDouble(number));
+    void resultCalculator(String operator, String number) throws IllegalAccessException {
+        if (operator.equals("/") && number.equals("0")) {
+            throw new ArithmeticException();
+        }
+        result = map.get(Operator.of(operator)).apply(result, Double.parseDouble(number));
     }
 
     double getFinalResult() {
