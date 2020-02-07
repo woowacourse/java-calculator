@@ -13,7 +13,7 @@ public class Application {
         try {
             Formulas formulas = new Formulas(InputView.input());
             Calculator calculator = new Calculator(formulas);
-            return calculator.startCalculate();
+            return calculator.stringCalculate();
         } catch (IllegalArgumentException e) {
             OutputView.exceptionMessage(e.getMessage());
             return calculateByInput();
