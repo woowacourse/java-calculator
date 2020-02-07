@@ -1,4 +1,7 @@
-package calculator;
+package calculator.domain;
+
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 import java.util.*;
 
@@ -9,44 +12,34 @@ public class Calculator {
     private final static String divide = "/";
     private final static String end = "q";
 
-    public Calculator() {}
+    public Calculator() {
+    }
 
     public void start() {
         Integer result = null;
         while (true) {
-            System.out.println("\n계산할 수식을 입력해주세요. (숫자와 연산자는 공백으로 구분)\n ex. 1 + 2");
-            String inputEq = inputEquation();
-            if (!validateString(inputEq)) {
-                System.out.println("빈 문자열입니다. 다시 입력해주세요.");
+            String inputEq = "";
+            try {
+                inputEq = InputView.inputEquation();
+            } catch (IllegalArgumentException e) {
+                OutputView.printMessage_EmptyCase();
                 continue;
             }
             Queue<String> equation = makeQueue(inputEq);
             try {
                 result = execute(equation);
-            } catch (ArithmeticException e1) {
-                System.out.println("0으로 나눌 수 없습니다. 다시 입력해주세요.");
+            } catch (ArithmeticException e) {
+                OutputView.printMessage_DividedByZeroCase();
                 continue;
-            } catch (NumberFormatException e2) {
-                System.out.println("잘못된 수식이 입력되었습니다. 다시 입력해주세요.");
-                continue;
-            } catch (InputMismatchException e3) {
-                System.out.println("잘못된 수식이 입력되었습니다. 다시 입력해주세요.");
+            } catch (NumberFormatException | InputMismatchException e) {
+                OutputView.printMessage_InvalidEquationCase();
                 continue;
             }
             if (result != null) {
-                System.out.println(result);
+                OutputView.printResult(result);
                 break;
             }
         }
-    }
-
-    private String inputEquation() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
-    public boolean validateString(String inputEq) {
-        return inputEq != null && !inputEq.equals("");
     }
 
     public Queue makeQueue(String inputString) {
