@@ -18,7 +18,7 @@ public class Calculator {
 				continue;
 			}
 			int operand = Integer.parseInt(expressionArg);
-			result = operator.calculate(result, operand);
+			result = operator.apply(result, operand);
 		}
 		return result;
 	}

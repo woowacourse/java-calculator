@@ -1,37 +1,20 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
-	ADD("+") {
-		@Override
-		public int calculate(int operand1, int operand2) {
-			return operand1 + operand2;
-		}
-	},
-	SUBTRACT("-") {
-		@Override
-		public int calculate(int operand1, int operand2) {
-			return operand1 - operand2;
-		}
-	},
-	MULTIPLY("*") {
-		@Override
-		public int calculate(int operand1, int operand2) {
-			return operand1 * operand2;
-		}
-	},
-	DIVIDE("/") {
-		@Override
-		public int calculate(int operand1, int operand2) {
-			return operand1 / operand2;
-		}
-	};
+	ADD("+", (operand1, operand2) -> operand1 + operand2),
+	SUBTRACT("-", (operand1, operand2) -> operand1 - operand2),
+	MULTIPLY("*", (operand1, operand2) -> operand1 * operand2),
+	DIVIDE("/", (operand1, operand2) -> operand1 / operand2);
 
 	private final String symbol;
+	private final BinaryOperator<Integer> binaryOperator;
 
-	Operator(String symbol) {
+	Operator(String symbol, BinaryOperator<Integer> binaryOperator) {
 		this.symbol = symbol;
+		this.binaryOperator = binaryOperator;
 	}
 
 	public static Operator findBySymbol(String value) {
@@ -41,7 +24,9 @@ public enum Operator {
 			.orElseThrow(() -> new IllegalArgumentException());
 	}
 
-	public abstract int calculate(int operand1, int operand2);
+	public int apply(int operand1, int operand2) {
+		return binaryOperator.apply(operand1, operand2);
+	}
 
 	public static boolean isOperatorSymbol(String symbol) {
 		return Arrays.stream(Operator.values())

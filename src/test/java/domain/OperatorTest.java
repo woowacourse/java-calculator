@@ -14,28 +14,28 @@ class OperatorTest {
 	@CsvSource(value = {"5:3:8", "3:2:5"}, delimiter = ':')
 	void addTest(int operand1, int operand2, int expected) {
 		Operator addOperator = Operator.ADD;
-		assertThat(addOperator.calculate(operand1, operand2)).isEqualTo(expected);
+		assertThat(addOperator.apply(operand1, operand2)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"5:3:2", "3:2:1"}, delimiter = ':')
 	void subtractTest(int operand1, int operand2, int expected) {
 		Operator subtractOperator = Operator.SUBTRACT;
-		assertThat(subtractOperator.calculate(operand1, operand2)).isEqualTo(expected);
+		assertThat(subtractOperator.apply(operand1, operand2)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"5:3:15", "3:2:6"}, delimiter = ':')
 	void multiplyTest(int operand1, int operand2, int expected) {
 		Operator multiplyOperator = Operator.MULTIPLY;
-		assertThat(multiplyOperator.calculate(operand1, operand2)).isEqualTo(expected);
+		assertThat(multiplyOperator.apply(operand1, operand2)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"6:3:2", "3:1:3"}, delimiter = ':')
 	void divideTest(int operand1, int operand2, int expected) {
 		Operator divideOperator = Operator.DIVIDE;
-		assertThat(divideOperator.calculate(operand1, operand2)).isEqualTo(expected);
+		assertThat(divideOperator.apply(operand1, operand2)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
@@ -43,7 +43,7 @@ class OperatorTest {
 	@DisplayName("Divide with 0 test")
 	void divideWithZeroTest(int operand1, int operand2) {
 		Operator divideOperator = Operator.DIVIDE;
-		assertThatThrownBy(() -> divideOperator.calculate(operand1, operand2))
+		assertThatThrownBy(() -> divideOperator.apply(operand1, operand2))
 			.isInstanceOf(ArithmeticException.class);
 	}
 
