@@ -1,14 +1,10 @@
 import expression.Expression;
-
-import java.util.Scanner;
+import input.CalculatorInputScanner;
 
 public class Application {
 
-    private static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-        System.out.println("수식을 입력해주세요.(공백으로 구분)");
-        String userExpression = scanner.nextLine();
+        String userExpression = CalculatorInputScanner.getExpression();
 
         Expression expression = new Expression(userExpression);
         Double userResult = expression.getResult();
