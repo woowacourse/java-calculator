@@ -24,13 +24,13 @@ public class ExpressionFactory {
         validateTokens(input);
         validateDivideByZero(input);
         List<String> tokens = Arrays.asList(input.split(DELIMITER));
-        Numbers numbers = makeNumbers(tokens);
-        Operators operators = makeOperators(tokens);
+        List<Double> numbers = makeNumbers(tokens);
+        List<OperatorType> operators = makeOperators(tokens);
         return new Expression(numbers, operators);
     }
 
     private static void validateTokens(final String input) {
-        if (!input.matches("^-?\\d(\\s[-+*/]\\s-?\\d)*\\b")) {
+        if (!input.matches("^-?\\d*(\\s[-+*/]\\s-?\\d*)*\\b")) {
             throw new IllegalArgumentException("잘못된 형식으로 입력하셨습니다.");
         }
     }
@@ -41,19 +41,19 @@ public class ExpressionFactory {
         }
     }
 
-    private static Numbers makeNumbers(final List<String> tokens) {
+    private static List<Double> makeNumbers(final List<String> tokens) {
         List<Double> numbers = new ArrayList<>();
         for (int index = 0; index < tokens.size(); index += 2) {
             numbers.add(Double.valueOf(tokens.get(index)));
         }
-        return new Numbers(numbers);
+        return numbers;
     }
 
-    private static Operators makeOperators(final List<String> tokens) {
+    private static List<OperatorType> makeOperators(final List<String> tokens) {
         List<OperatorType> operators = new ArrayList<>();
         for (int index = 1; index < tokens.size(); index += 2) {
             operators.add(OperatorType.of(tokens.get(index)));
         }
-        return new Operators(operators);
+        return operators;
     }
 }

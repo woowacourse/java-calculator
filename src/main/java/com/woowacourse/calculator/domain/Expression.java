@@ -1,5 +1,6 @@
 package com.woowacourse.calculator.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,15 +14,20 @@ import java.util.Objects;
  */
 
 public class Expression {
-    private final Numbers numbers;
-    private final Operators operators;
+    private final List<Double> numbers;
+    private final List<OperatorType> operators;
 
-    public Expression(final Numbers numbers, final Operators operators) {
+    public Expression(final List<Double> numbers, final List<OperatorType> operators) {
         this.numbers = Objects.requireNonNull(numbers);
         this.operators = Objects.requireNonNull(operators);
     }
 
     public double calculate() {
-        return operators.calculate(numbers);
+        double answer = numbers.get(0);
+        for (int index = 0; index < operators.size(); ++index) {
+            OperatorType operator = operators.get(index);
+            answer = operator.calculate(answer, numbers.get(index + 1));
+        }
+        return answer;
     }
 }
