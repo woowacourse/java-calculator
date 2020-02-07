@@ -1,6 +1,5 @@
 package domain;
 
-import org.w3c.dom.ls.LSOutput;
 import utils.Exit;
 import utils.InputValidation;
 import view.InputView;
