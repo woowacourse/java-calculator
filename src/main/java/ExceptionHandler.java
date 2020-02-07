@@ -20,10 +20,17 @@ public class ExceptionHandler {
     }
 
     private static String checkInputHandler(String input) {
-        if (checkString(input.split(" ")) == true) {
+        if (checkString(input.split(" ")) == true && isUndefinedValue(input) == true) {
             return input;
         }
         throw new IllegalArgumentException();
+    }
+
+    public static boolean isUndefinedValue(String str) {
+        if (str.replace(" ", "").contains("/0")) {
+            return false;
+        }
+        return true;
     }
 
     private static boolean checkString(String[] inputStrings) {
