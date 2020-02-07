@@ -34,7 +34,7 @@ public class InputUtil {
 		return Stream.of(input.split(SPACE)).collect(Collectors.toList());
 	}
 
-	private static boolean isRightPattern(String input) {
+	public static boolean isRightPattern(String input) {
 		return input.matches(PATTERN);
 	}
 }
