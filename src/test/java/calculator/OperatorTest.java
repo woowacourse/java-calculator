@@ -4,9 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 
 class OperatorTest {
-
     private Operator plusOperator;
     private Operator minusOperator;
     private Operator multiplyOperator;
@@ -17,10 +18,10 @@ class OperatorTest {
 
     @BeforeEach
     void setUp() {
-        plusOperator = new PlusOperator();
-        minusOperator = new MinusOperator();
-        multiplyOperator = new MultiplyOperator();
-        divideOperator = new DivideOperator();
+        plusOperator = Operator.from("+");
+        minusOperator = Operator.from("-");
+        multiplyOperator = Operator.from("*");
+        divideOperator = Operator.from("/");
     }
 
     @Test
@@ -41,5 +42,11 @@ class OperatorTest {
     @Test
     void testDivideOperator() {
         assertThat(divideOperator.calculate(prev, next)).isEqualTo(prev / next);
+    }
+
+    @Test
+    void testOperatorException() {
+        assertThatThrownBy(() -> Operator.from("j"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

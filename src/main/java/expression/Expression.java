@@ -1,10 +1,6 @@
 package expression;
 
-import calculator.DivideOperator;
-import calculator.MinusOperator;
-import calculator.MultiplyOperator;
 import calculator.Operator;
-import calculator.PlusOperator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,18 +58,6 @@ public class Expression {
     }
 
     private Operator tokenToOperator(String token) {
-        if (token.equals("+")) {
-            return new PlusOperator();
-        }
-        if (token.equals("-")) {
-            return new MinusOperator();
-        }
-        if (token.equals("*")) {
-            return new MultiplyOperator();
-        }
-        if (token.equals("/")) {
-            return new DivideOperator();
-        }
-        throw new IllegalArgumentException("올바른 연산자가 아닙니다.");
+        return Operator.from(token);
     }
 }
