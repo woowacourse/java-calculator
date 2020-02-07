@@ -1,11 +1,12 @@
 package calculator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+
 import domain.Calculator;
 import domain.Formula;
 import domain.Formulas;
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
 
@@ -19,6 +20,4 @@ public class CalculatorTest {
         result = Calculator.startCalculate(formulas);
         assertThat(result).isEqualTo(10);
     }
-
-
 }
