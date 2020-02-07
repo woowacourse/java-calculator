@@ -23,7 +23,6 @@ public class InputView {
     }
 
     private NumberSentence buildNumberSentence(String sentence) {
-        //"2 + 3 * 4 / 2";
         List<Integer> numbers = new ArrayList<>();
         Queue<String> operators = new LinkedList<>();
 
@@ -31,7 +30,7 @@ public class InputView {
         List<String> arg = Arrays.asList(arguments);
 
         for (int i = 0; i < arguments.length; i++) {
-            if (i / 2 == 0) {
+            if (i % 2 == 0) {
                 numbers.add(Integer.parseInt(arg.get(i)));
             } else {
                 operators.add(arg.get(i));
