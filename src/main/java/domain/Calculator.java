@@ -50,16 +50,9 @@ public class Calculator {
 	}
 
 	private boolean isNumeric(String formulaArg) {
-		for (int i = 0; i < formulaArg.length(); i++) {
-			if (!isOneDigit(formulaArg.charAt(i))) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean isOneDigit(char character) {
-		if (character < '0' || character > '9') {
+		try {
+			Integer.parseInt(formulaArg);
+		} catch (Exception e) {
 			return false;
 		}
 		return true;
