@@ -69,6 +69,14 @@ public class CalculatorTest {
         }
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"5:+:15", "5:-:5", "5:*:50", "5:/:2"}, delimiter = ':')
+    void calculateTest(double input, String sign, double expected) {
+        nowSign = sign;
+        calculate(input);
+        assertThat(returnValue).isEqualTo(expected);
+    }
+
     private static void plus(double nowNumber) {
         returnValue += nowNumber;
     }
