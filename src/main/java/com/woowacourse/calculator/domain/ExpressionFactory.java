@@ -17,6 +17,10 @@ import java.util.List;
 public class ExpressionFactory {
     private static final String DELIMITER = " ";
     private static final String DIVIDE_BY_ZERO_STRING = "/ 0";
+    private static final String EXPRESSION_VALIDATION_PATTERN = "^-?\\d*(\\s[-+*/]\\s-?\\d*)*\\b";
+    private static final int NUMBER_START_INDEX = 0;
+    private static final int OPERATION_START_INDEX = 1;
+    private static final int LOOP_JUMP_COUNT = 2;
 
     private ExpressionFactory() {}
 
@@ -30,7 +34,7 @@ public class ExpressionFactory {
     }
 
     private static void validateTokens(final String input) {
-        if (!input.matches("^-?\\d*(\\s[-+*/]\\s-?\\d*)*\\b")) {
+        if (!input.matches(EXPRESSION_VALIDATION_PATTERN)) {
             throw new IllegalArgumentException("잘못된 형식으로 입력하셨습니다.");
         }
     }
@@ -43,7 +47,7 @@ public class ExpressionFactory {
 
     private static List<Double> makeNumbers(final List<String> tokens) {
         List<Double> numbers = new ArrayList<>();
-        for (int index = 0; index < tokens.size(); index += 2) {
+        for (int index = NUMBER_START_INDEX; index < tokens.size(); index += LOOP_JUMP_COUNT) {
             numbers.add(Double.valueOf(tokens.get(index)));
         }
         return numbers;
@@ -51,7 +55,7 @@ public class ExpressionFactory {
 
     private static List<OperatorType> makeOperators(final List<String> tokens) {
         List<OperatorType> operators = new ArrayList<>();
-        for (int index = 1; index < tokens.size(); index += 2) {
+        for (int index = OPERATION_START_INDEX; index < tokens.size(); index += LOOP_JUMP_COUNT) {
             operators.add(OperatorType.of(tokens.get(index)));
         }
         return operators;

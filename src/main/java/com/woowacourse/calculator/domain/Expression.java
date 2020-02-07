@@ -14,6 +14,7 @@ import java.util.Objects;
  */
 
 public class Expression {
+    private static final int START_INDEX = 0;
     private final List<Double> numbers;
     private final List<OperatorType> operators;
 
@@ -23,8 +24,8 @@ public class Expression {
     }
 
     public double calculate() {
-        double answer = numbers.get(0);
-        for (int index = 0; index < operators.size(); ++index) {
+        double answer = numbers.get(START_INDEX);
+        for (int index = START_INDEX; index < operators.size(); ++index) {
             OperatorType operator = operators.get(index);
             answer = operator.calculate(answer, numbers.get(index + 1));
         }
