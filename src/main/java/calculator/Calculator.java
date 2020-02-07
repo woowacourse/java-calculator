@@ -30,26 +30,10 @@ public class Calculator {
         while (operatorIndex < operators.size()) {
             String newOperator = operators.get(operatorIndex);
             Double newNumber = Double.parseDouble(numbers.get(numberIndex));
-            result = doOperation(newOperator, result, newNumber);
+            // result = doOperation(newOperator, result, newNumber);
             numberIndex++;
             operatorIndex++;
         }
         return result;
-    }
-
-    static double doOperation(String operator, double a, double b) {
-        if (operator.equals("+")) {
-            return a + b;
-        }
-        if (operator.equals("-")) {
-            return a - b;
-        }
-        if (operator.equals("*")) {
-            return a * b;
-        }
-        if (operator.equals("/")) {
-            return a / b;
-        }
-        throw new IllegalStateException("잘못된 연산자가 입력되었습니다.");
     }
 }

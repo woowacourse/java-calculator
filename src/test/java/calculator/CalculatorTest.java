@@ -31,16 +31,4 @@ class CalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
-    @DisplayName("연산자 별 연산 확인")
-    @Test
-    void doOperation() {
-        double plusResult = Calculator.doOperation("+", 3, 5);
-        assertThat(plusResult).isEqualTo(8);
-        double minusResult = Calculator.doOperation("-", 3, 5);
-        assertThat(minusResult).isEqualTo(-2);
-        double multipleResult = Calculator.doOperation("*", 1, 2);
-        assertThat(multipleResult).isEqualTo(2);
-        double divideResult = Calculator.doOperation("/", 4, 2);
-        assertThat(divideResult).isEqualTo(2);
-    }
 }
