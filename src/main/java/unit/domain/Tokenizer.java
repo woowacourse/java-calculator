@@ -7,7 +7,13 @@ import java.util.stream.Collectors;
 public class Tokenizer {
 	public static List<Token> tokenize(final String inputExpression) {
 		return Arrays.stream(inputExpression.split(" "))
-			.map(Token::new)
+			.map(token -> {
+				try {
+					return new Number(token);
+				} catch (NumberFormatException e) {
+					return new Operator(token);
+				}
+			})
 			.collect(Collectors.toList());
 	}
 }
