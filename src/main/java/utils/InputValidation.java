@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class InputValidation {
@@ -35,4 +36,14 @@ public class InputValidation {
         }
         return operator;
     }
+
+    public static String[] trimSpace(String[] formulas) {
+        return Arrays.stream(formulas)
+                .filter((x) -> {
+                    if (x.equals("")) return false;
+                    return true;
+                }).toArray(String[]::new);
+
+    }
+
 }

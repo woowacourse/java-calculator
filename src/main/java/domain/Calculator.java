@@ -1,5 +1,6 @@
 package domain;
 
+import org.w3c.dom.ls.LSOutput;
 import utils.Exit;
 import utils.InputValidation;
 import view.InputView;
@@ -16,7 +17,7 @@ public class Calculator {
     private final BiFunction<Double, Double, Double> SUBTRACTION = (a, b) -> a - b;
     private final BiFunction<Double, Double, Double> MULTIPLICATION = (a, b) -> a * b;
     private final BiFunction<Double, Double, Double> DIVISION = (a, b) -> {
-        if (b == 0){
+        if (b == 0) {
             Exit.sendErrorMessage("0으로는 나눌 수 없습니다.");
         }
         return a / b;
@@ -45,8 +46,8 @@ public class Calculator {
     }
 
     public void splitFormula(String formula) {
-        String[] formulas = formula.split(" ",0);
-        //
+        String[] formulas = InputValidation.trimSpace(formula.split(" ", 0));
+
         for (int i = 0; i < formulas.length; i++) {
             String temp = formulas[i];
             if (i % 2 == 0) {
