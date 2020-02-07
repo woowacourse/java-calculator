@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Calculator {
-    public double calculate(String[] values) {
+    public double calculateString(String[] values) {
         Queue<String> elements = new LinkedList<>(Arrays.asList(values));
         double result = Double.parseDouble(elements.poll());
         while (!elements.isEmpty()) {
@@ -21,7 +21,7 @@ public class Calculator {
             result = Operator.of(operator)
                     .calculate(result, rightOperand);
         }
-        if(Double.isInfinite(result)) {
+        if (Double.isInfinite(result)) {
             throw new ArithmeticException();
         }
         return result;

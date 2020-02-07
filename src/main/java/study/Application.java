@@ -20,7 +20,7 @@ public class Application {
         Calculator calculator = new Calculator();
         try {
             String[] values = userInput.inputExpression();
-            System.out.println("정답은 " + calculator.calculate(values) + "입니다.");
+            System.out.println("정답은 " + calculator.calculateString(values) + "입니다.");
         } catch (ArithmeticException e) {
             System.out.println("0으로 나눌 수 없습니다.");
             runCalculator();
