@@ -11,7 +11,7 @@ public class InputView {
         boolean isException = true;
         String input = null;
         while(isException){
-            input = scanner.nextLine();
+            input = scanner.nextLine().trim();
             isException = InputValidation.checkNullOroSpace(input);
         }
         return input;
