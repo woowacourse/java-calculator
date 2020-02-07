@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
     private Calculator calculator = new Calculator();
+    private int first = 1;
+    private int second = 2;
 
     @Test
     void calculateAdd() {
-        int first = 1;
-        int second = 2;
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList("+")));
 
         assertThat(calculator.calculate(numberSentence)).isEqualTo(first + second);
@@ -23,8 +23,6 @@ class CalculatorTest {
 
     @Test
     void calculateSubstract() {
-        int first = 1;
-        int second = 2;
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList("-")));
 
         assertThat(calculator.calculate(numberSentence)).isEqualTo(first - second);
@@ -32,8 +30,6 @@ class CalculatorTest {
 
     @Test
     void calculateMultiple() {
-        int first = 1;
-        int second = 2;
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList("*")));
 
         assertThat(calculator.calculate(numberSentence)).isEqualTo(first * second);
@@ -41,8 +37,6 @@ class CalculatorTest {
 
     @Test
     void calculateDivide() {
-        int first = 1;
-        int second = 2;
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList("/")));
 
         assertThat(calculator.calculate(numberSentence)).isEqualTo(first / second);
