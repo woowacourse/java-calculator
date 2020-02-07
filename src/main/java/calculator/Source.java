@@ -1,16 +1,16 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Source {
-    private List<Double> operands;
-    private List<CalculatorType> operators;
+    private Queue<Double> operands;
+    private Queue<CalculatorType> operators;
     private boolean operandTurn;
 
     public Source(String[] inputs) throws Exception {
-        operands = new ArrayList<>();
-        operators = new ArrayList<>();
+        operands = new LinkedList<>();
+        operators = new LinkedList<>();
         operandTurn = true;
         generateSource(inputs);
     }
@@ -18,6 +18,16 @@ public class Source {
     public void generateSource(String[] inputs) throws Exception {
         validateSizeOfInputsIsOdds(inputs);
         validateInputsByIndex(inputs);
+    }
+
+    public double calculateInputs() {
+        Double result = operands.poll();
+
+        for (CalculatorType operator : operators) {
+            Double operand = operands.poll();
+            CalculatorType.calculate(result, operator, operand);
+        }
+        return result;
     }
 
     private void validateSizeOfInputsIsOdds(String[] inputs) throws Exception {
@@ -39,11 +49,11 @@ public class Source {
     private void validateInputByIndex(String input) throws Exception {
         if (operandTurn) {
             double operand = Double.parseDouble(input);
-            operands.add(operand);
+            operands.offer(operand);
         }
         if (!operandTurn) {
             CalculatorType operator = CalculatorType.validateOperator(input);
-            operators.add(operator);
+            operators.offer(operator);
         }
         operandTurn = !operandTurn;
     }
