@@ -34,7 +34,7 @@ public enum OperatorType {
                 .orElseThrow(() -> new IllegalArgumentException("연산자에 포함되지 않습니다."));
     }
 
-    public double calculate(Double firstOperand, Double secondOperand) {
+    public double calculate(final Double firstOperand, final Double secondOperand) {
         return expression.apply(firstOperand, secondOperand);
     }
 }

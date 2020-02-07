@@ -21,7 +21,7 @@ public class OutputView {
         System.out.println(RETRY_INPUT_NOTICE_MESSAGE);
     }
 
-    public static void printAnswer(double answer) {
+    public static void printAnswer(final double answer) {
         System.out.printf(ANSWER_MESSAGE, answer);
     }
 }
