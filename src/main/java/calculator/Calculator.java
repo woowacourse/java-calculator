@@ -11,38 +11,49 @@ public class Calculator {
 
     private static final int CHECK_EVEN_NUMBER_MODULAR = 2;
     private static final int EVEN_NUMBER = 1;
-    public void main(String[] args) {
+    public static void main(String[] args) {
         Calculator calculator = new Calculator();
         calculator.run();
     }
 
     private void run() {
         String[] equation = getEquation();
-        calculateEquation(equation);
+
     }
 
-    private void calculateEquation(String[] equation) {
-        int result = Integer.parseInt(equation[0]);
-        for(int i=0; i<equation.length; i++) {
-            if(i%CHECK_EVEN_NUMBER_MODULAR == EVEN_NUMBER) {
-                result = checkOperatorAndCalculate(result, equation[i], Integer.parseInt(equation[i+1]));
+    private String[] getEquation() {
+        Scanner scanner = new Scanner(System.in);
+        String[] equations;
+        while(true) {
+            try {
+                String equation = scanner.nextLine();
+                equations = equation.split(" ");
+                checkNumber(equations);
+                checkOperator(equations);
+                break;
+            } catch(NumberFormatException e) {
+                e.getMessage();
+                System.out.println("다시 입력해주세요");
+            }
+        }
+        return equations;
+    }
+
+    private void checkNumber(String[] equations) {
+        for(int i=0; i<equations.length; i += 2) {
+            if(Double.parseDouble(equations[i]) > (double) Integer.MAX_VALUE
+                    || Double.parseDouble(equations[i]) < -(double) Integer.MAX_VALUE) {
+                throw new NumberFormatException();
             }
         }
     }
 
-    private int checkOperatorAndCalculate(int previous, String operator, int next) {
-        if(operator.equals("+")) { return previous + next; }
-        if(operator.equals("-")) { return previous - next; }
-        if(operator.equals("*")) { return previous * next; }
-        if(operator.equals("/")) { return previous / next; }
-        return -1;
+    private void checkOperator(String[] equations) {
+        for(int i=1; i<equations.length; i += 2) {
+            if(!equations[i].equals("+") && !equations[i].equals("-") && !equations[i].equals("*") && !equations[i].equals("/")) {
+                throw new NumberFormatException();
+            }
+
+        }
     }
-
-
-    private String[] getEquation() {
-        Scanner scanner = new Scanner(System.in);
-        String equation = scanner.nextLine();
-        return equation.split(" " );
-    }
-
 }
