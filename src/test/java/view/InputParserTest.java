@@ -1,13 +1,12 @@
 package view;
 
-import jdk.internal.util.xml.impl.Input;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import parser.InputParser;
 
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class InputParserTest {
 

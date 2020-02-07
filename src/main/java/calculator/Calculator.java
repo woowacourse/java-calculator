@@ -1,7 +1,6 @@
 package calculator;
 
-import jdk.internal.util.xml.impl.Input;
-import view.InputParser;
+import parser.InputParser;
 import view.InputView;
 import view.OutputView;
 
@@ -12,13 +11,12 @@ public class Calculator {
     private final static int ONE = 1;
 
     public static void run() {
-        // input
         String input = InputView.inputCalculation();
-        // split
+
         String[] expression = InputParser.split(input);
-        ArrayList<String> numbers =  InputParser.extractNumber(expression);
+        ArrayList<String> numbers = InputParser.extractNumber(expression);
         ArrayList<String> operators = InputParser.extractOperator(expression);
-        // calculate
+
         double result = calculate(numbers, operators);
 
         OutputView.printCalculate(result);
@@ -28,6 +26,7 @@ public class Calculator {
         double result = Double.parseDouble(numbers.get(ZERO));
         int numberIndex = ONE;
         int operatorIndex = ZERO;
+
         while (operatorIndex < operators.size()) {
             String newOperator = operators.get(operatorIndex);
             Double newNumber = Double.parseDouble(numbers.get(numberIndex));
@@ -53,5 +52,4 @@ public class Calculator {
         }
         throw new IllegalStateException("잘못된 연산자가 입력되었습니다.");
     }
-
 }
