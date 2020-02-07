@@ -8,15 +8,23 @@ import util.Input;
 
 public class Calculator {
     private static Scanner sc = new Scanner(System.in);
-    static List<Integer> nums = new ArrayList<>();
-    static List<String> opers = new ArrayList<>();
-    private String value;
+    static List<List> expressions = new ArrayList<>();
 
-    static void init(String[] valueArray) { // 숫자와 연산자를 나누어서 각 리스트를 만드는 함수
-        value = Input.inputValue();
+    // Input에서 넘어온 리스트를 각 nums와 opers에 분배
+    static List<String> initOpers() {
+        return expressions.get(1);
+    }
+    // Input에서 넘어온 리스트를 각 nums와 opers에 분배
+    static List<Integer> initNums() {
+        List<String> numbers = expressions.get(0);
+        List<Integer> nums = new ArrayList<>();
+        for(String number : numbers) {
+            nums.add(Integer.parseInt(number));
+        }
+        return nums;
     }
 
-    static int operation(int currNum, String oper) { // 연산자에 따른 연산을 하는 함수.
+    static int operation(int currNum, String oper, List<Integer> nums, List<String> opers) { // 연산자에 따른 연산을 하는 함수.
        int result = 0;
        if(oper.equals("+")) {
            result = currNum + nums.remove(0);
@@ -33,19 +41,21 @@ public class Calculator {
         return result;
     }
 
-    static int calculate(int answer){
+    public static int calculate(int answer, List<Integer> nums, List<String> opers){
         for (int i = 0; i < opers.size(); i++) {        // 순서대로 연산을 한다. 초기 누적값은 nums의 첫번째 값으로 한다.
-            answer = operation(answer, opers.get(i));   // 누적값을 연산한 결과로 변경하게 된다.
+            answer = operation(answer, opers.get(i), nums, opers);   // 누적값을 연산한 결과로 변경하게 된다.
         }
         return answer;
 }
 
     public static void main(String[] args) {
-        String[] valueArray = Input.inputExpression();
-        init(valueArray);
-
+        List<Integer> nums = new ArrayList<>();
+        List<String> opers = new ArrayList<>();
+        expressions = Input.inputValue();
+        nums = initNums();
+        opers = initOpers();
         int answer = nums.remove(0);
-        answer = calculate(answer);
-        System.out.println("Answer is " + calculate(answer));
+        answer = calculate(answer, nums, opers);
+        System.out.println("Answer is " + answer);
     }
 }
