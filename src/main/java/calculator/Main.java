@@ -5,8 +5,9 @@ public class Main {
         try {
             String[] inputs = StringHandler.getInputAndSplit();
             Source source = new Source(inputs);
+            source.printResult(source.calculateInputs());
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 }
