@@ -17,6 +17,7 @@ public class Source {
 
     public void generateSource(String[] inputs) throws Exception {
         validateSizeOfInputsIsOdds(inputs);
+        validateInputsByIndex(inputs);
     }
 
     private void validateSizeOfInputsIsOdds(String[] inputs) throws Exception {
@@ -27,5 +28,22 @@ public class Source {
 
     private boolean isOddNumber(int number) {
         return number % 2 == 1;
+    }
+
+    private void validateInputsByIndex(String[] inputs) throws Exception {
+        for (String input : inputs) {
+            validateInputByIndex(input);
+        }
+    }
+
+    private void validateInputByIndex(String input) throws Exception {
+        if (operandTurn) {
+            double operand = Double.parseDouble(input);
+            operands.add(operand);
+        }
+        if (!operandTurn) {
+            CalculatorType.validateOperator(input);
+            operators.add(input);
+        }
     }
 }
