@@ -1,5 +1,6 @@
 package study;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -34,6 +35,7 @@ public class ExceptionHandlerTest {
     }
 
     @Test
+    @DisplayName("핸들러 동작 확인")
     public void checkInputHandlerTest() {
         String str = "321 + 3 + f";
         assertThatThrownBy(() -> {
@@ -57,6 +59,7 @@ public class ExceptionHandlerTest {
     }
 
     @Test
+    @DisplayName("문자열 체크 확인")
     void checkStringTest() {
         String[] inputStrings = "333 + 2434343".split(" ");
         assertThat(checkString(inputStrings)).isTrue();
@@ -77,8 +80,8 @@ public class ExceptionHandlerTest {
     }
 
     @Test
+    @DisplayName("숫자 판별 확인")
     void checkNumberTest() {
-        // return이 boolean이라 isTrue, isFalse로만 판별?
         String str = "g";
         assertThat(checkNumber(str)).isFalse();
     }
@@ -100,6 +103,7 @@ public class ExceptionHandlerTest {
     }
 
     @Test
+    @DisplayName("부호 판별 확인")
     void checkSignTest() {
         String str = "@";
         assertThat(checkSign(str)).isFalse();
@@ -113,8 +117,9 @@ public class ExceptionHandlerTest {
     }
 
     @Test
+    @DisplayName("0으로 나누기 판별 확인")
     void isUndefinedValueTest() {
-        String str = "@";
-        assertThat(isUndefinedValue("0 / 0")).isFalse();
+        String str = "0 / 0";
+        assertThat(isUndefinedValue(str)).isFalse();
     }
 }
