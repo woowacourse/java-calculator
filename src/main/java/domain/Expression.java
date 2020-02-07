@@ -1,13 +1,13 @@
 package domain;
 
-import domain.operator.*;
+import calculator.calculate.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
     private List<Double> numbers = new ArrayList<>();
-    private List<Operator> operators = new ArrayList<>();
+    private List<Calculatable> operators = new ArrayList<>();
 
     public Expression(String expression) {
         String[] tokens = expression.split(" ");
@@ -27,7 +27,7 @@ public class Expression {
     public double getResult() {
         Double prev = numbers.get(0);
         for (int i = 0; i < operators.size(); i++) {
-            Operator operator = operators.get(i);
+            Calculatable operator = operators.get(i);
             Double next = numbers.get(i + 1);
             prev = operator.calculate(prev, next);
         }
@@ -56,7 +56,7 @@ public class Expression {
         }
     }
 
-    private Operator tokenToOperator(String token) {
+    private Calculatable tokenToOperator(String token) {
         if (token.equals("+")) {
             return new Plus();
         }

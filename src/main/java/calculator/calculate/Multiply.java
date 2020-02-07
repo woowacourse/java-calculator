@@ -1,6 +1,6 @@
-package domain.operator;
+package calculator.calculate;
 
-public class Multiply implements Operator {
+public class Multiply implements Calculatable {
     @Override
     public double calculate(double prev, double next) {
         return prev * next;
