@@ -2,6 +2,7 @@ package unit.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -9,10 +10,11 @@ public class Tokens {
 	private static final int NUMBER_AMOUNT_OVER = 2;
 	private static final int OPERATOR_AMOUNT_OVER = -1;
 
-	// private final Stack<Token> expression;
+	private final Stack<Token> expression;
 
 	public Tokens(final List<Token> tokens) {
 		checkValidation(tokens);
+		expression = toExpression(tokens);
 	}
 
 	private void checkValidation(final List<Token> tokens) {
@@ -46,5 +48,13 @@ public class Tokens {
 		if (invalidStatus.contains(statusNumber)) {
 			throw new IllegalArgumentException("잘못된 식입니다.");
 		}
+	}
+
+	private Stack<Token> toExpression(List<Token> tokens) {
+		Stack<Token> expression = new Stack<>();
+
+		Collections.reverse(tokens);
+		tokens.forEach(expression::push);
+		return expression;
 	}
 }
