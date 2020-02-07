@@ -15,7 +15,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/result.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/calculation.csv", numLinesToSkip = 1)
     void testCalculator(String input, String expected) {
         Assertions.assertThat(tester.calculate(input)).isEqualTo(Integer.parseInt(expected));
     }
