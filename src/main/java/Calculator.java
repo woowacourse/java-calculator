@@ -28,20 +28,36 @@ public class Calculator {
 
     private static void calculate(int nowNumber) {
         if (nowSign.equals("+")) {
-            //덧셈 함수
+            plus(nowNumber);
             return;
         }
         if (nowSign.equals("-")) {
-            //뺄셈 함수
+            minus(nowNumber);
             return;
         }
         if (nowSign.equals("*")) {
-            //곱하기 함수
+            multiply(nowNumber);
             return;
         }
         if (nowSign.equals("/")) {
-            //더하기 함수
+            divide(nowNumber);
             return;
         }
+    }
+
+    private static void plus(int nowNumber) {
+        returnValue += nowNumber;
+    }
+
+    private static void minus(int nowNumber) {
+        returnValue -= nowNumber;
+    }
+
+    private static void multiply(int nowNumber) {
+        returnValue *= nowNumber;
+    }
+
+    private static void divide(int nowNumber) {
+        returnValue /= nowNumber;
     }
 }
