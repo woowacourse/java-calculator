@@ -14,7 +14,7 @@ public class Application {
 	public static void useCalculator(String input) {
 		String result;
 		try {
-			result = Calculator.doOneCycle(input);
+			result = Calculator.calculate(input);
 			OutputView.printResult(result);
 		} catch (IllegalArgumentException e) {
 			ErrorView.println(e.getMessage());

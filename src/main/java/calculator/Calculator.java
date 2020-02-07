@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
-    static public String doOneCycle(String expression) throws IllegalArgumentException {
+    static public String calculate(String expression) throws IllegalArgumentException {
         List<String> tokens = Arrays.asList(expression.split(" "));
 
         checkIsValidSize(tokens);

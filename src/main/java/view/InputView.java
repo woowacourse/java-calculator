@@ -6,18 +6,18 @@ public class InputView {
 	public static Scanner scanner = new Scanner(System.in);
 
 	public static String inputExpression() {
+		System.out.println("공백으로 구분하여 식을 입력해주세요(ex. 1 + 2 - 4)");
 		try {
-			System.out.println("공백으로 구분하여 식을 입력해주세요(ex. 1 + 2 - 4)");
 			String input = scanner.nextLine();
 			checkIsBlank(input);
 			return input;
 		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
+			ErrorView.println(e.getMessage());
 			return inputExpression();
 		}
 	}
 
-	private static void checkIsBlank(String input) {
+	private static void checkIsBlank(String input) throws IllegalArgumentException {
 		if (input.length() == 0) {
 			throw new IllegalArgumentException("입력값이 없습니다.");
 		}
