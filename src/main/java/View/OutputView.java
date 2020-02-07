@@ -6,7 +6,7 @@ public class OutputView {
     }
 
     public static void printOutputMessage(double output) {
-        System.out.println("계산한 결과는 " + output + " 입니다.");
+        System.out.printf("계산한 결과는 %.1f 입니다.\n", output);
     }
 
     public static void printInputExceptionMessage(Exception e) {
