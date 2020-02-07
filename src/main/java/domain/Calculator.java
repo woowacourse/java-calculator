@@ -28,21 +28,21 @@ public class Calculator {
         return (int) result;
     }
 
-    private static double checkNumbers(String number) {
+    private double checkNumbers(String number) {
         if (!number.matches("^[0-9\\+\\-]?[0-9]+$")) {
             throw new IllegalArgumentException("잘못된 계산식 - 피연산자가 숫자가 아님 : " + number);
         }
         return Double.parseDouble(number);
     }
 
-    private static String checkOperator(String operator) {
+    private String checkOperator(String operator) {
         if (operator.matches("^[\\+\\-\\*\\/]$")) {
             return operator;
         }
         throw new IllegalArgumentException("잘못된 계산식 - 연산자가 잘못됨 : " + operator);
     }
 
-    private static double calculate(String operator, Double num1, Double num2) {
+    private double calculate(String operator, Double num1, Double num2) {
         if (operator.equals("/") && num2.intValue() == 0) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
