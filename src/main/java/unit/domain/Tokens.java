@@ -57,4 +57,8 @@ public class Tokens {
 		tokens.forEach(expression::push);
 		return expression;
 	}
+
+	public Stack<Token> getExpression() {
+		return expression;
+	}
 }
