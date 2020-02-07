@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Source {
     private List<Double> operands;
-    private List<String> operators;
+    private List<CalculatorType> operators;
     private boolean operandTurn;
 
     public Source(String[] inputs) throws Exception {
@@ -42,8 +42,8 @@ public class Source {
             operands.add(operand);
         }
         if (!operandTurn) {
-            CalculatorType.validateOperator(input);
-            operators.add(input);
+            CalculatorType operator = CalculatorType.validateOperator(input);
+            operators.add(operator);
         }
     }
 }

@@ -23,11 +23,10 @@ enum CalculatorType {
         return calculatorType.expression.apply(operand1, operand2);
     }
 
-    public static void validateOperator (String input) throws Exception {
-        boolean isOperator = Arrays.stream(CalculatorType.values())
-                .anyMatch(c -> !c.operator.equals(input));
-        if (!isOperator) {
-            throw new Exception("연산자가 아님");
-        }
+    public static CalculatorType validateOperator(String input) throws Exception {
+        return Arrays.stream(CalculatorType.values())
+                .filter(c -> c.operator.equals(input))
+                .findFirst()
+                .orElseThrow(Exception::new);
     }
 }
