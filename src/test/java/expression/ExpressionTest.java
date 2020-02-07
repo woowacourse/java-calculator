@@ -47,4 +47,11 @@ class ExpressionTest {
         Expression expression = new Expression(expressionString);
         assertThat(expression.getResult()).isEqualTo(10);
     }
+
+    @Test
+    void testAloneNumber() {
+        String expressionString = "1";
+        Expression expression = new Expression(expressionString);
+        assertThat(expression.getResult()).isEqualTo(1);
+    }
 }

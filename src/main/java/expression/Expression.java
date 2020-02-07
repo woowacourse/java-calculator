@@ -7,13 +7,12 @@ import calculator.Operator;
 import calculator.PlusOperator;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Expression {
 
-    private List<Double> numbers = new LinkedList<>();
-    private List<Operator> operators = new LinkedList<>();
+    private List<Double> numbers = new ArrayList<>();
+    private List<Operator> operators = new ArrayList<>();
 
     public Expression(String expression) {
         String[] tokens = expression.split(" ");
@@ -31,10 +30,10 @@ public class Expression {
     }
 
     public double getResult() {
-        Double prev = numbers.remove(0);
-        while (!numbers.isEmpty()) {
-            Operator operator = operators.remove(0);
-            Double next = numbers.remove(0);
+        Double prev = numbers.get(0);
+        for (int i = 0; i < operators.size(); i++) {
+            Operator operator = operators.get(i);
+            Double next = numbers.get(i + 1);
             prev = operator.calculate(prev, next);
         }
         return prev;
