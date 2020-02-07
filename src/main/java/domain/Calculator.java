@@ -3,62 +3,62 @@ package domain;
 public class Calculator {
 	private static final String REGEX_SPACE = " ";
 	
-	public int apply(String formula) {
-		String[] formulaArray = formula.split(REGEX_SPACE);
-		validateFormula(formulaArray);
-		return getApplyResult(formulaArray);
+	public int apply(String expression) {
+		String[] expressionAsArray = expression.split(REGEX_SPACE);
+		validateExpression(expressionAsArray);
+		return getApplyResult(expressionAsArray);
 	}
 
-	private int getApplyResult(String[] formulaArray) {
+	private int getApplyResult(String[] expressionAsArray) {
 		int result = 0;
 		Operator operator = Operator.ADD;
-		for (String formulaArg : formulaArray) {
-			if (isOperator(formulaArg)) {
-				operator = Operator.findBySymbol(formulaArg);
+		for (String expressionArg : expressionAsArray) {
+			if (isOperator(expressionArg)) {
+				operator = Operator.findBySymbol(expressionArg);
 				continue;
 			}
-			int operand = Integer.parseInt(formulaArg);
+			int operand = Integer.parseInt(expressionArg);
 			result = operator.calculate(result, operand);
 		}
 		return result;
 	}
 
-	private void validateFormula(String[] formulaArray) {
+	private void validateExpression(String[] formulaArray) {
 		validateNumericPosition(formulaArray);
 		validateOperatorPosition(formulaArray);
 
 	}
 
-	private void validateNumericPosition(String[] formulaArray) {
-		for (int i = 0; i < formulaArray.length; i+=2) {
-			if (!isNumeric(formulaArray[i])) {
+	private void validateNumericPosition(String[] expressionAsArray) {
+		for (int i = 0; i < expressionAsArray.length; i+=2) {
+			if (!isNumeric(expressionAsArray[i])) {
 				throw new IllegalArgumentException("숫자가 있어야합니다.");
 			}
 		}
 	}
 
-	private void validateOperatorPosition(String[] formulaArray) {
-		if (formulaArray.length == 1) {
+	private void validateOperatorPosition(String[] expressionAsArray) {
+		if (expressionAsArray.length == 1) {
 			return;
 		}
 
-		for (int i = 1; i < formulaArray.length; i+=2) {
-			if (!isOperator(formulaArray[i]) || formulaArray.length - 1 == i) {
+		for (int i = 1; i < expressionAsArray.length; i+=2) {
+			if (!isOperator(expressionAsArray[i]) || expressionAsArray.length - 1 == i) {
 				throw new IllegalArgumentException("연산자 위치가 올바르지 않습니다.");
 			}
 		}
 	}
 
-	private boolean isNumeric(String formulaArg) {
+	private boolean isNumeric(String expressionArg) {
 		try {
-			Integer.parseInt(formulaArg);
+			Integer.parseInt(expressionArg);
 		} catch (Exception e) {
 			return false;
 		}
 		return true;
 	}
 
-	private boolean isOperator(String formulaArg) {
-		return Operator.isOperatorSymbol(formulaArg);
+	private boolean isOperator(String expressionArg) {
+		return Operator.isOperatorSymbol(expressionArg);
 	}
 }

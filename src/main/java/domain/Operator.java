@@ -9,7 +9,7 @@ public enum Operator {
 			return operand1 + operand2;
 		}
 	},
-	SUB("-") {
+	SUBTRACT("-") {
 		@Override
 		public int calculate(int operand1, int operand2) {
 			return operand1 - operand2;
@@ -41,10 +41,10 @@ public enum Operator {
 			.orElseThrow(() -> new IllegalArgumentException());
 	}
 
-	public abstract int calculate(int num1, int num2);
+	public abstract int calculate(int operand1, int operand2);
 
-	public static boolean isOperatorSymbol(String value) {
+	public static boolean isOperatorSymbol(String symbol) {
 		return Arrays.stream(Operator.values())
-			.anyMatch(operator -> value.equals(operator.symbol));
+			.anyMatch(operator -> symbol.equals(operator.symbol));
 	}
 }

@@ -12,30 +12,30 @@ class OperatorTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {"5:3:8", "3:2:5"}, delimiter = ':')
-	void addTest(int number1, int number2, int expected) {
+	void addTest(int operand1, int operand2, int expected) {
 		Operator addOperator = Operator.ADD;
-		assertThat(addOperator.calculate(number1, number2)).isEqualTo(expected);
+		assertThat(addOperator.calculate(operand1, operand2)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"5:3:2", "3:2:1"}, delimiter = ':')
-	void subtractTest(int number1, int number2, int expected) {
-		Operator subtractOperator = Operator.SUB;
-		assertThat(subtractOperator.calculate(number1, number2)).isEqualTo(expected);
+	void subtractTest(int operand1, int operand2, int expected) {
+		Operator subtractOperator = Operator.SUBTRACT;
+		assertThat(subtractOperator.calculate(operand1, operand2)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"5:3:15", "3:2:6"}, delimiter = ':')
-	void multiplyTest(int number1, int number2, int expected) {
+	void multiplyTest(int operand1, int operand2, int expected) {
 		Operator multiplyOperator = Operator.MULTIPLY;
-		assertThat(multiplyOperator.calculate(number1, number2)).isEqualTo(expected);
+		assertThat(multiplyOperator.calculate(operand1, operand2)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"6:3:2", "3:1:3"}, delimiter = ':')
-	void divideTest(int number1, int number2, int expected) {
+	void divideTest(int operand1, int operand2, int expected) {
 		Operator divideOperator = Operator.DIVIDE;
-		assertThat(divideOperator.calculate(number1, number2)).isEqualTo(expected);
+		assertThat(divideOperator.calculate(operand1, operand2)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
@@ -49,30 +49,30 @@ class OperatorTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {"+,true", "-,true", "/,true", "*,true", "3,false", "a,false"}, delimiter = ',')
-	public void isOperatorSymbolTest(String symbolValue, boolean actual) throws Exception {
+	public void isOperatorSymbolTest(String symbolValue, boolean actual) {
 	    boolean expected  = Operator.isOperatorSymbol(symbolValue);
 		assertThat(expected).isEqualTo(actual);
 	}
 
 	@Test
-	public void findBySymbolPlusTest() throws Exception {
+	public void findBySymbolPlusTest() {
 	    Operator expected = Operator.findBySymbol("+");
 		assertThat(expected).isEqualTo(Operator.ADD);
 	}
 	@Test
-	public void findBySymbolSubtractTest() throws Exception {
+	public void findBySymbolSubtractTest() {
 		Operator expected = Operator.findBySymbol("-");
-		assertThat(expected).isEqualTo(Operator.SUB);
+		assertThat(expected).isEqualTo(Operator.SUBTRACT);
 	}
 
 	@Test
-	public void findBySymbolMultiplyTest() throws Exception {
+	public void findBySymbolMultiplyTest() {
 		Operator expected3 = Operator.findBySymbol("*");
 		assertThat(expected3).isEqualTo(Operator.MULTIPLY);
 	}
 
 	@Test
-	public void findBySymbolDivideTest() throws Exception {
+	public void findBySymbolDivideTest() {
 		Operator expected4 = Operator.findBySymbol("/");
 		assertThat(expected4).isEqualTo(Operator.DIVIDE);
 	}

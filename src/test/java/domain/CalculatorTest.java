@@ -20,61 +20,16 @@ class CalculatorTest {
 		calculator = new Calculator();
 	}
 
-	// @Test
-	// @Ignore
-	// public void numericCheckExceptionTest() throws Exception {
-	//     String expression = "1 + 3 * a / 4";
-	// 	String[] array = expression.split(" ");
-	//
-	// 	assertThatExceptionOfType(IllegalArgumentException.class)
-	// 		.isThrownBy(() -> calculator.validateNumericPosition(array));
-	// }
-	//
-	// @Test
-	// @Ignore
-	// public void operatorCheckExceptionTest() throws Exception {
-	// 	String expression = "1 + 3 * 3 ;";
-	// 	String[] array = expression.split(" ");
-	//
-	// 	assertThatExceptionOfType(IllegalArgumentException.class)
-	// 		.isThrownBy(() -> calculator.validateOperatorPosition(array));
-	// }
-	//
-	// @ParameterizedTest
-	// @Ignore
-	// @ValueSource(strings = {"1 + k * 3 ; 4", "1 3 3 * 3 / 4", "+ + 3 * 3 ; 4", "1 + 3 * 3 / 4 +", "+"})
-	// public void validateExpressionExceptionTest(String expressionInput) throws Exception {
-	// 	String[] expressionArray = expressionInput.split(" ");
-	// 	assertThatExceptionOfType(IllegalArgumentException.class)
-	// 		.isThrownBy(() -> calculator.validateFormula(expressionArray));
-	// }
-	//
-	// @ParameterizedTest
-	// @Ignore
-	// @CsvSource(value = {"1,true" ,"3,true", "5,true", "a,false", "b,false"}, delimiter = ',')
-	// public void isNumericTest(String value, boolean expected) throws Exception {
-	//     assertThat(calculator.isNumeric(value)).isEqualTo(expected);
-	// }
-	//
-	// @ParameterizedTest
-	// @Ignore
-	// @CsvSource(value = {"1 + 2 * 3 / 4:2", "1 + 3 + 3 / 4:1", "3 + 4:7", "11 + 57 - 10:58", "1 - 10:-9"}, delimiter = ':')
-	// public void getApplyResultTest(String expression, int expected) throws Exception {
-	// 	String[] expressionAsArray = expression.split(" ");
-	// 	int actual = calculator.getApplyResult(expressionAsArray);
-	// 	assertThat(actual).isEqualTo(expected);
-	// }
-
 	@ParameterizedTest
 	@CsvSource(value = {"1 + 2 * 3 / 4:2", "1 + 3 + 3 / 4:1", "3 + 4:7", "11 + 57 - 10:58", "1 - 10:-9"}, delimiter = ':')
-	public void applyTest(String expression, int expected) throws Exception {
+	public void applyTest(String expression, int expected) {
 		int actual = calculator.apply(expression);
 		assertThat(actual).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"1 + k * 3 ; 4", "1 3 3 * 3 / 4", "+ + 3 * 3 ; 4", "1 + 3 * 3 / 4 +", "+"})
-	public void applyExceptionTest(String expression) throws Exception {
+	public void applyExceptionTest(String expression) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> calculator.apply(expression));
 	}
