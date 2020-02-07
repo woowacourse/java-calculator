@@ -11,8 +11,6 @@ package study;
 import study.domain.Calculator;
 import study.view.userInput;
 
-import java.util.Scanner;
-
 public class Application {
     public static void main(String[] args) {
         runCalculator();
