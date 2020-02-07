@@ -12,13 +12,11 @@ public class Runner {
         // 입력값이 조건에 맞지 않는 경우 사용자에게 다시 입력을 요청함
         while (oneTimeInput(getInput()) == ONE_TIME_INPUT_FAILED);
 
-        int result = Calculator.calculate(expression);
-
-        View.printResult(result);
+        View.printResult(Calculator.calculate(expression));
     }
 
     private String getInput() {
-        System.out.println("계산할 문자열을 입력해 주세요: ");
+        System.out.print("계산할 문자열을 입력해 주세요: ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
