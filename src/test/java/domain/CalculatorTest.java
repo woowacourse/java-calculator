@@ -30,9 +30,4 @@ public class CalculatorTest {
 	void manyOperatorsWorksProperly() {
 		Assertions.assertThat(calculator.run("1 + 3 * 4 / 2 - 7 - 3".split(" "))).isEqualTo(-2);
 	}
-
-	@Test
-	void zeroDivisionInvokesException() {
-		Assertions.assertThat(calculator.run("1 + 2".split(" "))).isEqualTo(3);
-	}
 }

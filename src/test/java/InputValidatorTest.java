@@ -37,6 +37,16 @@ public class InputValidatorTest {
 
 	@Test
 	void returnTrueIfNumberOrOperatorRepeats() {
-		assertThat(inputValidator.validate("1 1 - 2 + + 3"));
+		assertThat(inputValidator.validate("1 1 - 2 + + 3")).isTrue();
+	}
+
+	@Test
+	void zeroDivisionValidationReturnsTrue() {
+		assertThat(inputValidator.validate("1 + 2 / 0")).isTrue();
+	}
+
+	@Test
+	void inputExceedsRangeOfDouble() {
+		assertThat(inputValidator.validate(Double.MAX_VALUE + "+ 2")).isTrue();
 	}
 }
