@@ -1,26 +1,28 @@
 package calculator;
 
+import view.ErrorView;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
-	static public void calculate(String expression) {
+	static public void doOneCycle(String expression) {
 		List<String> tokens = Arrays.asList(expression.split(" "));
 		System.out.println(tokens);
 
 		if (!isValidSize(tokens)) {
-			System.err.println("유효한 식이 아닙니다.");
+			ErrorView.printNotValidExpressionError();
 			return;
 		}
 
 		if (!isNumber(tokens.get(0))) {
-			System.err.println("유효한 식이 아닙니다.");
+			ErrorView.printNotValidExpressionError();
 			return;
 		}
 		double condense = Integer.parseInt(tokens.get(0));
 		for (int i = 1; i < tokens.size(); i += 2) {
 			if (!isNumber(tokens.get(i+1))) {
-				System.err.println("유효한 식이 아닙니다.");
+				ErrorView.printNotValidExpressionError();
 				return;
 			}
 			condense = operate(condense, tokens.get(i), Integer.parseInt(tokens.get(i+1)));
