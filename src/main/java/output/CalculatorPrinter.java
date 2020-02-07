@@ -1,15 +1,11 @@
 package output;
 
 import expression.Expression;
+import expression.InvalidExpressionException;
 
 public class CalculatorPrinter {
 
     private static final String RESULT_FORMATTED_STRING = "결과: %f";
-
-    public static void print(Expression expression) {
-        System.out.println(String.format(RESULT_FORMATTED_STRING, expression.getResult()));
-        System.out.println();
-    }
 
     public static void printIntroduction() {
         System.out.println("계산기를 실행해주셔서 감사합니다.");
@@ -18,4 +14,17 @@ public class CalculatorPrinter {
         System.out.println("저희 계산기는 연산자의 우선순위 없이 순서대로 계산되니 정확한 연산에는 사용을 피해주세요");
         System.out.println();
     }
+
+    public static void printExpression(Expression expression) {
+        System.out.println(String.format(RESULT_FORMATTED_STRING, expression.getResult()));
+        System.out.println();
+    }
+
+    public static void printException(InvalidExpressionException iee) {
+        System.out.println();
+        System.out.println("!!!!!!!!!!!!!!!!!경고!!!!!!!!!!!!!!!");
+        System.out.println(iee.getMessage());
+        System.out.println();
+    }
+
 }
