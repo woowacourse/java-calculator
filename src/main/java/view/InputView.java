@@ -7,6 +7,7 @@ public class InputView {
 
 	public static String inputExpression() {
 		try {
+			System.out.println("공백으로 구분하여 식을 입력해주세요(ex. 1 + 2 - 4)");
 			String input = scanner.nextLine();
 			checkIsBlank(input);
 			return input;
