@@ -8,7 +8,7 @@ import java.util.*;
 public class InputView {
     private Scanner scanner;
 
-    InputView(Scanner scanner) {
+    public InputView(Scanner scanner) {
         this.scanner = scanner;
     }
 
