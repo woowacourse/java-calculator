@@ -6,9 +6,18 @@ import view.OutputView;
 
 public class Application {
 	public static void main(String[] args) {
-		String expression = InputView.inputExpression();
-		String[] values = expression.split(" ");
-		int result = Calculator.calculate(values);
-		OutputView.printResult(result);
+		calculate();
+	}
+
+	private static void calculate() {
+		try {
+			String expression = InputView.inputExpression();
+			String[] values = expression.split(" ");
+			int result = Calculator.calculate(values);
+			OutputView.printResult(result);
+		} catch (Exception e) {
+			System.out.println("잘못된 식입니다.");
+			calculate();
+		}
 	}
 }
