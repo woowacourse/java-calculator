@@ -8,6 +8,9 @@ public class Source {
     private Queue<CalculatorType> operators;
     private boolean operandTurn;
 
+    public Source() {
+    }
+
     public Source(String[] inputs) throws Exception {
         operands = new LinkedList<>();
         operators = new LinkedList<>();
@@ -30,7 +33,11 @@ public class Source {
         return result;
     }
 
-    private void validateSizeOfInputsIsOdds(String[] inputs) throws Exception {
+    public void printResult(double result) {
+        System.out.println(result);
+    }
+
+    public void validateSizeOfInputsIsOdds(String[] inputs) throws Exception {
         if (isOddNumber(inputs.length)) {
             throw new Exception("inputs의 사이즈가 홀수가 아님");
         }
