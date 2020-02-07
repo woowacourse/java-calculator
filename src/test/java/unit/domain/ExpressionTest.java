@@ -8,12 +8,12 @@ import java.util.Stack;
 
 import org.junit.jupiter.api.Test;
 
-class TokensTest {
+class ExpressionTest {
 	@Test
 	void testTokens() {
 		List<Token> invalidTokens = Arrays.asList(new Number("1"), new Operator("+"), new Operator("+"));
 		assertThatThrownBy(() -> {
-			new Tokens(invalidTokens);
+			new Expression(invalidTokens);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("잘못된 식입니다.");
 	}
@@ -21,8 +21,8 @@ class TokensTest {
 	@Test
 	void testGetExpression() {
 		List<Token> value = Arrays.asList(new Number("1"), new Operator("+"), new Number("2"));
-		Tokens tokens = new Tokens(value);
-		Stack<Token> actual = tokens.getExpression();
+		Expression expression = new Expression(value);
+		Stack<Token> actual = expression.getExpression();
 		Stack<Token> expected = new Stack<>();
 		expected.push(new Number("2"));
 		expected.push(new Operator("+"));
