@@ -9,4 +9,10 @@ public class InputView {
         OutputView.printInputCalculationMessage();
         return SCANNER.nextLine();
     }
+
+    public void validBlankInput(String input) {
+        if (input.replace(" ", "").length() == 0) {
+            throw new IllegalArgumentException("숫자와 연산자를 입력해주세요.");
+        }
+    }
 }
