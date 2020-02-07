@@ -20,5 +20,13 @@ public class Operators {
         Objects.requireNonNull(operators);
         this.operators = operators;
     }
+
+    public double calculate(Numbers numbers) {
+        double answer = numbers.get(0);
+        for (int index = 0; index < operators.size(); ++index) {
+            answer = numbers.calculate(operators.get(index), answer, index + 1);
+        }
+        return answer;
+    }
 }
 

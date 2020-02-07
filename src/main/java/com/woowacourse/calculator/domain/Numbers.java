@@ -16,17 +16,25 @@ import java.util.Objects;
 public class Numbers {
     private static final int ZERO = 0;
 
-    private final List<Number> numbers;
+    private final List<Double> numbers;
 
-    public Numbers(final List<Number> numbers) {
+    public Numbers(final List<Double> numbers) {
         validateSize(numbers);
         this.numbers = numbers;
     }
 
-    private void validateSize(final List<Number> numbers) {
+    private void validateSize(final List<Double> numbers) {
         Objects.requireNonNull(numbers);
         if (numbers.size() == ZERO) {
             throw new IllegalArgumentException("하나 이상의 숫자를 입력해주세요.");
         }
+    }
+
+    public Double get(final int index) {
+        return numbers.get(index);
+    }
+
+    public double calculate(OperatorType operatorType, double operand, int nextIndex) {
+        return operatorType.calculate(operand, numbers.get(nextIndex));
     }
 }

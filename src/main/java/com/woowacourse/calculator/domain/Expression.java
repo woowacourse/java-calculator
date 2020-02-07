@@ -21,4 +21,7 @@ public class Expression {
         this.operators = Objects.requireNonNull(operators);
     }
 
+    public double calculate() {
+        return operators.calculate(numbers);
+    }
 }
