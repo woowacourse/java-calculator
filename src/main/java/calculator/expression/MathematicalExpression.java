@@ -1,17 +1,17 @@
-package expression;
+package calculator.expression;
 
-import calculator.Operator;
-import calculator.OperatorException;
+import calculator.operaotr.Operator;
+import calculator.operaotr.OperatorException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Expression {
+public class MathematicalExpression {
 
     private List<Double> numbers = new ArrayList<>();
     private List<Operator> operators = new ArrayList<>();
 
-    public Expression(String expression) {
+    public MathematicalExpression(String expression) {
         String[] tokens = expression.split(" ");
 
         validate(tokens);
@@ -33,7 +33,7 @@ public class Expression {
 
     private void validate(String[] tokens) {
         if (tokens.length % 2 == 0) {
-            throw new InvalidExpressionException(InvalidExpressionException.WRONG_MATCH_NUMBER_OPERATOR);
+            throw new InvalidMathematicalExpressionException(InvalidMathematicalExpressionException.WRONG_MATCH_NUMBER_OPERATOR);
         }
     }
 
@@ -58,7 +58,7 @@ public class Expression {
         try {
             return Double.parseDouble(token);
         } catch (NumberFormatException ne) {
-            throw new InvalidExpressionException(InvalidExpressionException.NOT_A_NUMBER);
+            throw new InvalidMathematicalExpressionException(InvalidMathematicalExpressionException.NOT_A_NUMBER);
         }
     }
 
@@ -66,7 +66,7 @@ public class Expression {
         try {
             return Operator.from(token);
         } catch (OperatorException oe) {
-            throw new InvalidExpressionException(InvalidExpressionException.WRONG_OPERATOR);
+            throw new InvalidMathematicalExpressionException(InvalidMathematicalExpressionException.WRONG_OPERATOR);
         }
     }
 }

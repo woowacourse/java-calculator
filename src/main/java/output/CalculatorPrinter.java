@@ -1,7 +1,7 @@
 package output;
 
-import expression.Expression;
-import expression.InvalidExpressionException;
+import calculator.expression.InvalidMathematicalExpressionException;
+import calculator.expression.MathematicalExpression;
 
 public class CalculatorPrinter {
 
@@ -15,12 +15,12 @@ public class CalculatorPrinter {
         System.out.println();
     }
 
-    public static void printExpression(Expression expression) {
+    public static void printExpression(MathematicalExpression expression) {
         System.out.println(String.format(RESULT_FORMATTED_STRING, expression.getResult()));
         System.out.println();
     }
 
-    public static void printException(InvalidExpressionException iee) {
+    public static void printException(InvalidMathematicalExpressionException iee) {
         System.out.println();
         System.out.println("!!!!!!!!!!!!!!!!!경고!!!!!!!!!!!!!!!");
         System.out.println(iee.getMessage());

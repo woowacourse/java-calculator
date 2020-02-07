@@ -1,5 +1,6 @@
-package calculator;
+package calculator.operator;
 
+import calculator.operaotr.Operator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

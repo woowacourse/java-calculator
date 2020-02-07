@@ -1,4 +1,4 @@
-package calculator;
+package calculator.operaotr;
 
 public enum Operator {
 
