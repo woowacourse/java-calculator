@@ -2,6 +2,7 @@ package expression;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ExpressionTest {
@@ -33,5 +34,17 @@ class ExpressionTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void testValidateWithAlphabet() {
+        String expressionWithAlphabet = "2 + 3 * 4 / 2j";
+        assertThatThrownBy(() -> new Expression(expressionWithAlphabet))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 
+    @Test
+    void testGetResult() {
+        String expressionString = "2 + 3 * 4 / 2";
+        Expression expression = new Expression(expressionString);
+        assertThat(expression.getResult()).isEqualTo(10);
+    }
 }
