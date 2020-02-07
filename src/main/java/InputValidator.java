@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InputValidator {
+
+	private List<String> numbers = new ArrayList<>();
+	private List<String> operators = new ArrayList<>();
 
 	public boolean validate(String input) {
 		if (!validateWithRegex(input)) {
@@ -25,21 +29,26 @@ public class InputValidator {
 	}
 
 	private boolean validateAfterSplit(String[] input) {
-		List<String> numbers = new ArrayList<>();
-		List<String> operators = new ArrayList<>();
 		for (int i = 0; i < input.length; i++) {
-			if (i % 2 == 0) {
-				numbers.add(input[i]);
-			} else {
-				operators.add(input[i]);
-			}
+			separateNumbersAndOperators(input[i], i);
 		}
-		for (String number : numbers) {
-			try {
-				Double.parseDouble(number);
-			} catch (Exception e) {
-				return true;
-			}
+		List<Boolean> isNumberCheck = numbers.stream().map(this::numberCheck).collect(Collectors.toList());
+		return isNumberCheck.contains(true);
+	}
+
+	private void separateNumbersAndOperators(String input, int index) {
+		if (index % 2 == 0) {
+			numbers.add(input);
+			return;
+		}
+		operators.add(input);
+	}
+
+	private boolean numberCheck(String number) {
+		try {
+			Double.parseDouble(number);
+		} catch (Exception e) {
+			return true;
 		}
 		return false;
 	}
