@@ -25,6 +25,13 @@ public class StringValue {
 
     public StringValue(String input) {
         this.input = input;
+    }
+
+    public boolean isValidator() {
+        return new InputValidator().checkInput(input);
+    }
+
+    public void setValueList() {
         String[] inputSplit = this.input.split(" ");
         for (int i = 0; i < inputSplit.length; i++) {
             if (i % 2 == 0) {
@@ -34,10 +41,6 @@ public class StringValue {
                 operatorList.add(inputSplit[i]);
             }
         }
-    }
-
-    public boolean isValidator() {
-        return new InputValidator().checkInput(input);
     }
 
     public List<Double> getNumberList() {

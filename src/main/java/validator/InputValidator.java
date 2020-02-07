@@ -24,7 +24,7 @@ public class InputValidator {
 
     public boolean checkInput(String inputString) {
         String[] inputArr = inputString.split(BLANK);
-        return isCorrectLength(inputArr) && isCorrectIndex(inputArr);
+        return isCorrectLength(inputArr) && isCorrectIndex(inputArr) && isCorrectDivide(inputArr);
     }
 
     public boolean isCorrectLength(String[] inputArr) {
@@ -66,6 +66,15 @@ public class InputValidator {
         String[] signs = {"+", "-", "*", "/"};
         for (String operator : oddArr) {
             if (!Arrays.asList(signs).contains(operator)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isCorrectDivide(String[] inputArr) {
+        for (int i = 2; i < inputArr.length; i += 2) {
+            if (inputArr[i].equals("0") && inputArr[i - 1].equals("/")) {
                 return false;
             }
         }

@@ -31,7 +31,8 @@ public class Controller {
         do {
             String input = InputView.inputStringFromUser();
             stringInput = new StringValue(input);
-        } while (stringInput.isValidator());
+        } while (!stringInput.isValidator());
+        stringInput.setValueList();
 
         double sum = calculate(stringInput);
 
