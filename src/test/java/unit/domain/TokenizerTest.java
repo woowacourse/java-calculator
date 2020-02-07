@@ -17,9 +17,9 @@ class TokenizerTest {
 		final String inputLine = "1 + 2";
 		final List<Token> actual = Tokenizer.tokenize(inputLine);
 		final List<Token> expected = new ArrayList<>();
-		expected.add(new Token("1"));
-		expected.add(new Token("+"));
-		expected.add(new Token("2"));
+		expected.add(new Number("1"));
+		expected.add(new Operator("+"));
+		expected.add(new Number("2"));
 
 		assertThat(actual).isEqualTo(expected);
 	}
