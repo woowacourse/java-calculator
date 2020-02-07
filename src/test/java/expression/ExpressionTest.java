@@ -54,4 +54,11 @@ class ExpressionTest {
         Expression expression = new Expression(expressionString);
         assertThat(expression.getResult()).isEqualTo(1);
     }
+
+    @Test
+    void testAloneOperator() {
+        String expressionString = "*";
+        assertThatThrownBy(() -> new Expression(expressionString))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
