@@ -23,4 +23,12 @@ public class NumberSentence {
         return Objects.equals(numbers, that.numbers) &&
                 Objects.equals(operators, that.operators);
     }
+
+    Queue<String> getOperators() {
+        return operators;
+    }
+
+    List<Integer> getNumbers() {
+        return numbers;
+    }
 }
