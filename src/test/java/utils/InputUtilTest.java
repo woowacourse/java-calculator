@@ -1,16 +1,26 @@
 package utils;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class InputUtilTest {
+	@Test
+	@DisplayName("스플릿 메소드 테스트")
+	public void splitTest() {
+		List<String> split = InputUtil.split("1 + 2 - 4 - 6 * 7");
+		assertThat(split.size()).isEqualTo(9);
+		assertThat(split.get(0)).isEqualTo("1");
+		assertThat(split.get(1)).isEqualTo("+");
+	}
+
 	@ParameterizedTest
 	@MethodSource("generateInput")
 	@DisplayName("정규표현식 패턴 매칭 테스트")
