@@ -1,9 +1,14 @@
 package study;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ExceptionHandlerTest {
     private static final int EVEN = 0;
@@ -28,6 +33,14 @@ public class ExceptionHandlerTest {
         throw new IllegalArgumentException();
     }
 
+    @Test
+    public void checkInputHandlerTest() {
+        String str = "321 + 3 + f";
+        assertThatThrownBy(() -> {
+            checkInputHandler(str);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
     private static boolean checkString(String[] inputStrings) {
         if (inputStrings.length % 2 == EVEN) {
             return false;
@@ -43,6 +56,12 @@ public class ExceptionHandlerTest {
                 .allMatch(x -> checkIndividual(index.getAndIncrement(), x));
     }
 
+    @Test
+    void checkStringTest() {
+        String[] inputStrings = "333 + 2434343".split(" ");
+        assertThat(checkString(inputStrings)).isTrue();
+    }
+
     private static boolean checkIndividual(int i, String inputString) {
         if (i % 2 == EVEN) {
             return checkNumber(inputString);
@@ -52,23 +71,38 @@ public class ExceptionHandlerTest {
         }
         return false;
     }
+
     private static boolean checkNumber(String inputString) {
         return inputString.matches("-?\\d+(\\.\\d+)?");
     }
 
+    @Test
+    void checkNumberTest() {
+        // return이 boolean이라 isTrue, isFalse로만 판별?
+        String str = "g";
+        assertThat(checkNumber(str)).isFalse();
+    }
+
     private static boolean checkSign(String inputString) {
-        if (inputString.equals("+")){
+        if (inputString.equals("+")) {
             return true;
         }
-        if (inputString.equals("-")){
+        if (inputString.equals("-")) {
             return true;
         }
-        if (inputString.equals("*")){
+        if (inputString.equals("*")) {
             return true;
         }
-        if (inputString.equals("/")){
+        if (inputString.equals("/")) {
             return true;
         }
         return false;
+    }
+
+    @Test
+    void checkSignTest() {
+        // return이 boolean이라 isTrue, isFalse로만 판별?
+        String str = "@";
+        assertThat(checkSign(str)).isFalse();
     }
 }

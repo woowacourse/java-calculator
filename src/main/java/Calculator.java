@@ -1,5 +1,4 @@
 public class Calculator {
-    private static final double TEST_RETURN_VALUE_INIT = 10;
     private static final int INDEX_INIT = 1;
     private static final int EVEN = 0;
     private static final int ODD = 1;
