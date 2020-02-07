@@ -10,10 +10,8 @@ public class Calculator {
     private final static String minus = "-";
     private final static String multiply = "*";
     private final static String divide = "/";
-    private final static String end = "q";
 
-    public Calculator() {
-    }
+    public Calculator() {}
 
     public void start() {
         Integer result = null;
@@ -42,12 +40,12 @@ public class Calculator {
         }
     }
 
-    public Queue makeQueue(String inputString) {
+    private Queue makeQueue(String inputString) {
         String[] elements = inputString.split("\\s+", 0);
         return new LinkedList<>(Arrays.asList(elements));
     }
 
-    public int execute(Queue<String> equation) throws ArithmeticException, NumberFormatException, InputMismatchException {
+    private int execute(Queue<String> equation) throws ArithmeticException, NumberFormatException, InputMismatchException {
         int result = validateNumber(equation.poll());
         while (!equation.isEmpty()) {
             String operator = equation.poll();
@@ -57,7 +55,7 @@ public class Calculator {
         return result;
     }
 
-    public int validateNumber(String number) {
+    private int validateNumber(String number) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
@@ -65,7 +63,7 @@ public class Calculator {
         }
     }
 
-    public int calculate(int result, String operator, int operand) throws ArithmeticException {
+    private int calculate(int result, String operator, int operand) throws ArithmeticException {
         switch (operator) {
             case plus:
                 return add(result, operand);
@@ -80,19 +78,19 @@ public class Calculator {
         }
     }
 
-    public int add(int a, int b) {
+    private int add(int a, int b) {
         return a + b;
     }
 
-    public int subtract(int a, int b) {
+    private int subtract(int a, int b) {
         return a - b;
     }
 
-    public int multiply(int a, int b) {
+    private int multiply(int a, int b) {
         return a * b;
     }
 
-    public int divide(int a, int b) {
+    private int divide(int a, int b) {
         try {
             return a / b;
         } catch (ArithmeticException e) {
