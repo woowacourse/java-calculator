@@ -2,6 +2,7 @@ package calculator;
 
 import expression.Expression;
 import input.CalculatorInputScanner;
+import output.CalculatorPrinter;
 
 public class Calculator {
 
@@ -9,8 +10,7 @@ public class Calculator {
         while (true) {
             String userExpressionInput = CalculatorInputScanner.getExpression();
             Expression expression = new Expression(userExpressionInput);
-            Double userResult = expression.getResult();
-            System.out.println("결과 : " + userResult);
+            CalculatorPrinter.print(expression);
         }
     }
 
