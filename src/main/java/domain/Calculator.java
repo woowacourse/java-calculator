@@ -1,7 +1,5 @@
 package domain;
 
-import util.InputView;
-
 public class Calculator {
 	private static final String REGEX_SPACE = " ";
 	
@@ -26,12 +24,12 @@ public class Calculator {
 	}
 
 	private void validateFormula(String[] formulaArray) {
-		validateNumeric(formulaArray);
-		validateOperator(formulaArray);
+		validateNumericPosition(formulaArray);
+		validateOperatorPosition(formulaArray);
 
 	}
 
-	void validateNumeric(String[] formulaArray) {
+	private void validateNumericPosition(String[] formulaArray) {
 		for (int i = 0; i < formulaArray.length; i+=2) {
 			if (!isNumeric(formulaArray[i])) {
 				throw new IllegalArgumentException("숫자가 있어야합니다.");
@@ -39,24 +37,30 @@ public class Calculator {
 		}
 	}
 
-	void validateOperator(String[] formulaArray) {
+	private void validateOperatorPosition(String[] formulaArray) {
 		if (formulaArray.length == 1) {
 			return;
 		}
 
 		for (int i = 1; i < formulaArray.length; i+=2) {
-			if (!isNumeric(formulaArray[i])) {
-				throw new IllegalArgumentException("숫자가 있어야합니다.");
+			if (!isOperator(formulaArray[i]) || formulaArray.length - 1 == i) {
+				throw new IllegalArgumentException("연산자 위치가 올바르지 않습니다.");
 			}
 		}
 	}
 
 	private boolean isNumeric(String formulaArg) {
 		for (int i = 0; i < formulaArg.length(); i++) {
-			if (formulaArg.codePointAt(i) < '0'
-				|| formulaArg.codePointAt(i) > '9') {
+			if (!isOneDigit(formulaArg.charAt(i))) {
 				return false;
 			}
+		}
+		return true;
+	}
+
+	private boolean isOneDigit(char character) {
+		if (character < '0' || character > '9') {
+			return false;
 		}
 		return true;
 	}
