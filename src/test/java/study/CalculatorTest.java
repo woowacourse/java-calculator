@@ -81,15 +81,45 @@ public class CalculatorTest {
         returnValue += nowNumber;
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"5:15", "10:20", "33:43"}, delimiter = ':')
+    void plusTest(double input, double expected) {
+        plus(input);
+        System.out.println(input);
+        System.out.println(expected);
+        assertThat(returnValue).isEqualTo(expected);
+    }
+
     private static void minus(double nowNumber) {
         returnValue -= nowNumber;
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"5:5", "10:0", "33:-23"}, delimiter = ':')
+    void minusTest(double input, double expected) {
+        minus(input);
+        assertThat(returnValue).isEqualTo(expected);
     }
 
     private static void multiply(double nowNumber) {
         returnValue *= nowNumber;
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"5:50", "10:100", "33:330"}, delimiter = ':')
+    void multiplyTest(double input, double expected) {
+        multiply(input);
+        assertThat(returnValue).isEqualTo(expected);
+    }
+
     private static void divide(double nowNumber) {
         returnValue /= nowNumber;
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"5:2", "10:1", "4:2.5"}, delimiter = ':')
+    void divideTest(double input, double expected) {
+        divide(input);
+        assertThat(returnValue).isEqualTo(expected);
     }
 }
