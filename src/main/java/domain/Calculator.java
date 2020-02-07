@@ -1,5 +1,6 @@
 package domain;
 
+import exception.InputValidationException;
 import view.InputView;
 import view.OutputView;
 
@@ -38,10 +39,12 @@ public class Calculator {
     }
 
     public void splitFormula(String formula) {
-        String[] formulas = formula.split(" ");
+        String[] formulas = formula.split(" ",0);
+        //
         for (int i = 0; i < formulas.length; i++) {
+            String temp = formulas[i];
             if (i % 2 == 0) {
-                numbers.add(Double.parseDouble(formulas[i]));
+                numbers.add(InputValidationException.checkIsNumber(formulas[i]));
                 continue;
             }
             operators.add(formulas[i].charAt(0));
