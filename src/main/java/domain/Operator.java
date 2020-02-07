@@ -10,9 +10,9 @@ public enum Operator {
 	DIVIDE("/", (leftOperand, rightOperand) -> leftOperand / rightOperand);
 
 	private final String operator;
-	private final BiFunction<Double, Double, Double> expression;
+	private final BiFunction<Integer, Integer, Integer> expression;
 
-	Operator(String operator, BiFunction<Double, Double, Double> expression) {
+	Operator(String operator, BiFunction<Integer, Integer, Integer> expression) {
 		this.operator = operator;
 		this.expression = expression;
 	}
@@ -24,7 +24,7 @@ public enum Operator {
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 연산자입니다."));
 	}
 
-	public double calculate(double leftOperand, double rightOperand) {
+	public int calculate(int leftOperand, int rightOperand) {
 		return expression.apply(leftOperand, rightOperand);
 	}
 }

@@ -10,7 +10,7 @@ import domain.Calculator;
 public class CalculatorTest {
 	@ParameterizedTest
 	@CsvSource(value = {"2 + 3 * 4 / 2,10", "2 + 4 / 2 * 6,18"})
-	void calculate(String expression, double expected) {
+	void calculate(String expression, int expected) {
 		String[] values = expression.split(" ");
 		assertThat(Calculator.calculate(values)).isEqualTo(expected);
 	}
