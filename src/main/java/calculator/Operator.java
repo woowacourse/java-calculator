@@ -1,31 +1,45 @@
 package calculator;
 
 public class Operator {
-
-    public static final int ADD_TYPE = 1;
-    public static final int SUBTRACT_TYPE = 2;
-    public static final int MULTIPLY_TYPE = 3;
-    public static final int DIVIDE_TYPE = 4;
     private String value;
 
     public Operator(String input) {
         value = input;
     }
 
-    public int getType() {
+    public boolean isAdd() {
 
         if (value.equals("+")) {
-            return ADD_TYPE;
+            return true;
         }
+
+        return false;
+    }
+
+    public boolean isSubtract() {
 
         if (value.equals("-")) {
-            return SUBTRACT_TYPE;
+            return true;
         }
+
+        return false;
+    }
+
+    public boolean isMultiply() {
 
         if (value.equals("*")) {
-            return MULTIPLY_TYPE;
+            return true;
         }
 
-        return DIVIDE_TYPE;
+        return false;
+    }
+
+    public boolean isDivide() {
+
+        if (value.equals("/")) {
+            return true;
+        }
+
+        return false;
     }
 }

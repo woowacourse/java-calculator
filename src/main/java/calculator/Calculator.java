@@ -22,21 +22,21 @@ public class Calculator {
     private static int calculateBinomial(Operand firstOperand,
             Operator operator, Operand secondOperand) {
         return calculateBinomialByRawData(firstOperand.getValue(),
-            operator.getType(), secondOperand.getValue());
+            operator, secondOperand.getValue());
     }
 
     private static int calculateBinomialByRawData(int firstOperand,
-            int operator, int secondOperand) {
+            Operator operator, int secondOperand) {
 
-        if (operator == Operator.ADD_TYPE) {
+        if (operator.isAdd()) {
             return firstOperand + secondOperand;
         }
 
-        if (operator == Operator.SUBTRACT_TYPE) {
+        if (operator.isSubtract()) {
             return firstOperand - secondOperand;
         }
 
-        if (operator == Operator.MULTIPLY_TYPE) {
+        if (operator.isMultiply()) {
             return firstOperand * secondOperand;
         }
 
