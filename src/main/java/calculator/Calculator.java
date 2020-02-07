@@ -6,24 +6,60 @@ import java.util.Scanner;
 
 public class Calculator {
 
-    Queue<Integer> operatorQueue = new LinkedList<>();
-    Queue<Integer> numberQueue = new LinkedList<>();
+    Queue<String> operatorQueue = new LinkedList<>();
+    Queue<Double> numberQueue = new LinkedList<>();
 
-    private static final int CHECK_EVEN_NUMBER_MODULAR = 2;
-    private static final int EVEN_NUMBER = 1;
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
         calculator.run();
     }
 
     private void run() {
-        String[] equation = getEquation();
-
+        String[] equations = getEquation();
+        System.out.println(calculateEquation(equations));
     }
+
+    private Double calculateEquation(String[] equation) {
+        for(int i = 0; i < equation.length; i += 2) {
+            numberQueue.add(Double.parseDouble(equation[i]));
+        }
+
+        for(int i = 1; i < equation.length; i += 2) {
+            operatorQueue.add(equation[i]);
+        }
+
+        return checkOperatorAndCalculate();
+    }
+
+    private double checkOperatorAndCalculate() {
+        double result = numberQueue.poll();
+        int size = numberQueue.size();
+
+        for(int i = 0; i < size; i++) {
+            String operator = operatorQueue.poll();
+            double nextNum = numberQueue.poll();
+            result = distinguishOperator(result, operator, nextNum);
+        }
+
+        return result;
+    }
+
+    private double distinguishOperator(double prevNumber, String operator, double nextNumber) {
+        double result = 0.0;
+
+        if(operator.equals("+")) { result = prevNumber + nextNumber; }
+        if(operator.equals("-")) { result = prevNumber - nextNumber; }
+        if(operator.equals("*")) { result = prevNumber * nextNumber; }
+        if(operator.equals("/")) { result = prevNumber / nextNumber; }
+
+        return result;
+    }
+
 
     private String[] getEquation() {
         Scanner scanner = new Scanner(System.in);
         String[] equations;
+
         while(true) {
             try {
                 String equation = scanner.nextLine();
@@ -36,6 +72,7 @@ public class Calculator {
                 System.out.println("다시 입력해주세요");
             }
         }
+
         return equations;
     }
 
@@ -53,7 +90,12 @@ public class Calculator {
             if(!equations[i].equals("+") && !equations[i].equals("-") && !equations[i].equals("*") && !equations[i].equals("/")) {
                 throw new NumberFormatException();
             }
-
+            if(equations.length % 2 == 0) {
+                throw new NumberFormatException();
+            }
+            if(equations[i].equals("/") && Double.parseDouble(equations[i+1]) == 0.0) {
+                throw new NumberFormatException();
+            }
         }
     }
 }
