@@ -14,7 +14,7 @@ public class Validator {
 
     public void isValidInput(String input) {
         if (isNull(input) || isBlank(input) || isEmpty(input)) {
-            throw new IllegalArgumentException("Null or Blank or Empty exception.");
+            throw new IllegalArgumentException("Handled Exception : Null or Blank or Empty exception.");
         }
     }
 
@@ -36,7 +36,7 @@ public class Validator {
             String operator = splitedInput[i];
             String number = splitedInput[i + 1];
             if (operator.equals("/") && number.equals("0")) {
-                throw new IllegalArgumentException("Cannot divide zero.");
+                throw new IllegalArgumentException("Handled Exception : Cannot divide zero.");
             }
             checkIsOperator(operator);
             checkIsDoubleNumber(number);
@@ -47,13 +47,13 @@ public class Validator {
         try {
             Double.valueOf(s);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Can not convert to double.");
+            throw new IllegalArgumentException("Handled Exception : Cannot convert to double.");
         }
     }
 
     private void checkIsOperator(String s) {
         if (!operators.contains(s)) {
-            throw new IllegalArgumentException("Operator check exception.");
+            throw new IllegalArgumentException("Handled Exception : Operator check exception.");
         }
     }
 }
