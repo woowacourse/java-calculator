@@ -10,7 +10,7 @@ public class StringTest {
      * 요구사항 1. string split, contain 테스트
      */
     @Test
-    void split(){
+    void split() {
         String value = "1,2";
         String[] result = value.split(",");
         assertThat(result).contains("1");
@@ -21,9 +21,9 @@ public class StringTest {
      * 요구사항 2. string substring 테스트
      */
     @Test
-    void splitSubstring(){
+    void splitSubstring() {
         String value = "(1,2)";
-        String result = value.substring(1, value.length()-1);
+        String result = value.substring(1, value.length() - 1);
         assertThat(result).isEqualTo("1,2");
     }
 
@@ -31,7 +31,7 @@ public class StringTest {
      * 요구사항 3. IndexOutOfBound 테스트
      */
     @Test
-    void indexCheck(){
+    void indexCheck() {
         assertThatThrownBy(() -> {
             String value = "abc";
             char result2 = value.charAt(5);

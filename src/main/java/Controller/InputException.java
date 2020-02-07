@@ -34,7 +34,7 @@ public class InputException {
      * @throws Exception
      */
     public static void validateFirstAndLast(String[] inputs) throws Exception {
-        if (!isInteger(inputs[0]) || !isInteger(inputs[inputs.length - 1])) {
+        if (!(isInteger(inputs[0]) && isInteger(inputs[inputs.length - 1]))) {
             throw new Exception("식의 처음과 마지막은 숫자여야 합니다.");
         }
     }

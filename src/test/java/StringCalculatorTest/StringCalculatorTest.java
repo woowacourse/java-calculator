@@ -15,7 +15,7 @@ public class StringCalculatorTest {
     List<Operator> operators = new ArrayList<>();
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         numbers.add(1);
         numbers.add(1);
         numbers.add(2);
@@ -28,7 +28,7 @@ public class StringCalculatorTest {
     @Test
     void calculate() {
         double result = numbers.remove(0);
-        for (int i = 0; i < operators.size(); i++){
+        for (int i = 0; i < operators.size(); i++) {
             result = operators.get(i).compute(result, numbers.get(i));
         }
         assertThat(result).isEqualTo(0);
