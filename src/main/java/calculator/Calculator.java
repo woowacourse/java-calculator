@@ -19,7 +19,7 @@ public class Calculator {
         System.out.println(calculateEquation(equations));
     }
 
-    private Double calculateEquation(String[] equation) {
+    public Double calculateEquation(String[] equation) {
         for(int i = 0; i < equation.length; i += 2) {
             numberQueue.add(Double.parseDouble(equation[i]));
         }
@@ -44,7 +44,7 @@ public class Calculator {
         return result;
     }
 
-    private double distinguishOperator(double prevNumber, String operator, double nextNumber) {
+    public double distinguishOperator(double prevNumber, String operator, double nextNumber) {
         double result = 0.0;
 
         if(operator.equals("+")) { result = prevNumber + nextNumber; }
@@ -87,19 +87,19 @@ public class Calculator {
         }
     }
 
-    private boolean isDividedByZero(String[] equations, int i) {
+    public boolean isDividedByZero(String[] equations, int i) {
         return equations[i].equals("/") && Double.parseDouble(equations[i+1]) == 0.0;
     }
 
-    private boolean isInvalidEquation(String[] equations) {
+    public boolean isInvalidEquation(String[] equations) {
         return equations.length % 2 == 0;
     }
 
-    private boolean isWrongOperator(String equation) {
+    public boolean isWrongOperator(String equation) {
         return !equation.equals("+") && !equation.equals("-") && !equation.equals("*") && !equation.equals("/");
     }
 
-    private void checkNumberValue(String[] equations) {
+    public void checkNumberValue(String[] equations) {
         for(int i=0; i<equations.length; i += 2) {
             if(Double.parseDouble(equations[i]) > (double) Integer.MAX_VALUE
                     || Double.parseDouble(equations[i]) < -(double) Integer.MAX_VALUE) {
