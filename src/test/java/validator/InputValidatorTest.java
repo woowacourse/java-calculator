@@ -56,4 +56,14 @@ public class InputValidatorTest {
     void isCorrectOddIndex_isNumber_fail() {
         Assertions.assertTrue(inputValidator.isCorrectOddIndex(Arrays.asList("-", "*", "1")));
     }
+
+    @Test
+    void isCorrectDivide_isZero_success() {
+        Assertions.assertFalse(inputValidator.isCorrectDivide(new String[]{"2", "/", "0"}));
+    }
+
+    @Test
+    void isCorrectDivide_isZero_fail() {
+        Assertions.assertTrue(inputValidator.isCorrectDivide(new String[]{"2", "/", "0"}));
+    }
 }
