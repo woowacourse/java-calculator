@@ -24,6 +24,9 @@ public class Application {
         } catch (NumberFormatException e) {
             System.out.println("다시 입력해 주세요.");
             runCalculator();
+        } catch (ArithmeticException e) {
+            System.out.println("0으로 나눌 수 없습니다.");
+            runCalculator();
         }
     }
 

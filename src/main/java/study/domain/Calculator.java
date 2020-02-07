@@ -21,6 +21,9 @@ public class Calculator {
             result = Operator.of(operator)
                     .calculate(result, rightOperand);
         }
+        if(Double.isInfinite(result)) {
+            throw new ArithmeticException();
+        }
         return result;
     }
 }
