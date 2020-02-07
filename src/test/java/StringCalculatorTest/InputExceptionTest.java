@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputExceptionTest {
 
-    private static String[] str = {"1", "/", "3", "@"};
+    private static String[] str = {"3", "+", "4", "/","10","/","10"};
 
     @Test
     void validateFirstAndLast() {
@@ -20,8 +20,8 @@ public class InputExceptionTest {
     void validateRepeat() {
         boolean result;
         for (int i = 1; i < str.length; i++) {
-            result = !(isInteger(str[i - 1]) ^ isInteger(str[i]));
-            assertThat(result).isFalse();
+            result = (isInteger(str[i - 1]) ^ isInteger(str[i]));
+            assertThat(result).isTrue();
         }
     }
 

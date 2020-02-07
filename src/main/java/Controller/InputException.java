@@ -22,8 +22,10 @@ public class InputException {
     }
 
     public static void validateSpace(String[] inputs) throws Exception {
-        if (inputs.length == 1) {
-            throw new Exception("식이 입력되지 않았습니다.");
+        for(int i=0;i< inputs.length;i++) {
+            if (inputs[i].length() == 0) {
+                throw new Exception("식이 정상적으로 입력되지 않았습니다. 숫자와 연산자 사이에 띄어쓰기를 한 번 해주세요.");
+            }
         }
     }
 
