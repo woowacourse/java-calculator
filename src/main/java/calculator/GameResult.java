@@ -6,7 +6,7 @@ import java.util.function.BiFunction;
 public class GameResult {
     private static double result;
 
-    private static HashMap<Operator, BiFunction<Double, Double, Double>> map = new HashMap<Operator, BiFunction<Double, Double, Double>>();
+    private static HashMap<Operator, BiFunction<Double, Double, Double>> map = new HashMap<>();
 
     GameResult(String result) {
         this.result = Double.parseDouble(result);
