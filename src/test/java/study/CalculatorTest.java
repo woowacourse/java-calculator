@@ -1,6 +1,7 @@
 package study;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,7 +16,13 @@ public class CalculatorTest {
     static double returnValue;
     static String nowSign;
 
+    @BeforeEach
+    void setUp() {
+        returnValue = TEST_RETURN_VALUE_INIT;
+    }
+
     @Test
+    @DisplayName("계산기 전체 동작 확인")
     public static void main(String args[]) {
         String[] values = ExceptionHandlerTest.inputHandler().split(" ");
         returnValue = Double.parseDouble(values[0]);
@@ -29,11 +36,6 @@ public class CalculatorTest {
         System.out.println(returnValue);
     }
 
-    @BeforeEach
-    void setUp() {
-        returnValue = TEST_RETURN_VALUE_INIT;
-    }
-
     private static void check(int i, String value) {
         if (i % 2 == EVEN) {
             calculate(Double.parseDouble(value));
@@ -44,6 +46,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
+    @DisplayName("홀수일 경우, 짝우일 경우 계산 확인")
     @CsvSource(value = {"1:+:5:10", "2:+:10:20", "4:-:8:2", "6:*:2:20", "8:/:2:5"}, delimiter = ':')
     void checkTest(int i, String sign, String input, double expected) {
         nowSign = sign;
@@ -71,6 +74,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
+    @DisplayName("부호에 따른 분류 확인")
     @CsvSource(value = {"5:+:15", "5:-:5", "5:*:50", "5:/:2"}, delimiter = ':')
     void calculateTest(double input, String sign, double expected) {
         nowSign = sign;
@@ -83,6 +87,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
+    @DisplayName("덧셈 확인")
     @CsvSource(value = {"5:15", "10:20", "33:43"}, delimiter = ':')
     void plusTest(double input, double expected) {
         plus(input);
@@ -96,6 +101,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
+    @DisplayName("뺄셈 확인")
     @CsvSource(value = {"5:5", "10:0", "33:-23"}, delimiter = ':')
     void minusTest(double input, double expected) {
         minus(input);
@@ -107,6 +113,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
+    @DisplayName("곱셈 확인")
     @CsvSource(value = {"5:50", "10:100", "33:330"}, delimiter = ':')
     void multiplyTest(double input, double expected) {
         multiply(input);
@@ -118,6 +125,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
+    @DisplayName("나눗셈 확인")
     @CsvSource(value = {"5:2", "10:1", "4:2.5"}, delimiter = ':')
     void divideTest(double input, double expected) {
         divide(input);
