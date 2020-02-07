@@ -1,4 +1,11 @@
-package study;
+/**
+ * Operator.java
+ * 사칙 연산을 담당하는 enum
+ * 우아한테크코스 1주차 미션 온보딩 - 문자열 계산기
+ * 히로-핀
+ * https://github.com/hotheadfactory/java-calculator
+ */
+package study.domain;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;

@@ -1,4 +1,14 @@
+/**
+ * Application.java
+ * 메인 클래스
+ * 우아한테크코스 1주차 미션 온보딩 - 문자열 계산기
+ * 히로-핀
+ * https://github.com/hotheadfactory/java-calculator
+ */
+
 package study;
+
+import study.domain.Calculator;
 
 import java.util.Scanner;
 
