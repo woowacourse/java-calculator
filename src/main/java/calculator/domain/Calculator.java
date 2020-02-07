@@ -9,10 +9,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Calculator {
-    private final static String plus = "+";
-    private final static String minus = "-";
-    private final static String multiply = "*";
-    private final static String divide = "/";
+    private final static String PLUS = "+";
+    private final static String MINUS = "-";
+    private final static String MULTIPLY = "*";
+    private final static String DIVIDE = "/";
 
     public Calculator() {
     }
@@ -38,7 +38,7 @@ public class Calculator {
         }
     }
 
-    private Queue makeQueue(String inputString) {
+    private Queue<String> makeQueue(String inputString) {
         String[] elements = inputString.split("\\s+", 0);
         return new LinkedList<>(Arrays.asList(elements));
     }
@@ -63,13 +63,13 @@ public class Calculator {
 
     private int calculate(int result, String operator, int operand) throws ArithmeticException {
         switch (operator) {
-            case plus:
+            case PLUS:
                 return add(result, operand);
-            case minus:
+            case MINUS:
                 return subtract(result, operand);
-            case multiply:
+            case MULTIPLY:
                 return multiply(result, operand);
-            case divide:
+            case DIVIDE:
                 return divide(result, operand);
             default:
                 throw new InputMismatchException("해당 연산자 없음");
