@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Operator;
 import View.InputView;
 import View.OutputView;
 
@@ -21,7 +22,7 @@ public class InputException {
     }
 
     public static void validateSpace(String[] inputs) throws Exception {
-        if (inputs.length == 0) {
+        if (inputs.length == 1) {
             throw new Exception("식이 입력되지 않았습니다.");
         }
     }

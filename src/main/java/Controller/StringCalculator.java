@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Operator;
 import View.OutputView;
 
 import java.util.ArrayList;

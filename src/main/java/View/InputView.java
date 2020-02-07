@@ -7,7 +7,7 @@ public class InputView {
 
     public static String[] input() {
         Scanner sc = new Scanner(System.in);
-        input = sc.nextLine();
-        return input.split(" ");
+        input = sc.nextLine().replaceAll(" ","");
+        return input.split("");
     }
 }

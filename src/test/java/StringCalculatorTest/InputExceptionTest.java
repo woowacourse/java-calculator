@@ -1,6 +1,6 @@
 package StringCalculatorTest;
 
-import Controller.Operator;
+import Model.Operator;
 import org.junit.jupiter.api.Test;
 
 
