@@ -9,7 +9,7 @@ public class Calculator {
         return left;
     }
 
-    private double calculateByOperator(double left, double right, String operator) {
+    public double calculateByOperator(double left, double right, String operator) {
         double result = 0d;
         if (operator.equals("+")) {
             result = left + right;
