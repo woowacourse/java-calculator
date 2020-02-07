@@ -6,7 +6,7 @@ import java.util.List;
 public class Formula {
     private static final String BLANK = " ";
 
-    private String formula;
+    private final String formula;
 
     public Formula(String formula) {
         checkFormula(formula.split(BLANK));
