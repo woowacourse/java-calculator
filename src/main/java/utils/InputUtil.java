@@ -10,15 +10,20 @@ import java.util.stream.Stream;
 public class InputUtil {
 	private static final String SPACE = " ";
 	private static final String EMPTY = "";
+	private static final String PATTERN = "[0-9]+(((\\s)[+\\-*](\\s)[0-9]+)|((\\s)[/](\\s)[1-9]+))*";
 
 	private static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-	public static String inputMathematicalExpression() throws IOException {
+	public static List<String> inputMathematicalExpression() throws IOException {
 		return checkException(bufferedReader.readLine());
 	}
 
-	private static String checkException(String input) {
-		return "";
+	private static List<String> checkException(String input) throws IOException {
+		if (isRightPattern(input)) {
+			input = trimSpace(input);
+			return split(input);
+		}
+		return inputMathematicalExpression();
 	}
 
 	private static String trimSpace(String input) {
@@ -27,5 +32,9 @@ public class InputUtil {
 
 	public static List<String> split(String input) {
 		return Stream.of(input.split(SPACE)).collect(Collectors.toList());
+	}
+
+	private static boolean isRightPattern(String input) {
+		return input.matches(PATTERN);
 	}
 }
