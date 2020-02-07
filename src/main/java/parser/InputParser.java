@@ -1,5 +1,7 @@
 package parser;
 
+import domain.OperatorGroup;
+
 import java.util.ArrayList;
 
 public class InputParser {
@@ -19,11 +21,11 @@ public class InputParser {
         return numbers;
     }
 
-    public static ArrayList<String> extractOperator(String[] input) {
-        ArrayList<String> operators = new ArrayList<>();
+    public static ArrayList<OperatorGroup> extractOperator(String[] input) {
+        ArrayList<OperatorGroup> operators = new ArrayList<>();
         for (int i = 0; i < input.length; i++) {
             if (i % 2 != 0) {
-                operators.add(input[i]);
+                operators.add(OperatorGroup.stringToOperator(input[i]));
             }
         }
         return operators;

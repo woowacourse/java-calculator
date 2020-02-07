@@ -28,18 +28,34 @@ public enum OperatorGroup {
         return this.letter.equals(OperatorGroup.DIVIDE.letter);
     }
 
-    public static double calculateBy(OperatorGroup operator, double a, double b) {
-        if (operator.isPlus()) {
+    public double calculateBy(double a, double b) {
+        if (isPlus()) {
             return a + b;
         }
-        if (operator.isMinus()) {
+        if (isMinus()) {
             return a - b;
         }
-        if (operator.isMultiply()) {
+        if (isMultiply()) {
             return a * b;
         }
-        if (operator.isDivide()) {
+        if (isDivide()) {
             return a / b;
+        }
+        throw new IllegalStateException("잘못된 연산자가 입력되었습니다.");
+    }
+
+    public static OperatorGroup stringToOperator(String operator) {
+        if (operator.equals(PLUS.letter)) {
+            return OperatorGroup.PLUS;
+        }
+        if (operator.equals(MINUS.letter)) {
+            return OperatorGroup.MINUS;
+        }
+        if (operator.equals(MULTIPLY.letter)) {
+            return OperatorGroup.MULTIPLY;
+        }
+        if (operator.equals(DIVIDE.letter)) {
+            return OperatorGroup.DIVIDE;
         }
         throw new IllegalStateException("잘못된 연산자가 입력되었습니다.");
     }
