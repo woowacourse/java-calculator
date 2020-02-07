@@ -5,8 +5,12 @@ import java.util.function.BiFunction;
 
 public class Main {
     public static void main(String[] args) {
-        String[] inputs = StringHandler.getInputAndSplit();
-        Source source = new Source(inputs);
+        try {
+            String[] inputs = StringHandler.getInputAndSplit();
+            Source source = new Source(inputs);
+        } catch (Exception e) {
+            
+        }
     }
 }
 
