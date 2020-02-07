@@ -1,5 +1,6 @@
 package calculator;
 
+import domain.Numbers;
 import domain.OperatorGroup;
 import parser.InputParser;
 import view.InputView;
@@ -15,7 +16,7 @@ public class Calculator {
         String input = InputView.inputCalculation();
 
         String[] expression = InputParser.split(input);
-        ArrayList<String> numbers = InputParser.extractNumber(expression);
+        Numbers numbers = new Numbers(InputParser.extractNumber(expression));
         ArrayList<OperatorGroup> operators = InputParser.extractOperator(expression);
 
         double result = calculate(numbers, operators);
@@ -23,7 +24,7 @@ public class Calculator {
         OutputView.printCalculate(result);
     }
 
-    static double calculate(ArrayList<String> numbers, ArrayList<OperatorGroup> operators) {
+    static double calculate(Numbers numbers, ArrayList<OperatorGroup> operators) {
         double result = Double.parseDouble(numbers.get(ZERO));
         int numberIndex = ONE;
         int operatorIndex = ZERO;
