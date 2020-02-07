@@ -2,6 +2,9 @@ import domain.Calculator;
 
 public class Application {
 	public static void main(String[] args) {
-		new Calculator().calculate(new InputHandler().getInput());
+		InputHandler inputHandler = new InputHandler();
+		do {
+			new Calculator().run(inputHandler.getInput());
+		} while (inputHandler.isStartingAgain());
 	}
 }

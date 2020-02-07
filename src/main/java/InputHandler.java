@@ -13,4 +13,13 @@ public class InputHandler {
 		} while (inputValidator.validate(input));
 		return input.split(" ");
 	}
+
+	public boolean isStartingAgain() {
+		String input;
+		System.out.println("다시 시작하시겠습니까? (y / n)");
+		do {
+			input = scanner.nextLine();
+		} while (!input.matches("[ynYN]"));
+		return input.toLowerCase().equals("y");
+	}
 }
