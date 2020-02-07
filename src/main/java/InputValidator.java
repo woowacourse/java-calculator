@@ -5,13 +5,19 @@ public class InputValidator {
 
 	public boolean validate(String input) {
 		if (!validateWithRegex(input)) {
+			askAgain();
 			return true;
 		}
 		String[] splittedInput = input.split(" ");
 		if (validateAfterSplit(splittedInput)) {
+			askAgain();
 			return true;
 		}
 		return false;
+	}
+
+	private void askAgain() {
+		System.out.println("잘못된 형식을 입력하셨습니다. 다시 입력해주세요.");
 	}
 
 	private boolean validateWithRegex(String input) {
