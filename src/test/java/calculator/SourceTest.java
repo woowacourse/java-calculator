@@ -16,12 +16,21 @@ public class SourceTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2 +", "1 / 3 + 4 *", "4 4"})
-    void sizeOfInputs_ShouldBeOdds(String input) {
-        System.out.println(input);
+    void notOddSizeOfInputs_ShouldThrowException(String input) {
         String[] inputs = input.split(" ");
         assertThatThrownBy(() -> {
             source.validateSizeOfInputsIsOdds(inputs);
         }).isInstanceOf(Exception.class)
                 .hasMessageMatching("inputs의 사이즈가 홀수가 아님");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1 2 + 3", "1 / + 4"})
+    void notProperTurn_ShouldThrowException(String input) {
+        System.out.println(input);
+        String[] inputs = input.split(" ");
+        assertThatThrownBy(() -> {
+            source.validateSizeOfInputsIsOdds(inputs);
+        }).isInstanceOf(Exception.class);
     }
 }
