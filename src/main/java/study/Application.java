@@ -9,6 +9,7 @@
 package study;
 
 import study.domain.Calculator;
+import study.view.userInput;
 
 import java.util.Scanner;
 
@@ -18,9 +19,10 @@ public class Application {
     }
 
     private static void runCalculator() {
+        Calculator calculator = new Calculator();
         try {
-            String[] values = inputExpression();
-            System.out.println("정답은 " + Calculator.calculate(values) + "입니다.");
+            String[] values = userInput.inputExpression();
+            System.out.println("정답은 " + calculator.calculate(values) + "입니다.");
         } catch (ArithmeticException e) {
             System.out.println("0으로 나눌 수 없습니다.");
             runCalculator();
@@ -30,9 +32,5 @@ public class Application {
         }
     }
 
-    private static String[] inputExpression() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("계산식을 입력하세요:");
-        return scanner.nextLine().split(" ");
-    }
+
 }
