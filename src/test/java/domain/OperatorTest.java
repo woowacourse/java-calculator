@@ -1,5 +1,6 @@
-package calculator;
+package domain;
 
+import domain.operator.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +18,10 @@ class OperatorTest {
 
     @BeforeEach
     void setUp() {
-        plusOperator = new PlusOperator();
-        minusOperator = new MinusOperator();
-        multiplyOperator = new MultiplyOperator();
-        divideOperator = new DivideOperator();
+        plusOperator = new Plus();
+        minusOperator = new Minus();
+        multiplyOperator = new Multiply();
+        divideOperator = new Divide();
     }
 
     @Test

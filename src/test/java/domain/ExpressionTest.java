@@ -1,4 +1,4 @@
-package expression;
+package domain;
 
 import org.junit.jupiter.api.Test;
 

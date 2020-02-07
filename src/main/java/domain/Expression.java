@@ -1,16 +1,11 @@
-package expression;
+package domain;
 
-import calculator.DivideOperator;
-import calculator.MinusOperator;
-import calculator.MultiplyOperator;
-import calculator.Operator;
-import calculator.PlusOperator;
+import domain.operator.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
-
     private List<Double> numbers = new ArrayList<>();
     private List<Operator> operators = new ArrayList<>();
 
@@ -57,22 +52,22 @@ public class Expression {
         try {
             return Double.parseDouble(token);
         } catch (NumberFormatException ne) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("항의 자리엔 숫자가 와야합니다.");
         }
     }
 
     private Operator tokenToOperator(String token) {
         if (token.equals("+")) {
-            return new PlusOperator();
+            return new Plus();
         }
         if (token.equals("-")) {
-            return new MinusOperator();
+            return new Minus();
         }
         if (token.equals("*")) {
-            return new MultiplyOperator();
+            return new Multiply();
         }
         if (token.equals("/")) {
-            return new DivideOperator();
+            return new Divide();
         }
         throw new IllegalArgumentException("올바른 연산자가 아닙니다.");
     }
