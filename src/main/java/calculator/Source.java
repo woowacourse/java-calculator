@@ -25,10 +25,9 @@ public class Source {
 
     public double calculateInputs() {
         Double result = operands.poll();
-
         for (CalculatorType operator : operators) {
             Double operand = operands.poll();
-            CalculatorType.calculate(result, operator, operand);
+            result = CalculatorType.calculate(result, operator, operand);
         }
         return result;
     }
