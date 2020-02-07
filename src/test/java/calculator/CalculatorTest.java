@@ -2,9 +2,13 @@ package calculator;
 
 import domain.Calculator;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 
 public class CalculatorTest {
     Calculator calculator = new Calculator();
@@ -12,7 +16,7 @@ public class CalculatorTest {
     @DisplayName("계산식 분할 테스트")
     @Test
     void splitFormula() {
-        String formula = "3 + 2 - 1";
+        String formula = "3 + 2 / 1";
         double[] numbers = {3, 2, 1};
         char[] operators = {'+', '-'};
 
@@ -36,5 +40,20 @@ public class CalculatorTest {
 
         double result = calculator.calculate();
         Assertions.assertThat(result).isEqualTo(4);
+    }
+
+    @DisplayName("종료 상황 테스트")
+    @Test
+    void SendErrorMessage() {
+        String value = "프로그램을 종료합니다.\r\n";
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        String string = "1 + 3 / 0";
+        InputStream in = new ByteArrayInputStream(string.getBytes());
+        System.setIn(in);
+        calculator.run();
+
+        Assertions.assertThat(outContent.toString()).isEqualTo(value);
     }
 }
