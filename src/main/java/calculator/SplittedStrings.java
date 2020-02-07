@@ -7,44 +7,41 @@ import java.util.stream.IntStream;
 
 import static calculator.Operator.checkIfOperator;
 
-public class SplitedStrings {
+public class SplittedStrings {
     List<String> splittedStrings;
 
-    SplitedStrings(String input) {
+    SplittedStrings(String input) {
         splittedStrings = Arrays.asList(input.split(" "));
-        checkClusteredNumbers();
+        checkClusteredElements();
+        checkIfStartWithSymbol();
     }
 
-    private void checkClusteredNumbers() {
+    private void checkIfStartWithSymbol() {
+        if (!isNumber(splittedStrings.get(0))) {
+            throw new IllegalArgumentException("숫자로 시작해야 합니다");
+        }
+    }
+
+    private void checkClusteredElements() {
         IntStream.range(0,splittedStrings.size()-1).forEach(i->{
-            checkIfBothAreNumbers(splittedStrings.get(i), splittedStrings.get(i + 1));
-            checkIfBothAreOperators(splittedStrings.get(i), splittedStrings.get(i + 1));
+            checkIfClustered(splittedStrings.get(i), splittedStrings.get(i + 1));
         });
     }
 
-    private void checkIfBothAreNumbers(String input1, String input2) {
-        try {
-            checkIfNumber(input1);
-            checkIfNumber(input2);
-        } catch (IllegalArgumentException e) {
+    private void checkIfClustered(String prev, String post){
+        if(isNumber(prev) && isNumber(post)){
+            throw new IllegalArgumentException("숫자가 연속되면 안됩니다");
+        } else if (!isNumber(prev) && !isNumber(post)) {
+            throw new IllegalArgumentException("연산자가 연속되면 안됩니다");
         }
-        throw new IllegalArgumentException("숫자가 연속되면 안됩니다");
     }
 
-    private void checkIfBothAreOperators(String input1, String input2) {
+    private Boolean isNumber(String input) {
         try {
-            checkIfOperator(input1);
-            checkIfOperator(input2);
+            Double.parseDouble(input);
+            return true;
         } catch (IllegalArgumentException e) {
-        }
-        throw new IllegalArgumentException("연산자가 연속되면 안됩니다");
-    }
-
-    private void checkIfNumber(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("숫자가 아닙니다.");
+            return false;
         }
     }
 }

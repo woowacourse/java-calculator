@@ -11,7 +11,7 @@ public class SplittedStringsTest {
         Assertions.assertThatThrownBy(()->{
             SplittedStrings sample = new SplittedStrings(input);
         }).isInstanceOf(IllegalArgumentException.class)
-        .hasMessageStartingWith("there exist clustered");
+        .hasMessageEndingWith("가 연속되면 안됩니다");
     }
 
     @ParameterizedTest
@@ -20,7 +20,7 @@ public class SplittedStringsTest {
         Assertions.assertThatThrownBy(()->{
             SplittedStrings sample = new SplittedStrings(input);
         }).isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("given mathematical expression starts with symbol");
+        .hasMessage("숫자로 시작해야 합니다");
     }
 }
 
