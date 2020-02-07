@@ -8,10 +8,11 @@ public enum Operator {
 	MINUS("-", (leftOperand, rightOperand) -> leftOperand - rightOperand),
 	MULTIPLY("*", (leftOperand, rightOperand) -> leftOperand * rightOperand),
 	DIVIDE("/", (leftOperand, rightOperand) -> {
-		if (rightOperand.intValue() == 0) {
+		double result = leftOperand / rightOperand;
+		if (Double.isInfinite(result)) {
 			throw new ArithmeticException("0으로 나눌 수 없습니다.");
 		}
-		return leftOperand / rightOperand;
+		return result;
 	});
 
 	private final String operator;
