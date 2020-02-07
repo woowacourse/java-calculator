@@ -9,6 +9,7 @@ import java.util.Stack;
 public class Expression {
 	private static final int NUMBER_AMOUNT_OVER = 2;
 	private static final int OPERATOR_AMOUNT_OVER = -1;
+	private static final int MIN_SIZE_OF_TOKENS = 3;
 
 	private final Stack<Token> expression;
 
@@ -18,11 +19,18 @@ public class Expression {
 	}
 
 	private void checkValidation(final List<Token> tokens) {
+		if (isInvalidSize(tokens)) {
+			throw new IllegalArgumentException("적절한 식이 아닙니다.");
+		}
 		int status = 0;
 		for (Token token : tokens) {
 			status = updateBy(token, status);
 			checkStatus(status);
 		}
+	}
+
+	private boolean isInvalidSize(List<Token> tokens) {
+		return tokens.size() < MIN_SIZE_OF_TOKENS;
 	}
 
 	private int updateBy(final Token token, int status) {
@@ -56,6 +64,24 @@ public class Expression {
 		Collections.reverse(tokens);
 		tokens.forEach(expression::push);
 		return expression;
+	}
+
+	public int calculate() {
+		int result = 0;
+		Number number1;
+		Operator operator;
+		Number number2;
+
+		while (expression.size() > 2) {
+			number1 = (Number)expression.pop();
+			operator = (Operator)expression.pop();
+			number2 = (Number)expression.pop();
+
+			result = operator.calculate(number1, number2);
+
+			expression.push(new Number(Integer.toString(result)));
+		}
+		return result;
 	}
 
 	public Stack<Token> getExpression() {

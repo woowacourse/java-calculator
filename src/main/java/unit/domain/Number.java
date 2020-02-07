@@ -27,6 +27,10 @@ public class Number implements Token {
 		return number == number1.number;
 	}
 
+	public int getNumber() {
+		return number;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(number);
