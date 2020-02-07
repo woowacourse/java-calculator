@@ -6,12 +6,12 @@ public class Calculator {
 	public double run(String[] input) {
 		result = Double.parseDouble(input[0]);
 		for (int i = 1; i < input.length; i += 2) {
-			run(Double.parseDouble(input[i + 1]), input[i]);
+			calculate(Double.parseDouble(input[i + 1]), input[i]);
 		}
 		return result;
 	}
 
-	private void run(double operand, String operator) {
+	private void calculate(double operand, String operator) {
 		if (operator.equals("+")) {
 			plus(operand);
 			return;
