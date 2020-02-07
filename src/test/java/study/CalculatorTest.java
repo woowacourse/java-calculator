@@ -1,6 +1,7 @@
 package study;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,20 +15,6 @@ public class CalculatorTest {
     private static final int ODD = 1;
     static double returnValue;
     static String nowSign;
-
-    @Test
-    public static void main(String args[]) {
-        String[] values = ExceptionHandlerTest.inputHandler().split(" ");
-        returnValue = Double.parseDouble(values[0]);
-        for (int i = INDEX_INIT; i < values.length; i++) {
-            check(i, values[i]);
-        }
-        if (returnValue == (int) returnValue) {
-            System.out.println((int) returnValue);
-            return;
-        }
-        System.out.println(returnValue);
-    }
 
     @BeforeEach
     void setUp() {
