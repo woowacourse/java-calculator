@@ -3,7 +3,10 @@ package calculator.domain;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Calculator {
     private final static String plus = "+";
@@ -11,31 +14,26 @@ public class Calculator {
     private final static String multiply = "*";
     private final static String divide = "/";
 
-    public Calculator() {}
+    public Calculator() {
+    }
 
     public void start() {
-        Integer result = null;
         while (true) {
-            String inputEq = "";
             try {
-                inputEq = InputView.inputEquation();
-            } catch (IllegalArgumentException e) {
-                OutputView.printMessage_EmptyCase();
-                continue;
-            }
-            Queue<String> equation = makeQueue(inputEq);
-            try {
-                result = execute(equation);
+                String inputEq = InputView.inputEquation();
+                Queue<String> equation = makeQueue(inputEq);
+                int result = execute(equation);
+                OutputView.printResult(result);
+                break;
             } catch (ArithmeticException e) {
                 OutputView.printMessage_DividedByZeroCase();
                 continue;
             } catch (NumberFormatException | InputMismatchException e) {
                 OutputView.printMessage_InvalidEquationCase();
                 continue;
-            }
-            if (result != null) {
-                OutputView.printResult(result);
-                break;
+            } catch (IllegalArgumentException e) {
+                OutputView.printMessage_EmptyCase();
+                continue;
             }
         }
     }
