@@ -17,17 +17,15 @@ public enum OperatorGroup {
         this.operationStrategy = operationStrategy;
     }
 
-    public static double operate(double a, String inputOperator, double b) {
-        return findOperationStrategy(inputOperator)
-                .operationStrategy
-                .operate(a, b);
+    public static OperatorGroup findByDelimiter(String delimiter) {
+        return Arrays.stream(values())
+                .filter(aOperator -> aOperator.isEqual(delimiter))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException(delimiter + "는 등록되지 않은 연산자 입니다."));
     }
 
-    private static OperatorGroup findOperationStrategy(String inputOperator) {
-        return Arrays.stream(values())
-                .filter(operator -> operator.isEqual(inputOperator))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException(inputOperator + "는 등록되지 않은 연산자 입니다."));
+    public double operate(double a, double b) {
+        return this.operationStrategy.operate(a, b);
     }
 
     private boolean isEqual(String op) {

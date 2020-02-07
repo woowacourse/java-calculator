@@ -19,7 +19,8 @@ public class Equation {
     public double getResult() {
         double result = numbers.poll();
         while (isNotEmpty()) {
-            result = OperatorGroup.operate(result, operators.poll(), numbers.poll());
+            OperatorGroup operatorGroup = OperatorGroup.findByDelimiter(operators.poll());
+            result = operatorGroup.operate(result, numbers.poll());
         }
         return result;
     }

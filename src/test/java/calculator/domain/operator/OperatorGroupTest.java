@@ -14,9 +14,9 @@ class OperatorGroupTest {
 
     @DisplayName("연산자에 따른 연산 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"6,+,3,9", "6,-,3,3", "6,*,3,18", "6,/,3,2"})
-    void operate(double a, String op, double b, double result) {
-        assertThat(OperatorGroup.operate(a, op, b)).isEqualTo(result);
+    @CsvSource(value = {"6,PLUS,3,9", "6,MINUS,3,3", "6,MULTIPLE,3,18", "6,DIVIDE,3,2"})
+    void operate(double a, OperatorGroup operatorGroup, double b, double result) {
+        assertThat(operatorGroup.operate(a, b)).isEqualTo(result);
     }
 
     @DisplayName("등록되지 않은 연산자로 연산을 시도할 경우 Exception 발생")
@@ -24,8 +24,15 @@ class OperatorGroupTest {
     void name() {
         String notOperator = "~";
 
-        assertThatThrownBy(() -> OperatorGroup.operate(1, notOperator, 2))
+        assertThatThrownBy(() -> OperatorGroup.findByDelimiter(notOperator))
                 .isInstanceOf(NoSuchElementException.class)
                 .hasMessage(notOperator + "는 등록되지 않은 연산자 입니다.");
+    }
+
+    @DisplayName("구분자를 입력받아 연산자 Enum 을 찾아내기")
+    @ParameterizedTest
+    @CsvSource(value = {"+,PLUS", "-,MINUS", "*,MULTIPLE", "/,DIVIDE"})
+    void findByDelimiter(String delimiter, OperatorGroup operatorGroup) {
+        assertThat(OperatorGroup.findByDelimiter(delimiter)).isEqualTo(operatorGroup);
     }
 }
