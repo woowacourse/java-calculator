@@ -17,10 +17,8 @@ enum CalculatorType {
         this.operator = operator;
     }
 
-    public static double calculate(double operand1, String operator, double operand2) {
-        CalculatorType calculatorType = Arrays.stream(CalculatorType.values())
-                .filter(c -> c.operator.equals(operator)).findFirst().get();
-        return calculatorType.expression.apply(operand1, operand2);
+    public static double calculate(double operand1, CalculatorType operator, double operand2) {
+        return operator.expression.apply(operand1, operand2);
     }
 
     public static CalculatorType validateOperator(String input) throws Exception {
