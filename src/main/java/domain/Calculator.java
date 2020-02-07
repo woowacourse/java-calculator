@@ -47,7 +47,7 @@ public class Calculator {
                 numbers.add(InputValidationException.checkIsNumber(formulas[i]));
                 continue;
             }
-            operators.add(formulas[i].charAt(0));
+            operators.add(InputValidationException.checkIsOperator(formulas[i]));
         }
     }
 
