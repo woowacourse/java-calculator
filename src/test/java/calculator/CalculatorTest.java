@@ -4,6 +4,9 @@ import domain.Calculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -33,13 +36,13 @@ public class CalculatorTest {
     }
 
     @DisplayName("컬랙션 분할 후 계산 테스트")
-    @Test
-    public void calculate() {
-        String formula = "3 + 2 - 1";
+    @ParameterizedTest
+    @CsvSource(value = {"1 + 2 + 3,6", "3 * 6 + 3,21", "3 * 3 / 3,3", "3 + 2 - 5,0"})
+    public void calculate(String formula, double expect) {
         calculator.splitFormula(formula);
 
         double result = calculator.calculate();
-        Assertions.assertThat(result).isEqualTo(4);
+        Assertions.assertThat(result).isEqualTo(expect);
     }
 
     @DisplayName("종료 상황 테스트")
