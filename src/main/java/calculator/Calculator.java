@@ -1,5 +1,10 @@
 package calculator;
 
+import jdk.internal.util.xml.impl.Input;
+import view.InputParser;
+import view.InputView;
+import view.OutputView;
+
 import java.util.ArrayList;
 
 public class Calculator {
@@ -8,10 +13,15 @@ public class Calculator {
 
     public static void run() {
         // input
-
+        String input = InputView.inputCalculation();
         // split
-
+        String[] expression = InputParser.split(input);
+        ArrayList<String> numbers =  InputParser.extractNumber(expression);
+        ArrayList<String> operators = InputParser.extractOperator(expression);
         // calculate
+        double result = calculate(numbers, operators);
+
+        OutputView.printCalculate(result);
     }
 
     static double calculate(ArrayList<String> numbers, ArrayList<String> operators) {
