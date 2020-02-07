@@ -1,19 +1,27 @@
 package calculator;
 
+import view.InputView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static calculator.Operator.checkIfOperator;
-
 public class Calculator {
     List<String> splittedStrings;
 
-    Calculator(String input) {
-        splittedStrings = Arrays.asList(input.split(" "));
-        checkClusteredElements();
-        checkIfStartWithSymbol();
+    Calculator() {}
+
+    public List<String> enterMathematicalExpression() {
+        try {
+            splittedStrings = Arrays.asList(InputView.enterMathematicalExpression().split(" "));
+            checkClusteredElements();
+            checkIfStartWithSymbol();
+            return splittedStrings;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return enterMathematicalExpression();
+        }
     }
 
     private void checkIfStartWithSymbol() {
@@ -44,4 +52,15 @@ public class Calculator {
             return false;
         }
     }
+
+    public Double calculate() {
+        Double state = Double.parseDouble(splittedStrings.get(0));
+        for (int i = 1; i < splittedStrings.size(); i++) {
+            if (!isNumber(splittedStrings.get(i))) {
+                state = Operator.calculate(splittedStrings.get(i), state, Double.parseDouble(splittedStrings.get(i + 1)));
+            }
+        }
+        return state;
+    }
+
 }
