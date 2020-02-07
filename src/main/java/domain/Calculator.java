@@ -1,4 +1,4 @@
-package study;
+package domain;
 
 public class Calculator {
 	public static double calculate(String[] values) {
