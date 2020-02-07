@@ -8,7 +8,7 @@ public class InputValidator {
 	private List<String> operators = new ArrayList<>();
 
 	public boolean validate(String input) {
-		if (!validateWithRegex(input)) {
+		if (!validateWithRegex(input) || isZeroDivisionExists(input)) {
 			askAgain();
 			return true;
 		}
@@ -26,6 +26,10 @@ public class InputValidator {
 
 	private boolean validateWithRegex(String input) {
 		return input.matches("[0-9+*/\\-.\\s]+[0-9]+$");
+	}
+
+	private boolean isZeroDivisionExists(String input) {
+		return input.contains("/ 0");
 	}
 
 	private boolean validateAfterSplit(String[] input) {
