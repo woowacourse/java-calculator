@@ -45,5 +45,6 @@ public class Source {
             CalculatorType operator = CalculatorType.validateOperator(input);
             operators.add(operator);
         }
+        operandTurn = !operandTurn;
     }
 }
