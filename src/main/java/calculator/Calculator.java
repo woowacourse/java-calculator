@@ -15,7 +15,7 @@ public class Calculator {
     }
 
     private void run() {
-        String[] equations = getEquation();
+        String[] equations = getInputEquation();
         System.out.println(calculateEquation(equations));
     }
 
@@ -37,8 +37,8 @@ public class Calculator {
 
         for(int i = 0; i < size; i++) {
             String operator = operatorQueue.poll();
-            double nextNum = numberQueue.poll();
-            result = distinguishOperator(result, operator, nextNum);
+            double nextNumber = numberQueue.poll();
+            result = distinguishOperator(result, operator, nextNumber);
         }
 
         return result;
@@ -56,7 +56,7 @@ public class Calculator {
     }
 
 
-    private String[] getEquation() {
+    private String[] getInputEquation() {
         Scanner scanner = new Scanner(System.in);
         String[] equations;
 
@@ -64,11 +64,9 @@ public class Calculator {
             try {
                 String equation = scanner.nextLine();
                 equations = equation.split(" ");
-                checkNumber(equations);
-                checkOperator(equations);
+                checkEquationElementValue(equations);
                 break;
             } catch(NumberFormatException e) {
-                e.getMessage();
                 System.out.println("다시 입력해주세요");
             }
         }
@@ -76,24 +74,35 @@ public class Calculator {
         return equations;
     }
 
-    private void checkNumber(String[] equations) {
-        for(int i=0; i<equations.length; i += 2) {
-            if(Double.parseDouble(equations[i]) > (double) Integer.MAX_VALUE
-                    || Double.parseDouble(equations[i]) < -(double) Integer.MAX_VALUE) {
-                throw new NumberFormatException();
-            }
+    private void checkEquationElementValue(String[] equations) {
+        checkOperatorValue(equations);
+        checkNumberValue(equations);
+    }
+
+    private void checkOperatorValue(String[] equations) {
+        for(int i=1; i<equations.length; i += 2) {
+            if(isWrongOperator(equations[i])) { throw new NumberFormatException(); }
+            if(isInvalidEquation(equations)) { throw new NumberFormatException(); }
+            if(isDividedByZero(equations, i)) { throw new NumberFormatException(); }
         }
     }
 
-    private void checkOperator(String[] equations) {
-        for(int i=1; i<equations.length; i += 2) {
-            if(!equations[i].equals("+") && !equations[i].equals("-") && !equations[i].equals("*") && !equations[i].equals("/")) {
-                throw new NumberFormatException();
-            }
-            if(equations.length % 2 == 0) {
-                throw new NumberFormatException();
-            }
-            if(equations[i].equals("/") && Double.parseDouble(equations[i+1]) == 0.0) {
+    private boolean isDividedByZero(String[] equations, int i) {
+        return equations[i].equals("/") && Double.parseDouble(equations[i+1]) == 0.0;
+    }
+
+    private boolean isInvalidEquation(String[] equations) {
+        return equations.length % 2 == 0;
+    }
+
+    private boolean isWrongOperator(String equation) {
+        return !equation.equals("+") && !equation.equals("-") && !equation.equals("*") && !equation.equals("/");
+    }
+
+    private void checkNumberValue(String[] equations) {
+        for(int i=0; i<equations.length; i += 2) {
+            if(Double.parseDouble(equations[i]) > (double) Integer.MAX_VALUE
+                    || Double.parseDouble(equations[i]) < -(double) Integer.MAX_VALUE) {
                 throw new NumberFormatException();
             }
         }
