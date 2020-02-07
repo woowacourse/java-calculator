@@ -20,4 +20,13 @@ class CalculatorTest {
 
         assertThat(calculator.calculate(numberSentence)).isEqualTo(first + second);
     }
+
+    @Test
+    void calculateSubstract() {
+        int first = 1;
+        int second = 2;
+        NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList("-")));
+
+        assertThat(calculator.calculate(numberSentence)).isEqualTo(first - second);
+    }
 }
