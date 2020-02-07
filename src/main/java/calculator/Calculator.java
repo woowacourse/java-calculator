@@ -6,74 +6,76 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
-	static public void doOneCycle(String expression) {
-		List<String> tokens = Arrays.asList(expression.split(" "));
-		System.out.println(tokens);
+    static public String doOneCycle(String expression) throws IllegalArgumentException {
+        List<String> tokens = Arrays.asList(expression.split(" "));
 
-		if (!isValidSize(tokens)) {
-			ErrorView.printNotValidExpressionError();
-			return;
-		}
+        checkIsValidSize(tokens);
+        checkIsNumber(tokens.get(0));
 
-		if (!isNumber(tokens.get(0))) {
-			ErrorView.printNotValidExpressionError();
-			return;
-		}
-		double condense = Integer.parseInt(tokens.get(0));
-		for (int i = 1; i < tokens.size(); i += 2) {
-			if (!isNumber(tokens.get(i+1))) {
-				ErrorView.printNotValidExpressionError();
-				return;
+        double condense = Integer.parseInt(tokens.get(0));
+        for (int i = 1; i < tokens.size(); i += 2) {
+        	checkIsNumber(tokens.get(i + 1));
+            condense = operate(condense, tokens.get(i), Integer.parseInt(tokens.get(i + 1)));
+        }
+
+        return Double.toString(condense);
+    }
+
+    private static double operate(double condense, String term, double next) throws IllegalArgumentException {
+        if (term.equals("+")) {
+            return condense + next;
+        }
+        if (term.equals("-")) {
+            return condense - next;
+        }
+        if (term.equals("*")) {
+            return condense * next;
+        }
+        if (term.equals("/")) {
+        	if (next == 0) {
+        		throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
 			}
-			condense = operate(condense, tokens.get(i), Integer.parseInt(tokens.get(i+1)));
+            return condense / next;
+        }
+        throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
+    }
+
+    private  static void checkIsValidSize(List<String> tokens) throws IllegalArgumentException {
+    	if (isValidSize(tokens)) {
+    		return;
 		}
 
-		System.out.println(condense);
-		return;
+    	throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
 	}
 
-	private static double operate(double condense, String term, double next) {
-		if (term.equals("+")) {
-			return condense + next;
-		}
-		if (term.equals("-")) {
-			return condense - next;
-		}
-		if (term.equals("*")) {
-			return condense * next;
-		}
-		if (term.equals("/")) {
-			return condense / next;
-		}
-		return -1;
+    private static boolean isValidSize(List<String> tokens) {
+		return (tokens.size() & 1) == 1;
 	}
 
-	private static boolean isValidSize(List<String> tokens) {
-		if ((tokens.size() & 1) == 1) {
-			return true;
+	private static void checkIsNumber(String term) throws IllegalArgumentException {
+    	if (isNumber(term)) {
+    		return;
 		}
-		return false;
+    	throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
 	}
 
-	private static boolean isNumber(String term) {
-		int firstIndex = 0;
+    private static boolean isNumber(String term) {
+        int firstIndex = 0;
 
-		if (isFirstNumberMinus(term)) {
-			firstIndex = 1;
-		}
+        if (isFirstMinusMoreThanOneSize(term)) {
+            firstIndex = 1;
+        }
 
-		for (int i = firstIndex; i < term.length(); i++) {
-			if (Character.isDigit(term.charAt(i)) == false) {
-				return false;
-			}
-		}
-		return true;
-	}
+        for (int i = firstIndex; i < term.length(); i++) {
+            if (!Character.isDigit(term.charAt(i))) {
+                return false;
+            }
+        }
 
-	private static boolean isFirstNumberMinus(String term) {
-		if (term.startsWith("-") && term.length() > 1) {
-			return true;
-		}
-		return false;
-	}
+        return true;
+    }
+
+    private static boolean isFirstMinusMoreThanOneSize(String term) {
+        return term.startsWith("-") && term.length() > 1;
+    }
 }
