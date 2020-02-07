@@ -46,7 +46,7 @@ public enum Operator {
         if (DIVIDE.name.equals(name)) {
             return DIVIDE;
         }
-        throw new IllegalArgumentException();
+        throw new OperatorException();
     }
 
     public abstract double calculate(double prev, double next);

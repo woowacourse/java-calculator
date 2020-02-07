@@ -1,6 +1,7 @@
 package expression;
 
 import calculator.Operator;
+import calculator.OperatorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,7 @@ public class Expression {
         validate(tokens);
 
         for (int i = 0; i < tokens.length; i++) {
-            if (isNumberIndex(i)) {
-                numbers.add(tokenToDouble(tokens[i]));
-            }
-            if (isOperatorIndex(i)) {
-                operators.add(tokenToOperator(tokens[i]));
-            }
+            parseComponent(i, tokens[i]);
         }
     }
 
@@ -37,7 +33,16 @@ public class Expression {
 
     private void validate(String[] tokens) {
         if (tokens.length % 2 == 0) {
-            throw new IllegalArgumentException();
+            throw new InvalidExpressionException(InvalidExpressionException.WRONG_MATCH_NUMBER_OPERATOR);
+        }
+    }
+
+    private void parseComponent(int i, String token) {
+        if (isNumberIndex(i)) {
+            numbers.add(tokenToDouble(token));
+        }
+        if (isOperatorIndex(i)) {
+            operators.add(tokenToOperator(token));
         }
     }
 
@@ -53,11 +58,15 @@ public class Expression {
         try {
             return Double.parseDouble(token);
         } catch (NumberFormatException ne) {
-            throw new IllegalArgumentException();
+            throw new InvalidExpressionException(InvalidExpressionException.NOT_A_NUMBER);
         }
     }
 
     private Operator tokenToOperator(String token) {
-        return Operator.from(token);
+        try {
+            return Operator.from(token);
+        } catch (OperatorException oe) {
+            throw new InvalidExpressionException(InvalidExpressionException.WRONG_OPERATOR);
+        }
     }
 }
