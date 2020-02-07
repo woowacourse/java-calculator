@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import view.OutputView;
+
 public class InputUtil {
 	private static final String SPACE = " ";
 	private static final String PATTERN = "[0-9]+(((\\s)[+\\-*](\\s)[0-9]+)|((\\s)[/](\\s)[1-9]+))*";
@@ -21,6 +23,8 @@ public class InputUtil {
 		if (isRightPattern(input)) {
 			return split(input);
 		}
+
+		OutputView.showRetry();
 		return inputMathematicalExpression();
 	}
 
