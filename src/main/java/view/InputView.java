@@ -12,7 +12,7 @@ public class InputView {
 			checkIsBlank(input);
 			return input;
 		} catch (IllegalArgumentException e) {
-			System.out.println(e);
+			System.err.println(e);
 			return inputExpression();
 		}
 	}
