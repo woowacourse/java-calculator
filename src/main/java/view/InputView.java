@@ -1,6 +1,6 @@
 package view;
 
-import exception.InputValidationException;
+import utils.InputValidation;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class InputView {
         String input = null;
         while(isException){
             input = scanner.nextLine();
-            isException = InputValidationException.checkNullOroSpace(input);
+            isException = InputValidation.checkNullOroSpace(input);
         }
         return input;
     }

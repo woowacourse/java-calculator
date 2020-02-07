@@ -1,17 +1,13 @@
-package exception;
-
-import view.InputView;
+package utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputValidationException {
+public class InputValidation {
 
     public static boolean checkNullOroSpace(String input) {
         if (input.equals(null) || input.equals(" ")) {
-            System.out.println("공백을 입력하셨습니다.");
-            System.out.println("프로그램을 종료합니다.");
-            System.exit(0);
+            Exit.sendErrorMessage("공백을 입력하셨습니다.");
         }
         return false;
     }
@@ -20,9 +16,7 @@ public class InputValidationException {
         try {
             return Double.parseDouble(stringNumber);
         } catch (Exception e) {
-            System.out.println("오류");
-            System.out.println("프로그램을 종료합니다.");
-            System.exit(0);
+            Exit.sendErrorMessage("잘못된 식을 입력하셨습니다.");
         }
         return -1;
     }
@@ -37,9 +31,7 @@ public class InputValidationException {
 
         if (!operators.contains(operator)
                 || stringOperator.length() != 1) {
-            System.out.println("오류");
-            System.out.println("프로그램을 종료합니다.");
-            System.exit(0);
+            Exit.sendErrorMessage("잘못된 식을 입력하셨습니다.");
         }
         return operator;
     }

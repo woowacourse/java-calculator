@@ -1,6 +1,7 @@
 package domain;
 
-import exception.InputValidationException;
+import utils.Exit;
+import utils.InputValidation;
 import view.InputView;
 import view.OutputView;
 
@@ -14,7 +15,12 @@ public class Calculator {
     private final BiFunction<Double, Double, Double> ADDITION = (a, b) -> a + b;
     private final BiFunction<Double, Double, Double> SUBTRACTION = (a, b) -> a - b;
     private final BiFunction<Double, Double, Double> MULTIPLICATION = (a, b) -> a * b;
-    private final BiFunction<Double, Double, Double> DIVISION = (a, b) -> a / b;
+    private final BiFunction<Double, Double, Double> DIVISION = (a, b) -> {
+        if (b == 0){
+            Exit.sendErrorMessage("0으로는 나눌 수 없습니다.");
+        }
+        return a / b;
+    };
     private final Map<Character, BiFunction<Double, Double, Double>> calculateFunctionMap = new HashMap<>();
 
 
@@ -44,10 +50,10 @@ public class Calculator {
         for (int i = 0; i < formulas.length; i++) {
             String temp = formulas[i];
             if (i % 2 == 0) {
-                numbers.add(InputValidationException.checkIsNumber(formulas[i]));
+                numbers.add(InputValidation.checkIsNumber(formulas[i]));
                 continue;
             }
-            operators.add(InputValidationException.checkIsOperator(formulas[i]));
+            operators.add(InputValidation.checkIsOperator(formulas[i]));
         }
     }
 
