@@ -24,7 +24,6 @@ public class InputValidator {
 
     public boolean checkInput(String inputString) {
         String[] inputArr = inputString.split(BLANK);
-
         return isCorrectLength(inputArr) && isCorrectIndex(inputArr);
     }
 

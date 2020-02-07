@@ -14,7 +14,7 @@
 package view;
 
 public class OutputView {
-    public void print(double sum) {
+    public static void print(double sum) {
         System.out.println(sum);
     }
 }

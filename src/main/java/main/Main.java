@@ -13,39 +13,10 @@
 
 package main;
 
-import calculator.Calculator;
-import validator.InputValidator;
-import view.InputView;
-import view.OutputView;
+import controller.Controller;
 
 public class Main {
     public static void main(String[] args) {
-        InputView input = new InputView();
-        String inputString;
-        do {
-            inputString = input.inputStringFromUser();
-        } while(! new InputValidator().checkInput(inputString));
-
-        String[] inputArr = inputString.split(" ");
-
-        double sum = Double.parseDouble(inputArr[0]);
-        Calculator calculator = new Calculator();
-
-        for(int i = 1; i < inputArr.length-1; i += 2) {
-            if(inputArr[i].equals("+")){
-                sum = calculator.plus(sum, Double.parseDouble(inputArr[i+1]));
-            }
-            if(inputArr[i].equals("-")){
-                sum = calculator.minus(sum, Double.parseDouble(inputArr[i+1]));
-            }
-            if(inputArr[i].equals("*")){
-                sum = calculator.mul(sum, Double.parseDouble(inputArr[i+1]));
-            }
-            if(inputArr[i].equals("/")){
-                sum = calculator.div(sum, Double.parseDouble(inputArr[i+1]));
-            }
-        }
-
-        new OutputView().print(sum);
+        new Controller().run();
     }
 }
