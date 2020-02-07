@@ -12,3 +12,10 @@ dependencies {
     testCompile('org.junit.jupiter:junit-jupiter:5.4.2')
     testCompile('org.assertj:assertj-core:3.11.1')
 }
+
+apply plugin: 'java'
+compileJava.options.encoding = 'UTF-8'
+
+test {
+    useJUnitPlatform()
+}
