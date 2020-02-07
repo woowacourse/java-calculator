@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class StringTest {
 	@Test
+	@DisplayName("split 테스트")
 	void split() {
 		String value = "1,2";
 		String[] values = value.split(",");
@@ -16,6 +17,7 @@ public class StringTest {
 	}
 
 	@Test
+	@DisplayName("substring 테스트")
 	void substring() {
 		String value = "(1,2)";
 		value = value.substring(1, 4);
@@ -23,7 +25,7 @@ public class StringTest {
 	}
 
 	@Test
-	@DisplayName("문자열 인덱스 범위를 벗어난 접근 예외 발생확인 테스트")
+	@DisplayName("문자열 인덱스 범위를 벗어난 접근 예외 발생 확인 테스트")
 	void charAt() {
 		String value = "abc";
 		assertThatThrownBy(() -> {

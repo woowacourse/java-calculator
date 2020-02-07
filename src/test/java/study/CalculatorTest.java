@@ -2,6 +2,7 @@ package study;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,6 +18,7 @@ public class CalculatorTest {
 	}
 
 	@Test
+	@DisplayName("0으로 나눌 때 예외가 발생하는지 테스트")
 	void testZeroDivide() {
 		String[] values = "1 / 0".split(" ");
 		assertThatExceptionOfType(ArithmeticException.class).isThrownBy(() -> {
