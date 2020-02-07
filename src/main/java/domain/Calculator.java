@@ -3,19 +3,15 @@ package domain;
 public class Calculator {
 	private double result;
 
-	public double calculate(String[] input) {
+	public double run(String[] input) {
 		result = Double.parseDouble(input[0]);
 		for (int i = 1; i < input.length; i += 2) {
-			calculate2(Double.parseDouble(input[i + 1]), input[i]);
+			run(Double.parseDouble(input[i + 1]), input[i]);
 		}
 		return result;
 	}
 
-	private void plus(double operand) {
-		result += operand;
-	}
-
-	private void calculate2(double operand, String operator) {
+	private void run(double operand, String operator) {
 		if (operator.equals("+")) {
 			plus(operand);
 			return;
@@ -31,6 +27,10 @@ public class Calculator {
 		if (operator.equals("/")) {
 			divide(operand);
 		}
+	}
+
+	private void plus(double operand) {
+		result += operand;
 	}
 
 	private void minus(double operand) {
