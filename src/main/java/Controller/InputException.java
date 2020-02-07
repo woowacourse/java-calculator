@@ -20,6 +20,12 @@ public class InputException {
         return checkException();
     }
 
+    /**
+     * 공백 입력 여부 유효성 검사
+     *
+     * @param inputs
+     * @throws Exception
+     */
     public static void validateSpace(String[] inputs) throws Exception {
         if (inputs.length == 0) {
             throw new Exception("식이 입력되지 않았습니다.");

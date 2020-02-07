@@ -12,31 +12,23 @@ public enum Operator {
         this.sign = sign;
     }
 
-    public boolean isOperator(String sign) {
-        return this.sign.equals(sign);
-    }
-
     public double compute(double result, int number) {
-        if (this == PLUS) {
-            result += number;
-            return result;
+        switch (this) {
+            case PLUS:
+                result += number;
+                return result;
+            case MINUS:
+                result -= number;
+                return result;
+            case MULTIPLY:
+                result *= number;
+                return result;
+            case DIVIDE:
+                result /= number;
+                return result;
+            default:
+                return result;
         }
-
-        if (this == MINUS) {
-            result -= number;
-            return result;
-        }
-
-        if (this == MULTIPLY) {
-            result *= number;
-            return result;
-        }
-
-        if (this == DIVIDE) {
-            result /= number;
-            return result;
-        }
-        return result;
     }
 
     public static Operator getEnumFromString(String sign) {

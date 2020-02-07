@@ -27,13 +27,8 @@ public class InputExceptionTest {
 
     @Test
     void validateOperators() {
-        for (int i = 1; i < str.length; i += 2) {
-            boolean result = Operator.PLUS.isOperator(str[i])
-                    || Operator.MINUS.isOperator(str[i])
-                    || Operator.MULTIPLY.isOperator(str[i])
-                    || Operator.DIVIDE.isOperator(str[i]);
-            assertThat(result).isTrue();
-        }
+        Operator result = Operator.getEnumFromString("@");
+        assertThat(result).isNull();
     }
 
     public static boolean isInteger(String value) {
