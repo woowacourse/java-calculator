@@ -4,8 +4,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 public class StringTest {
     @Test
     void firstRequire() {
@@ -21,19 +19,19 @@ public class StringTest {
     void secondRequire() {
         String oneAndTwoWithBracket = "(1,2)";
 
-        Assertions.assertThat(oneAndTwoWithBracket.substring(1,4)).isEqualTo("1,2");
+        Assertions.assertThat(oneAndTwoWithBracket.substring(1, 4)).isEqualTo("1,2");
     }
 
     @Test
     @DisplayName("out of bounds unit test")
-    void thirdRequire() throws StringIndexOutOfBoundsException{
+    void thirdRequire() throws StringIndexOutOfBoundsException {
         String abc = "abc";
 
         Assertions.assertThat(abc.charAt(0)).isEqualTo('a');
         Assertions.assertThat(abc.charAt(1)).isEqualTo('b');
         Assertions.assertThat(abc.charAt(2)).isEqualTo('c');
 
-        Assertions.assertThatThrownBy(()->{
+        Assertions.assertThatThrownBy(() -> {
             abc.charAt(3);
         }).isInstanceOf(IndexOutOfBoundsException.class);
     }

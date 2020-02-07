@@ -37,7 +37,7 @@ public class SetTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,false", "2,false", "3,false","4,true"})
+    @CsvSource(value = {"1,false", "2,false", "3,false", "4,true"})
     @DisplayName("csv test")
     void testMultiplyTwo(String input, String expected) {
         Assertions.assertThat(numbers.add(Integer.parseInt(input))).isEqualTo(Boolean.parseBoolean(expected));

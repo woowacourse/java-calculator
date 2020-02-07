@@ -18,7 +18,7 @@ public class OperatorTest {
         Assertions.assertThatThrownBy(() -> {
             Operator.calculate(operator, Double.parseDouble(arg1), Double.parseDouble(arg2));
         }).isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("사칙연산 연산자만 계산 가능합니다");
+                .hasMessage("사칙연산 연산자만 계산 가능합니다");
     }
 
     @ParameterizedTest
@@ -27,6 +27,6 @@ public class OperatorTest {
         Assertions.assertThatThrownBy(() -> {
             Operator.calculate(operator, Double.parseDouble(arg1), Double.parseDouble(arg2));
         }).isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("0으로 나눌 수 없습니다.");
+                .hasMessage("0으로 나눌 수 없습니다.");
     }
 }
