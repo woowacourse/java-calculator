@@ -1,6 +1,7 @@
 import domain.Calculator;
 import domain.NumberSentence;
 import view.InputView;
+import view.OutputView;
 
 import java.util.Scanner;
 
@@ -10,6 +11,9 @@ public class Application {
         NumberSentence numberSentence = inputView.getNumberSentence();
 
         Calculator calculator = new Calculator();
-        int calculate = calculator.calculate(numberSentence);
+        int result = calculator.calculate(numberSentence);
+
+        OutputView outputView = new OutputView();
+        outputView.showCalculateResult(result);
     }
 }
