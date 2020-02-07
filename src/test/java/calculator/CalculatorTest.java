@@ -1,6 +1,7 @@
 package calculator;
 
 import domain.Calculator;
+import domain.Formula;
 import domain.Formulas;
 import org.junit.jupiter.api.Test;
 
@@ -10,11 +11,12 @@ public class CalculatorTest {
 
     @Test
     void calculateTest() {
-        Calculator calculator = new Calculator(new Formulas("1 + 2"));
-        int result = calculator.startCalculate();
+        Formulas formulas = new Formulas(new Formula("1 + 2"));
+        int result = Calculator.startCalculate(formulas);
         assertThat(result).isEqualTo(3);
-        Calculator calculator2 = new Calculator(new Formulas("2 + 3 * 4 / 2"));
-        result = calculator2.startCalculate();
+
+        formulas = new Formulas(new Formula("2 + 3 * 4 / 2"));
+        result = Calculator.startCalculate(formulas);
         assertThat(result).isEqualTo(10);
     }
 
