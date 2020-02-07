@@ -71,4 +71,15 @@ public class CalculatorTest {
 
         Assertions.assertThat(actualResult).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @DisplayName("0으로 나눈 경우 검증")
+    @CsvSource(value = {"0:0", "1:0", "2:0"}, delimiter = ':')
+    void divideByZeroTest(double num1, double num2) {
+        Assertions.assertThatThrownBy(() -> {
+            Operator operator = Operator.getOperatorByString("/");
+            double actualResult = operator.operate(num1, num2);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("0으로 나눌 수 없습니다.");
+    }
 }
