@@ -1,34 +1,22 @@
-
-import java.util.Scanner;
-
 public class Calculator {
-    String value;
-    String[] values;
-    double result = 0;
-
-    public Calculator() {
-        Scanner scanner = new Scanner(System.in);
-        value = scanner.nextLine();
-        values = value.split(" ");
-        Validator.validateInput(values);
-    }
+    private final int FIRST = 0;
+    private double result = 0;
 
     void calculate() {
-        result = Double.parseDouble(values[0]);
+        int length = InputValues.getValuesLength();
+        double nextNumber = 0;
 
-        int length = values.length;
+        result = Double.parseDouble(InputValues.getValueByIndex(FIRST));
         Operator nowOperator = null;
-        for (int i = 1; i < length; i++) {
-            if (i % 2 == 1) { // 연산자일 때
-                nowOperator = Operator.getOperatorByString(values[i]);
-            }
-            else { // 숫자가 나올 때
-                result = nowOperator.operate(result, Double.parseDouble(values[i]));
-            }
+        for (int i = 1; i < length; i += 2) {
+            nowOperator = Operator.getOperatorByString(InputValues.getValueByIndex(i));
+            nextNumber = Double.parseDouble(InputValues.getValueByIndex(i + 1));
+            result = nowOperator.operate(result, nextNumber);
         }
     }
 
+
     void printResult() {
-        System.out.print("결과: "+result);
+        System.out.print("결과: " + result);
     }
 }

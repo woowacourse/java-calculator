@@ -15,13 +15,13 @@ public enum Operator {
         }
     },
     DIV("/") {
-        double operate(double num1, double num2) throws ArithmeticException {
-            try {
-                return num1 / num2;
-            } catch (ArithmeticException ae) {
+        double operate(double num1, double num2) {
+            double result = num1 / num2;
 
+            if (Double.isInfinite(result) || Double.isNaN(result)) {
+                throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
             }
-            throw new IllegalArgumentException("0으로 나눌 수 없습니다..");
+            return result;
         }
     };
 
@@ -42,5 +42,5 @@ public enum Operator {
         throw new IllegalArgumentException("연산자가 잘못되었습니다.");
     }
 
-    abstract double operate(double num1, double num2) ;
+    abstract double operate(double num1, double num2);
 }
