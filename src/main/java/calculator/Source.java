@@ -38,7 +38,7 @@ public class Source {
     }
 
     public void validateSizeOfInputsIsOdds(String[] inputs) throws Exception {
-        if (isOddNumber(inputs.length)) {
+        if (!isOddNumber(inputs.length)) {
             throw new Exception("inputs의 사이즈가 홀수가 아님");
         }
     }
