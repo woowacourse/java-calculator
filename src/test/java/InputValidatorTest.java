@@ -41,12 +41,12 @@ public class InputValidatorTest {
 	}
 
 	@Test
-	void zeroDivisionValidationReturnsTrue() {
+	void returnTrueIfZeroDivisionExists() {
 		assertThat(inputValidator.validate("1 + 2 / 0")).isTrue();
 	}
 
 	@Test
-	void inputExceedsRangeOfDouble() {
+	void returnTrueIfInputExceedsRangeOfDouble() {
 		assertThat(inputValidator.validate(Double.MAX_VALUE + "+ 2")).isTrue();
 	}
 }
