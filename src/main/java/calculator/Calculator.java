@@ -8,57 +8,44 @@ public class Calculator {
 	private static final String MINUS = "-";
 	private static final String MULTIPLY = "*";
 	private static final String DIVIDE = "/";
-	private static final String SPACE = " ";
+	private static final String BLANK = " ";
 	private static final int ONE = 1;
 	private static final int ZERO = 0;
 
-	static public void calculate(String expression) {
-		List<String> tokens = Arrays.asList(expression.split(SPACE));
+	static public double calculate(String expression) {
+		List<String> tokens = Arrays.asList(expression.split(BLANK));
 
 		if (!isValidSize(tokens) || !isNumber(tokens.get(ZERO))) {
-			System.err.println("유효한 식이 아닙니다.");
-			return;
+			throw new IllegalArgumentException("유효한 식이 아닙니다.");
 		}
 
-		double condense = Integer.parseInt(tokens.get(ZERO));
+		double accumulatedNumber = Integer.parseInt(tokens.get(ZERO));
 		for (int i = 1; i < tokens.size(); i += 2) {
-			if (!isValidOperator(tokens.get(i))) {
-				System.err.println("올바른 연산자가 아닙니다.");
-			}
 			if (!isNumber(tokens.get(i + 1))) {
-				System.err.println("유효한 식이 아닙니다.");
-				return;
+				throw new IllegalArgumentException("유효한 식이 아닙니다.");
 			}
-			condense = operate(condense, tokens.get(i), Integer.parseInt(tokens.get(i + 1)));
+			accumulatedNumber = operate(accumulatedNumber, tokens.get(i), Integer.parseInt(tokens.get(i + 1)));
 		}
-
-		System.out.println(condense);
-		return;
+		return accumulatedNumber;
 	}
 
-	private static boolean isValidOperator(String operator) {
-		String[] validOperator = {PLUS, MINUS, MULTIPLY, DIVIDE};
-		return Arrays.asList(validOperator).contains(operator);
-	}
-
-	private static double operate(double condense, String operator, double next) {
+	private static double operate(double previousNumber, String operator, double nextNumber) {
 		if (operator.equals(PLUS)) {
-			return condense + next;
+			return previousNumber + nextNumber;
 		}
 		if (operator.equals(MINUS)) {
-			return condense - next;
+			return previousNumber - nextNumber;
 		}
 		if (operator.equals(MULTIPLY)) {
-			return condense * next;
+			return previousNumber * nextNumber;
 		}
 		if (operator.equals(DIVIDE)) {
-			if (next == ZERO) {
-				System.err.println("0으로 나눌 수는 없습니다.");
-				return ZERO;
+			if (nextNumber == ZERO) {
+				throw new ArithmeticException("0으로 나눌 수는 없습니다.");
 			}
-			return condense / next;
+			return previousNumber / nextNumber;
 		}
-		return ZERO;
+		throw new IllegalArgumentException("올바른 연산자가 아닙니다.");
 	}
 
 	private static boolean isValidSize(List<String> tokens) {
