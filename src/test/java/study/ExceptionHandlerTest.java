@@ -33,13 +33,6 @@ public class ExceptionHandlerTest {
         throw new IllegalArgumentException();
     }
 
-    public static boolean isUndefinedValue(String str) {
-        if (str.replace(" ", "").contains("/0")) {
-            return false;
-        }
-        return true;
-    }
-
     @Test
     public void checkInputHandlerTest() {
         String str = "321 + 3 + f";
@@ -108,8 +101,20 @@ public class ExceptionHandlerTest {
 
     @Test
     void checkSignTest() {
-        // return이 boolean이라 isTrue, isFalse로만 판별?
         String str = "@";
         assertThat(checkSign(str)).isFalse();
+    }
+
+    public static boolean isUndefinedValue(String str) {
+        if (str.replace(" ", "").contains("/0")) {
+            return false;
+        }
+        return true;
+    }
+
+    @Test
+    void isUndefinedValueTest() {
+        String str = "@";
+        assertThat(isUndefinedValue("0 / 0")).isFalse();
     }
 }
