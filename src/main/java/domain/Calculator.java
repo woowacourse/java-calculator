@@ -1,13 +1,12 @@
 package domain;
 
 public class Calculator {
-	public static int calculate(String[] tokens) {
-		int result = Integer.parseInt(tokens[0]);
+	public static double calculate(String[] tokens) {
+		double result = Double.parseDouble(tokens[0]);
 		for (int i = 1; i < tokens.length; i += 2) {
-			String operator = tokens[i];
-			int rightOperand = Integer.parseInt(tokens[i + 1]);
-			result = Operator.of(operator)
-					.calculate(result, rightOperand);
+			Operator operator = Operator.of(tokens[i]);
+			double rightOperand = Double.parseDouble(tokens[i + 1]);
+			result = operator.calculate(result, rightOperand);
 		}
 		return result;
 	}

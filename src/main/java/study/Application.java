@@ -13,7 +13,7 @@ public class Application {
 		try {
 			String expression = InputView.inputExpression();
 			String[] tokens = expression.split(" ");
-			int result = Calculator.calculate(tokens);
+			double result = Calculator.calculate(tokens);
 			OutputView.printResult(result);
 		} catch (Exception e) {
 			System.out.println("잘못된 식입니다.");
