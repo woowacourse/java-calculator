@@ -37,12 +37,8 @@ public class Calculator {
 		result -= operand;
 	}
 
-	private boolean divide(double operand) {
-		if (operand == 0) {
-			return false;
-		}
+	private void divide(double operand) {
 		result /= operand;
-		return true;
 	}
 
 	private void multiply(double operand) {
