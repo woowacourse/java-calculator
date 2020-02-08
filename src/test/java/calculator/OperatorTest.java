@@ -1,36 +1,49 @@
 package calculator;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class OperatorTest {
-    private static List<String> operators = Arrays.asList("+", "-", "*", "/");
-    private static List<String> notOperators = Arrays.asList("", "a", "++");
-    private static List<Operator> expects = Arrays.asList(Operator.values());
+    private static List<String> operatorStrings = Arrays.asList("+", "-", "*", "/");
+    private static List<String> notOperatorStrings = Arrays.asList("", "a", "++");
+    List<Operator> operators = Arrays.asList(Operator.addition, Operator.subtraction, Operator.multiplication, Operator.division);
 
     @Test
     void getOperator() {
-        for (int i = 0; i < operators.size(); i++) {
-            for (int j = 0; j < expects.size(); j++) {
+        for (int i = 0; i < operatorStrings.size(); i++) {
+            for (int j = 0; j < operators.size(); j++) {
                 if (i == j) {
-                    Assertions.assertThat(Operator.getOperator(operators.get(i))).isEqualTo(expects.get(j));
+                    Assertions.assertThat(Operator.getOperator(operatorStrings.get(i))).isEqualTo(operators.get(j));
                 }
                 if (i != j) {
-                    Assertions.assertThat(Operator.getOperator(operators.get(i))).isNotEqualTo(expects.get(j));
+                    Assertions.assertThat(Operator.getOperator(operatorStrings.get(i))).isNotEqualTo(operators.get(j));
                 }
 
             }
         }
 
-        for (String notOperator: notOperators) {
+        for (String notOperator : notOperatorStrings) {
             Assertions.assertThatThrownBy(() -> {
                 Operator.getOperator(notOperator);
             }).isInstanceOf(IllegalArgumentException.class);
         }
+    }
+
+    @Test
+    void calculate() {
+        double a = 3;
+        double b = 3;
+        double zero = 0;
+
+        Assertions.assertThat(Operator.addition.calculate(a, b)).isEqualTo(a + b);
+        Assertions.assertThat(Operator.subtraction.calculate(a, b)).isEqualTo(a - b);
+        Assertions.assertThat(Operator.multiplication.calculate(a, b)).isEqualTo(a * b);
+        Assertions.assertThat(Operator.division.calculate(a, b)).isEqualTo(a / b);
+        Assertions.assertThatThrownBy(() -> {
+            Operator.division.calculate(a, zero);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
