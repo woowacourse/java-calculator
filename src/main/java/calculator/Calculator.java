@@ -8,6 +8,22 @@ import java.util.*;
  */
 
 public class Calculator {
+    /**
+     * INPUT_MESSAGE는 상수 문자열로, 입력을 받을 때 출력되는 메세지를 저한다.
+     */
+    private final String INPUT_MESSAGE = "계산할 수식을 입력해주세요. (숫자와 연산자는 공백으로 구분)";
+    /**
+     * ARITHMETIC_ERROR_MESSAGE는 상수 문자열로, 빈 문자열을 받을 때 출력되는 메세지를 저장한다.
+     */
+    private final String EMPTY_ERROR_MESSAGE = "빈 문자열입니다. 다시 입력해주세요.";
+    /**
+     * ARITHMETIC_ERROR_MESSAGE 상수 문자열로, 수학 관련 예외(여기서는 0으로 나누는 경우이다) 발생 시 출력되는 메세지를 저장한다.
+     */
+    private final String ARITHMETIC_ERROR_MESSAGE = "0으로 나눌 수 없습니다. 다시 입력해주세요.";
+    /**
+     * ILLEGAL_EQUATION_ERROR_MESSAGE는 상수 문자열로, 잘못된 수식이 연산 중 예외를 발생시킬 때에 출력되는 메세지를 저장한다.
+     */
+    private final String ILLEGAL_EQUATION_ERROR_MESSAGE = "잘못된 수식이 입력되었습니다. 다시 입력해주세요.";
 
     /**
      * start 메서드는 계산기의 메인 동작을 수행한다.
@@ -26,20 +42,20 @@ public class Calculator {
      */
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("계산할 수식을 입력해주세요. (숫자와 연산자는 공백으로 구분)");
+        System.out.println(INPUT_MESSAGE);
         String inputString = inputEquation(scanner);
         if (validateString(inputString)) {
-            System.out.println("빈 문자열입니다. 다시 입력해주세요.");
+            System.out.println(EMPTY_ERROR_MESSAGE);
             start();
         }
         Queue<String> equation = makeQueue(inputString);
         try {
             System.out.println(execute(equation));
         } catch (ArithmeticException arithmeticException) {
-            System.out.println("0으로 나눌 수 없습니다. 다시 입력해주세요.");
+            System.out.println(ARITHMETIC_ERROR_MESSAGE);
             start();
         } catch (IllegalArgumentException | InputMismatchException e) {
-            System.out.println("잘못된 수식이 입력되었습니다. 다시 입력해주세요.");
+            System.out.println(ILLEGAL_EQUATION_ERROR_MESSAGE);
             start();
         }
     }
@@ -105,7 +121,7 @@ public class Calculator {
      * @return 예외 미발생시 숫자값을 정수형으로 변환하여 반환한다.
      * @throws NumberFormatException 만약 값이 유효하지 않은 숫자값(오버플로우, 숫자가 아닌 문자열 등)일 경우 throw한다.
      */
-    private int validateNumber(String number) throws NumberFormatException{
+    private int validateNumber(String number) throws NumberFormatException {
         return Integer.parseInt(number);
     }
 
