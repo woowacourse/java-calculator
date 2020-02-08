@@ -32,9 +32,6 @@ public class Source {
         return result;
     }
 
-    public void printResult(double result) {
-        System.out.println(result);
-    }
 
     public void validateSizeOfInputsIsOdds(String[] inputs) {
         if (!isOddNumber(inputs.length)) {

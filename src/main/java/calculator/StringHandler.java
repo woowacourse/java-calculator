@@ -11,4 +11,8 @@ public class StringHandler {
 
         return inputs;
     }
+
+    public static void printResult(double result) {
+        System.out.println("result: " + result);
+    }
 }
