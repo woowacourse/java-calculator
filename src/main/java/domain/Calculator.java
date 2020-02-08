@@ -12,42 +12,27 @@ public class Calculator {
         int result = numbers.get(0);
 
         for (int i = 0; i < size; i++) {
-            String operator = operators.poll();
-            switch (operator) {
-                case "+" :
-                    result = add(result, numbers.get(i+1));
-                    break;
-                case "*":
-                    result = multiply(result, numbers.get(i+1));
-                    break;
-                case "/":
-                    result = divide(result, numbers.get(i+1));
-                    break;
-                case "-":
-                    result = substract(result, numbers.get(i+1));
-                    break;
-
-                default:
-                    throw new InvalidParameterException("not allowed ");
-            }
+            Operation operation = recognizeOperation(operators.poll());
+            result = operation.operate(result, numbers.get(i + 1));
         }
+
         return result;
 
     }
 
-    private int add(int first, int second) {
-        return first + second;
-    }
+    private Operation recognizeOperation(String operator) {
+        if ("+".equals(operator)) {
+            return new AddOperation();
+        }
 
-    private int substract(int first, int second) {
-        return first - second;
-    }
+        if ("-".equals(operator)) {
+            return new SubstractOperation();
+        }
 
-    private int multiply(int first, int second) {
-        return first * second;
-    }
+        if ("*".equals(operator)) {
+            return new MultiplyOperation();
+        }
 
-    private int divide(int first, int second) {
-        return first / second;
+        return new DivideOperation();
     }
 }
