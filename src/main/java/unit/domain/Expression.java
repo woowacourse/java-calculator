@@ -1,90 +1,84 @@
 package unit.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
 public class Expression {
-	private static final int NUMBER_AMOUNT_OVER = 2;
-	private static final int OPERATOR_AMOUNT_OVER = -1;
-	private static final int MIN_SIZE_OF_TOKENS = 3;
+    private final static boolean NUMBER_TURN_STATUS = false;
+    private final static boolean OPERATOR_TURN_STATUS = true;
+	private static final int ONLY_RESULT_REMAIN_SIZE = 1;
 
 	private final Stack<Token> expression;
 
-	public Expression(final List<Token> tokens) {
-		checkValidation(tokens);
-		expression = toExpression(tokens);
-	}
+    public Expression(final List<Token> tokens) {
+        checkValidation(tokens);
+        expression = toExpression(tokens);
+    }
 
-	private void checkValidation(final List<Token> tokens) {
-		if (isInvalidSize(tokens)) {
-			throw new IllegalArgumentException("적절한 식이 아닙니다.");
-		}
-		int status = 0;
-		for (Token token : tokens) {
-			status = updateBy(token, status);
-			checkStatus(status);
-		}
-	}
+    private void checkValidation(final List<Token> tokens) {
+        boolean tokenTurnStatus = NUMBER_TURN_STATUS;
 
-	private boolean isInvalidSize(List<Token> tokens) {
-		return tokens.size() < MIN_SIZE_OF_TOKENS;
-	}
+        for (int i = 0; i < tokens.size(); i++) {
+            if (isTurnStatus(tokenTurnStatus, tokens.get(i))) {
+                throw new IllegalArgumentException("잘못된 연산 식입니다.");
+            }
+            tokenTurnStatus = !tokenTurnStatus;
+        }
+    }
 
-	private int updateBy(final Token token, int status) {
-		if (isNumber(token)) {
-			status++;
-		}
-		if (isOperator(token)) {
-			status--;
-		}
-		return status;
-	}
+    private boolean isTurnStatus(final boolean tokenStatus, final Token token) {
+        if (isTurnStatus(NUMBER_TURN_STATUS, tokenStatus) && !isNumber(token)) {
+            return false;
+        }
+        if (isTurnStatus(OPERATOR_TURN_STATUS, tokenStatus) && !isOperator(token)) {
+            return false;
+        }
+        return true;
+    }
 
-	private boolean isNumber(Token token) {
-		return token.getClass() == Number.class;
-	}
+    private boolean isTurnStatus(final boolean selectTurnStatus, final boolean tokenStatus) {
+        return tokenStatus == selectTurnStatus;
+    }
 
-	private boolean isOperator(Token token) {
-		return token.getClass() == Operator.class;
-	}
+    private boolean isNumber(final Token token) {
+        return token.getClass() == Number.class;
+    }
 
-	private void checkStatus(int statusNumber) {
-		final List<Integer> invalidStatus = Arrays.asList(OPERATOR_AMOUNT_OVER, NUMBER_AMOUNT_OVER);
-		if (invalidStatus.contains(statusNumber)) {
-			throw new IllegalArgumentException("잘못된 식입니다.");
-		}
-	}
+    private boolean isOperator(final Token token) {
+        return token.getClass() == Operator.class;
+    }
 
-	private Stack<Token> toExpression(List<Token> tokens) {
-		Stack<Token> expression = new Stack<>();
+    private Stack<Token> toExpression(final List<Token> tokens) {
+        Stack<Token> expression = new Stack<>();
+        List<Token> reverseTokens = new ArrayList<>(tokens);
 
-		Collections.reverse(tokens);
-		tokens.forEach(expression::push);
-		return expression;
-	}
+        Collections.reverse(reverseTokens);
+        reverseTokens.forEach(expression::push);
 
-	public int calculate() {
-		int result = 0;
+        return expression;
+    }
+
+    public int calculate() {
+		int calculateResult = 0;
 		Number number1;
 		Operator operator;
 		Number number2;
 
-		while (expression.size() > 2) {
-			number1 = (Number)expression.pop();
-			operator = (Operator)expression.pop();
-			number2 = (Number)expression.pop();
+        while (expression.size() != ONLY_RESULT_REMAIN_SIZE) {
+            number1 = (Number) expression.pop();
+            operator = (Operator) expression.pop();
+            number2 = (Number) expression.pop();
 
-			result = operator.calculate(number1, number2);
+            calculateResult = operator.calculate(number1, number2);
 
-			expression.push(new Number(Integer.toString(result)));
-		}
-		return result;
-	}
+            expression.push(new Number(Integer.toString(calculateResult)));
+        }
+        return calculateResult;
+    }
 
-	public Stack<Token> getExpression() {
-		return expression;
-	}
+    public Stack<Token> getExpression() {
+        return expression;
+    }
 }
