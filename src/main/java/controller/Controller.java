@@ -14,7 +14,7 @@
 package controller;
 
 import calculator.Calculator;
-import model.StringValue;
+import model.CalculatedValue;
 import view.InputView;
 import view.OutputView;
 
@@ -27,10 +27,10 @@ public class Controller {
     private final String DIV = "/";
 
     public void run() {
-        StringValue stringInput;
+        CalculatedValue stringInput;
         do {
             String input = InputView.inputStringFromUser();
-            stringInput = new StringValue(input);
+            stringInput = new CalculatedValue(input);
         } while (!stringInput.isValidator());
         stringInput.setValueList();
 
@@ -39,7 +39,7 @@ public class Controller {
         OutputView.print(sum);
     }
 
-    private double calculate(StringValue stringInput) {
+    private double calculate(CalculatedValue stringInput) {
         List<Double> numberList = stringInput.getNumberList();
         List<String> operatorList = stringInput.getOperatorList();
         double sum = numberList.get(0);
