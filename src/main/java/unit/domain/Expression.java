@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Stack;
 
 public class Expression {
-	private static final int NUMBER_AMOUNT_OVER = 2;
-	private static final int OPERATOR_AMOUNT_OVER = -1;
 	private static final int MIN_SIZE_OF_TOKENS = 3;
+	private static final int INITIAL_STATUS = 0;
+	private static final int NUMBER_PUSHED_STATUS = 1;
 
 	private final Stack<Token> expression;
 
@@ -19,12 +19,10 @@ public class Expression {
 
 	private void checkValidation(final List<Token> tokens) {
 		if (isInvalidSize(tokens)) {
-			throw new IllegalArgumentException("적절한 식이 아닙니다.");
+			throw new IllegalArgumentException("식은 최소 3자 이상이어야 합니다.");
 		}
-		int status = 0;
-		for (Token token : tokens) {
-			status = updateBy(token, status);
-			checkStatus(status);
+		if (isUnbalanced(tokens)) {
+			throw new IllegalArgumentException("연산자 혹은 숫자의 개수가 너무 많습니다.");
 		}
 	}
 
@@ -32,14 +30,29 @@ public class Expression {
 		return tokens.size() < MIN_SIZE_OF_TOKENS;
 	}
 
-	private int updateBy(final Token token, int status) {
+	private boolean isUnbalanced(List<Token> tokens) {
+		boolean isUnbalanced = false;
+		final List<Integer> balancedStatus = Arrays.asList(INITIAL_STATUS, NUMBER_PUSHED_STATUS);
+
+		int tokensStatus = INITIAL_STATUS;
+		for (Token token : tokens) {
+			tokensStatus = updateBy(token, tokensStatus);
+			if (isNotIn(balancedStatus, tokensStatus)) {
+				isUnbalanced = true;
+				break;
+			}
+		}
+		return isUnbalanced;
+	}
+
+	private int updateBy(final Token token, int tokensStatus) {
 		if (isNumber(token)) {
-			status++;
+			tokensStatus++;
 		}
 		if (isOperator(token)) {
-			status--;
+			tokensStatus--;
 		}
-		return status;
+		return tokensStatus;
 	}
 
 	private boolean isNumber(Token token) {
@@ -50,11 +63,8 @@ public class Expression {
 		return token.getClass() == Operator.class;
 	}
 
-	private void checkStatus(int statusNumber) {
-		final List<Integer> invalidStatus = Arrays.asList(OPERATOR_AMOUNT_OVER, NUMBER_AMOUNT_OVER);
-		if (invalidStatus.contains(statusNumber)) {
-			throw new IllegalArgumentException("잘못된 식입니다.");
-		}
+	private boolean isNotIn(final List<Integer> balancedStatus, final int tokensStatus) {
+		return !balancedStatus.contains(tokensStatus);
 	}
 
 	private Stack<Token> toExpression(List<Token> tokens) {
@@ -71,7 +81,7 @@ public class Expression {
 		Operator operator;
 		Number number2;
 
-		while (expression.size() > 2) {
+		while (expression.size() >= MIN_SIZE_OF_TOKENS) {
 			number1 = (Number)expression.pop();
 			operator = (Operator)expression.pop();
 			number2 = (Number)expression.pop();

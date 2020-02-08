@@ -8,7 +8,7 @@ public class Operator implements Token {
 	private static final String PLUS = "+";
 	private static final String MINUS = "-";
 	private static final String DIVIDE = "/";
-	private static final String MULTIFLE = "*";
+	private static final String MULTIPLY = "*";
 
 	private final String operator;
 
@@ -18,7 +18,7 @@ public class Operator implements Token {
 	}
 
 	private void checkValidation(String operator) {
-		final List<String> validOperators = Arrays.asList("+", "-", "*", "/");
+		final List<String> validOperators = Arrays.asList(PLUS, MINUS, DIVIDE, MULTIPLY);
 		if (!validOperators.contains(operator)) {
 			throw new IllegalArgumentException("유효한 연산자 형식이 아닙니다.");
 		}

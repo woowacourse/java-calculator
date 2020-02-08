@@ -17,6 +17,10 @@ public class Number implements Token {
 		}
 	}
 
+	public int getNumber() {
+		return number;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -27,9 +31,6 @@ public class Number implements Token {
 		return number == number1.number;
 	}
 
-	public int getNumber() {
-		return number;
-	}
 
 	@Override
 	public int hashCode() {

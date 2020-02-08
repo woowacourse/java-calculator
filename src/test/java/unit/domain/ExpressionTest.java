@@ -15,7 +15,13 @@ class ExpressionTest {
 		assertThatThrownBy(() -> {
 			new Expression(invalidTokens);
 		}).isInstanceOf(IllegalArgumentException.class)
-			.hasMessage("잘못된 식입니다.");
+			.hasMessage("연산자 혹은 숫자의 개수가 너무 많습니다.");
+
+		List<Token> scarceTokens = Arrays.asList(new Number("1"), new Operator("+"));
+		assertThatThrownBy(() -> {
+			new Expression(scarceTokens);
+		}).isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("식은 최소 3자 이상이어야 합니다.");
 	}
 
 	@Test
