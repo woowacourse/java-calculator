@@ -42,9 +42,6 @@ public class InputView {
 
     //todo: 숫자 위치에 숫자가 아닌 입력이 있는 경우, 연산자 위치에 연산자가 아닌 경우 로직 추가
     private boolean isAbleToParse(String sentence) {
-        if (sentence.isEmpty()) {
-            return false;
-        }
-        return true;
+        return !sentence.isEmpty();
     }
 }
