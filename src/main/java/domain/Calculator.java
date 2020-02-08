@@ -25,6 +25,12 @@ public class Calculator {
     };
     private final Map<Character, BiFunction<Double, Double, Double>> calculateFunctionMap = new HashMap<>();
 
+    public Calculator() {
+        calculateFunctionMap.put('+', ADDITION);
+        calculateFunctionMap.put('-', SUBTRACTION);
+        calculateFunctionMap.put('*', MULTIPLICATION);
+        calculateFunctionMap.put('/', DIVISION);
+    }
 
     public List<Double> getNumbers() {
         return numbers;
@@ -32,13 +38,6 @@ public class Calculator {
 
     public List<Character> getOperators() {
         return operators;
-    }
-
-    public Calculator() {
-        calculateFunctionMap.put('+', ADDITION);
-        calculateFunctionMap.put('-', SUBTRACTION);
-        calculateFunctionMap.put('*', MULTIPLICATION);
-        calculateFunctionMap.put('/', DIVISION);
     }
 
     public void run() {
