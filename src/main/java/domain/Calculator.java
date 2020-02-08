@@ -10,11 +10,12 @@ import java.util.function.BiFunction;
 
 public class Calculator {
 
-    private final int ZERO = 0;
-    private final int EVEN = 2;
+    private final static int ZERO = 0;
+    private final static int EVEN = 2;
 
     private final List<Double> numbers = new ArrayList<>();
     private final List<Character> operators = new ArrayList<>();
+
     private final BiFunction<Double, Double, Double> ADDITION = (a, b) -> a + b;
     private final BiFunction<Double, Double, Double> SUBTRACTION = (a, b) -> a - b;
     private final BiFunction<Double, Double, Double> MULTIPLICATION = (a, b) -> a * b;
