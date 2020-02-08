@@ -22,7 +22,8 @@ public class Calculator {
 
     public int stringCalculate() {
         double result = new CastNumber(formulas.get(0)).getValue();
-        for (int index = 1; index < formulas.size(); index += 2) {
+        int formulasSize = formulas.size();
+        for (int index = 1; index < formulasSize; index += 2) {
             result = calculate(formulas.get(index),
                     result, (double) new CastNumber(formulas.get(index + 1)).getValue());
         }
