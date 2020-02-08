@@ -11,14 +11,14 @@ public class Source {
     public Source() {
     }
 
-    public Source(String[] inputs) throws Exception {
+    public Source(String[] inputs) {
         operands = new LinkedList<>();
         operators = new LinkedList<>();
         operandTurn = true;
         generateSource(inputs);
     }
 
-    public void generateSource(String[] inputs) throws Exception {
+    public void generateSource(String[] inputs) {
         validateSizeOfInputsIsOdds(inputs);
         validateInputsByIndex(inputs);
     }
@@ -36,9 +36,9 @@ public class Source {
         System.out.println(result);
     }
 
-    public void validateSizeOfInputsIsOdds(String[] inputs) throws Exception {
+    public void validateSizeOfInputsIsOdds(String[] inputs) {
         if (!isOddNumber(inputs.length)) {
-            throw new Exception("inputs의 사이즈가 홀수가 아님");
+            throw new IllegalArgumentException(inputs.length + "(length of inputs) is not odd");
         }
     }
 
@@ -46,13 +46,13 @@ public class Source {
         return number % 2 == 1;
     }
 
-    private void validateInputsByIndex(String[] inputs) throws Exception {
+    private void validateInputsByIndex(String[] inputs) {
         for (String input : inputs) {
             validateInputByIndex(input);
         }
     }
 
-    private void validateInputByIndex(String input) throws Exception {
+    private void validateInputByIndex(String input) {
         if (operandTurn) {
             double operand = Double.parseDouble(input);
             operands.offer(operand);
