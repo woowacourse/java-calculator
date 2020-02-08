@@ -14,7 +14,7 @@ public enum CalculatorType {
         this.operationMethod = operationMethod;
     }
 
-    public static int operate(int n1, int n2, String inputOperator) throws IllegalArgumentException{
+    public static int operate(int n1, String inputOperator, int n2) throws IllegalArgumentException{
         return findApplytoOperator(inputOperator).operationMethod.apply(n1, n2);
     }
 

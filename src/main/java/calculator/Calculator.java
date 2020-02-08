@@ -8,11 +8,6 @@ import java.util.*;
  */
 
 public class Calculator {
-    /**
-     * Calculator는 생성자 메서드이다. 수행하는 작업은 없다.
-     */
-    public Calculator() {
-    }
 
     /**
      * start 메서드는 계산기의 메인 동작을 수행한다.
@@ -20,14 +15,14 @@ public class Calculator {
      * 올바른 값이 들어오면 값을 출력해준다.
      * 이 때 while을 통한 루프 구조 대신,
      * 자기 자신을 재귀적으로 호출하여 올바른 값이 나올 까지 실행하도록 설계하였다.
-     *
+     * <p>
      * Exception의 경우, IllegalArgumentException(enum 접근시 잘못된 값이 들어가는 경우),
      * NumberFormatException(잘못된 숫자가 들어가는 경우, IllegalArgumentException의 하위 클래스라 기재하지 않음),
      * InputMismatchException(잘못된 연산자 문자열이 들어가는 경우) 을 묶어서 처리한다.
      * 세 경우 모두 유효하지 않은 문자열이고, 별도로 나누는 것이 의미없다고 생각하였기때문이다.
      *
-     * @exception  ArithmeticException    : 만약 0으로 나누기 오류가 발생하면 예외처리한다
-     * @exception  IllegalArgumentException  : 만약 입력받은 숫자가 유효하지 않은 값이라면 예외처리한다
+     * @throws ArithmeticException      : 만약 0으로 나누기 오류가 발생하면 예외처리한다
+     * @throws IllegalArgumentException : 만약 입력받은 숫자가 유효하지 않은 값이라면 예외처리한다
      */
     public void start() {
         Scanner scanner = new Scanner(System.in);
@@ -51,11 +46,12 @@ public class Calculator {
 
     /**
      * inputEquation은 수식을 입력받고 값을 리턴해준다.
+     * 이 과정에서, trim 메서드를 실행하여 전후 공백을 제거하도록 하였다.
      *
      * @return 입력받은 문자열 값을 반환한다.
      */
     private String inputEquation(Scanner scanner) {
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     /**
@@ -109,19 +105,14 @@ public class Calculator {
      * @return 예외 미발생시 숫자값을 정수형으로 변환하여 반환한다.
      * @throws NumberFormatException 만약 값이 유효하지 않은 숫자값(오버플로우, 숫자가 아닌 문자열 등)일 경우 throw한다.
      */
-    private int validateNumber(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw e;
-        }
+    private int validateNumber(String number) throws NumberFormatException{
+        return Integer.parseInt(number);
     }
 
     /**
      * calculate는 두 개의 정수 값과 연산자 값을 입력받고,
      * 연산자 값에 따라 정해진 연산을 두 숫자에 수행하여 결과값을 반환한다.
-     * 만약 enum을 통해 PLUS,MINUS 등의 메서드가 등록되어 있다면 switch가 없어도 될듯하다.
-     * 이에 대해서는 추후 수정할 예정이다. (문서 주석 20.02.07 작성)
+     * enum CalculatorType을 통해 연산자에 대한 메서드를 자동으로 매칭한다.
      *
      * @param result   이전에 계산해 둔 정수형 값을 전달받는다.
      * @param operator 새로 수행할 문자열 연산을 전달받는다.
@@ -131,6 +122,6 @@ public class Calculator {
      * @throws ArithmeticException      만약 0으로 나누는 연산 발생 시 예외를 throw한다.
      */
     public int calculate(int result, String operator, int operand) throws ArithmeticException, IllegalArgumentException {
-        return CalculatorType.operate(result, operand, operator);
+        return CalculatorType.operate(result, operator, operand);
     }
 }
