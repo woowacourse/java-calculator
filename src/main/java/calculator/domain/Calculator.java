@@ -25,7 +25,16 @@ public class Calculator {
     }
 
     private Queue<String> inputEquation() {
-        return handleRawEquation(InputView.inputEquation());
+        String rawEquation = validate(InputView.inputEquation());
+        return handleRawEquation(rawEquation);
+    }
+
+    private static String validate(String rawEquation) {
+        if (rawEquation.isEmpty()) {
+            OutputView.printMessage_EmptyCase();
+            throw new IllegalArgumentException("빈 문자열");
+        }
+        return rawEquation;
     }
 
     private Queue<String> handleRawEquation(String inputEquation) {
