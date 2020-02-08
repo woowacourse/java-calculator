@@ -1,4 +1,5 @@
 import domain.Calculator;
+import domain.ExpressionParser;
 import view.InputView;
 import view.OutputView;
 
@@ -11,9 +12,8 @@ public class Application {
 
 	private static int getCalculateResult(Calculator calculator) {
 		try {
-			System.out.print("계산식을 입력해주세요 :");
-			return calculator.calculate(InputView.inputExpression());
-		} catch (IllegalArgumentException ex) {
+			return calculator.calculate(ExpressionParser.parseExpression(InputView.inputExpression()));
+		} catch (RuntimeException ex) {
 			System.out.println(ex.getMessage());
 			return getCalculateResult(calculator);
 		}

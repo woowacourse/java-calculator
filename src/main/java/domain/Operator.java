@@ -17,18 +17,18 @@ public enum Operator {
 		this.operation = operation;
 	}
 
-	public static Operator getOperatorOf(String value) {
+	static Operator getOperatorOf(String value) {
 		return Arrays.stream(values())
 			.filter(operator -> value.equals(operator.symbol))
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException());
 	}
 
-	public int calculate(int operand1, int operand2) {
+	int calculate(int operand1, int operand2) {
 		return operation.apply(operand1, operand2);
 	}
 
-	public static boolean isOperator(String value) {
+	static boolean isOperator(String value) {
 		return Arrays.stream(Operator.values())
 			.anyMatch(operator -> value.equals(operator.symbol));
 	}
