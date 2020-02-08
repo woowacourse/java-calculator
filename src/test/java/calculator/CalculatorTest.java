@@ -6,28 +6,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static calculator.domain.Calculator.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
-    private static final double TEST_RETURN_VALUE_INIT = 10;
-    private static final int INDEX_INIT = 1;
-    private static final int EVEN = 0;
-    private static final int ODD = 1;
+    static final double TEST_RETURN_VALUE_INIT = 10;
     static double returnValue;
     static String nowSign;
 
     @BeforeEach
     void setUp() {
         returnValue = TEST_RETURN_VALUE_INIT;
-    }
-
-    private static void check(int i, String value) {
-        if (i % 2 == EVEN) {
-            calculate(Double.parseDouble(value));
-        }
-        if (i % 2 == ODD) {
-            nowSign = value;
-        }
     }
 
     @ParameterizedTest
@@ -38,35 +27,12 @@ public class CalculatorTest {
         assertThat(returnValue).isEqualTo(expected);
     }
 
-    private static void calculate(double nowNumber) {
-        if (nowSign.equals("+")) {
-            plus(nowNumber);
-            return;
-        }
-        if (nowSign.equals("-")) {
-            minus(nowNumber);
-            return;
-        }
-        if (nowSign.equals("*")) {
-            multiply(nowNumber);
-            return;
-        }
-        if (nowSign.equals("/")) {
-            divide(nowNumber);
-            return;
-        }
-    }
-
     @ParameterizedTest
     @CsvSource(value = {"5:+:15", "5:-:5", "5:*:50", "5:/:2"}, delimiter = ':')
     void calculateTest(double input, String sign, double expected) {
         nowSign = sign;
         calculate(input);
         assertThat(returnValue).isEqualTo(expected);
-    }
-
-    private static void plus(double nowNumber) {
-        returnValue += nowNumber;
     }
 
     @ParameterizedTest
@@ -78,10 +44,6 @@ public class CalculatorTest {
         assertThat(returnValue).isEqualTo(expected);
     }
 
-    private static void minus(double nowNumber) {
-        returnValue -= nowNumber;
-    }
-
     @ParameterizedTest
     @CsvSource(value = {"5:5", "10:0", "33:-23"}, delimiter = ':')
     void minusTest(double input, double expected) {
@@ -89,19 +51,11 @@ public class CalculatorTest {
         assertThat(returnValue).isEqualTo(expected);
     }
 
-    private static void multiply(double nowNumber) {
-        returnValue *= nowNumber;
-    }
-
     @ParameterizedTest
     @CsvSource(value = {"5:50", "10:100", "33:330"}, delimiter = ':')
     void multiplyTest(double input, double expected) {
         multiply(input);
         assertThat(returnValue).isEqualTo(expected);
-    }
-
-    private static void divide(double nowNumber) {
-        returnValue /= nowNumber;
     }
 
     @ParameterizedTest

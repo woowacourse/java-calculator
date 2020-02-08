@@ -8,31 +8,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static calculator.util.ExceptionHandler.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ExceptionHandlerTest {
-    private static final int EVEN = 0;
-    private static final int ODD = 1;
-    private static final int INDEX_INIT = 0;
-    private static Scanner scanner = new Scanner(System.in);
-
-    public static String inputHandler() {
-        try {
-            return checkInputHandler(scanner.nextLine());
-        } catch (InputMismatchException | IllegalArgumentException e) {
-            System.out.println("입력값을 확인해주세요.");
-            scanner = new Scanner(System.in);
-            return inputHandler();
-        }
-    }
-
-    private static String checkInputHandler(String input) {
-        if (checkString(input.split(" ")) == true && isUndefinedValue(input) == true) {
-            return input;
-        }
-        throw new IllegalArgumentException();
-    }
 
     @Test
     @DisplayName("입력값을 체크해주는 테스트")
@@ -43,21 +23,6 @@ public class ExceptionHandlerTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    private static boolean checkString(String[] inputStrings) {
-        if (inputStrings.length % 2 == EVEN) {
-            return false;
-        }
-/*        for (int i = INDEX_INIT; i < inputStrings.length; i++) {
-            if (checkIndividual(i, inputStrings[i]) == false) {
-                return false;
-            }
-        }*/
-        // depth 1으로 대신하는 코드
-        AtomicInteger index = new AtomicInteger();
-        return Arrays.stream(inputStrings)
-                .allMatch(str -> checkIndividual(index.getAndIncrement(), str));
-    }
-
     @Test
     @DisplayName("문자열을 split하고 전체적으로 체크해주는 테스트")
     void checkStringTest() {
@@ -65,19 +30,6 @@ public class ExceptionHandlerTest {
         assertThat(checkString(inputStrings)).isTrue();
     }
 
-    private static boolean checkIndividual(int i, String inputString) {
-        if (i % 2 == EVEN) {
-            return checkNumber(inputString);
-        }
-        if (i % 2 == ODD) {
-            return checkSign(inputString);
-        }
-        return false;
-    }
-
-    private static boolean checkNumber(String inputString) {
-        return inputString.matches("-?\\d+(\\.\\d+)?");
-    }
 
     @Test
     @DisplayName("숫자인지 체크해주는 테스트")
@@ -86,34 +38,11 @@ public class ExceptionHandlerTest {
         assertThat(checkNumber(str)).isFalse();
     }
 
-    private static boolean checkSign(String inputString) {
-        if (inputString.equals("+")) {
-            return true;
-        }
-        if (inputString.equals("-")) {
-            return true;
-        }
-        if (inputString.equals("*")) {
-            return true;
-        }
-        if (inputString.equals("/")) {
-            return true;
-        }
-        return false;
-    }
-
     @Test
     @DisplayName("사칙연산인지 체크해주는 테스트")
     void checkSignTest() {
         String str = "@";
         assertThat(checkSign(str)).isFalse();
-    }
-
-    public static boolean isUndefinedValue(String str) {
-        if (str.replace(" ", "").contains("/0")) {
-            return false;
-        }
-        return true;
     }
 
     @Test

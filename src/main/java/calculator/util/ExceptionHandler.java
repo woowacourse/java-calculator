@@ -21,7 +21,7 @@ public class ExceptionHandler {
         }
     }
 
-    private static String checkInputHandler(String input) {
+    public static String checkInputHandler(String input) {
         if (checkString(input.split(" ")) == true && isUndefinedValue(input) == true) {
             return input;
         }
@@ -35,7 +35,7 @@ public class ExceptionHandler {
         return true;
     }
 
-    private static boolean checkString(String[] inputStrings) {
+    public static boolean checkString(String[] inputStrings) {
         if (inputStrings.length % 2 == EVEN) {
             return false;
         }
@@ -50,7 +50,7 @@ public class ExceptionHandler {
                 .allMatch(x -> checkIndividual(index.getAndIncrement(), x));
     }
 
-    private static boolean checkIndividual(int i, String inputString) {
+    public static boolean checkIndividual(int i, String inputString) {
         if (i % 2 == EVEN) {
             return checkNumber(inputString);
         }
@@ -60,11 +60,11 @@ public class ExceptionHandler {
         return false;
     }
 
-    private static boolean checkNumber(String inputString) {
+    public static boolean checkNumber(String inputString) {
         return inputString.matches("-?\\d+(\\.\\d+)?");
     }
 
-    private static boolean checkSign(String inputString) {
+    public static boolean checkSign(String inputString) {
         if (inputString.equals("+")) {
             return true;
         }
@@ -79,4 +79,5 @@ public class ExceptionHandler {
         }
         return false;
     }
+
 }

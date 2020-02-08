@@ -23,7 +23,7 @@ public class Calculator {
         System.out.println(returnValue);
     }
 
-    private static void check(int i, String value) {
+    public static void check(int i, String value) {
         if (i % 2 == EVEN) {
             calculate(Double.parseDouble(value));
         }
@@ -32,7 +32,7 @@ public class Calculator {
         }
     }
 
-    private static void calculate(double nowNumber) {
+    public static void calculate(double nowNumber) {
         if (nowSign.equals("+")) {
             plus(nowNumber);
             return;
@@ -51,19 +51,19 @@ public class Calculator {
         }
     }
 
-    private static void plus(double nowNumber) {
+    public static void plus(double nowNumber) {
         returnValue += nowNumber;
     }
 
-    private static void minus(double nowNumber) {
+    public static void minus(double nowNumber) {
         returnValue -= nowNumber;
     }
 
-    private static void multiply(double nowNumber) {
+    public static void multiply(double nowNumber) {
         returnValue *= nowNumber;
     }
 
-    private static void divide(double nowNumber) {
+    public static void divide(double nowNumber) {
         returnValue /= nowNumber;
     }
 }
