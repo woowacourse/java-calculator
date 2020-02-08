@@ -24,7 +24,7 @@ enum OperatorType {
                 .orElseThrow(() -> new IllegalArgumentException(input + " is not valid operator"));
     }
 
-    public double calculate(double operand1, double operand2) {
-        return expression.apply(operand1, operand2);
+    public double calculate(Operand operand1, Operand operand2) {
+        return expression.apply(operand1.getOperand(), operand2.getOperand());
     }
 }

@@ -4,36 +4,45 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Formula {
-    private Queue<Double> operands;
-    private Queue<OperatorType> operators;
-    private boolean operandTurn;
-
-    public Formula() {
-    }
+    private Queue<FormulaElement> formula;
 
     public Formula(String[] inputs) {
-        operands = new LinkedList<>();
-        operators = new LinkedList<>();
-        operandTurn = true;
-        generateSource(inputs);
-    }
-
-    public void generateSource(String[] inputs) {
         validateSizeOfInputsIsOdds(inputs);
-        validateInputsByIndex(inputs);
+        formula = new LinkedList<>();
+        generateFormula(inputs);
     }
 
-    public double calculateInputs() {
-        Double result = operands.poll();
-        for (OperatorType operator : operators) {
-            Double operand = operands.poll();
-            result = operator.calculate(result, operand);
+    public double calculateFormula() {
+        Operand operand1 = (Operand) formula.poll();
+        double result = operand1.getOperand();
+
+        while (formula.size() > 0) {
+            Operator operator = (Operator) formula.poll();
+            Operand operand2 = (Operand) formula.poll();
+            result = operator.calculate(operand1, operand2);
+            operand1 = new Operand(result);
         }
         return result;
     }
 
+    private void generateFormula(String[] inputs) {
+        for (String input : inputs) {
+            formula.offer(generateFormulaElement(input));
+        }
+    }
 
-    public void validateSizeOfInputsIsOdds(String[] inputs) {
+    private FormulaElement generateFormulaElement(String input) {
+        if (isOperandTurn()) {
+            return new Operand(input);
+        }
+        return new Operator(input);
+    }
+
+    private boolean isOperandTurn() {
+        return !isOddNumber(formula.size());
+    }
+
+    private void validateSizeOfInputsIsOdds(String[] inputs) {
         if (!isOddNumber(inputs.length)) {
             throw new IllegalArgumentException(inputs.length + "(length of inputs) is not odd");
         }
@@ -42,22 +51,7 @@ public class Formula {
     private boolean isOddNumber(int number) {
         return number % 2 == 1;
     }
+}
 
-    private void validateInputsByIndex(String[] inputs) {
-        for (String input : inputs) {
-            validateInputByIndex(input);
-        }
-    }
-
-    private void validateInputByIndex(String input) {
-        if (operandTurn) {
-            double operand = Double.parseDouble(input);
-            operands.offer(operand);
-        }
-        if (!operandTurn) {
-            OperatorType operator = OperatorType.validateOperator(input);
-            operators.offer(operator);
-        }
-        operandTurn = !operandTurn;
-    }
+class FormulaElement {
 }

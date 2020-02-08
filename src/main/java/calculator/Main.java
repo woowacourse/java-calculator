@@ -7,7 +7,7 @@ public class Main {
                 System.out.println("계산할 식을 입력해주세요.");
                 String[] inputs = StringHandler.getInputAndSplit();
                 Formula formula = new Formula(inputs);
-                StringHandler.printResult(formula.calculateInputs());
+                StringHandler.printResult(formula.calculateFormula());
                 return;
             } catch (Exception e) {
                 e.printStackTrace();
