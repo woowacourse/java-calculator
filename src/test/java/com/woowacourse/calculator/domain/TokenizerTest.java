@@ -1,4 +1,4 @@
-package unit.domain;
+package com.woowacourse.calculator.domain;
 
 import static org.assertj.core.api.Assertions.*;
 

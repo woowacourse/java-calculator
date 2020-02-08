@@ -1,4 +1,4 @@
-package unit.view;
+package com.woowacourse.calculator.view;
 
 import java.util.Scanner;
 

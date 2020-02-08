@@ -1,4 +1,4 @@
-package unit.domain;
+package com.woowacourse.calculator.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;

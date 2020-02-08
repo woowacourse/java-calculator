@@ -1,4 +1,4 @@
-package unit.domain;
+package com.woowacourse.calculator.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ExpressionTest {
@@ -27,6 +28,6 @@ class ExpressionTest {
 		expected.push(new Number("2"));
 		expected.push(new Operator("+"));
 		expected.push(new Number("1"));
-		assertThat(actual).isEqualTo(expected);
+		Assertions.assertThat(actual).isEqualTo(expected);
 	}
 }

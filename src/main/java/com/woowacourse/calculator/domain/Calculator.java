@@ -1,4 +1,4 @@
-package unit.domain;
+package com.woowacourse.calculator.domain;
 
 public class Calculator {
 	private final Expression expression;
