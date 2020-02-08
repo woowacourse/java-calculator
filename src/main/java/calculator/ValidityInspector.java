@@ -1,15 +1,17 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Validator {
-    private static final ArrayList<String> operators = new ArrayList<>();
+public class ValidityInspector {
+    private List<String> operators;
 
-    public Validator() {
-        operators.add("+");
-        operators.add("-");
-        operators.add("*");
-        operators.add("/");
+    ValidityInspector() {
+        operators = new ArrayList<>();
+        operators.add(Operator.Plus.getValue());
+        operators.add(Operator.Minus.getValue());
+        operators.add(Operator.Multiplication.getValue());
+        operators.add(Operator.Division.getValue());
     }
 
     public void isValidInput(String input) {

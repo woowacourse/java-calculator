@@ -10,12 +10,12 @@ import java.util.stream.Stream;
 
 public class CalculatorTest {
     private Calculator calculator;
-    private Validator validator;
+    private ValidityInspector validityInspector;
 
     @BeforeEach
     public void setUp() {
         calculator = new Calculator();
-        validator = new Validator();
+        validityInspector = new ValidityInspector();
     }
 
     static Stream<String> notValidInputStrings() {
@@ -30,7 +30,7 @@ public class CalculatorTest {
     @MethodSource("notValidInputStrings")
     public void isValidInputTest(String notValidInputString) {
         Assertions.assertThatThrownBy(() -> {
-            validator.isValidInput(notValidInputString);
+            validityInspector.isValidInput(notValidInputString);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Null or Blank or Empty exception.");
     }
@@ -40,7 +40,7 @@ public class CalculatorTest {
     public void isValidSplitedInputTest(String notValidSplitedStrings) {
         String[] splitData = notValidSplitedStrings.split(" ");
         Assertions.assertThatThrownBy(() -> {
-            validator.isValidSplitedInput(splitData);
+            validityInspector.isValidSplitedInput(splitData);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
