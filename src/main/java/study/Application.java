@@ -5,8 +5,6 @@ import view.InputView;
 import view.OutputView;
 
 public class Application {
-	private static final String TOKEN_DELIMITER = " ";
-
 	public static void main(String[] args) {
 		calculate();
 	}
@@ -14,8 +12,7 @@ public class Application {
 	private static void calculate() {
 		try {
 			String expression = InputView.inputExpression();
-			String[] tokens = expression.split(TOKEN_DELIMITER);
-			double result = Calculator.calculate(tokens);
+			double result = Calculator.calculate(expression);
 			OutputView.printResult(result);
 		} catch (Exception e) {
 			System.out.println("잘못된 식입니다.");
