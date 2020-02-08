@@ -59,11 +59,13 @@ public class Calculator {
     }
 
     private double calculate() {
-        double result = numbers.remove(ZERO);
+        int numberIndex = 1;
+        double result = numbers.get(0);
         for (Operator operator : operators) {
             result = calculateFunctionMap
                     .get(operator)
-                    .apply(result, numbers.remove(ZERO));
+                    .apply(result, numbers.get(numberIndex));
+            numberIndex++;
         }
         return result;
     }
