@@ -55,7 +55,7 @@ public class ExceptionHandlerTest {
         // depth 1으로 대신하는 코드
         AtomicInteger index = new AtomicInteger();
         return Arrays.stream(inputStrings)
-                .allMatch(x -> checkIndividual(index.getAndIncrement(), x));
+                .allMatch(str -> checkIndividual(index.getAndIncrement(), str));
     }
 
     @Test
