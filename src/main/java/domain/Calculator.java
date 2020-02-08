@@ -14,7 +14,7 @@ public class Calculator {
     private final int EVEN = 2;
 
     private final List<Double> numbers = new ArrayList<>();
-    private final List<Character> operators = new ArrayList<>();
+    private final List<Operator> operators = new ArrayList<>();
     private final BiFunction<Double, Double, Double> ADDITION = (a, b) -> a + b;
     private final BiFunction<Double, Double, Double> SUBTRACTION = (a, b) -> a - b;
     private final BiFunction<Double, Double, Double> MULTIPLICATION = (a, b) -> a * b;
@@ -22,22 +22,22 @@ public class Calculator {
         if (b == ZERO) Exit.sendErrorMessage("0으로는 나눌 수 없습니다.");
         return a / b;
     };
-    private final Map<Character, BiFunction<Double, Double, Double>> calculateFunctionMap = new HashMap<>();
+    private final Map<Operator, BiFunction<Double, Double, Double>> calculateFunctionMap = new HashMap<>();
 
 
     public List<Double> getNumbers() {
         return numbers;
     }
 
-    public List<Character> getOperators() {
+    public List<Operator> getOperators() {
         return operators;
     }
 
     public Calculator() {
-        calculateFunctionMap.put('+', ADDITION);
-        calculateFunctionMap.put('-', SUBTRACTION);
-        calculateFunctionMap.put('*', MULTIPLICATION);
-        calculateFunctionMap.put('/', DIVISION);
+        calculateFunctionMap.put(Operator.PLUS, ADDITION);
+        calculateFunctionMap.put(Operator.MINUS, SUBTRACTION);
+        calculateFunctionMap.put(Operator.MULTIPLY, MULTIPLICATION);
+        calculateFunctionMap.put(Operator.DIVISION, DIVISION);
     }
 
     public void run() {
@@ -54,14 +54,16 @@ public class Calculator {
                 numbers.add(InputValidation.checkIsNumber(formulas[i]));
                 continue;
             }
-            operators.add(InputValidation.checkIsOperator(formulas[i]));
+            operators.add(Operator.getOperatorForChar(InputValidation.checkIsOperator(formulas[i])));
         }
     }
 
     private double calculate() {
         double result = numbers.remove(ZERO);
-        for (char operator : operators) {
-            result = calculateFunctionMap.get(operator).apply(result, numbers.remove(ZERO));
+        for (Operator operator : operators) {
+            result = calculateFunctionMap
+                    .get(operator)
+                    .apply(result, numbers.remove(ZERO));
         }
         return result;
     }
