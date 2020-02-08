@@ -16,7 +16,7 @@ class ExpressionTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"1 + 2 * 3 / 4:2", "1 + 3 + 3 / 4:1", "3 + 4:7", "11 + 57 - 10:58", "1 - 10:-9"}, delimiter = ':')
+	@CsvSource(value = {"10:10", "1 + 2 * 3 / 4:2", "1 + 3 + 3 / 4:1", "3 + 4:7", "11 + 57 - 10:58", "1 - 10:-9"}, delimiter = ':')
 	public void calculateTest(String expression, int expected) {
 		Expression parsedExpression = ExpressionParser.parseExpression(expression);
 		int actual = calculator.calculate(parsedExpression);
