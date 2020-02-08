@@ -27,7 +27,7 @@ public class Source {
         Double result = operands.poll();
         for (CalculatorType operator : operators) {
             Double operand = operands.poll();
-            result = CalculatorType.calculate(result, operator, operand);
+            result = operator.calculate(result, operand);
         }
         return result;
     }

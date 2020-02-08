@@ -17,14 +17,14 @@ enum CalculatorType {
         this.operator = operator;
     }
 
-    public static double calculate(double operand1, CalculatorType operator, double operand2) {
-        return operator.expression.apply(operand1, operand2);
-    }
-
     public static CalculatorType validateOperator(String input) {
         return Arrays.stream(CalculatorType.values())
                 .filter(c -> c.operator.equals(input))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(input + " is not valid operator"));
+    }
+
+    public double calculate(double operand1, double operand2) {
+        return expression.apply(operand1, operand2);
     }
 }
