@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class StringSplitterTest {
 
@@ -21,7 +20,7 @@ class StringSplitterTest {
         assertThat(result).containsExactly("2", "+", "3", "*", "4");
     }
 
-    @DisplayName("숫자와 연산자가 벌갈아 잘 나오는지 체크 테스트")
+    @DisplayName("숫자와 연산자가 번갈아 잘 나오는지 체크 테스트")
     @Test
     void split() {
         //given

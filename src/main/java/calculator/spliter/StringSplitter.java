@@ -10,18 +10,26 @@ public class StringSplitter {
     public static List<String> split(String inputString) {
         String[] result = inputString.split(BLANK);
         validate(result);
-        return Arrays.asList(inputString.split(BLANK));
+        return Arrays.asList(result);
     }
 
     private static void validate(String[] equation) {
         for (int i = 0; i < equation.length; i++) {
-            if (i % 2 == 0 && isNotNumber(equation[i])) {
+            if (operatorPlaceError(i, equation[i])) {
                 throw new IllegalArgumentException("연산자의 위치가 잘못되었습니다.");
             }
-            if (i % 2 != 0 && isNumber(equation[i])) {
+            if (numberPlaceError(i, equation[i])) {
                 throw new IllegalArgumentException("숫자의 위치가 잘못되었습니다.");
             }
         }
+    }
+
+    private static boolean operatorPlaceError(int idx, String equationElement) {
+        return idx % 2 == 0 && isNotNumber(equationElement);
+    }
+
+    private static boolean numberPlaceError(int idx, String equationElement) {
+        return idx % 2 != 0 && isNumber(equationElement);
     }
 
     private static boolean isNotNumber(String maybeNumber) {
