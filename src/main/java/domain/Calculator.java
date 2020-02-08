@@ -14,7 +14,7 @@ public class Calculator {
 	}
 
 	private static boolean isEmpty(String expression) {
-		return expression == null || expression.isEmpty();
+		return expression == null || expression.isEmpty() || expression.isBlank();
 	}
 
 	private static String[] split(String expression) {
