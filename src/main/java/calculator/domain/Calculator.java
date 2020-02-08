@@ -17,14 +17,7 @@ public class Calculator {
                 int result = execute(equation);
                 OutputView.printResult(result);
                 break;
-            } catch (ArithmeticException e) {
-                OutputView.printMessage_DividedByZeroCase();
-                continue;
-            } catch (NumberFormatException | InputMismatchException e) {
-                OutputView.printMessage_InvalidEquationCase();
-                continue;
-            } catch (IllegalArgumentException e) {
-                OutputView.printMessage_EmptyCase();
+            } catch (InputMismatchException | ArithmeticException | IllegalArgumentException e) {
                 continue;
             }
         }
@@ -35,7 +28,7 @@ public class Calculator {
         return new LinkedList<>(Arrays.asList(elements));
     }
 
-    private int execute(Queue<String> equation) throws ArithmeticException, NumberFormatException, InputMismatchException {
+    private int execute(Queue<String> equation) {
         int result = validateNumber(equation.poll());
         while (!equation.isEmpty()) {
             Operators operator = Operators.findOperator(equation.poll());
@@ -49,6 +42,7 @@ public class Calculator {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
+            OutputView.printMessage_InvalidEquationCase();
             throw e;
         }
     }

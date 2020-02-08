@@ -14,6 +14,7 @@ public class InputView {
 
     private static void validate(String equation) {
         if (equation.trim().isEmpty()) {
+            OutputView.printMessage_EmptyCase();
             throw new IllegalArgumentException("빈 문자열");
         }
     }

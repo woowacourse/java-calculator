@@ -1,8 +1,10 @@
 package calculator.domain;
 
+import calculator.view.OutputView;
+
 import java.util.InputMismatchException;
 
-enum Operators implements Operation{
+enum Operators implements Operation {
     PLUS("+") {
         @Override
         public int operate(int a, int b) {
@@ -23,8 +25,14 @@ enum Operators implements Operation{
     },
     DIVIDE("/") {
         @Override
-        public int operate(int a, int b) throws ArithmeticException {
-            return a / b;
+        public int operate(int a, int b) {
+            try {
+                return a / b;
+            } catch (ArithmeticException e) {
+                OutputView.printMessage_DividedByZeroCase();
+                throw e;
+            }
+
         }
     };
 
@@ -45,6 +53,7 @@ enum Operators implements Operation{
                 return op;
             }
         }
+        OutputView.printMessage_InvalidEquationCase();
         throw new InputMismatchException("해당 연산자 없음");
     }
 }
