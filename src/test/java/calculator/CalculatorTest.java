@@ -4,9 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class CalculatorTest {
     private Calculator calculator;
@@ -18,29 +16,21 @@ public class CalculatorTest {
         validityInspector = new ValidityInspector();
     }
 
-    static Stream<String> notValidInputStrings() {
-        return Stream.of(" ", null, "");
-    }
-
-    static Stream<String> notValidSplitedStrings() {
-        return Stream.of("q + w + e", "1+2+3", "+ + 2", "1 abcd 2", "2 * 65 / 0", "1 + 2 + 3");
-    }
-
     @ParameterizedTest
-    @MethodSource("notValidInputStrings")
-    public void isValidInputTest(String notValidInputString) {
+    @ValueSource(strings = {" ", ""})
+    public void checkUserInputIsBlankOrEmptyTest(String input) {
         Assertions.assertThatThrownBy(() -> {
-            validityInspector.isValidInput(notValidInputString);
+            validityInspector.checkUserInputIsBlankOrEmpty(input);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Null or Blank or Empty exception.");
+                .hasMessageContaining("공백 또는 빈 문자열을 입력하셨습니다.");
     }
 
     @ParameterizedTest
-    @MethodSource("notValidSplitedStrings")
-    public void isValidSplitedInputTest(String notValidSplitedStrings) {
-        String[] splitData = notValidSplitedStrings.split(" ");
+    @ValueSource(strings = {"        ", "q + w + e", "1+2+3", "+ + 2", "1 abcd 2", "2 * 65 / 0"})
+    public void checkCanConvertUserInputToNumberAndOperatorTest(String input) {
+        String[] splitData = input.split(Constant.BLANK);
         Assertions.assertThatThrownBy(() -> {
-            validityInspector.isValidSplitedInput(splitData);
+            validityInspector.checkCanConvertUserInputToNumberAndOperator(splitData);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
