@@ -1,3 +1,5 @@
+package calculator.domain;
+
 public class Calculator {
     private static final int INDEX_INIT = 1;
     private static final int EVEN = 0;

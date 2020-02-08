@@ -1,17 +1,11 @@
-package study;
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+package calculator.domain;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-public class ExceptionHandlerTest {
+public class ExceptionHandler {
     private static final int EVEN = 0;
     private static final int ODD = 1;
     private static final int INDEX_INIT = 0;
@@ -34,13 +28,11 @@ public class ExceptionHandlerTest {
         throw new IllegalArgumentException();
     }
 
-    @Test
-    @DisplayName("입력값을 체크해주는 테스트")
-    public void checkInputHandlerTest() {
-        String str = "321 + 3 + f";
-        assertThatThrownBy(() -> {
-            checkInputHandler(str);
-        }).isInstanceOf(IllegalArgumentException.class);
+    public static boolean isUndefinedValue(String str) {
+        if (str.replace(" ", "").contains("/0")) {
+            return false;
+        }
+        return true;
     }
 
     private static boolean checkString(String[] inputStrings) {
@@ -58,13 +50,6 @@ public class ExceptionHandlerTest {
                 .allMatch(x -> checkIndividual(index.getAndIncrement(), x));
     }
 
-    @Test
-    @DisplayName("문자열을 split하고 전체적으로 체크해주는 테스트")
-    void checkStringTest() {
-        String[] inputStrings = "333 + 2434343".split(" ");
-        assertThat(checkString(inputStrings)).isTrue();
-    }
-
     private static boolean checkIndividual(int i, String inputString) {
         if (i % 2 == EVEN) {
             return checkNumber(inputString);
@@ -77,13 +62,6 @@ public class ExceptionHandlerTest {
 
     private static boolean checkNumber(String inputString) {
         return inputString.matches("-?\\d+(\\.\\d+)?");
-    }
-
-    @Test
-    @DisplayName("숫자인지 체크해주는 테스트")
-    void checkNumberTest() {
-        String str = "g";
-        assertThat(checkNumber(str)).isFalse();
     }
 
     private static boolean checkSign(String inputString) {
@@ -100,26 +78,5 @@ public class ExceptionHandlerTest {
             return true;
         }
         return false;
-    }
-
-    @Test
-    @DisplayName("사칙연산인지 체크해주는 테스트")
-    void checkSignTest() {
-        String str = "@";
-        assertThat(checkSign(str)).isFalse();
-    }
-
-    public static boolean isUndefinedValue(String str) {
-        if (str.replace(" ", "").contains("/0")) {
-            return false;
-        }
-        return true;
-    }
-
-    @Test
-    @DisplayName("0으로 나누었을 때의 예외처리를 해주는 테스트")
-    void isUndefinedValueTest() {
-        String str = "0 / 0";
-        assertThat(isUndefinedValue(str)).isFalse();
     }
 }
