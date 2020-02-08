@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum Operator {
     PLUS('+'),
     MINUS('-'),
@@ -17,9 +19,9 @@ public enum Operator {
     }
 
     public static Operator getOperatorForChar(char charOperator) {
-        for (Operator operator : Operator.values())
-            if (operator.symbol == charOperator)
-                return operator;
-        return null;
+        return Arrays.stream(Operator.values())
+                .filter(x -> x.symbol == charOperator)
+                .findAny()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }
