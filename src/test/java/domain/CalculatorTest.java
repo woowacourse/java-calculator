@@ -1,16 +1,11 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 class CalculatorTest {
 	private Calculator calculator;
@@ -23,7 +18,7 @@ class CalculatorTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1 + 2 * 3 / 4:2", "1 + 3 + 3 / 4:1", "3 + 4:7", "11 + 57 - 10:58", "1 - 10:-9"}, delimiter = ':')
 	public void applyTest(String expression, int expected) {
-		int actual = calculator.apply(expression);
+		int actual = calculator.calculate(expression);
 		assertThat(actual).isEqualTo(expected);
 	}
 
@@ -31,6 +26,6 @@ class CalculatorTest {
 	@ValueSource(strings = {"1 + k * 3 ; 4", "1 3 3 * 3 / 4", "+ + 3 * 3 ; 4", "1 + 3 * 3 / 4 +", "+"})
 	public void applyExceptionTest(String expression) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> calculator.apply(expression));
+			.isThrownBy(() -> calculator.calculate(expression));
 	}
 }

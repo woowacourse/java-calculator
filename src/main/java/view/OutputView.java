@@ -1,4 +1,4 @@
-package util;
+package view;
 
 public class OutputView {
 	public static void printResult(int result) {
