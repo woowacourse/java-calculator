@@ -12,7 +12,7 @@ public class Application {
 	private static int getApplyResult(Calculator calculator) {
 		try {
 			System.out.print("계산식을 입력해주세요 :");
-			return calculator.apply(InputView.getExpression());
+			return calculator.run(InputView.getExpression());
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return getApplyResult(calculator);

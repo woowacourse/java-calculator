@@ -6,13 +6,13 @@ public class Calculator {
 	private static final int ODD_START_NUM = 1;
 	private static final int EVEN_INDEX = 2;
 	
-	public int apply(String expression) {
+	public int run(String expression) {
 		String[] expressionAsArray = expression.split(REGEX_SPACE);
 		validateExpression(expressionAsArray);
-		return getApplyResult(expressionAsArray);
+		return calculateExpression(expressionAsArray);
 	}
 
-	private int getApplyResult(String[] expressionAsArray) {
+	private int calculateExpression(String[] expressionAsArray) {
 		int result = 0;
 		Operator operator = Operator.ADD;
 		for (String expressionArg : expressionAsArray) {

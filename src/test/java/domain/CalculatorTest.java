@@ -18,7 +18,7 @@ class CalculatorTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1 + 2 * 3 / 4:2", "1 + 3 + 3 / 4:1", "3 + 4:7", "11 + 57 - 10:58", "1 - 10:-9"}, delimiter = ':')
 	public void applyTest(String expression, int expected) {
-		int actual = calculator.apply(expression);
+		int actual = calculator.run(expression);
 		assertThat(actual).isEqualTo(expected);
 	}
 
@@ -26,6 +26,6 @@ class CalculatorTest {
 	@ValueSource(strings = {"1 + k * 3 ; 4", "1 3 3 * 3 / 4", "+ + 3 * 3 ; 4", "1 + 3 * 3 / 4 +", "+", "5 / 0"})
 	public void applyExceptionTest(String expression) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> calculator.apply(expression));
+			.isThrownBy(() -> calculator.run(expression));
 	}
 }
