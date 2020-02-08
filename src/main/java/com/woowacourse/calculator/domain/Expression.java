@@ -20,11 +20,11 @@ public class Expression {
     private void checkValidation(final List<Token> tokens) {
         boolean tokenTurnStatus = NUMBER_TURN_STATUS;
 
-        for (int i = 0; i < tokens.size(); i++) {
-            if (isTurnStatus(tokenTurnStatus, tokens.get(i))) {
+        for (Token token : tokens) {
+            if (!isTurnStatus(tokenTurnStatus, token)) {
                 throw new IllegalArgumentException("잘못된 연산 식입니다.");
             }
-            tokenTurnStatus = !tokenTurnStatus;
+            tokenTurnStatus = shiftNextStatus(tokenTurnStatus);
         }
     }
 
@@ -38,8 +38,8 @@ public class Expression {
         return true;
     }
 
-    private boolean isTurnStatus(final boolean selectTurnStatus, final boolean tokenStatus) {
-        return tokenStatus == selectTurnStatus;
+    private boolean isTurnStatus(final boolean selectTurnStatus, final boolean tokenTurnStatus) {
+        return tokenTurnStatus == selectTurnStatus;
     }
 
     private boolean isNumber(final Token token) {
@@ -58,6 +58,10 @@ public class Expression {
         reverseTokens.forEach(expression::push);
 
         return expression;
+    }
+
+    private boolean shiftNextStatus(final boolean tokenTurnStatus) {
+        return !tokenTurnStatus;
     }
 
     public int calculate() {
