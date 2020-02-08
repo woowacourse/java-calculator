@@ -30,14 +30,19 @@ public class InputView {
         List<String> arg = Arrays.asList(arguments);
 
         for (int i = 0; i < arguments.length; i++) {
-            if (i % 2 == 0) {
-                numbers.add(Integer.parseInt(arg.get(i)));
-            } else {
-                operators.add(arg.get(i));
-            }
+            classify(i, arg, numbers, operators);
         }
 
         return new NumberSentence(numbers, operators);
+    }
+
+    private void classify(int index, List<String> arguments, List<Integer> numbers, Queue<String> operators) {
+        if (index % 2 == 0) {
+            numbers.add(Integer.parseInt(arguments.get(index)));
+        }
+        if (index % 2 != 0) {
+            operators.add(arguments.get(index));
+        }
     }
 
     //todo: 숫자 위치에 숫자가 아닌 입력이 있는 경우, 연산자 위치에 연산자가 아닌 경우 로직 추가
@@ -45,6 +50,26 @@ public class InputView {
         if (sentence.isEmpty()) {
             return false;
         }
+        for (int i = 0; i < sentence.length(); i++) {
+            if (!validate(i, sentence.charAt(i))) {
+                return false;
+            }
+        }
+
         return true;
+    }
+
+    private boolean validate(int index, char character) {
+        if (index % 2 != 0 && character != ' ') {
+            return false;
+        }
+        if (index % 4 == 0) {
+            int num = Integer.parseInt(String.valueOf(character));
+        }
+        return (index % 4 == 0 || index % 2 != 0) || isOperator(character);
+    }
+
+    private boolean isOperator(char operator) {
+        return operator == '+' || operator == '-' || operator == '*' || operator == '/';
     }
 }

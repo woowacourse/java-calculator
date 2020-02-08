@@ -11,7 +11,7 @@ public class Application {
         NumberSentence numberSentence = inputView.getNumberSentence();
 
         Calculator calculator = new Calculator();
-        int result = calculator.calculate(numberSentence);
+        int result = calculator.calculateNumberSentence(numberSentence);
 
         OutputView outputView = new OutputView();
         outputView.showCalculateResult(result);

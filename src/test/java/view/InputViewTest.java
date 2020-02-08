@@ -27,8 +27,6 @@ class InputViewTest {
         inputView = createInputViewForTest(input);
 
         assertThat(inputView.getNumberSentence()).isEqualTo(new NumberSentence(Arrays.asList(2,3,4),new LinkedList<>(Arrays.asList("+", "*"))));
-
-
     }
 
     private InputView createInputViewForTest(String input) {

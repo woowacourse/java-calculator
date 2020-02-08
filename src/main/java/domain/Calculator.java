@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class Calculator {
-    public int calculate(NumberSentence numberSentence) {
+    public int calculateNumberSentence(NumberSentence numberSentence) {
         Queue<String> operators = numberSentence.getOperators();
         List<Integer> numbers = numberSentence.getNumbers();
         int size = operators.size();
@@ -13,26 +13,22 @@ public class Calculator {
 
         for (int i = 0; i < size; i++) {
             String operator = operators.poll();
-            switch (operator) {
-                case "+" :
-                    result = add(result, numbers.get(i+1));
-                    break;
-                case "*":
-                    result = multiply(result, numbers.get(i+1));
-                    break;
-                case "/":
-                    result = divide(result, numbers.get(i+1));
-                    break;
-                case "-":
-                    result = substract(result, numbers.get(i+1));
-                    break;
-
-                default:
-                    throw new InvalidParameterException("not allowed ");
-            }
+            result = calculate(result, numbers.get(i+1), operator);
         }
         return result;
+    }
 
+    private int calculate(int first, int second, String operator) {
+        if (operator.equals("+")) {
+            return add(first, second);
+        }
+        if (operator.equals("-")) {
+            return substract(first, second);
+        }
+        if (operator.equals("*")) {
+            return multiply(first, second);
+        }
+        return divide(first, second);
     }
 
     private int add(int first, int second) {

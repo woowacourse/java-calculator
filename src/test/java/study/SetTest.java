@@ -15,27 +15,20 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SetTest {
-    private Set<Integer> numbers;
     private List<Integer> initNumbers = Arrays.asList(1,1,2,3);
     String[] aa = {"1,2"};
-
-    @BeforeEach
-    void setUp() {
-        numbers = new HashSet<>();
-        numbers.addAll(initNumbers);
-    }
 
     @Test
     @DisplayName("#size() : return size of distict initNumbers")
     void size() {
-
+        HashSet numbers = new HashSet<>();
+        numbers.addAll(initNumbers);
         int expectedSize = initNumbers.stream()
                 .distinct()
                 .collect(Collectors.toList())
                 .size();
 
         assertThat(numbers.size()).isEqualTo(expectedSize);
-
     }
 
     @ParameterizedTest
@@ -43,17 +36,21 @@ class SetTest {
     @ValueSource(ints = {1,2,3})
     @DisplayName("#contains() : return true if set contains valueSource")
     void contains(Integer input) {
+        HashSet numbers = new HashSet<>();
+        numbers.addAll(initNumbers);
         assertThat(numbers.contains(input)).isTrue();
     }
 
     @ParameterizedTest
     @MethodSource({"getCompareableNumbers"} )
     void containsMethod(int input, boolean expected) {
+        HashSet numbers = new HashSet<>();
+        numbers.addAll(initNumbers);
         assertThat(numbers.contains(input)).isEqualTo(expected);
     }
 
     //todo: inject parameter
-    private static Stream<Arguments> getCompareableNumbers() {
+    private static Stream<Arguments> getComparableNumbers() {
         return Stream.of(
                 Arguments.of(1,true),
                 Arguments.of(2,true),
@@ -61,6 +58,4 @@ class SetTest {
                 Arguments.of(4,false)
         );
     }
-
-    //test if merge good
 }

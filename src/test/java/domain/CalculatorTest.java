@@ -18,27 +18,27 @@ class CalculatorTest {
     void calculateAdd() {
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList("+")));
 
-        assertThat(calculator.calculate(numberSentence)).isEqualTo(first + second);
+        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(first + second);
     }
 
     @Test
     void calculateSubstract() {
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList("-")));
 
-        assertThat(calculator.calculate(numberSentence)).isEqualTo(first - second);
+        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(first - second);
     }
 
     @Test
     void calculateMultiple() {
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList("*")));
 
-        assertThat(calculator.calculate(numberSentence)).isEqualTo(first * second);
+        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(first * second);
     }
 
     @Test
     void calculateDivide() {
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList("/")));
 
-        assertThat(calculator.calculate(numberSentence)).isEqualTo(first / second);
+        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(first / second);
     }
 }
