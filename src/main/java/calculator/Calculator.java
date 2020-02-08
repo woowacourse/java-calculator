@@ -26,7 +26,7 @@ public class Calculator {
     private static double operate(double prev, String term, double next) throws IllegalArgumentException {
         Operator operator = Operator.getOperator(term);
 
-        return operator.calcuate(prev, next);
+        return operator.calculate(prev, next);
     }
 
     private static void checkIsValidSize(List<String> tokens) throws IllegalArgumentException {

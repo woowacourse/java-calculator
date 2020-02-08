@@ -12,7 +12,7 @@ public enum Operator {
 
     private BinaryOperator<Double> operate;
 
-    Operator (BinaryOperator<Double> operate) {
+    Operator(BinaryOperator<Double> operate) {
         this.operate = operate;
     }
 
@@ -32,7 +32,7 @@ public enum Operator {
         throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
     }
 
-    public double calcuate(double a, double b) {
+    public double calculate(double a, double b) {
         return operate.apply(a, b);
     }
 
