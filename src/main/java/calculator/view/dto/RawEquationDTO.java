@@ -1,6 +1,7 @@
 package calculator.view.dto;
 
 public class RawEquationDTO {
+    public static final String ERROR_MESSAGE_EMPTY_INPUT = "입력값이 비어있습니다.";
     private String rawEquation;
 
     public RawEquationDTO(String rawEquation) {
@@ -10,7 +11,7 @@ public class RawEquationDTO {
 
     private void validate(String equation) {
         if (equation.trim().isEmpty()) {
-            throw new IllegalArgumentException("입력값이 비어있습니다.");
+            throw new IllegalArgumentException(ERROR_MESSAGE_EMPTY_INPUT);
         }
     }
 

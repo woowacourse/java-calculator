@@ -9,6 +9,7 @@ public enum OperatorGroup {
     MULTIPLE("*", (a, b) -> a * b),
     DIVIDE("/", (a, b) -> a / b);
 
+    public static final String NOT_EXIST_OPERATOR_MESSAGE = "는 등록되지 않은 연산자 입니다.";
     private final OperationStarategy operationStarategy;
     private final String delimiter;
 
@@ -27,7 +28,7 @@ public enum OperatorGroup {
         return Arrays.stream(values())
                 .filter(operator -> operator.isEqual(inputOperator))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException(inputOperator + "는 등록되지 않은 연산자 입니다."));
+                .orElseThrow(() -> new NoSuchElementException(inputOperator + NOT_EXIST_OPERATOR_MESSAGE));
     }
 
     private boolean isEqual(String op) {

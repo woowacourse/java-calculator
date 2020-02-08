@@ -6,6 +6,8 @@ import java.util.List;
 public class StringSplitter {
     private static final String BLANK = " ";
     private static final String NUMBER_FORMAT = "\\d+";
+    public static final String ERROR_MESSAGE_OPERATOR_PLACE = "연산자의 위치가 잘못되었습니다.";
+    public static final String ERROR_MESSAGE_NUMBER_PLACE = "숫자의 위치가 잘못되었습니다.";
 
     public static List<String> split(String inputString) {
         String[] result = inputString.split(BLANK);
@@ -16,10 +18,10 @@ public class StringSplitter {
     private static void validate(String[] equation) {
         for (int i = 0; i < equation.length; i++) {
             if (operatorPlaceError(i, equation[i])) {
-                throw new IllegalArgumentException("연산자의 위치가 잘못되었습니다.");
+                throw new IllegalArgumentException(ERROR_MESSAGE_OPERATOR_PLACE);
             }
             if (numberPlaceError(i, equation[i])) {
-                throw new IllegalArgumentException("숫자의 위치가 잘못되었습니다.");
+                throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_PLACE);
             }
         }
     }
