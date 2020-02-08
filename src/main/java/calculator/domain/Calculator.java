@@ -12,10 +12,8 @@ public class Calculator {
     public void start() {
         while (true) {
             try {
-                String inputEq = InputView.inputEquation();
-                Queue<String> equation = makeQueue(inputEq);
-                int result = execute(equation);
-                OutputView.printResult(result);
+                Queue<String> equation = inputEquation(InputView.inputEquation());
+                OutputView.printResult(calculate(equation));
                 break;
             } catch (InputMismatchException | ArithmeticException | IllegalArgumentException e) {
                 continue;
@@ -23,24 +21,23 @@ public class Calculator {
         }
     }
 
-    private Queue<String> makeQueue(String inputString) {
-        String[] elements = inputString.split("\\s+", 0);
-        return new LinkedList<>(Arrays.asList(elements));
+    private Queue<String> inputEquation(String inputEquation) {
+        String[] equationElements = inputEquation.split("\\s+", 0);
+        return new LinkedList<>(Arrays.asList(equationElements));
     }
 
-    private int execute(Queue<String> equation) {
-        int result = validateNumber(equation.poll());
+    private int calculate(Queue<String> equation) {
+        int result = toNumber(equation.poll());
         while (!equation.isEmpty()) {
             Operators operator = Operators.findOperator(equation.poll());
-            int operand = validateNumber(equation.poll());
-            result = operator.operate(result, operand);
+            result = operator.operate(result, toNumber(equation.poll()));
         }
         return result;
     }
 
-    private int validateNumber(String number) {
+    private int toNumber(String element) {
         try {
-            return Integer.parseInt(number);
+            return Integer.parseInt(element);
         } catch (NumberFormatException e) {
             OutputView.printMessage_InvalidEquationCase();
             throw e;
