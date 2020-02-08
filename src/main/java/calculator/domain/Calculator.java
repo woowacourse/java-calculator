@@ -15,7 +15,7 @@ public class Calculator {
     public void start() {
         while (true) {
             try {
-                Queue<String> equation = inputEquation(InputView.inputEquation());
+                Queue<String> equation = inputEquation();
                 OutputView.printResult(calculate(equation));
                 break;
             } catch (InputMismatchException | ArithmeticException | IllegalArgumentException e) {
@@ -24,7 +24,11 @@ public class Calculator {
         }
     }
 
-    private Queue<String> inputEquation(String inputEquation) {
+    private Queue<String> inputEquation() {
+        return handleRawEquation(InputView.inputEquation());
+    }
+
+    private Queue<String> handleRawEquation(String inputEquation) {
         String[] equationElements = inputEquation.split(DELIMITER, ZERO);
         return new LinkedList<>(Arrays.asList(equationElements));
     }
