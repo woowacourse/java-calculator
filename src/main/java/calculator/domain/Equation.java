@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Queue;
 
 public class Equation {
+    private static final int MIN_NUMBER_LIST_SIZE = 1;
     private Deque<Double> numbers;
     private Queue<String> operators;
 
@@ -18,7 +19,7 @@ public class Equation {
     }
 
     public double getResult() {
-        while (numbers.size() != 1) {
+        while (numbers.size() != MIN_NUMBER_LIST_SIZE) {
             numbers.addFirst(OperatorGroup.operate(numbers.pollFirst(), operators.poll(), numbers.pollFirst()));
         }
         return numbers.getFirst();
