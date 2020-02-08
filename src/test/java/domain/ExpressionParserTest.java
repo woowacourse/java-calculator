@@ -7,6 +7,8 @@ import java.util.LinkedList;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class ExpressionParserTest {
 
@@ -72,5 +74,13 @@ class ExpressionParserTest {
 		assertThat(expression)
 			.isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(10, 10, 10, 10))),
 				new Operators(new LinkedList<>(Arrays.asList("/", "/", "/")))));
+	}
+
+	@DisplayName("부적절한 조건 아래 파싱 시도시 RuntimeException 발생")
+	@ParameterizedTest
+	@ValueSource(strings = {"", "1 + k * 3 ; 4", "1 3 3 * 3 / 4", "+ + 3 * 3 ; 4", "1 + 3 * 3 / 4 +", "+"})
+	public void parseExpressionExceptionTest(String expression) {
+		assertThatExceptionOfType(RuntimeException.class)
+			.isThrownBy(() -> ExpressionParser.parseExpression(expression));
 	}
 }

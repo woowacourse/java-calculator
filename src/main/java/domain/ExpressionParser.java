@@ -27,8 +27,8 @@ public class ExpressionParser {
 		return new Expression(getOperands(splitExpressions), getOperators(splitExpressions));
 	}
 
-	private static List<String> splitExpression(String expression) {
-		return Arrays.stream(expression.split(SPLIT_REGEX))
+	private static List<String> splitExpression(String rawExpression) {
+		return Arrays.stream(rawExpression.split(SPLIT_REGEX))
 			.collect(Collectors.toList());
 	}
 
@@ -51,9 +51,13 @@ public class ExpressionParser {
 
 	private static void validateOperandPosition(List<String> expression) {
 		for (int i = OPERAND_START_IDX, size = expression.size(); i < size; i += VALID_CHECK_IDX_UNIT) {
-			if (!isOperand(expression.get(i))) {
-				throw new IllegalArgumentException(EXPRESSION_POSITION_EXCEPTION_MESSAGE);
-			}
+			checkValidCondition(isOperand(expression.get(i)));
+		}
+	}
+
+	private static void checkValidCondition(boolean isValidCondition) {
+		if (!isValidCondition) {
+			throw new IllegalArgumentException(EXPRESSION_POSITION_EXCEPTION_MESSAGE);
 		}
 	}
 
@@ -72,9 +76,7 @@ public class ExpressionParser {
 		}
 
 		for (int i = OPERATOR_START_IDX, size = expression.size(); i < size; i += VALID_CHECK_IDX_UNIT) {
-			if (!isOperator(expression.get(i))) {
-				throw new IllegalArgumentException(EXPRESSION_POSITION_EXCEPTION_MESSAGE);
-			}
+			checkValidCondition(isOperator(expression.get(i)));
 		}
 	}
 
