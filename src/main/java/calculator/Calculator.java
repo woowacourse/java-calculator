@@ -46,9 +46,11 @@ public class Calculator {
     private void checkIfClustered(String prev, String post) {
         if (isNumber(prev) && isNumber(post)) {
             throw new IllegalArgumentException("숫자가 연속되면 안됩니다");
-        } else if (!isNumber(prev) && !isNumber(post)) {
+        }
+        if (!isNumber(prev) && !isNumber(post)) {
             throw new IllegalArgumentException("연산자가 연속되면 안됩니다");
         }
+        return;
     }
 
     private Boolean isNumber(String input) {
