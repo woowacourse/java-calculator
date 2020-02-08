@@ -15,4 +15,11 @@ public enum Operator {
     public char getSymbol() {
         return symbol;
     }
+
+    public static Operator getOperatorForChar(char charOperator) {
+        for (Operator operator : Operator.values())
+            if (operator.symbol == charOperator)
+                return operator;
+        return null;
+    }
 }
