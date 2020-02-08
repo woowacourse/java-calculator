@@ -1,11 +1,11 @@
 package view;
 
 public enum YesNo {
-    y,
-    n;
+    Y,
+    N;
 
     public boolean toBoolean() {
-        if (this == y) {
+        if (this == Y) {
             return true;
         }
         return false;
