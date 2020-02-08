@@ -82,16 +82,18 @@ public class ExpressionParser {
 		return Operator.isOperator(expressionArg);
 	}
 
-	private static Deque<Integer> getOperands(List<String> splitExpressions) {
-		return splitExpressions.stream()
+	private static Operands getOperands(List<String> splitExpressions) {
+		Deque<Integer> operandsDeque = splitExpressions.stream()
 			.filter(ExpressionParser::isNumeric)
 			.map(Integer::parseInt)
 			.collect(Collectors.toCollection(LinkedList::new));
+		return new Operands(operandsDeque);
 	}
 
-	private static Queue<String> getOperators(List<String> splitExpressions) {
-		return splitExpressions.stream()
+	private static Operators getOperators(List<String> splitExpressions) {
+		Queue<String> operatorsQueue = splitExpressions.stream()
 			.filter(ExpressionParser::isOperator)
 			.collect(Collectors.toCollection(LinkedList::new));
+		return new Operators(operatorsQueue);
 	}
 }

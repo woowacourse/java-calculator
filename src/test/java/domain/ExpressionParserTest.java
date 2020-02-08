@@ -1,9 +1,10 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,8 @@ class ExpressionParserTest {
 	    //when
 		Expression expression = ExpressionParser.parseExpression(rawExpression);
 		//then
-		Assertions.assertThat(expression).isEqualTo(new Expression(new LinkedList<>(Arrays.asList(10)), new LinkedList<>()));
+		assertThat(expression).isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(10))),
+			new Operators(new LinkedList<>())));
 	}
 
 	@Test
@@ -28,8 +30,9 @@ class ExpressionParserTest {
 		//when
 		Expression expression = ExpressionParser.parseExpression(rawExpression);
 		//then
-		Assertions.assertThat(expression)
-			.isEqualTo(new Expression(new LinkedList<>(Arrays.asList(1, 5)), new LinkedList<>(Arrays.asList("+"))));
+		assertThat(expression)
+			.isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(1, 5))),
+				new Operators(new LinkedList<>(Arrays.asList("+")))));
 	}
 
 	@Test
@@ -40,9 +43,9 @@ class ExpressionParserTest {
 		//when
 		Expression expression = ExpressionParser.parseExpression(rawExpression);
 		//then
-		Assertions.assertThat(expression)
-			.isEqualTo(new Expression(new LinkedList<>(Arrays.asList(0, 0, 0, 0)),
-				new LinkedList<>(Arrays.asList("+", "+", "+"))));
+		assertThat(expression)
+			.isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(0, 0, 0, 0))),
+				new Operators(new LinkedList<>(Arrays.asList("+", "+", "+")))));
 	}
 
 	@Test
@@ -53,9 +56,9 @@ class ExpressionParserTest {
 		//when
 		Expression expression = ExpressionParser.parseExpression(rawExpression);
 		//then
-		Assertions.assertThat(expression)
-			.isEqualTo(new Expression(new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5)),
-				new LinkedList<>(Arrays.asList("+", "-", "*", "/"))));
+		assertThat(expression)
+			.isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5))),
+				new Operators(new LinkedList<>(Arrays.asList("+", "-", "*", "/")))));
 	}
 
 	@Test
@@ -66,8 +69,8 @@ class ExpressionParserTest {
 		//when
 		Expression expression = ExpressionParser.parseExpression(rawExpression);
 		//then
-		Assertions.assertThat(expression)
-			.isEqualTo(new Expression(new LinkedList<>(Arrays.asList(10, 10, 10, 10)),
-				new LinkedList<>(Arrays.asList("/", "/", "/"))));
+		assertThat(expression)
+			.isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(10, 10, 10, 10))),
+				new Operators(new LinkedList<>(Arrays.asList("/", "/", "/")))));
 	}
 }
