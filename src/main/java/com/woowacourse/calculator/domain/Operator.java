@@ -33,13 +33,13 @@ public class Operator implements Token {
             return number1.getNumber() - number2.getNumber();
         }
         if (operator.equals(DIVISION)) {
-            checkDivider(number2);
+            checkDivision(number2);
             return number1.getNumber() / number2.getNumber();
         }
         return number1.getNumber() * number2.getNumber();
     }
 
-    private void checkDivider(Number number2) {
+    private void checkDivision(Number number2) {
         if (number2.getNumber() == 0) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }

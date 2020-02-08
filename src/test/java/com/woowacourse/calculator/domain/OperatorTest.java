@@ -30,4 +30,13 @@ class OperatorTest {
         int actual = operator.calculate(new Number(inputNumber1), new Number(inputNumber2));
         assertThat(actual).isEqualTo(expected);
     }
+
+    @DisplayName("Operator - checkDivision")
+    @Test
+    void testCheckDivision() {
+        Operator operator = new Operator("/");
+        assertThatThrownBy(() -> operator.calculate(new Number("1"), new Number("0")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("0으로 나눌 수 없습니다.");
+    }
 }
