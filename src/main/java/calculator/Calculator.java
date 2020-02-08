@@ -10,19 +10,15 @@ public class Calculator {
     }
 
     private double calculateByOperator(double left, double right, String operator) {
-        double result = 0d;
-        if (operator.equals("+")) {
-            result = left + right;
+        if (Operator.Plus.getValue().equals(operator)) {
+            return left + right;
+        } else if (Operator.Minus.getValue().equals(operator)) {
+            return left - right;
+        } else if (Operator.Multiplication.getValue().equals(operator)) {
+            return left * right;
+        } else if (Operator.Division.getValue().equals(operator)) {
+            return left / right;
         }
-        if (operator.equals("-")) {
-            result = left - right;
-        }
-        if (operator.equals("*")) {
-            result = left * right;
-        }
-        if (operator.equals("/")) {
-            result = left / right;
-        }
-        return result;
+        return 0d;
     }
 }
