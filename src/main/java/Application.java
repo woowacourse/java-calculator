@@ -13,8 +13,8 @@ public class Application {
 		try {
 			System.out.print("계산식을 입력해주세요 :");
 			return calculator.apply(InputView.getExpression());
-		} catch (IllegalArgumentException ex) {
-			System.out.println(ex.getMessage());
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
 			return getApplyResult(calculator);
 		}
 	}

@@ -44,7 +44,7 @@ class OperatorTest {
 	void divideWithZeroTest(int operand1, int operand2) {
 		Operator divideOperator = Operator.DIVIDE;
 		assertThatThrownBy(() -> divideOperator.calculate(operand1, operand2))
-			.isInstanceOf(ArithmeticException.class);
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@ParameterizedTest
@@ -55,32 +55,32 @@ class OperatorTest {
 	}
 
 	@Test
-	public void findBySymbolPlusTest() {
-	    Operator expected = Operator.findBySymbol("+");
+	public void ofPlusTest() {
+	    Operator expected = Operator.of("+");
 		assertThat(expected).isEqualTo(Operator.ADD);
 	}
 	@Test
-	public void findBySymbolSubtractTest() {
-		Operator expected = Operator.findBySymbol("-");
+	public void ofSubtractTest() {
+		Operator expected = Operator.of("-");
 		assertThat(expected).isEqualTo(Operator.SUBTRACT);
 	}
 
 	@Test
-	public void findBySymbolMultiplyTest() {
-		Operator expected3 = Operator.findBySymbol("*");
+	public void ofMultiplyTest() {
+		Operator expected3 = Operator.of("*");
 		assertThat(expected3).isEqualTo(Operator.MULTIPLY);
 	}
 
 	@Test
-	public void findBySymbolDivideTest() {
-		Operator expected4 = Operator.findBySymbol("/");
+	public void ofDivideTest() {
+		Operator expected4 = Operator.of("/");
 		assertThat(expected4).isEqualTo(Operator.DIVIDE);
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"abc", "dsjk", "2", "ㄹㅁ", "&"})
-	public void findBySymbolExceptionTest(String operator) {
+	public void ofExceptionTest(String operator) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> Operator.findBySymbol(operator));
+			.isThrownBy(() -> Operator.of(operator));
 	}
 }
