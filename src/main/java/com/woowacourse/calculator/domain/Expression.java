@@ -26,7 +26,7 @@ public class Expression {
 
     public double calculate() {
         double answer = numbers.get(START_INDEX);
-        for (int index = START_INDEX; index < operators.size(); ++index) {
+        for (int index = START_INDEX, end = operators.size(); index < end; ++index) {
             OperatorType operator = operators.get(index);
             answer = operator.calculate(answer, numbers.get(index + 1));
         }
