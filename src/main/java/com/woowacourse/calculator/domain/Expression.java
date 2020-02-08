@@ -8,9 +8,9 @@ import java.util.Stack;
 public class Expression {
     private final static boolean NUMBER_TURN_STATUS = false;
     private final static boolean OPERATOR_TURN_STATUS = true;
-	private static final int ONLY_RESULT_REMAIN_SIZE = 1;
+    private static final int ONLY_RESULT_REMAIN_SIZE = 1;
 
-	private final Stack<Token> expression;
+    private final Stack<Token> expression;
 
     public Expression(final List<Token> tokens) {
         checkValidation(tokens);
@@ -61,10 +61,10 @@ public class Expression {
     }
 
     public int calculate() {
-		int calculateResult = 0;
-		Number number1;
-		Operator operator;
-		Number number2;
+        int calculateResult = 0;
+        Number number1;
+        Operator operator;
+        Number number2;
 
         while (expression.size() != ONLY_RESULT_REMAIN_SIZE) {
             number1 = (Number) expression.pop();
