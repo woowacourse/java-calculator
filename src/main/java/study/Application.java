@@ -5,6 +5,8 @@ import view.InputView;
 import view.OutputView;
 
 public class Application {
+	private static final String TOKEN_DELIMITER = " ";
+
 	public static void main(String[] args) {
 		calculate();
 	}
@@ -12,7 +14,7 @@ public class Application {
 	private static void calculate() {
 		try {
 			String expression = InputView.inputExpression();
-			String[] tokens = expression.split(" ");
+			String[] tokens = expression.split(TOKEN_DELIMITER);
 			double result = Calculator.calculate(tokens);
 			OutputView.printResult(result);
 		} catch (Exception e) {
