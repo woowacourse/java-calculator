@@ -6,13 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class OperatorTest {
-
-    private Calculatable plus;
-    private Calculatable minus;
-    private Calculatable multiply;
-    private Calculatable divide;
-
+class CalculatableTest {
+    private Calculatable plus, minus, multiply, divide;
     private double prev = 5;
     private double next = 3;
 
