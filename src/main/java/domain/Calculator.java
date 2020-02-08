@@ -2,6 +2,9 @@ package domain;
 
 public class Calculator {
 	private static final String REGEX_SPACE = " ";
+	private static final int EVEN_START_NUM = 0;
+	private static final int ODD_START_NUM = 1;
+	private static final int EVEN_INDEX = 2;
 	
 	public int apply(String expression) {
 		String[] expressionAsArray = expression.split(REGEX_SPACE);
@@ -14,7 +17,7 @@ public class Calculator {
 		Operator operator = Operator.ADD;
 		for (String expressionArg : expressionAsArray) {
 			if (isOperator(expressionArg)) {
-				operator = Operator.findBySymbol(expressionArg);
+				operator = Operator.of(expressionArg);
 				continue;
 			}
 			int operand = Integer.parseInt(expressionArg);
@@ -23,14 +26,13 @@ public class Calculator {
 		return result;
 	}
 
-	private void validateExpression(String[] formulaArray) {
-		validateNumericPosition(formulaArray);
-		validateOperatorPosition(formulaArray);
-
+	private void validateExpression(String[] expressionAsArray) {
+		validateNumericPosition(expressionAsArray);
+		validateOperatorPosition(expressionAsArray);
 	}
 
 	private void validateNumericPosition(String[] expressionAsArray) {
-		for (int i = 0; i < expressionAsArray.length; i+=2) {
+		for (int i = EVEN_START_NUM; i < expressionAsArray.length; i += EVEN_INDEX) {
 			if (!isNumeric(expressionAsArray[i])) {
 				throw new IllegalArgumentException("숫자가 있어야합니다.");
 			}
@@ -38,11 +40,7 @@ public class Calculator {
 	}
 
 	private void validateOperatorPosition(String[] expressionAsArray) {
-		if (expressionAsArray.length == 1) {
-			return;
-		}
-
-		for (int i = 1; i < expressionAsArray.length; i+=2) {
+		for (int i = ODD_START_NUM; i < expressionAsArray.length; i += EVEN_INDEX) {
 			if (!isOperator(expressionAsArray[i]) || expressionAsArray.length - 1 == i) {
 				throw new IllegalArgumentException("연산자 위치가 올바르지 않습니다.");
 			}
@@ -52,7 +50,7 @@ public class Calculator {
 	private boolean isNumeric(String expressionArg) {
 		try {
 			Integer.parseInt(expressionArg);
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			return false;
 		}
 		return true;
