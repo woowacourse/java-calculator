@@ -16,7 +16,7 @@ public class Calculator {
 		int result = 0;
 		Operator operator = Operator.ADD;
 		for (String expressionArg : expressionAsArray) {
-			if (isOperator(expressionArg)) {
+			if (Operator.isOperatorSymbol(expressionArg)) {
 				operator = Operator.of(expressionArg);
 				continue;
 			}
@@ -41,7 +41,7 @@ public class Calculator {
 
 	private void validateOperatorPosition(String[] expressionAsArray) {
 		for (int i = ODD_START_NUM; i < expressionAsArray.length; i += EVEN_INDEX) {
-			if (!isOperator(expressionAsArray[i]) || expressionAsArray.length - 1 == i) {
+			if (!Operator.isOperatorSymbol(expressionAsArray[i]) || expressionAsArray.length - 1 == i) {
 				throw new IllegalArgumentException("연산자 위치가 올바르지 않습니다.");
 			}
 		}
@@ -54,9 +54,5 @@ public class Calculator {
 			return false;
 		}
 		return true;
-	}
-
-	private boolean isOperator(String expressionArg) {
-		return Operator.isOperatorSymbol(expressionArg);
 	}
 }
