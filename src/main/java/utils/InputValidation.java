@@ -39,10 +39,7 @@ public class InputValidation {
 
     public static String[] trimSpace(String[] formulas) {
         return Arrays.stream(formulas)
-                .filter((x) -> {
-                    if (x.equals("")) return false;
-                    return true;
-                }).toArray(String[]::new);
+                .filter(formula -> !formula.isEmpty()).toArray(String[]::new);
 
     }
 
