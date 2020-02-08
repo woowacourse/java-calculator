@@ -6,8 +6,8 @@ public class Main {
             try {
                 System.out.println("계산할 식을 입력해주세요.");
                 String[] inputs = StringHandler.getInputAndSplit();
-                Source source = new Source(inputs);
-                StringHandler.printResult(source.calculateInputs());
+                Formula formula = new Formula(inputs);
+                StringHandler.printResult(formula.calculateInputs());
                 return;
             } catch (Exception e) {
                 e.printStackTrace();

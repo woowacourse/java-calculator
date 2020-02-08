@@ -6,8 +6,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class SourceTest {
-    private Source source = new Source();
+public class FormulaTest {
+    private Formula formula = new Formula();
 
     @BeforeEach
     void setUp() {
@@ -19,7 +19,7 @@ public class SourceTest {
     void notOddSizeOfInputs_ShouldThrowException(String input) {
         String[] inputs = input.split(" ");
         assertThatThrownBy(() -> {
-            source.validateSizeOfInputsIsOdds(inputs);
+            formula.validateSizeOfInputsIsOdds(inputs);
         }).isInstanceOf(Exception.class)
                 .hasMessageMatching("inputs의 사이즈가 홀수가 아님");
     }
@@ -30,7 +30,7 @@ public class SourceTest {
         System.out.println(input);
         String[] inputs = input.split(" ");
         assertThatThrownBy(() -> {
-            source.validateSizeOfInputsIsOdds(inputs);
+            formula.validateSizeOfInputsIsOdds(inputs);
         }).isInstanceOf(Exception.class);
     }
 }

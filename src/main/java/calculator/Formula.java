@@ -3,15 +3,15 @@ package calculator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Source {
+public class Formula {
     private Queue<Double> operands;
     private Queue<OperatorType> operators;
     private boolean operandTurn;
 
-    public Source() {
+    public Formula() {
     }
 
-    public Source(String[] inputs) {
+    public Formula(String[] inputs) {
         operands = new LinkedList<>();
         operators = new LinkedList<>();
         operandTurn = true;
