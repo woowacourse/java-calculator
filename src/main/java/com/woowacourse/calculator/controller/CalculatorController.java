@@ -27,7 +27,7 @@ public class CalculatorController {
         try {
             String input = InputView.inputEquation();
             return ExpressionFactory.create(input);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             OutputView.printRetryMessage();
             return makeExpression();
         }
