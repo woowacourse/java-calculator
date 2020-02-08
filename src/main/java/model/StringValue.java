@@ -22,13 +22,14 @@ public class StringValue {
     private String input;
     private List<Double> numberList = new ArrayList<>();
     private List<String> operatorList = new ArrayList<>();
+    private final InputValidator inputValidator = new InputValidator();
 
     public StringValue(String input) {
         this.input = input;
     }
 
     public boolean isValidator() {
-        return new InputValidator().checkInput(input);
+        return inputValidator.checkInput(input);
     }
 
     public void setValueList() {
