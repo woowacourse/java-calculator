@@ -1,10 +1,27 @@
 package domain;
 
 public enum Operator {
-    PLUS("+"), Minus("-"), Multiply("*"), Divide("/");
+    PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/");
+
+    private String symbol;
 
     Operator(String symbol) {
+        this.symbol = symbol;
     }
 
-    // TODO: 2020-02-07 연산자에 따라 해당 연산객체를 반환해주는 기능 추가 
+    public boolean isPlusSymbol(String symbol) {
+        return PLUS.symbol.equals(symbol);
+    }
+
+    public boolean isMinusSymbol(String symbol) {
+        return MINUS.symbol.equals(symbol);
+    }
+
+    public boolean isMultiplySymbol(String symbol) {
+        return MULTIPLY.symbol.equals(symbol);
+    }
+
+    public boolean isDivideSymbol(String symbol) {
+        return DIVIDE.symbol.equals(symbol);
+    }
 }

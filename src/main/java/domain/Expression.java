@@ -13,7 +13,10 @@ public class Expression {
         String[] tokens = expression.split(" ");
 
         validate(tokens);
+        parseTokens(tokens);
+    }
 
+    private void parseTokens(String[] tokens) {
         for (int i = 0; i < tokens.length; i++) {
             if (isNumberIndex(i)) {
                 numbers.add(tokenToDouble(tokens[i]));
@@ -57,16 +60,16 @@ public class Expression {
     }
 
     private Calculatable tokenToOperator(String token) {
-        if (token.equals("+")) {
+        if (Operator.PLUS.isPlusSymbol(token)) {
             return new Plus();
         }
-        if (token.equals("-")) {
+        if (Operator.MINUS.isMinusSymbol(token)) {
             return new Minus();
         }
-        if (token.equals("*")) {
+        if (Operator.MULTIPLY.isMultiplySymbol(token)) {
             return new Multiply();
         }
-        if (token.equals("/")) {
+        if (Operator.DIVIDE.isDivideSymbol(token)) {
             return new Divide();
         }
         throw new IllegalArgumentException("올바른 연산자가 아닙니다.");
