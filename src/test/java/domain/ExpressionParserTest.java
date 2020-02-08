@@ -10,21 +10,21 @@ import org.junit.jupiter.api.Test;
 
 class ExpressionParserTest {
 
-	@Test
 	@DisplayName("10 단항식에 대한 계산식 파싱 테스트")
-	public void parseExpressionTest() throws Exception {
-	    //given
-	    String rawExpression = "10";
-	    //when
+	@Test
+	public void parseExpressionTest() {
+		//given
+		String rawExpression = "10";
+		//when
 		Expression expression = ExpressionParser.parseExpression(rawExpression);
 		//then
 		assertThat(expression).isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(10))),
 			new Operators(new LinkedList<>())));
 	}
 
-	@Test
 	@DisplayName("1 + 5 계산식 파싱 테스트")
-	public void parseExpressionTest1() throws Exception {
+	@Test
+	public void parseExpressionTest1() {
 		//given
 		String rawExpression = "1 + 5";
 		//when
@@ -35,9 +35,9 @@ class ExpressionParserTest {
 				new Operators(new LinkedList<>(Arrays.asList("+")))));
 	}
 
-	@Test
 	@DisplayName("0 + 0 + 0 + 0 계산식 파싱 테스트")
-	public void parseExpressionTest3() throws Exception {
+	@Test
+	public void parseExpressionTest3() {
 		//given
 		String rawExpression = "0 + 0 + 0 + 0";
 		//when
@@ -48,9 +48,9 @@ class ExpressionParserTest {
 				new Operators(new LinkedList<>(Arrays.asList("+", "+", "+")))));
 	}
 
-	@Test
 	@DisplayName("1 + 2 - 3 * 4 / 5 계산식 파싱 테스트")
-	public void parseExpressionTest4() throws Exception {
+	@Test
+	public void parseExpressionTest4() {
 		//given
 		String rawExpression = "1 + 2 - 3 * 4 / 5";
 		//when
@@ -61,9 +61,9 @@ class ExpressionParserTest {
 				new Operators(new LinkedList<>(Arrays.asList("+", "-", "*", "/")))));
 	}
 
-	@Test
 	@DisplayName("10 / 10 / 10 / 10 계산식 파싱 테스트")
-	public void parseExpressionTest5() throws Exception {
+	@Test
+	public void parseExpressionTest5() {
 		//given
 		String rawExpression = "10 / 10 / 10 / 10";
 		//when

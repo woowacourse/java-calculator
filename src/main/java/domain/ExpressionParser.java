@@ -14,7 +14,7 @@ public class ExpressionParser {
 	private static final int ZERO = 0;
 
 	private static final int SINGLE_EXPRESSION_SIZE = 1;
-	private static final int NUMERIC_START_IDX = 0;
+	private static final int OPERAND_START_IDX = 0;
 	private static final int OPERATOR_START_IDX = 1;
 	private static final int VALID_CHECK_IDX_UNIT = 2;
 
@@ -34,7 +34,7 @@ public class ExpressionParser {
 
 	private static void validate(List<String> expression) {
 		validateLength(expression);
-		validateNumericPosition(expression);
+		validateOperandPosition(expression);
 		validateOperatorPosition(expression);
 	}
 
@@ -49,15 +49,15 @@ public class ExpressionParser {
 		return expressionLength == ZERO || expressionLength % TWO == ZERO;
 	}
 
-	private static void validateNumericPosition(List<String> expression) {
-		for (int i = NUMERIC_START_IDX, size = expression.size(); i < size; i += VALID_CHECK_IDX_UNIT) {
-			if (!isNumeric(expression.get(i))) {
+	private static void validateOperandPosition(List<String> expression) {
+		for (int i = OPERAND_START_IDX, size = expression.size(); i < size; i += VALID_CHECK_IDX_UNIT) {
+			if (!isOperand(expression.get(i))) {
 				throw new IllegalArgumentException(EXPRESSION_POSITION_EXCEPTION_MESSAGE);
 			}
 		}
 	}
 
-	private static boolean isNumeric(String expressionArg) {
+	private static boolean isOperand(String expressionArg) {
 		try {
 			Integer.parseInt(expressionArg);
 		} catch (NumberFormatException e) {
@@ -84,7 +84,7 @@ public class ExpressionParser {
 
 	private static Operands getOperands(List<String> splitExpressions) {
 		Deque<Integer> operandsDeque = splitExpressions.stream()
-			.filter(ExpressionParser::isNumeric)
+			.filter(ExpressionParser::isOperand)
 			.map(Integer::parseInt)
 			.collect(Collectors.toCollection(LinkedList::new));
 		return new Operands(operandsDeque);

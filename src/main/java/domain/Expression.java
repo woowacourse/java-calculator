@@ -11,7 +11,7 @@ public class Expression {
 		this.operators = operators;
 	}
 
-	int calculate() {
+	int getResult() {
 		while (!operators.isEmpty()) {
 			Operator operator = Operator.getOperatorOf(operators.poll());
 			int result = operator.calculate(operands.poll(), operands.poll());
