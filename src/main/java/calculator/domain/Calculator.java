@@ -14,9 +14,6 @@ public class Calculator {
     private final static String MULTIPLY = "*";
     private final static String DIVIDE = "/";
 
-    public Calculator() {
-    }
-
     public void start() {
         while (true) {
             try {
