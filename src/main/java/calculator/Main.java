@@ -8,7 +8,7 @@ public class Main {
                 Formula formula = new Formula(inputs);
                 StringHandler.printResult(formula.calculateFormula());
                 return;
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 e.printStackTrace();
                 continue;
             }
