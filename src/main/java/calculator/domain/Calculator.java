@@ -9,6 +9,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Calculator {
+    private static final String DELIMITER = "\\s+";
+    private static final int ZERO = 0;
+
     public void start() {
         while (true) {
             try {
@@ -22,7 +25,7 @@ public class Calculator {
     }
 
     private Queue<String> inputEquation(String inputEquation) {
-        String[] equationElements = inputEquation.split("\\s+", 0);
+        String[] equationElements = inputEquation.split(DELIMITER, ZERO);
         return new LinkedList<>(Arrays.asList(equationElements));
     }
 
