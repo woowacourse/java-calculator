@@ -2,11 +2,31 @@ package calculator.domain;
 
 import java.util.InputMismatchException;
 
-enum Operators {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/");
+enum Operators implements Operation{
+    PLUS("+") {
+        @Override
+        public int operate(int a, int b) {
+            return a + b;
+        }
+    },
+    MINUS("-") {
+        @Override
+        public int operate(int a, int b) {
+            return a - b;
+        }
+    },
+    MULTIPLY("*") {
+        @Override
+        public int operate(int a, int b) {
+            return a * b;
+        }
+    },
+    DIVIDE("/") {
+        @Override
+        public int operate(int a, int b) throws ArithmeticException {
+            return a / b;
+        }
+    };
 
     private static Operators[] operators = Operators.values();
     private final String symbol;

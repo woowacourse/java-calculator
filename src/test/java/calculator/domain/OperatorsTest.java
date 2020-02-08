@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.InputMismatchException;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 public class OperatorsTest {
 
@@ -34,5 +33,14 @@ public class OperatorsTest {
         //        .isInstanceOf(InputMismatchException.class);
         assertThatExceptionOfType(InputMismatchException.class)
                 .isThrownBy(() -> Operators.findOperator(notSupportedSymbol));
+    }
+
+    @Test
+    public void operate() {
+        int result = Operators.PLUS.operate(1, 2);
+        assertThat(result).isEqualTo(3);
+
+        assertThatThrownBy(() -> Operators.DIVIDE.operate(1, 0))
+                .isInstanceOf(ArithmeticException.class);
     }
 }

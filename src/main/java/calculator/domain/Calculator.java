@@ -38,9 +38,9 @@ public class Calculator {
     private int execute(Queue<String> equation) throws ArithmeticException, NumberFormatException, InputMismatchException {
         int result = validateNumber(equation.poll());
         while (!equation.isEmpty()) {
-            String operator = equation.poll();
+            Operators operator = Operators.findOperator(equation.poll());
             int operand = validateNumber(equation.poll());
-            result = calculate(result, operator, operand);
+            result = operator.operate(result, operand);
         }
         return result;
     }
@@ -49,41 +49,6 @@ public class Calculator {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw e;
-        }
-    }
-
-    private Integer calculate(int result, String symbol, int operand) throws ArithmeticException {
-        switch (Operators.findOperator(symbol)) {
-            case PLUS:
-                return add(result, operand);
-            case MINUS:
-                return subtract(result, operand);
-            case MULTIPLY:
-                return multiply(result, operand);
-            case DIVIDE:
-                return divide(result, operand);
-            default:
-                return null;
-        }
-    }
-
-    private int add(int a, int b) {
-        return a + b;
-    }
-
-    private int subtract(int a, int b) {
-        return a - b;
-    }
-
-    private int multiply(int a, int b) {
-        return a * b;
-    }
-
-    private int divide(int a, int b) {
-        try {
-            return a / b;
-        } catch (ArithmeticException e) {
             throw e;
         }
     }
