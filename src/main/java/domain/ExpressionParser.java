@@ -18,6 +18,9 @@ public class ExpressionParser {
 	private static final int OPERATOR_START_IDX = 1;
 	private static final int VALID_CHECK_IDX_UNIT = 2;
 
+	private static final String EXPRESSION_SIZE_EXCEPTION_MESSAGE = "계산식의 성분은 %d이(가) 될 수 없습니다.";
+	private static final String EXPRESSION_POSITION_EXCEPTION_MESSAGE = "계산식중 일부 위치에 부적절한 값이 있습니다.";
+
 	public static Expression parseExpression(String rawExpression) {
 		List<String> splitExpressions = splitExpression(rawExpression);
 		validate(splitExpressions);
@@ -30,28 +33,26 @@ public class ExpressionParser {
 	}
 
 	private static void validate(List<String> expression) {
-		validateNonZeroLength(expression);
-		validateOddLength(expression);
+		validateLength(expression);
 		validateNumericPosition(expression);
 		validateOperatorPosition(expression);
 	}
 
-	private static void validateNonZeroLength(List<String> expression) {
-		if (expression.size() == ZERO) {
-			throw new IllegalArgumentException("계산식의 성분은 빈값이 될 수 없습니다.");
+	private static void validateLength(List<String> expression) {
+		int size = expression.size();
+		if (isEmptyOrEvenLength(size)) {
+			throw new IllegalArgumentException(String.format(EXPRESSION_SIZE_EXCEPTION_MESSAGE, size));
 		}
 	}
 
-	private static void validateOddLength(List<String> expression) {
-		if (expression.size() % TWO == ZERO) {
-			throw new IllegalArgumentException("계산식의 성분은 짝수개가 될 수 없습니다.");
-		}
+	private static boolean isEmptyOrEvenLength(int expressionLength) {
+		return expressionLength == ZERO || expressionLength % TWO == ZERO;
 	}
 
 	private static void validateNumericPosition(List<String> expression) {
 		for (int i = NUMERIC_START_IDX, size = expression.size(); i < size; i += VALID_CHECK_IDX_UNIT) {
 			if (!isNumeric(expression.get(i))) {
-				throw new IllegalArgumentException("피연산자 위치에 숫자 외 값이 들어있습니다.");
+				throw new IllegalArgumentException(EXPRESSION_POSITION_EXCEPTION_MESSAGE);
 			}
 		}
 	}
@@ -59,7 +60,7 @@ public class ExpressionParser {
 	private static boolean isNumeric(String expressionArg) {
 		try {
 			Integer.parseInt(expressionArg);
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			return false;
 		}
 		return true;
@@ -72,7 +73,7 @@ public class ExpressionParser {
 
 		for (int i = OPERATOR_START_IDX, size = expression.size(); i < size; i += VALID_CHECK_IDX_UNIT) {
 			if (!isOperator(expression.get(i))) {
-				throw new IllegalArgumentException("연산자 위치에 연산자 외 값이 들어있습니다.");
+				throw new IllegalArgumentException(EXPRESSION_POSITION_EXCEPTION_MESSAGE);
 			}
 		}
 	}

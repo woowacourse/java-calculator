@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.function.BinaryOperator;
 
 public enum Operator {
@@ -8,6 +9,8 @@ public enum Operator {
 	SUBTRACT("-", (operand1, operand2) -> operand1 - operand2),
 	MULTIPLY("*", (operand1, operand2) -> operand1 * operand2),
 	DIVIDE("/", (operand1, operand2) -> operand1 / operand2);
+
+	private static final String NO_SUCH_OPERATOR_EXCEPTION_MESSAGE = "존재하지 않는 연산자입니다.";
 
 	private final String symbol;
 	private final BinaryOperator<Integer> operation;
@@ -21,7 +24,7 @@ public enum Operator {
 		return Arrays.stream(values())
 			.filter(operator -> value.equals(operator.symbol))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException());
+			.orElseThrow(() -> new NoSuchElementException(NO_SUCH_OPERATOR_EXCEPTION_MESSAGE));
 	}
 
 	int calculate(int operand1, int operand2) {
