@@ -6,8 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
+    static private String delimiter = " ";
+
     static public String calculate(String expression) throws IllegalArgumentException {
-        List<String> tokens = Arrays.asList(expression.split(" "));
+        List<String> tokens = Arrays.asList(expression.split(delimiter));
 
         checkIsValidSize(tokens);
         checkIsNumber(tokens.get(0));
