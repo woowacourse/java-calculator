@@ -9,6 +9,14 @@ public class Calculator {
 		if (isEmpty(tokens)) {
 			return 0;
 		}
+		return reduce(tokens);
+	}
+
+	private static boolean isEmpty(String[] tokens) {
+		return tokens == null || tokens.length == 0;
+	}
+
+	private static double reduce(String[] tokens) {
 		double result = Double.parseDouble(tokens[FIRST_OPERAND_INDEX]);
 		for (int i = FIRST_OPERATOR_INDEX; i < tokens.length; i += OPERATOR_INDEX_STEP) {
 			Operator operator = Operator.of(tokens[i]);
@@ -16,9 +24,5 @@ public class Calculator {
 			result = operator.calculate(result, rightOperand);
 		}
 		return result;
-	}
-
-	private static boolean isEmpty(String[] tokens) {
-		return tokens == null || tokens.length == 0;
 	}
 }
