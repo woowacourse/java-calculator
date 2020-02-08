@@ -1,18 +1,15 @@
 package calculator;
 
-import java.util.LinkedList;
-import java.util.Queue;
+public class SourceForCalculating {
+    private Operands operands;
+    private Operators operators;
 
-public class Source {
-    private Queue<Double> operands;
-    private Queue<CalculatorType> operators;
-
-    public Source() {
+    public SourceForCalculating() {
     }
 
-    public Source(String[] inputs) throws Exception {
-        operands = new LinkedList<>();
-        operators = new LinkedList<>();
+    public SourceForCalculating(String[] inputs) throws Exception {
+        operands = new Operands();
+        operators = new Operators();
         generateSource(inputs);
     }
 
@@ -22,9 +19,10 @@ public class Source {
     }
 
     public double calculateInputs() {
-        Double result = operands.poll();
-        for (CalculatorType operator : operators) {
-            Double operand = operands.poll();
+        Double result = operands.remove();
+        while (operators.isEmpty()) {
+            CalculatorType operator = operators.remove();
+            Double operand = operands.remove();
             result = CalculatorType.calculate(result, operator, operand);
         }
         return result;
@@ -53,12 +51,12 @@ public class Source {
     private void validateInputByIndex(int index, String input) throws NumberFormatException, IllegalArgumentException {
         if (!isOddNumber(index)) {
             double operand = Double.parseDouble(input);
-            operands.offer(operand);
+            operands.add(operand);
         }
 
         if (isOddNumber(index)) {
             CalculatorType operator = CalculatorType.validateOperator(input);
-            operators.offer(operator);
+            operators.add(operator);
         }
     }
 }
