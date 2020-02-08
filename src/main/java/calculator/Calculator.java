@@ -26,13 +26,14 @@ public class Calculator {
         try {
             this.equation = inputView.inputEquation();
         } catch (IllegalArgumentException e) {
+            OutputView.showErrorMessage(e);
             init();
         }
     }
 
     private double operate() {
-        List<String> spiltedEquation = StringSplitter.split(equation.getRawEquation());
-        Equation equation = EquationFilter.parseEquation(spiltedEquation);
+        List<String> spilttedEquation = StringSplitter.split(equation.getRawEquation());
+        Equation equation = EquationFilter.parseEquation(spilttedEquation);
         return equation.getResult();
     }
 }
