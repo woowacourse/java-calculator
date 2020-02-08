@@ -15,7 +15,7 @@ public class OutputView {
     private static final String ANSWER_MESSAGE = "연산 결과는 %s 입니다.\n";
 
     // 묵시적 생성자 방지
-    public OutputView() {}
+    private OutputView() {}
 
     public static void printRetryMessage() {
         System.out.println(RETRY_INPUT_NOTICE_MESSAGE);
