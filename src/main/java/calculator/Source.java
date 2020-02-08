@@ -36,9 +36,9 @@ public class Source {
         System.out.println(result);
     }
 
-    public void validateSizeOfInputsIsOdds(String[] inputs) throws Exception {
+    public void validateSizeOfInputsIsOdds(String[] inputs) throws IllegalArgumentException {
         if (!isOddNumber(inputs.length)) {
-            throw new Exception("inputs의 사이즈가 홀수가 아님");
+            throw new IllegalArgumentException("inputs의 사이즈가 홀수가 아님");
         }
     }
 
@@ -52,7 +52,7 @@ public class Source {
         }
     }
 
-    private void validateInputByIndex(String input) throws Exception {
+    private void validateInputByIndex(String input) throws NumberFormatException, IllegalArgumentException {
         if (operandTurn) {
             double operand = Double.parseDouble(input);
             operands.offer(operand);
