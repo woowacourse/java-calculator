@@ -33,17 +33,28 @@ public class Calculator {
 
 	private void validateNumericPosition(String[] expressionAsArray) {
 		for (int i = EVEN_START_NUM; i < expressionAsArray.length; i += EVEN_INDEX) {
-			if (!isNumeric(expressionAsArray[i])) {
-				throw new IllegalArgumentException("숫자가 있어야합니다.");
-			}
+			validateNumeric(expressionAsArray[i]);
+		}
+	}
+
+	private void validateNumeric(String expressionArg) {
+		if (!isNumeric(expressionArg)) {
+			throw new IllegalArgumentException("숫자가 있어야합니다.");
 		}
 	}
 
 	private void validateOperatorPosition(String[] expressionAsArray) {
+		if (expressionAsArray.length % EVEN_INDEX == EVEN_START_NUM) {
+			throw new IllegalArgumentException("연산자로 끝나서는 안됩니다.");
+		}
 		for (int i = ODD_START_NUM; i < expressionAsArray.length; i += EVEN_INDEX) {
-			if (!Operator.isOperatorSymbol(expressionAsArray[i]) || expressionAsArray.length - 1 == i) {
-				throw new IllegalArgumentException("연산자 위치가 올바르지 않습니다.");
-			}
+			validateOperator(expressionAsArray[i]);
+		}
+	}
+
+	private void validateOperator(String expressionArg) {
+		if (!Operator.isOperatorSymbol(expressionArg)) {
+			throw new IllegalArgumentException("연산자 위치가 올바르지 않습니다.");
 		}
 	}
 
