@@ -1,8 +1,8 @@
 package utils;
 
-import java.util.ArrayList;
+import static utils.Constant.*;
+
 import java.util.Arrays;
-import java.util.List;
 
 public class InputValidation {
 
@@ -17,22 +17,17 @@ public class InputValidation {
         try {
             return Double.parseDouble(stringNumber);
         } catch (Exception e) {
-            Exit.sendErrorMessage("잘못된 식을 입력하셨습니다.");
+            Exit.sendErrorMessage("잘못된 피연산자를 입력하셨습니다.");
         }
         return -1;
     }
 
     public static char checkIsOperator(String stringOperator) {
         char operator = stringOperator.charAt(0);
-        List<Character> operators = new ArrayList<>();
-        operators.add('+');
-        operators.add('-');
-        operators.add('*');
-        operators.add('/');
 
-        if (!operators.contains(operator)
+        if (!operatorFunction.containsKey(operator)
                 || stringOperator.length() != 1) {
-            Exit.sendErrorMessage("잘못된 식을 입력하셨습니다.");
+            Exit.sendErrorMessage("잘못된 연산자를 입력하셨습니다.");
         }
         return operator;
     }
