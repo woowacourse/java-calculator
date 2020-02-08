@@ -21,11 +21,11 @@ public class ValidityInspector {
     }
 
     private boolean isEmpty(String input) {
-        return input.equals("");
+        return input.equals(Constant.EMPTY_STRING);
     }
 
     private boolean isBlank(String input) {
-        return input.equals(" ");
+        return input.equals(Constant.BLANK);
     }
 
     public void checkCanConvertUserInputToNumberAndOperator(String[] splitedInput) {
@@ -35,7 +35,7 @@ public class ValidityInspector {
         for (int i = 1; i < splitedInput.length; i = i + 2) {
             String operator = splitedInput[i];
             String secondClause = splitedInput[i + 1];
-            if (Operator.Division.getValue().equals(operator) && "0".equals(secondClause)) {
+            if (Operator.Division.getValue().equals(operator) && Integer.toString(Constant.ZERO).equals(secondClause)) {
                 throw new IllegalArgumentException("0으로 나누는 식을 입력하셨습니다.");
             }
             checkCorrectOperator(operator);

@@ -15,7 +15,7 @@ public class UserInputScanner {
 
     public String[] splitUserInputString() {
         String input = inputStringToUser();
-        String[] splitInput = input.split(" ");
+        String[] splitInput = input.split(Constant.BLANK);
         validityInspector.checkCanConvertUserInputToNumberAndOperator(splitInput);
         return splitInput;
     }
