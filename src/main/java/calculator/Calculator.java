@@ -23,23 +23,10 @@ public class Calculator {
         return Double.toString(result);
     }
 
-    private static double operate(double condense, String term, double next) throws IllegalArgumentException {
-        if (term.equals("+")) {
-            return condense + next;
-        }
-        if (term.equals("-")) {
-            return condense - next;
-        }
-        if (term.equals("*")) {
-            return condense * next;
-        }
-        if (term.equals("/")) {
-            if (next == 0) {
-                throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
-            }
-            return condense / next;
-        }
-        throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
+    private static double operate(double prev, String term, double next) throws IllegalArgumentException {
+        Operator operator = Operator.getOperator(term);
+
+        return operator.calcuate(prev, next);
     }
 
     private static void checkIsValidSize(List<String> tokens) throws IllegalArgumentException {
