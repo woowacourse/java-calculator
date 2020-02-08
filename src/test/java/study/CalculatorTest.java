@@ -48,13 +48,6 @@ public class CalculatorTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"1,1", "10,10", "100,100", "123,123", "1111,1111"})
-	@DisplayName("식에 숫자만 있는 경우 테스트")
-	void testContains(String expression, double expected) {
-		assertThat(Calculator.calculate(expression)).isEqualTo(expected);
-	}
-
-	@ParameterizedTest
 	@ValueSource(strings = {"+", "1 + +", "1 + a", "a"})
 	@DisplayName("식이 숫자로 끝나지 않을 때 예외 테스트")
 	void testNotEndWithNumber(String expression) {
@@ -68,6 +61,24 @@ public class CalculatorTest {
 	@DisplayName("식의 토큰 길이가 올바르지 않을 때 즉 짝수인 경우 예외 테스트")
 	void testTokenSize(String expression) {
 		assertThatExceptionOfType(ArrayIndexOutOfBoundsException.class).isThrownBy(() -> {
+			Calculator.calculate(expression);
+		});
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"a", "a + b", "3 + a", "a + b + c", "+ + 3", "ab"})
+	@DisplayName("피연산자가 숫자가 아닌 경우 예외 테스트")
+	void testNotNumber(String expression) {
+		assertThatExceptionOfType(NumberFormatException.class).isThrownBy(() -> {
+			Calculator.calculate(expression);
+		});
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"3 ^ 5", "4 & 3", "5 | 2", "1 + 2 ^ 3"})
+	@DisplayName("연산자가 사칙연산이 아닌 경우 예외 테스트")
+	void testNotOperator(String expression) {
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
 			Calculator.calculate(expression);
 		});
 	}
