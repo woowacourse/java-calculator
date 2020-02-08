@@ -6,7 +6,6 @@ import java.util.Queue;
 public class Source {
     private Queue<Double> operands;
     private Queue<CalculatorType> operators;
-    private boolean operandTurn;
 
     public Source() {
     }
@@ -14,7 +13,6 @@ public class Source {
     public Source(String[] inputs) throws Exception {
         operands = new LinkedList<>();
         operators = new LinkedList<>();
-        operandTurn = true;
         generateSource(inputs);
     }
 
@@ -47,20 +45,20 @@ public class Source {
     }
 
     private void validateInputsByIndex(String[] inputs) throws Exception {
-        for (String input : inputs) {
-            validateInputByIndex(input);
+        for (int i = 0; i < inputs.length; i++) {
+            validateInputByIndex(i, inputs[i]);
         }
     }
 
-    private void validateInputByIndex(String input) throws NumberFormatException, IllegalArgumentException {
-        if (operandTurn) {
+    private void validateInputByIndex(int index, String input) throws NumberFormatException, IllegalArgumentException {
+        if (!isOddNumber(index)) {
             double operand = Double.parseDouble(input);
             operands.offer(operand);
         }
-        if (!operandTurn) {
+
+        if (isOddNumber(index)) {
             CalculatorType operator = CalculatorType.validateOperator(input);
             operators.offer(operator);
         }
-        operandTurn = !operandTurn;
     }
 }
