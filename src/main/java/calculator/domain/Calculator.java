@@ -9,11 +9,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Calculator {
-    private final static String PLUS = "+";
-    private final static String MINUS = "-";
-    private final static String MULTIPLY = "*";
-    private final static String DIVIDE = "/";
-
     public void start() {
         while (true) {
             try {
@@ -58,8 +53,8 @@ public class Calculator {
         }
     }
 
-    private int calculate(int result, String operator, int operand) throws ArithmeticException {
-        switch (operator) {
+    private Integer calculate(int result, String symbol, int operand) throws ArithmeticException {
+        switch (Operators.findOperator(symbol)) {
             case PLUS:
                 return add(result, operand);
             case MINUS:
@@ -69,7 +64,7 @@ public class Calculator {
             case DIVIDE:
                 return divide(result, operand);
             default:
-                throw new InputMismatchException("해당 연산자 없음");
+                return null;
         }
     }
 
