@@ -75,8 +75,8 @@ public class Expression {
 		return expression;
 	}
 
-	public int calculate() {
-		int result = 0;
+	public double calculate() {
+		double result = 0;
 		Number number1;
 		Operator operator;
 		Number number2;
@@ -88,7 +88,7 @@ public class Expression {
 
 			result = operator.calculate(number1, number2);
 
-			expression.push(new Number(Integer.toString(result)));
+			expression.push(new Number(Double.toString(result)));
 		}
 		return result;
 	}

@@ -17,14 +17,15 @@ class OperatorTest {
 			.hasMessage("유효한 연산자 형식이 아닙니다.");
 	}
 
+	@DisplayName("calculate test")
 	@Test
 	void testCalculate() {
 		Operator plus = new Operator("+");
 		final Number one = new Number("1");
 		final Number two = new Number("2");
 
-		final int expected = 3;
-		final int actual = plus.calculate(one, two);
+		final double expected = 3;
+		final double actual = plus.calculate(one, two);
 
 		assertThat(actual).isEqualTo(expected);
 
@@ -35,5 +36,10 @@ class OperatorTest {
 			divide.calculate(one, zero);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(("0 으로 나눌 수 없습니다."));
+
+		final double expected2 = 0.5;
+		final double actual2 = divide.calculate(one, two);
+
+		assertThat(actual2).isEqualTo(expected2);
 	}
 }

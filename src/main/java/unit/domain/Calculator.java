@@ -7,7 +7,7 @@ public class Calculator {
 		this.expression = expression;
 	}
 
-	public int getResult() {
+	public double getResult() {
 		return expression.calculate();
 	}
 }

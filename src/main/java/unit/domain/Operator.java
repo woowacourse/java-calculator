@@ -24,7 +24,7 @@ public class Operator implements Token {
 		}
 	}
 
-	public int calculate(Number number1, Number number2) {
+	public double calculate(Number number1, Number number2) {
 		if (operator.equals(PLUS)) {
 			return number1.getNumber() + number2.getNumber();
 		}

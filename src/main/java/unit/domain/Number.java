@@ -3,21 +3,21 @@ package unit.domain;
 import java.util.Objects;
 
 public class Number implements Token {
-	private final int number;
+	private final double number;
 
 	public Number(final String number) {
-		this.number = toInt(number);
+		this.number = toDouble(number);
 	}
 
-	private int toInt(final String token) {
+	private double toDouble(final String token) {
 		try {
-			return Integer.parseInt(token);
+			return Double.parseDouble(token);
 		} catch (NumberFormatException e) {
 			throw new NumberFormatException("유효한 범위의 숫자를 입력해 주세요");
 		}
 	}
 
-	public int getNumber() {
+	public double getNumber() {
 		return number;
 	}
 
