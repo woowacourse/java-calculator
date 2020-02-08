@@ -12,13 +12,13 @@ public class Calculator {
         checkIsValidSize(tokens);
         checkIsNumber(tokens.get(0));
 
-        double condense = Integer.parseInt(tokens.get(0));
+        double result = Integer.parseInt(tokens.get(0));
         for (int i = 1; i < tokens.size(); i += 2) {
-        	checkIsNumber(tokens.get(i + 1));
-            condense = operate(condense, tokens.get(i), Integer.parseInt(tokens.get(i + 1)));
+            checkIsNumber(tokens.get(i + 1));
+            result = operate(result, tokens.get(i), Integer.parseInt(tokens.get(i + 1)));
         }
 
-        return Double.toString(condense);
+        return Double.toString(result);
     }
 
     private static double operate(double condense, String term, double next) throws IllegalArgumentException {
@@ -32,32 +32,32 @@ public class Calculator {
             return condense * next;
         }
         if (term.equals("/")) {
-        	if (next == 0) {
-        		throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
-			}
+            if (next == 0) {
+                throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
+            }
             return condense / next;
         }
         throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
     }
 
-    private  static void checkIsValidSize(List<String> tokens) throws IllegalArgumentException {
-    	if (isValidSize(tokens)) {
-    		return;
-		}
+    private static void checkIsValidSize(List<String> tokens) throws IllegalArgumentException {
+        if (isValidSize(tokens)) {
+            return;
+        }
 
-    	throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
-	}
+        throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
+    }
 
     private static boolean isValidSize(List<String> tokens) {
-		return (tokens.size() & 1) == 1;
-	}
+        return (tokens.size() & 1) == 1;
+    }
 
-	private static void checkIsNumber(String term) throws IllegalArgumentException {
-    	if (isNumber(term)) {
-    		return;
-		}
-    	throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
-	}
+    private static void checkIsNumber(String term) throws IllegalArgumentException {
+        if (isNumber(term)) {
+            return;
+        }
+        throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
+    }
 
     private static boolean isNumber(String term) {
         int firstIndex = 0;
