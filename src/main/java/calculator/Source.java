@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class Source {
     private Queue<Double> operands;
-    private Queue<CalculatorType> operators;
+    private Queue<OperatorType> operators;
     private boolean operandTurn;
 
     public Source() {
@@ -25,7 +25,7 @@ public class Source {
 
     public double calculateInputs() {
         Double result = operands.poll();
-        for (CalculatorType operator : operators) {
+        for (OperatorType operator : operators) {
             Double operand = operands.poll();
             result = operator.calculate(result, operand);
         }
@@ -55,7 +55,7 @@ public class Source {
             operands.offer(operand);
         }
         if (!operandTurn) {
-            CalculatorType operator = CalculatorType.validateOperator(input);
+            OperatorType operator = OperatorType.validateOperator(input);
             operators.offer(operator);
         }
         operandTurn = !operandTurn;
