@@ -4,10 +4,9 @@ import calculator.domain.Equation;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 public class EquationFilter {
-
     private static final String NUMBER_FORMAT = "\\d+";
 
     public static Equation parseEquation(List<String> input) {
@@ -33,9 +32,5 @@ public class EquationFilter {
 
     private static boolean isNumber(String maybeNumber) {
         return maybeNumber.matches(NUMBER_FORMAT);
-    }
-
-    public static void validateEquation() {
-
     }
 }
