@@ -21,10 +21,10 @@ enum CalculatorType {
         return operator.expression.apply(operand1, operand2);
     }
 
-    public static CalculatorType validateOperator(String input) throws Exception {
+    public static CalculatorType validateOperator(String input){
         return Arrays.stream(CalculatorType.values())
                 .filter(c -> c.operator.equals(input))
                 .findFirst()
-                .orElseThrow(Exception::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 }
