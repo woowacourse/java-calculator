@@ -34,8 +34,8 @@ public class InputValidation {
 
     public static String[] trimSpace(String[] formulas) {
         return Arrays.stream(formulas)
-                .filter(formula -> !formula.isEmpty()).toArray(String[]::new);
-
+                .filter(formula -> !formula.isEmpty())
+                .toArray(String[]::new);
     }
 
 }
