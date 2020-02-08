@@ -1,35 +1,37 @@
 package calculator;
 
-public enum Operator {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/");
+import java.util.Arrays;
+import java.util.function.DoubleBinaryOperator;
+import java.util.function.Function;
+
+public enum Operator implements DoubleBinaryOperator {
+    PLUS("+", (left, right) -> left + right),
+    MINUS("-", (left, right) -> left - right),
+    MULTIPLY("*", (left, right) -> left * right),
+    DIVIDE("/", (left, right) -> left / right);
 
     private String symbol;
+    private DoubleBinaryOperator expression;
 
-    Operator(String symbol) {
+    Operator(String symbol, DoubleBinaryOperator expression) {
         this.symbol = symbol;
+        this.expression = expression;
     }
 
     public String toString() {
         return this.symbol;
     }
 
-    public static double calculate(String operator, double input1, double input2) {
-        checkIfOperator(operator);
-        double output = 0.0;
-        if (operator.equals(PLUS.symbol)) {
-            output = input1 + input2;
-        } else if (operator.equals(MINUS.symbol)) {
-            output = input1 - input2;
-        } else if (operator.equals(MULTIPLY.symbol)) {
-            output = input1 * input2;
-        } else if (operator.equals(DIVIDE.symbol)) {
-            checkZero(input2);
-            output = input1 / input2;
-        }
-        return output;
+    public static Operator findOperatorBySymbol(String symbol) {
+        return Arrays.stream(values())
+                .filter(op -> op.symbol.equals(symbol))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 연산자입니다."));
+    }
+
+    public double operate(double input1, double input2) {
+        checkIfOperator(symbol);
+        return expression.applyAsDouble(input1, input2);
     }
 
     private static void checkZero(double input) {
@@ -46,5 +48,10 @@ public enum Operator {
             }
         }
         throw new IllegalArgumentException("사칙연산 연산자만 계산 가능합니다");
+    }
+
+    @Override
+    public double applyAsDouble(final double left, final double right) {
+        return expression.applyAsDouble(left, right);
     }
 }

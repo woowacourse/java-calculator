@@ -13,7 +13,7 @@ public class Calculator {
     }
 
     //테스트용 setter메서드
-    public void setSplittedStrings(String input){
+    public void setSplittedStrings(String input) {
         splittedStrings = Arrays.asList(input.split(" "));
         checkClusteredElements();
         checkIfStartWithSymbol();
@@ -65,7 +65,8 @@ public class Calculator {
         for (int i = 1; i < splittedStrings.size(); i++) {
             if (!isNumber(splittedStrings.get(i))) {
                 try {
-                    state = Operator.calculate(splittedStrings.get(i), state, Double.parseDouble(splittedStrings.get(i + 1)));
+                    Operator operator = Operator.findOperatorBySymbol(splittedStrings.get(i));
+                    state = operator.operate(state, Double.parseDouble(splittedStrings.get(i + 1)));
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                     enterMathematicalExpression();
