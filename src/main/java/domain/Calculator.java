@@ -1,5 +1,6 @@
 package domain;
 
+import static utils.Constant.*;
 import utils.Exit;
 import utils.InputValidation;
 import view.InputView;
@@ -9,10 +10,6 @@ import java.util.*;
 import java.util.function.BiFunction;
 
 public class Calculator {
-
-    private final static int ZERO = 0;
-    private final static int EVEN = 2;
-
     private final List<Double> numbers = new ArrayList<>();
     private final List<Character> operators = new ArrayList<>();
 
