@@ -1,15 +1,18 @@
 package view;
 
 import domain.NumberSentence;
+import domain.NumberSentenceTranslator;
 import view.errors.InvalidInputException;
 
 import java.util.*;
 
 public class InputView {
     private Scanner scanner;
+    private NumberSentenceTranslator numberSentenceTranslator;
 
-    public InputView(Scanner scanner) {
+    public InputView(Scanner scanner, NumberSentenceTranslator numberSentenceTranslator) {
         this.scanner = scanner;
+        this.numberSentenceTranslator = numberSentenceTranslator;
     }
 
     public NumberSentence getNumberSentence() {
@@ -37,7 +40,7 @@ public class InputView {
             }
         }
 
-        return new NumberSentence(numbers, operators);
+        return this.numberSentenceTranslator.traslate(numbers, operators);
     }
 
     //todo: 숫자 위치에 숫자가 아닌 입력이 있는 경우, 연산자 위치에 연산자가 아닌 경우 로직 추가

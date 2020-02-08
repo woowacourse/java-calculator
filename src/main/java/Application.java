@@ -1,5 +1,6 @@
 import domain.Calculator;
 import domain.NumberSentence;
+import domain.NumberSentenceTranslatorImpl;
 import view.InputView;
 import view.OutputView;
 
@@ -7,7 +8,7 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        InputView inputView = new InputView(new Scanner(System.in));
+        InputView inputView = new InputView(new Scanner(System.in), new NumberSentenceTranslatorImpl());
         NumberSentence numberSentence = inputView.getNumberSentence();
 
         Calculator calculator = new Calculator();

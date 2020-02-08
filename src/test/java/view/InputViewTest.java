@@ -1,6 +1,7 @@
 package view;
 
 import domain.NumberSentence;
+import domain.NumberSentenceTranslatorImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +36,6 @@ class InputViewTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         scanner = new Scanner(System.in);
 
-        return new InputView(scanner);
+        return new InputView(scanner, new NumberSentenceTranslatorImpl());
     }
 }
