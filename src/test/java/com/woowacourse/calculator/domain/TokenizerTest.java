@@ -1,25 +1,24 @@
 package com.woowacourse.calculator.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
+
 @DisplayName("Tokenizer Test")
 class TokenizerTest {
-
     @DisplayName("Tokenize - Tokenize() Test")
     @Test
     void testTokenize() {
-        final String inputLine = "1 + 2";
-        final List<Token> actual = Tokenizer.tokenize(inputLine);
-        final List<Token> expected = new ArrayList<>();
-        expected.add(new Number("1"));
-        expected.add(new Operator("+"));
-        expected.add(new Number("2"));
+        final String inputExpression = "1 + 2";
+
+        final List<Token> actual = Tokenizer.tokenize(inputExpression);
+
+        final List<Token> expected = Arrays.asList(new Number("1"), new Operator("+"), new Number("2"));
 
         assertThat(actual).isEqualTo(expected);
     }

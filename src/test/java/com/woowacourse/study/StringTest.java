@@ -1,9 +1,9 @@
 package com.woowacourse.study;
 
-import static org.assertj.core.api.Assertions.*;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("String API Test")
 public class StringTest {
@@ -11,12 +11,16 @@ public class StringTest {
     @Test
     void testSplit() {
         final String value = "1,2";
+
         final String[] actual = value.split(",");
+
         assertThat(actual).contains("1");
         assertThat(actual).contains("2");
 
         final String value2 = "1";
+
         final String[] actual2 = value2.split(",");
+
         assertThat(actual2).containsExactly("1");
     }
 
@@ -36,12 +40,15 @@ public class StringTest {
     void testCharAt() {
         final String value = "abc";
         final int index = 0;
+
         final char actual = value.charAt(index);
+
         final char expected = 'a';
 
         assertThat(actual).isEqualTo(expected);
 
         final int outOfBoundIndex = 3;
+
         assertThatThrownBy(() -> {
             value.charAt(outOfBoundIndex);
         }).isInstanceOf(StringIndexOutOfBoundsException.class)

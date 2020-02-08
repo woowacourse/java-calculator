@@ -9,15 +9,23 @@ public class Expression {
     private final static boolean NUMBER_TURN_STATUS = false;
     private final static boolean OPERATOR_TURN_STATUS = true;
     private static final int ONLY_RESULT_REMAIN_SIZE = 1;
+    private static final int MIN_EXPRESSION_TOKEN_SIZE = 3;
 
     private final Stack<Token> expression;
 
     public Expression(final List<Token> tokens) {
-        checkValidation(tokens);
+        checkValidSize(tokens);
+        checkValidExpression(tokens);
         expression = toExpression(tokens);
     }
 
-    private void checkValidation(final List<Token> tokens) {
+    private void checkValidSize(List<Token> tokens) {
+        if (tokens.size() < MIN_EXPRESSION_TOKEN_SIZE) {
+            throw new IllegalArgumentException("잘못된 연산 식입니다.");
+        }
+    }
+
+    private void checkValidExpression(final List<Token> tokens) {
         boolean tokenTurnStatus = NUMBER_TURN_STATUS;
 
         for (Token token : tokens) {

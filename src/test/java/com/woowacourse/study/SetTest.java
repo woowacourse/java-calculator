@@ -28,6 +28,7 @@ public class SetTest {
     @Test
     void testSize() {
         final int expected = 3;
+
         assertThat(numbers).hasSize(expected);
     }
 
@@ -35,6 +36,8 @@ public class SetTest {
     @ParameterizedTest
     @CsvSource(value = {"1,true", "2,true", "3,true", "4,false"})
     void testContains(int input, boolean expected) {
-        assertThat(numbers.contains(input)).isEqualTo(expected);
+        final boolean actual = numbers.contains(input);
+
+        assertThat(actual).isEqualTo(expected);
     }
 }
