@@ -14,13 +14,13 @@ public class ValidityInspector {
         operators.add(Operator.Division.getValue());
     }
 
-    public void isValidInput(String input) {
-        if (isBlank(input) || isNullOrEmpty(input)) {
-            throw new IllegalArgumentException("Null or Blank or Empty exception.");
+    public void checkUserInputIsBlankOrEmpty(String input) {
+        if (isBlank(input) || isEmpty(input)) {
+            throw new IllegalArgumentException("공백 또는 빈 문자열을 입력하셨습니다.");
         }
     }
 
-    private boolean isNullOrEmpty(String input) {
+    private boolean isEmpty(String input) {
         return input.equals("");
     }
 
@@ -28,14 +28,15 @@ public class ValidityInspector {
         return input.equals(" ");
     }
 
-    public void isValidSplitedInput(String[] splitedInput) {
+    public void checkCanConvertUserInputToNumberAndOperator(String[] splitedInput) {
+        checkSplitedInputEmpty(splitedInput);
         String firstClause = splitedInput[0];
         checkCorrectDoubleNumber(firstClause);
         for (int i = 1; i < splitedInput.length; i = i + 2) {
             String operator = splitedInput[i];
             String secondClause = splitedInput[i + 1];
             if (Operator.Division.getValue().equals(operator) && "0".equals(secondClause)) {
-                throw new IllegalArgumentException("Cannot divide zero.");
+                throw new IllegalArgumentException("0으로 나누는 식을 입력하셨습니다.");
             }
             checkCorrectOperator(operator);
             checkCorrectDoubleNumber(secondClause);
@@ -46,13 +47,19 @@ public class ValidityInspector {
         try {
             Double.valueOf(s);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Can not convert to double.");
+            throw new IllegalArgumentException("잘못된 수를 입력하였습니다.");
         }
     }
 
     private void checkCorrectOperator(String s) {
         if (!operators.contains(s)) {
-            throw new IllegalArgumentException("Operator check exception.");
+            throw new IllegalArgumentException("잘못된 연산자를 입력하였습니다.");
+        }
+    }
+
+    private void checkSplitedInputEmpty(String[] splitedInput) {
+        if (splitedInput.length == 0) {
+            throw new IllegalArgumentException("공백을 입력하였습니다.");
         }
     }
 }
