@@ -2,6 +2,8 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -49,38 +51,38 @@ class OperatorTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {"+,true", "-,true", "/,true", "*,true", "3,false", "a,false"}, delimiter = ',')
-	public void isOperatorSymbolTest(String symbolValue, boolean actual) {
+	public void isOperatorTest(String symbolValue, boolean actual) {
 	    boolean expected  = Operator.isOperator(symbolValue);
 		assertThat(expected).isEqualTo(actual);
 	}
 
 	@Test
-	public void findBySymbolPlusTest() {
+	public void getOperatorOfPlusTest() {
 	    Operator expected = Operator.getOperatorOf("+");
 		assertThat(expected).isEqualTo(Operator.ADD);
 	}
 	@Test
-	public void findBySymbolSubtractTest() {
+	public void getOperatorOfSubtractTest() {
 		Operator expected = Operator.getOperatorOf("-");
 		assertThat(expected).isEqualTo(Operator.SUBTRACT);
 	}
 
 	@Test
-	public void findBySymbolMultiplyTest() {
+	public void getOperatorOfMultiplyTest() {
 		Operator expected3 = Operator.getOperatorOf("*");
 		assertThat(expected3).isEqualTo(Operator.MULTIPLY);
 	}
 
 	@Test
-	public void findBySymbolDivideTest() {
+	public void getOperatorOfDivideTest() {
 		Operator expected4 = Operator.getOperatorOf("/");
 		assertThat(expected4).isEqualTo(Operator.DIVIDE);
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"abc", "dsjk", "2", "ㄹㅁ", "&"})
-	public void findBySymbolExceptionTest(String operator) {
-		assertThatExceptionOfType(IllegalArgumentException.class)
+	public void getOperatorOfExceptionTest(String operator) {
+		assertThatExceptionOfType(NoSuchElementException.class)
 			.isThrownBy(() -> Operator.getOperatorOf(operator));
 	}
 }
