@@ -35,7 +35,6 @@ public class Calculator {
         String[] formulas = InputValidation.trimSpace(formula.split(" ", ZERO));
 
         for (int i = ZERO; i < formulas.length; i++) {
-            String temp = formulas[i];
             if (i % EVEN == ZERO) {
                 numbers.add(InputValidation.checkIsNumber(formulas[i]));
                 continue;
@@ -45,10 +44,13 @@ public class Calculator {
     }
 
     private double calculate() {
-        double result = numbers.remove(ZERO);
+        int index = ZERO;
+
+        double result = numbers.get(index++);
         for (char operator : operators) {
-            result = operatorFunction.get(operator).apply(result, numbers.remove(ZERO));
+            result = operatorFunction.get(operator).apply(result, numbers.get(index++));
         }
+
         return result;
     }
 }
