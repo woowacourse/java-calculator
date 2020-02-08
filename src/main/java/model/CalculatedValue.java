@@ -20,8 +20,8 @@ import java.util.List;
 
 public class CalculatedValue {
     private String input;
-    private List<Double> numberList = new ArrayList<>();
-    private List<String> operatorList = new ArrayList<>();
+    private List<Double> numbers = new ArrayList<>();
+    private List<String> operators = new ArrayList<>();
     private final InputValidator inputValidator = new InputValidator();
 
     public CalculatedValue(String input) {
@@ -36,19 +36,19 @@ public class CalculatedValue {
         String[] inputSplit = this.input.split(" ");
         for (int i = 0; i < inputSplit.length; i++) {
             if (i % 2 == 0) {
-                numberList.add(Double.parseDouble(inputSplit[i]));
+                numbers.add(Double.parseDouble(inputSplit[i]));
             }
             if (i % 2 == 1) {
-                operatorList.add(inputSplit[i]);
+                operators.add(inputSplit[i]);
             }
         }
     }
 
     public List<Double> getNumberList() {
-        return numberList;
+        return numbers;
     }
 
     public List<String> getOperatorList() {
-        return operatorList;
+        return operators;
     }
 }
