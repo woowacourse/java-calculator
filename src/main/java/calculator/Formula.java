@@ -1,5 +1,7 @@
 package calculator;
 
+import exceptions.NotOddLengthInputsException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class Formula {
 
     private void validateSizeOfInputsIsOdds(String[] inputs) {
         if (isEvenNumber(inputs.length)) {
-            throw new IllegalArgumentException(inputs.length + "(length of inputs) is not odd");
+            throw new NotOddLengthInputsException(inputs.length);
         }
     }
 

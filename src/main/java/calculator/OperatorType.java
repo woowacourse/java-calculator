@@ -1,5 +1,7 @@
 package calculator;
 
+import exceptions.InvalidOperatorException;
+
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
@@ -21,7 +23,7 @@ enum OperatorType {
         return Arrays.stream(OperatorType.values())
                 .filter(o -> o.operator.equals(operator))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(operator + " is not valid operator"));
+                .orElseThrow(() -> new InvalidOperatorException(operator));
     }
 
     public double calculate(Operand operand1, Operand operand2) {

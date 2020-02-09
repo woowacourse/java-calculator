@@ -1,5 +1,7 @@
 package calculator;
 
+import exceptions.InvalidOperatorException;
+import exceptions.NotOddLengthInputsException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,7 +17,7 @@ public class FormulaTest {
     void notOddSizeOfInputs_ShouldThrowException(String input) {
         String[] inputs = input.split(" ");
         assertThatThrownBy(() -> formula = new Formula(inputs))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(NotOddLengthInputsException.class)
                 .hasMessageMatching("\\d+\\(length of inputs\\) is not odd");
     }
 
@@ -24,7 +26,7 @@ public class FormulaTest {
     void nonOperatorInEvenIndex_ShouldThrowException(String input) {
         String[] inputs = input.split(" ");
         assertThatThrownBy(() -> formula = new Formula(inputs))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(InvalidOperatorException.class)
                 .hasMessageMatching(".+ is not valid operator");
     }
 
