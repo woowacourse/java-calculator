@@ -9,29 +9,29 @@ import java.util.stream.IntStream;
 
 public class Calculator {
     private static final String BLANK = " ";
+    private static final int START_INDEX = 0;
 
     List<String> splittedStrings;
 
-    //테스트용 setter메서드
     public void setSplittedStrings(String input) {
         splittedStrings = Arrays.asList(input.split(BLANK));
         checkClusteredElements();
         checkIfStartWithSymbol();
     }
 
-    public List<String> enterMathematicalExpression() {
+    public List<String> repeatRequestingCorrectMathematicalExpression() {
         try {
             String input = InputView.enterMathematicalExpression();
             setSplittedStrings(input);
             return splittedStrings;
         } catch (IllegalArgumentException e) {
             OutputView.print(e.getMessage());
-            return enterMathematicalExpression();
+            return repeatRequestingCorrectMathematicalExpression();
         }
     }
 
     private void checkClusteredElements() {
-        IntStream.range(0, splittedStrings.size() - 1).forEach(i -> {
+        IntStream.range(START_INDEX, splittedStrings.size() - 1).forEach(i -> {
             checkIfClustered(splittedStrings.get(i), splittedStrings.get(i + 1));
         });
     }
@@ -47,7 +47,7 @@ public class Calculator {
     }
 
     private void checkIfStartWithSymbol() {
-        if (!isNumber(splittedStrings.get(0))) {
+        if (!isNumber(splittedStrings.get(START_INDEX))) {
             throw new IllegalArgumentException("숫자로 시작해야 합니다");
         }
     }
@@ -62,7 +62,7 @@ public class Calculator {
     }
 
     public Double calculate() {
-        Double state = Double.parseDouble(splittedStrings.get(0));
+        Double state = Double.parseDouble(splittedStrings.get(START_INDEX));
         for (int i = 1; i < splittedStrings.size(); i++) {
             if (!isNumber(splittedStrings.get(i))) {
                 try {
@@ -70,7 +70,7 @@ public class Calculator {
                     state = operator.operate(state, Double.parseDouble(splittedStrings.get(i + 1)));
                 } catch (IllegalArgumentException e) {
                     OutputView.print(e.getMessage());
-                    enterMathematicalExpression();
+                    repeatRequestingCorrectMathematicalExpression();
                 }
             }
         }

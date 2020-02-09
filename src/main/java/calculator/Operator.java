@@ -2,13 +2,14 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.function.DoubleBinaryOperator;
-import java.util.function.Function;
 
 public enum Operator implements DoubleBinaryOperator {
     PLUS("+", (left, right) -> left + right),
     MINUS("-", (left, right) -> left - right),
     MULTIPLY("*", (left, right) -> left * right),
     DIVIDE("/", (left, right) -> left / right);
+
+    private static final int ZERO = 0;
 
     private String symbol;
     private DoubleBinaryOperator expression;
@@ -38,7 +39,7 @@ public enum Operator implements DoubleBinaryOperator {
     }
 
     private static void checkZero(double input) {
-        if (input == 0) {
+        if (input == ZERO) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
     }

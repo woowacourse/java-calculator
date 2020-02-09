@@ -7,8 +7,10 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 public class CalculatorTest {
     Calculator tester = new Calculator();
 
+    private static final int NUM_LINES_TO_SKIP = 1;
+
     @ParameterizedTest
-    @CsvFileSource(resources = "/SpittedString/clusteredStrings.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/SpittedString/clusteredStrings.csv", numLinesToSkip = NUM_LINES_TO_SKIP)
     void testClustered(String input) {
         Assertions.assertThatThrownBy(() -> {
             tester.setSplittedStrings(input);
@@ -17,7 +19,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/SpittedString/stringStartingWithSymbols.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/SpittedString/stringStartingWithSymbols.csv", numLinesToSkip = NUM_LINES_TO_SKIP)
     void testSymbolStarter(String input) {
         Assertions.assertThatThrownBy(() -> {
             tester.setSplittedStrings(input);
@@ -26,7 +28,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/calculation.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/calculation.csv", numLinesToSkip = NUM_LINES_TO_SKIP)
     void testCalculator(String input, String expected) {
         tester.setSplittedStrings(input);
         Assertions.assertThat(tester.calculate()).isEqualTo(Integer.parseInt(expected));

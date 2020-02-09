@@ -9,7 +9,7 @@ public class Application {
         boolean isContinue = true;
 
         while (isContinue) {
-            calculator.enterMathematicalExpression();
+            calculator.repeatRequestingCorrectMathematicalExpression();
             OutputView.printAnswer(calculator.calculate());
             isContinue = InputView.enterYesNo();
         }
