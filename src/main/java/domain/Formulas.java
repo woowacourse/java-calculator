@@ -1,6 +1,8 @@
 package domain;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Formulas {
     private final List<String> formulas;
@@ -9,15 +11,19 @@ public class Formulas {
         this.formulas = formula.toList();
     }
 
-    public int size() {
-        return formulas.size();
+    public Queue<String> getOperators() {
+        Queue<String> operators = new LinkedList<>();
+        for (int index = 1; index < formulas.size(); index +=2) {
+            operators.add(formulas.get(index));
+        }
+        return operators;
     }
 
-    public String getOperation(int index) {
-        return formulas.get(index);
-    }
-
-    public double getNumToDouble(int index) {
-        return Double.parseDouble(formulas.get(index));
+    public Queue<Double> getOperands() {
+        Queue<Double> operands = new LinkedList<>();
+        for (int index = 0; index < formulas.size(); index +=2) {
+            operands.add(Double.parseDouble(formulas.get(index)));
+        }
+        return operands;
     }
 }
