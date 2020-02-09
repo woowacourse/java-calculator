@@ -9,8 +9,7 @@ import view.OutputView;
 import java.util.ArrayList;
 
 public class Calculator {
-    private final static int ZERO = 0;
-    private final static int ONE = 1;
+    private final static int FIRST_RESULT = 0;
 
     public static void run() {
         String input = InputView.inputCalculation();
@@ -25,16 +24,12 @@ public class Calculator {
     }
 
     static double calculate(Numbers numbers, ArrayList<OperatorGroup> operators) {
-        double result = Double.parseDouble(numbers.get(ZERO));
-        int numberIndex = ONE;
-        int operatorIndex = ZERO;
+        double result = Double.parseDouble(numbers.get(FIRST_RESULT));
 
-        while (operatorIndex < operators.size()) {
+        for (int operatorIndex = FIRST_RESULT, numberIndex = 1; operatorIndex < operators.size() ; operatorIndex++, numberIndex++) {
             OperatorGroup newOperator = operators.get(operatorIndex);
             Double newNumber = Double.parseDouble(numbers.get(numberIndex));
             result = newOperator.calculateBy(result, newNumber);
-            numberIndex++;
-            operatorIndex++;
         }
         return result;
     }
