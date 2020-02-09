@@ -9,9 +9,9 @@ public class Number implements Token {
 		this.number = toDouble(number);
 	}
 
-	private double toDouble(final String token) {
+	private double toDouble(final String number) {
 		try {
-			return Double.parseDouble(token);
+			return Double.parseDouble(number);
 		} catch (NumberFormatException e) {
 			throw new NumberFormatException("유효한 범위의 숫자를 입력해 주세요");
 		}
