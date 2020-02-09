@@ -13,7 +13,7 @@ public class Calculator {
 		List<String> tokens = Arrays.asList(expression.split(BLANK));
 		Validator.checkIsValidExpression(tokens);
 
-		double accumulatedNumber = Integer.parseInt(tokens.get(ZERO));
+		double accumulatedNumber = Double.parseDouble(tokens.get(ZERO));
 		for (int i = 1; i < tokens.size(); i += 2) {
 			String operator = tokens.get(i);
 			String nextNumber = tokens.get(i + 1);
