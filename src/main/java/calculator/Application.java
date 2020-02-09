@@ -5,11 +5,12 @@ import io.OutputView;
 public class Application {
     public static void main(String[] args) {
         try {
-            CalculatorModel model = new CalculatorModel();
+            OutputView.welcome();
+            CalculatorController model = new CalculatorController();
             model.runCalculator();
         } catch (Exception e) {
-            OutputView.programError();
-            main(args);
+            OutputView.inputError();
+            Application.main(args);
         }
     }
 }
