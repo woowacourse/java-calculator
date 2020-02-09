@@ -28,4 +28,8 @@ public enum Operator {
 		return expression.apply(firstOperand, secondOperand);
 	}
 
+	public String getOperator() {
+		return operator;
+	}
+
 }

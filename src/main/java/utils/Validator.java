@@ -2,9 +2,9 @@ package utils;
 
 import java.util.List;
 
+import domain.Operator;
+
 public class Validator {
-	private static final String MINUS = "-";
-	private static final String DIVIDE = "/";
 	private static final int ONE = 1;
 	private static final int ZERO = 0;
 
@@ -19,7 +19,7 @@ public class Validator {
 	}
 
 	public static void checkDivideByZero(String operator, double number) {
-		if (operator.equals(DIVIDE) && number == ZERO) {
+		if (operator.equals(Operator.DIVIDE.getOperator()) && number == ZERO) {
 			throw new ArithmeticException("0으로 나눌 수는 없습니다.");
 		}
 	}
@@ -52,7 +52,7 @@ public class Validator {
 	}
 
 	public static boolean isFirstNumberMinus(String term) {
-		if (term.startsWith(MINUS) && term.length() > ONE) {
+		if (term.startsWith(Operator.MINUS.getOperator()) && term.length() > ONE) {
 			return true;
 		}
 		return false;
