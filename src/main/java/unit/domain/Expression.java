@@ -17,11 +17,11 @@ public class Expression {
 		return expression.pop();
 	}
 
-	public void push(Token token) {
+	public void push(final Token token) {
 		expression.push(token);
 	}
 
-	public int size() {
-		return expression.size();
+	public boolean isSizeGreaterThanOrEqualTo(final int size) {
+		return expression.size() >= size;
 	}
 }
