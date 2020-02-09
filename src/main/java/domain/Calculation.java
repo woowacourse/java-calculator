@@ -1,8 +1,9 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
-public enum Calculator {
+public enum Calculation {
     PLUS("+", (num1, num2) -> num1 + num2),
     MINUS("-", (num1, num2) -> num1 - num2),
     MULTIPLICATION("*", (num1, num2) -> num1 * num2),
@@ -14,7 +15,7 @@ public enum Calculator {
     private String operator;
     private BiFunction<Double, Double, Double>  expression;
 
-    Calculator(String operator, BiFunction<Double, Double, Double> expression) {
+    Calculation(String operator, BiFunction<Double, Double, Double> expression) {
         this.operator = operator;
         this.expression = expression;
     }
@@ -25,17 +26,14 @@ public enum Calculator {
         }
     }
 
-    public static int startCalculate(Formulas formulas) {
-        double accumulationValue = formulas.getNumToDouble(0);
-        for (int index = 1; index < formulas.size(); index += 2) {
-            String operation = formulas.getOperator(index);
-            double newValue = formulas.getNumToDouble(index + 1);
-            accumulationValue = calculate(operation, accumulationValue, newValue);
-        }
-        return (int) accumulationValue;
+    public static Calculation findByOperator(String operator) {
+        return Arrays.stream(Calculation.values())
+                .filter(calculation -> calculation.operator.equals(operator))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 연산자가 없습니다."));
     }
 
-    private double calculate(double num1, double num2) {
-        return expression.apply(num1, num2)
+    public double calculate(double num1, double num2) {
+        return expression.apply(num1, num2);
     }
 }
