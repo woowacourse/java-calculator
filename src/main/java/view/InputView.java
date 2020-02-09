@@ -8,7 +8,7 @@ public class InputView {
     public static String inputCalculation() {
         OutputView.printInputCalculationMessage();
         String input = SCANNER.nextLine();
-        validBlankInput(SCANNER.nextLine());
+        validBlankInput(input);
         return input;
     }
 
