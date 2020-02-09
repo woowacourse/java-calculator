@@ -6,9 +6,7 @@ import java.util.Map;
 import java.util.function.BiFunction;
 
 public class Calculator {
-	private static final int ZERO = 0;
-	private static final int ONE = 1;
-	private static final int TWO = 2;
+	private static final int FIRST_NUMBER = 0;
 
 	private List<String> expression;
 	private Map<String, BiFunction<Double, Double, Double>> functions;
@@ -24,15 +22,15 @@ public class Calculator {
 	}
 
 	public double calculate() {
-		double result = Double.parseDouble(this.expression.get(ZERO));
+		double result = Double.parseDouble(this.expression.get(FIRST_NUMBER));
 
-		for (int i = ONE; i < expression.size() - ONE; i = i + TWO) {
+		for (int i = 1; i < expression.size(); i = i + 2) {
 			result = patternMatching(result, i);
 		}
 		return result;
 	}
 
 	public double patternMatching(double result, int index) {
-		return functions.get(expression.get(index)).apply(result, Double.parseDouble(expression.get(index + ONE)));
+		return functions.get(expression.get(index)).apply(result, Double.parseDouble(expression.get(index + 1)));
 	}
 }
