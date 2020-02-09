@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Formula {
-    private List<FormulaElement> formula;
-
     private static final int FIRST_ELEMENT = 0;
+
+    private List<FormulaElement> formula;
 
     public Formula(String[] inputs) {
         validateSizeOfInputsIsOdds(inputs);
