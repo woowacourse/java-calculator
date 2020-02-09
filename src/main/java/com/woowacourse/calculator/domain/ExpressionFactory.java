@@ -16,7 +16,6 @@ import java.util.List;
 
 public class ExpressionFactory {
     private static final String EXPRESSION_DELIMITER = " ";
-    private static final String EXPRESSION_VALIDATION_PATTERN = "^-?\\d*(\\s[-+*/]\\s-?\\d*)*\\b";
     private static final int NUMBER_START_INDEX = 0;
     private static final int OPERATION_START_INDEX = 1;
     private static final int LOOP_JUMP_COUNT = 2;
@@ -24,15 +23,8 @@ public class ExpressionFactory {
     private ExpressionFactory() {}
 
     public static Expression create(final String input) {
-        validateTokens(input);
         List<String> tokens = Arrays.asList(input.split(EXPRESSION_DELIMITER));
         return makeExpression(tokens);
-    }
-
-    private static void validateTokens(final String input) {
-        if (!input.matches(EXPRESSION_VALIDATION_PATTERN)) {
-            throw new ArithmeticException("잘못된 형식으로 입력하셨습니다.");
-        }
     }
 
     private static Expression makeExpression(final List<String> tokens) {
