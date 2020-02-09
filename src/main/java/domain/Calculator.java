@@ -18,11 +18,15 @@ public class Calculator {
     }
 
     private double calculate(String operator, Double num1, Double num2) {
+        double result = 0.0;
+        boolean sameOperator = false;
         for (Operator compareOperator : Operator.values()) {
-            if (compareOperator.isSameOperator(operator)) {
-                return compareOperator.calculate(num1, num2);
-            }
+            result += compareOperator.sameOperatorCalculate(operator, num1, num2);
+            sameOperator = (sameOperator || compareOperator.isSameOperator(operator));
         }
-        throw new IllegalArgumentException("올바른 연산자를 입력하지 않으셨습니다. (입력한 연산자 : " + operator + ")");
+        if (sameOperator == false) {
+            throw new IllegalArgumentException("올바른 연산자를 입력하지 않으셨습니다. (입력한 연산자 : " + operator + ")");
+        }
+        return result;
     }
 }

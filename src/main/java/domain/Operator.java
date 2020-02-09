@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.List;
 import java.util.function.BinaryOperator;
 
 public enum Operator {
@@ -23,6 +24,14 @@ public enum Operator {
 
     public double calculate(double operand1, double operand2) {
         return this.expression.apply(operand1, operand2);
+    }
+
+    public double sameOperatorCalculate(String operator, double operand1, double operand2) {
+        double result = 0.0;
+        if (this.operator.equals(operator)) {
+            result = calculate(operand1, operand2);
+        }
+        return result;
     }
 
     public boolean isSameOperator(String operator) {
