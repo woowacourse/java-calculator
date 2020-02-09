@@ -11,37 +11,15 @@ public class Calculator {
 		return result;
 	}
 
-	private void calculate(double operand, String operator) {
-		if (operator.equals("+")) {
-			plus(operand);
-			return;
-		}
-		if (operator.equals("-")) {
-			minus(operand);
-			return;
-		}
-		if (operator.equals("*")) {
-			multiply(operand);
-			return;
-		}
-		if (operator.equals("/")) {
-			divide(operand);
+	private void calculate(double operand, String symbol) {
+		for (Operator operator : Operator.values()) {
+			findAndExecute(operand, symbol, operator);
 		}
 	}
 
-	private void plus(double operand) {
-		result += operand;
-	}
-
-	private void minus(double operand) {
-		result -= operand;
-	}
-
-	private void divide(double operand) {
-		result /= operand;
-	}
-
-	private void multiply(double operand) {
-		result *= operand;
+	private void findAndExecute(double operand, String symbol, Operator operator) {
+		if (operator.getSymbol().equals(symbol)) {
+			result = operator.getFunction().applyAsDouble(result, operand);
+		}
 	}
 }
