@@ -31,6 +31,9 @@ public enum Operator implements DoubleBinaryOperator {
 
     public double operate(double input1, double input2) {
         checkIfOperator(symbol);
+        if (this == DIVIDE) {
+            checkZero(input2);
+        }
         return expression.applyAsDouble(input1, input2);
     }
 

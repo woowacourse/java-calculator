@@ -6,26 +6,28 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class OperatorTest {
     @ParameterizedTest
-    @CsvFileSource(resources = "/Operator/calculation.csv", numLinesToSkip = 1)
-    void testCalculation(String operator, String arg1, String arg2, String result) {
-        Assertions.assertThat(Operator.calculate(operator, Double.parseDouble(arg1), Double.parseDouble(arg2)))
+    @CsvFileSource(resources = "/Operator/operate.csv", numLinesToSkip = 1)
+    void testOperate(String operator, String arg1, String arg2, String result) {
+        Assertions.assertThat(Operator.findOperatorBySymbol(operator).operate(Double.parseDouble(arg1), Double.parseDouble(arg2)))
                 .isEqualTo(Double.parseDouble(result));
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/Operator/InvalidSymbols.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/Operator/invalidSymbols.csv", numLinesToSkip = 1)
     void testInvalidSymbol(String operator, String arg1, String arg2) {
         Assertions.assertThatThrownBy(() -> {
-            Operator.calculate(operator, Double.parseDouble(arg1), Double.parseDouble(arg2));
+            Operator op = Operator.findOperatorBySymbol(operator);
+            op.operate(Double.parseDouble(arg1), Double.parseDouble(arg2));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("사칙연산 연산자만 계산 가능합니다");
+                .hasMessage("존재하지 않는 연산자입니다.");
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/Operator/OperatorZeroException.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/Operator/operatorZeroException.csv", numLinesToSkip = 1)
     void testZeroDivider(String operator, String arg1, String arg2) {
         Assertions.assertThatThrownBy(() -> {
-            Operator.calculate(operator, Double.parseDouble(arg1), Double.parseDouble(arg2));
+            Operator op = Operator.findOperatorBySymbol(operator);
+            op.operate(Double.parseDouble(arg1), Double.parseDouble(arg2));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("0으로 나눌 수 없습니다.");
     }
