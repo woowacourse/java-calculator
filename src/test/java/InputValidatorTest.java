@@ -1,10 +1,17 @@
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class InputValidatorTest {
-	private InputValidator inputValidator = new InputValidator();
+	private InputValidator inputValidator;
+
+	@BeforeEach
+	void setUp(){
+		inputValidator = new InputValidator();
+	}
 
 	@Test
 	@DisplayName("입력값을 입력했을 때 제대로된 값으로 재입력 여부를 false 출력")
@@ -58,5 +65,10 @@ public class InputValidatorTest {
 	@DisplayName("double값의 범위가 넘어가는 값이 들어올 경우 재입력 여부를 true 출력")
 	void returnTrueIfInputExceedsRangeOfDouble() {
 		assertThat(inputValidator.validate(Double.MAX_VALUE + "+ 2")).isTrue();
+	}
+
+	@AfterEach
+	void tearDown(){
+		inputValidator = null;
 	}
 }
