@@ -19,7 +19,7 @@ public class Validator {
 
 	public static void checkIsNumber(String term) {
 		if (!isNumber(term)) {
-			throw new IllegalArgumentException("유효한 식이 아닙니다.");
+			throw new IllegalArgumentException("유효한 숫자가 아닙니다.");
 		}
 	}
 
