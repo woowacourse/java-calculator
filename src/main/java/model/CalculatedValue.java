@@ -20,16 +20,13 @@ import java.util.List;
 
 public class CalculatedValue {
     private String input;
+    private boolean isCorrectValue;
     private List<Double> numbers = new ArrayList<>();
     private List<String> operators = new ArrayList<>();
     private final InputValidator inputValidator = new InputValidator();
 
     public CalculatedValue(String input) {
         this.input = input;
-    }
-
-    public boolean isValidator() {
-        return inputValidator.checkInput(input);
     }
 
     public void setValueList() {

@@ -15,6 +15,7 @@ package controller;
 
 import calculator.CalculatorMap;
 import model.CalculatedValue;
+import validator.InputValidator;
 import view.InputView;
 import view.OutputView;
 
@@ -22,15 +23,16 @@ import java.util.List;
 
 public class Controller {
     public void run() {
-        CalculatedValue stringInput;
+        InputValidator inputValidator = new InputValidator();
+        String input;
+
         do {
-            String input = InputView.inputStringFromUser();
-            stringInput = new CalculatedValue(input);
-        } while (!stringInput.isValidator());
+            input = InputView.inputStringFromUser();
+        } while (!inputValidator.checkInput(input));
+
+        CalculatedValue stringInput = new CalculatedValue(input);
         stringInput.setValueList();
-
         double sum = calculate(stringInput);
-
         OutputView.print(sum);
     }
 
