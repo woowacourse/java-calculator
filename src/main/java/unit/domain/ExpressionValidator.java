@@ -11,6 +11,9 @@ public class ExpressionValidator {
 		if (isInvalidSize(tokens)) {
 			throw new IllegalArgumentException("식은 최소 3자 이상이어야 합니다.");
 		}
+		if (isEndWithOperator(tokens)) {
+			throw new IllegalArgumentException("식의 마지막은 연산자가 될수 없습니다.");
+		}
 		if (isUnbalanced(tokens)) {
 			throw new IllegalArgumentException("연산자 혹은 숫자의 개수가 너무 많습니다.");
 		}
@@ -20,10 +23,16 @@ public class ExpressionValidator {
 		return tokens.size() < MIN_SIZE_OF_TOKENS;
 	}
 
+	private static boolean isEndWithOperator(final List<Token> tokens) {
+		final Token lastToken = tokens.get(tokens.size() - 1);
+		return isOperator(lastToken);
+	}
+
+	private static boolean isOperator(final Token token) {
+		return token.getClass() == Operator.class;
+	}
+
 	private static boolean isUnbalanced(final List<Token> tokens) {
-		if (isEndWithOperator(tokens)) {
-			return true;
-		}
 		for (int i = 0; i < tokens.size() - 1; i++) {
 			if (isNumberTurn(i) && isNumber(tokens.get(i))) {
 				continue;
@@ -34,15 +43,6 @@ public class ExpressionValidator {
 			return true;
 		}
 		return false;
-	}
-
-	private static boolean isEndWithOperator(final List<Token> tokens) {
-		final Token lastToken = tokens.get(tokens.size() - 1);
-		return isOperator(lastToken);
-	}
-
-	private static boolean isOperator(final Token token) {
-		return token.getClass() == Operator.class;
 	}
 
 	public static boolean isNumberTurn(final int indexOfTokens) {

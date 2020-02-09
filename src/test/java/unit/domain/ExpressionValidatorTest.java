@@ -32,7 +32,7 @@ class ExpressionValidatorTest {
 	}
 
 	@Test
-	void testCheckValidationForUnbalancedTokens() {
+	void testCheckValidationForEndWithOperatorTokens() {
 		tokens.add(new Number("1"));
 		tokens.add(new Operator("+"));
 		tokens.add(new Number("1"));
@@ -40,7 +40,20 @@ class ExpressionValidatorTest {
 
 		assertThatIllegalArgumentException().isThrownBy(() ->
 			checkValidation(tokens)
-		).withMessage("연산자 혹은 숫자의 개수가 너무 많습니다.");
+		).withMessage("식의 마지막은 연산자가 될수 없습니다.");
+	}
+
+	@Test
+	void testCheckValidationForUnbalancedTokens() {
+		tokens.add(new Number("1"));
+		tokens.add(new Number("1"));
+		tokens.add(new Operator("+"));
+		tokens.add(new Number("1"));
+
+		assertThatThrownBy(() ->
+			checkValidation(tokens)
+		).isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("연산자 혹은 숫자의 개수가 너무 많습니다.");
 	}
 
 	@Test
