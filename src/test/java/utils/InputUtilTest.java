@@ -43,6 +43,8 @@ class InputUtilTest {
 			Arguments.of("2 / 0", false),
 			Arguments.of("0 / 1", true),
 			Arguments.of("5 * 0", true),
-			Arguments.of("0 - 29", true));
+			Arguments.of("0 - 29", true),
+			Arguments.of("15 / 10", true),
+			Arguments.of("15 + 010", true));
 	}
 }

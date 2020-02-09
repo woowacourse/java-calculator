@@ -11,7 +11,7 @@ import view.OutputView;
 
 public class InputUtil {
 	private static final String SPACE = " ";
-	private static final String PATTERN = "[0-9]+(((\\s)[+\\-*](\\s)[0-9]+)|((\\s)[/](\\s)[1-9]+))*";
+	private static final String PATTERN = "[0-9]+(((\\s)[+\\-*](\\s)[0-9]+)|((\\s)[/](\\s)[1-9]+[0-9]*))*";
 
 	private static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
