@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
-    static private String delimiter = " ";
+    private static String delimiter = " ";
 
-    static public String calculate(String expression) throws IllegalArgumentException {
+    public static String calculate(String expression) throws IllegalArgumentException {
         List<String> tokens = Arrays.asList(expression.split(delimiter));
 
         checkIsValidSize(tokens);
