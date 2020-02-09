@@ -1,25 +1,25 @@
 package domain;
 
-public enum  Operator {
-    ADDITION("+"){
+public enum Operator {
+    ADDITION("+") {
         @Override
         public double apply(double operand1, double operand2) {
             return operand1 + operand2;
         }
     },
-    SUBTRACTION("-"){
+    SUBTRACTION("-") {
         @Override
         public double apply(double operand1, double operand2) {
             return operand1 - operand2;
         }
     },
-    MULTIPLICATION("*"){
+    MULTIPLICATION("*") {
         @Override
         public double apply(double operand1, double operand2) {
             return operand1 * operand2;
         }
     },
-    DIVISION("/"){
+    DIVISION("/") {
         @Override
         public double apply(double operand1, double operand2) {
             return operand1 / operand2;
@@ -29,7 +29,7 @@ public enum  Operator {
 
     private final String textOperator;
 
-    private Operator(String textOperator){
+    private Operator(String textOperator) {
         this.textOperator = textOperator;
     }
 
