@@ -6,9 +6,14 @@ import java.util.function.BinaryOperator;
 
 public enum Operator {
     ADDITION(Double::sum, "+"),
-    SUBTRACTION(Operator::subtract, "-"),
-    MULTIPLICATION(Operator::multiply, "*"),
-    DIVISION(Operator::divide, "/");
+    SUBTRACTION((a, b) -> a - b, "-"),
+    MULTIPLICATION((a, b) -> a * b, "*"),
+    DIVISION((a, b) -> {
+        if (b == 0) {
+            throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
+        }
+        return a / b;
+    }, "/");
 
     private BinaryOperator<Double> operate;
     private String symbol;
@@ -34,20 +39,5 @@ public enum Operator {
 
     private String getSymbol() {
         return symbol;
-    }
-
-    private static double subtract(double a, double b) {
-        return a - b;
-    }
-
-    private static double multiply(double a, double b) {
-        return a * b;
-    }
-
-    private static double divide(double a, double b) throws IllegalArgumentException {
-        if (b == 0) {
-            throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
-        }
-        return a / b;
     }
 }
