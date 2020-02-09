@@ -1,54 +1,50 @@
 package study;
 
-import org.junit.jupiter.api.BeforeEach;
+import static org.assertj.core.api.Assertions.*;
+
+import org.assertj.core.api.AbstractBigDecimalAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.ParameterizedTest;  //ParameterizedTest를 활용하면 더 많은 테스트 가능.
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import calculator.Calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-// Test
-// 입력되는 공식은
-// 1 + 3 * 4 / 2
-// 로 가정하여 진행
-
 public class CalculatorTest {
-    private ArrayList<Integer> numbers;
-    private ArrayList<String> operators;
-    private List<Integer> numbersTest;
+    private Calculator cal = new Calculator();
+    List<Integer> nums = new ArrayList<>();
+    List<String> opers = new ArrayList<>();
 
-    @BeforeEach
-    void setUp() {  //테스트 전 변수 초기화
-        numbers = new ArrayList<>();
-        numbers.add(1);
-        numbers.add(3);
-        numbers.add(4);
-        numbers.add(2);
-        operators = new ArrayList<>();
-        operators.add("+");
-        operators.add("*");
-        operators.add("/");
-        numbersTest = new ArrayList<>();
-        for (int i=0; i < 10; i++) {
-            numbersTest.add(i);
-        }
+    @Test
+    @DisplayName("Test calculate method")
+    public void 계산결과가_잘_나오는지_테스트() {
+        List<Integer> nums = Arrays.asList(1, 5, 4, 2);
+        List<String> opers = Arrays.asList("+", "*", "/");
+        assertThat(cal.runCalculator(nums, opers)).isEqualTo(12);
+        nums = Arrays.asList(5, 2, 7, 10, 10, 2);
+        opers = Arrays.asList("*", "-", "*", "+", "/");
+        assertThat(cal.runCalculator(nums, opers)).isEqualTo(20);
+        nums = Arrays.asList(100, 20, 30, 2);
+        opers = Arrays.asList("-", "-", "*");
+        assertThat(cal.runCalculator(nums, opers)).isEqualTo(100);
     }
 
     @Test
-    @DisplayName("Calculator Calculate Test")
-    void isResultCorrect() {    //calculate 함수의 결과 테스트
-        int answer = (((1+3)*4)/2);
-        int result = Calculator.calculate(numbers.remove(0), numbers, operators);
-        assertThat(answer).isEqualTo(result);
-        System.out.println("Answer " + answer + " is Correct");
+    @DisplayName("Test Divide By Zero")
+    void 어떤수를_0으로_나누었을때_발생하는_예외_확인() {
+        List<Integer> nums = Arrays.asList(1, 0);
+        List<String> opers = Arrays.asList("/");
+
+        assertThatExceptionOfType(ArithmeticException.class)
+                .isThrownBy(() -> {
+                    cal.runCalculator(nums, opers);
+                }).withMessage("/ by zero");
     }
-
-
 }
