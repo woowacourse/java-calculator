@@ -5,15 +5,13 @@ import view.OutputView;
 public class Application {
 
 	public static void main(String[] args) {
-		while (true) {
-			try {
-				String input = InputView.inputExpression();
-				String result = Calculator.calculate(input);
-				OutputView.printResult(result);
+		try {
+			String input = InputView.inputExpression();
+			String result = Calculator.calculate(input);
+			OutputView.printResult(result);
 
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
-			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
 	}
 
