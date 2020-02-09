@@ -9,7 +9,6 @@ public class Formula {
     private List<FormulaElement> formula;
 
     private static final int FIRST_ELEMENT = 0;
-    private static final int SECOND_ELEMENT = 1;
 
     public Formula(String[] inputs) {
         validateSizeOfInputsIsOdds(inputs);
@@ -18,11 +17,12 @@ public class Formula {
     }
 
     public double calculateFormula() {
-        Operand result = formula.get(FIRST_ELEMENT).getOperand();
+        int index = FIRST_ELEMENT;
+        Operand result = formula.get(index++).getOperand();
 
-        for (int i = SECOND_ELEMENT; i < formula.size(); i++) {
-            Operator operator = formula.get(i).getOperator();
-            Operand operand = formula.get(i).getOperand();
+        while (index < formula.size()) {
+            Operator operator = formula.get(index++).getOperator();
+            Operand operand = formula.get(index++).getOperand();
             result = new Operand(operator.calculate(result, operand));
         }
         return result.getOperandValue();
