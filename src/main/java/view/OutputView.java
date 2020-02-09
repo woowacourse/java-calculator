@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2019 by 이름
+ * Copyright (c) 2019 by 또링
  * All rights reserved.
  *
- * 클래스명.java
- * 클래스 설명
+ * OutputView.java
+ * 출력을 담당하는 클래스
  *
- * @author      이름
+ * @author      또링
  * @version     1.0
- * @date        dd mm yyyy
+ * @date        09 Feb 2020
  *
  */
 

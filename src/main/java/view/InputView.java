@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2019 by tiger,DDoring
+ * Copyright (c) 2019 by 또링
  * All rights reserved.
  *
  * InputView.java
  * 사용자의 입력을 담당하는 클래스
  *
- * @author      tiger,DDoring
+ * @author      또링
  * @version     1.0
- * @date        06 Feb 2020
+ * @date        09 Feb 2020
  *
  */
 

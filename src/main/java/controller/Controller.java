@@ -1,20 +1,20 @@
 /*
- * Copyright (c) 2019 by tiger,DDoring
+ * Copyright (c) 2019 by 또링
  * All rights reserved.
  *
  * Controller.java
- * StringValue 객체를 이용하여 계산을 하고 View를 통해 입출력을 제어하는 클래스
+ * Expression 객체를 이용하여 계산을 하고 View를 통해 입출력을 제어하는 클래스
  *
- * @author      tiger,DDoring
+ * @author      또링
  * @version     1.0
- * @date        07 Feb 2020
+ * @date        09 Feb 2020
  *
  */
 
 package controller;
 
 import calculator.Calculator;
-import model.StringValue;
+import model.Expression;
 import view.InputView;
 import view.OutputView;
 
@@ -27,37 +27,37 @@ public class Controller {
     private final String DIV = "/";
 
     public void run() {
-        StringValue stringInput;
+        Expression expression;
         do {
             String input = InputView.inputStringFromUser();
-            stringInput = new StringValue(input);
-        } while (!stringInput.isValidator());
-        stringInput.setValueList();
+            expression = new Expression(input);
+        } while (!expression.isValidator());
+        expression.setValueList();
 
-        double sum = calculate(stringInput);
+        double sum = calculate(expression);
 
         OutputView.print(sum);
     }
 
-    private double calculate(StringValue stringInput) {
-        List<Double> numberList = stringInput.getNumberList();
-        List<String> operatorList = stringInput.getOperatorList();
-        double sum = numberList.get(0);
+    private double calculate(Expression expression) {
+        List<Double> numbers = expression.getNumbers();
+        List<String> operators = expression.getOperators();
+        double sum = numbers.get(0);
 
         Calculator calculator = new Calculator();
 
-        for (int i = 0; i < operatorList.size(); i++) {
-            if (operatorList.get(i).equals(PLUS)) {
-                sum = calculator.plus(sum, numberList.get(i + 1));
+        for (int i = 0; i < operators.size(); i++) {
+            if (operators.get(i).equals(PLUS)) {
+                sum = calculator.plus(sum, numbers.get(i + 1));
             }
-            if (operatorList.get(i).equals(MINUS)) {
-                sum = calculator.minus(sum, numberList.get(i + 1));
+            if (operators.get(i).equals(MINUS)) {
+                sum = calculator.minus(sum, numbers.get(i + 1));
             }
-            if (operatorList.get(i).equals(MUL)) {
-                sum = calculator.mul(sum, numberList.get(i + 1));
+            if (operators.get(i).equals(MUL)) {
+                sum = calculator.mul(sum, numbers.get(i + 1));
             }
-            if (operatorList.get(i).equals(DIV)) {
-                sum = calculator.div(sum, numberList.get(i + 1));
+            if (operators.get(i).equals(DIV)) {
+                sum = calculator.div(sum, numbers.get(i + 1));
             }
         }
 
