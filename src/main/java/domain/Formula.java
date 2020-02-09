@@ -6,6 +6,8 @@ import java.util.List;
 public class Formula {
     private static final String BLANK = " ";
     private static final String[] OPERATORS = {"+", "-", "*", "/"};
+    private static final String NOT_NUMBER = "피연산자가 숫자가 아닙니다. %s";
+    private static final String WORNG_OPERATOR = "연산자가 잘못되었습니다. %s";
 
     private final String formula;
 
@@ -26,7 +28,7 @@ public class Formula {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("피연산자가 숫자가 아닙니다. %s" ,number));
+            throw new IllegalArgumentException(String.format(NOT_NUMBER ,number));
         }
     }
 
@@ -34,7 +36,7 @@ public class Formula {
         Arrays.stream(OPERATORS)
                 .filter(o -> o.equals(operator))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("연산자가 잘못되었습니다. %s" ,operator)));
+                .orElseThrow(() -> new IllegalArgumentException(String.format(WORNG_OPERATOR ,operator)));
     }
 
     public List<String> toList() {
