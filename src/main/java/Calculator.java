@@ -9,52 +9,23 @@ public class Calculator {
         String[] values = input.split(" ");
         returnValue = Double.parseDouble(values[0]);
         for (int i = INDEX_INIT; i < values.length; i++) {
-            check(i, values[i]);
+            checkStep(i, values[i]);
         }
         return returnValue;
     }
 
-    private static void check(int i, String value) {
+    private static void checkStep(int i, String value) {
+        if (isEven(i) == true) {
+            returnValue = Operator.calculate(nowSign, returnValue, Double.parseDouble(value));
+            return;
+        }
+        nowSign = value;
+    }
+
+    private static boolean isEven(int i) {
         if (i % 2 == EVEN) {
-            calculate(Double.parseDouble(value));
+            return true;
         }
-        if (i % 2 == ODD) {
-            nowSign = value;
-        }
-    }
-
-    private static void calculate(double nowNumber) {
-        if (nowSign.equals("+")) {
-            plus(nowNumber);
-            return;
-        }
-        if (nowSign.equals("-")) {
-            minus(nowNumber);
-            return;
-        }
-        if (nowSign.equals("*")) {
-            multiply(nowNumber);
-            return;
-        }
-        if (nowSign.equals("/")) {
-            divide(nowNumber);
-            return;
-        }
-    }
-
-    private static void plus(double nowNumber) {
-        returnValue += nowNumber;
-    }
-
-    private static void minus(double nowNumber) {
-        returnValue -= nowNumber;
-    }
-
-    private static void multiply(double nowNumber) {
-        returnValue *= nowNumber;
-    }
-
-    private static void divide(double nowNumber) {
-        returnValue /= nowNumber;
+        return false;
     }
 }
