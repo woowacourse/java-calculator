@@ -1,9 +1,12 @@
+package utils;
+
+import domain.Operator;
+
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class InputValidator {
     private static final int EVEN = 0;
-    private static final int ODD = 1;
 
     public static String checkInputHandler(String input) {
         if (checkString(input.split(" ")) == true && isUndefinedValue(input) == true) {

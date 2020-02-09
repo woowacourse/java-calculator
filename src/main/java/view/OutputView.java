@@ -1,3 +1,5 @@
+package view;
+
 public class OutputView {
     public static void printAnswer(double returnValue) {
         if (returnValue == Math.rint(returnValue)) {
