@@ -1,7 +1,7 @@
 package calculator;
 
 /**
- * OperatorType 클래스는 계산기에서 사용되는 사칙연산을 모아놓은 Enum이다.
+ * OperatorType 클래스는 계산기에서 사용되는 사칙연산을 모아놓은 Enum type 이다.
  * 각각의 사칙연산 문자열에 대하여 매칭되는 원소를 찾고,
  * 그 원소에 포함되어있는 메서드(OperationMethod 인터페이스를 바탕으로 만든)를 사용한다.
  */
@@ -16,6 +16,7 @@ public enum OperatorType {
      * operator는 연산자의 문자열 값이다. 이를 바탕으로 연산자 문자열과 실제 연산 메서드를 매칭한다.
      */
     private final String operator;
+
     /**
      * operationMethod는 각각의 연산이 실제 수행될 때 가지는 메서드가 저장되는 인터페이스이다.
      */

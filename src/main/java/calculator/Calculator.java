@@ -11,19 +11,19 @@ public class Calculator {
     /**
      * INPUT_MESSAGE는 상수 문자열로, 입력을 받을 때 출력되는 메세지를 저한다.
      */
-    private final String INPUT_MESSAGE = "계산할 수식을 입력해주세요. (숫자와 연산자는 공백으로 구분)";
+    private final static String INPUT_MESSAGE = "계산할 수식을 입력해주세요. (숫자와 연산자는 공백으로 구분)";
     /**
      * ARITHMETIC_ERROR_MESSAGE는 상수 문자열로, 빈 문자열을 받을 때 출력되는 메세지를 저장한다.
      */
-    private final String EMPTY_ERROR_MESSAGE = "빈 문자열입니다. 다시 입력해주세요.";
+    private final static String EMPTY_ERROR_MESSAGE = "빈 문자열입니다. 다시 입력해주세요.";
     /**
      * ARITHMETIC_ERROR_MESSAGE 상수 문자열로, 수학 관련 예외(여기서는 0으로 나누는 경우이다) 발생 시 출력되는 메세지를 저장한다.
      */
-    private final String ARITHMETIC_ERROR_MESSAGE = "0으로 나눌 수 없습니다. 다시 입력해주세요.";
+    private final static String ARITHMETIC_ERROR_MESSAGE = "0으로 나눌 수 없습니다. 다시 입력해주세요.";
     /**
      * ILLEGAL_EQUATION_ERROR_MESSAGE는 상수 문자열로, 잘못된 수식이 연산 중 예외를 발생시킬 때에 출력되는 메세지를 저장한다.
      */
-    private final String ILLEGAL_EQUATION_ERROR_MESSAGE = "잘못된 수식이 입력되었습니다. 다시 입력해주세요.";
+    private final static String ILLEGAL_EQUATION_ERROR_MESSAGE = "잘못된 수식이 입력되었습니다. 다시 입력해주세요.";
 
     /**
      * start 메서드는 계산기의 메인 동작을 수행한다.
