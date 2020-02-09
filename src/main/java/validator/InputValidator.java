@@ -18,9 +18,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputValidator {
-    private final String BLANK = " ";
-    private final int EVEN = 0;
-    private final int ODD = 1;
+    public static final String BLANK = " ";
+    private static final String ZERO = "0";
+    private static final int EVEN = 0;
+    private static final int ODD = 1;
 
     public boolean validateExpression(String expression) {
         String[] expressionArr = expression.split(BLANK);
@@ -35,10 +36,7 @@ public class InputValidator {
         List<String> evenIndexOfExpression = getEvenOrOddArr(EVEN, expressionArr);
         List<String> oddIndexOfExpression = getEvenOrOddArr(ODD, expressionArr);
 
-        if (!(isNumberAllElements(evenIndexOfExpression) && isRightOperatorAllElements(oddIndexOfExpression))) {
-            return false;
-        }
-        return true;
+        return isNumberAllElements(evenIndexOfExpression) && isRightOperatorAllElements(oddIndexOfExpression);
     }
 
     private List<String> getEvenOrOddArr(int num, String[] inputArr) {
@@ -63,9 +61,9 @@ public class InputValidator {
     }
 
     public boolean isRightOperatorAllElements(List<String> oddIndexOfExpression) {
-        String[] signs = {"+", "-", "*", "/"};
+        final List<String> fourOperators = Arrays.asList("+","-","*","/");
         for (String operator : oddIndexOfExpression) {
-            if (!Arrays.asList(signs).contains(operator)) {
+            if (!fourOperators.contains(operator)) {
                 return false;
             }
         }
@@ -74,7 +72,7 @@ public class InputValidator {
 
     public boolean isNotDivideByZero(String[] expression) {
         for (int i = 2; i < expression.length; i += 2) {
-            if (expression[i].equals("0") && expression[i - 1].equals("/")) {
+            if (ZERO.equals(expression[i]) && expression[i - 1].equals("/")) {
                 return false;
             }
         }

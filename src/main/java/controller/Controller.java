@@ -21,10 +21,10 @@ import view.OutputView;
 import java.util.List;
 
 public class Controller {
-    private final String PLUS = "+";
-    private final String MINUS = "-";
-    private final String MUL = "*";
-    private final String DIV = "/";
+    private static final String PLUS = "+";
+    private static final String MINUS = "-";
+    private static final String MUL = "*";
+    private static final String DIV = "/";
 
     public void run() {
         Expression expression;

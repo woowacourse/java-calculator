@@ -31,7 +31,7 @@ public class Expression {
     }
 
     public void setValueList() {
-        String[] componentOfExpression = expression.split(" ");
+        String[] componentOfExpression = expression.split(InputValidator.BLANK);
         for (int i = 0; i < componentOfExpression.length; i++) {
             if (i % 2 == 0) {
                 numbers.add(Double.parseDouble(componentOfExpression[i]));
