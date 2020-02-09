@@ -30,14 +30,10 @@ public class Expression {
         boolean ret = true;
 
         for (int i = 1; i < input.length && ret == true; i += 2) {
-            ret = isOperator(input[i]);
+            ret = Operator.isOperator(input[i]);
         }
 
         return ret;
-    }
-
-    private boolean isOperator(String input) {
-        return input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/");
     }
 
     private boolean isNumberAtEvenIndex(String[] input) {
