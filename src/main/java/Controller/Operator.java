@@ -1,10 +1,30 @@
 package Controller;
 
 public enum Operator {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/");
+    PLUS("+"){
+        @Override
+        public double compute(double num1, double num2){
+            return num1 + num2;
+        }
+    },
+    MINUS("-"){
+        @Override
+        public double compute(double num1, double num2){
+            return num1 - num2;
+        }
+    },
+    MULTIPLY("*"){
+        @Override
+        public double compute(double num1, double num2){
+            return num1 * num2;
+        }
+    },
+    DIVIDE("/"){
+        @Override
+        public double compute(double num1, double num2){
+            return num1 / num2;
+        }
+    };
 
     private String sign;
 
@@ -12,24 +32,7 @@ public enum Operator {
         this.sign = sign;
     }
 
-    public double compute(double result, int number) {
-        switch (this) {
-            case PLUS:
-                result += number;
-                return result;
-            case MINUS:
-                result -= number;
-                return result;
-            case MULTIPLY:
-                result *= number;
-                return result;
-            case DIVIDE:
-                result /= number;
-                return result;
-            default:
-                return result;
-        }
-    }
+    public abstract double compute(double num1, double num2);
 
     public static Operator getEnumFromString(String sign) {
         for (Operator op : Operator.values()) {
