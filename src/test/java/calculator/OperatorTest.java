@@ -45,7 +45,11 @@ public class OperatorTest {
     @CsvFileSource(resources = "/testData.csv")
     void divide(Double operand1, Double operand2) {
         double expected = operand1 / operand2;
-        assertThat(Operator.DIVIDE.calculate(operand1, operand2)).isEqualTo(expected);
+        try {
+            assertThat(Operator.DIVIDE.calculate(operand1, operand2)).isEqualTo(expected);
+        } catch (IllegalArgumentException iae) {
+            assertThat(iae.getMessage()).isEqualTo("0으로 나눌 수 없습니다.");
+        }
     }
 
     @BeforeEach
@@ -55,10 +59,10 @@ public class OperatorTest {
         try {
             BufferedWriter fw = new BufferedWriter(new FileWriter("out/test/classes/testData.csv"));
             for (int i = 0; i < TEST_COUNTS; i++) {
-                data1 = random.nextDouble();
-                data2 = random.nextDouble();
                 fw.write(data1 + ", " + data2);
                 fw.newLine();
+                data1 = random.nextDouble();
+                data2 = random.nextDouble();
             }
             fw.flush();
             fw.close();
