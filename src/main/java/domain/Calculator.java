@@ -5,6 +5,7 @@ import utils.InputValidation;
 import view.InputView;
 import view.OutputView;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.function.BiFunction;
 
@@ -12,9 +13,6 @@ public class Calculator {
 
     private final static int ZERO = 0;
     private final static int EVEN = 2;
-
-    private final List<Double> numbers = new ArrayList<>();
-    private final List<Operator> operators = new ArrayList<>();
     private final BiFunction<Double, Double, Double> ADDITION = (a, b) -> a + b;
     private final BiFunction<Double, Double, Double> SUBTRACTION = (a, b) -> a - b;
     private final BiFunction<Double, Double, Double> MULTIPLICATION = (a, b) -> a * b;
@@ -23,15 +21,6 @@ public class Calculator {
         return a / b;
     };
     private final Map<Operator, BiFunction<Double, Double, Double>> calculateFunctionMap = new HashMap<>();
-
-
-    public List<Double> getNumbers() {
-        return numbers;
-    }
-
-    public List<Operator> getOperators() {
-        return operators;
-    }
 
     public Calculator() {
         calculateFunctionMap.put(Operator.PLUS, ADDITION);
@@ -51,20 +40,23 @@ public class Calculator {
         for (int i = ZERO; i < formulas.length; i++) {
             String temp = formulas[i];
             if (i % EVEN == ZERO) {
-                numbers.add(InputValidation.checkIsNumber(formulas[i]));
+                Operand.addOperand(InputValidation.checkIsNumber(formulas[i]));
                 continue;
             }
-            operators.add(Operator.getOperatorForChar(InputValidation.checkIsOperator(formulas[i])));
+            OperatorRepository.addOperator(Operator.getOperatorForChar(InputValidation.checkIsOperator(formulas[i])));
         }
     }
 
     private double calculate() {
+        List<Double> operands = Operand.getOperands();
+        List<Operator> operators = OperatorRepository.getOperatorList();
+
         int numberIndex = 1;
-        double result = numbers.get(0);
+        double result = operands.get(0);
         for (Operator operator : operators) {
             result = calculateFunctionMap
                     .get(operator)
-                    .apply(result, numbers.get(numberIndex));
+                    .apply(result, operands.get(numberIndex));
             numberIndex++;
         }
         return result;
