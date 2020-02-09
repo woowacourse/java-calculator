@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Calculator {
 
-    Queue<String> operatorQueue = new LinkedList<>();
-    Queue<Double> numberQueue = new LinkedList<>();
+    private Queue<String> operatorQueue = new LinkedList<>();
+    private Queue<Double> numberQueue = new LinkedList<>();
 
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
