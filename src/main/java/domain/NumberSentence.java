@@ -6,11 +6,13 @@ import java.util.Objects;
 import java.util.Queue;
 
 public class NumberSentence {
-    /* NumberSentence는 계산식을 의미합니다. */
-    private final List<Integer> numbers;
-    private final Queue<String> operators;
+    /**
+     *  NumberSentence는 계산식을 의미합니다.
+     */
+    private final List<Number> numbers;
+    private final Queue<Operator> operators;
 
-    public NumberSentence(List<Integer> numbers, Queue<String> operators) {
+    public NumberSentence(List<Number> numbers, Queue<Operator> operators) {
         this.numbers = numbers;
         this.operators = operators;
     }
@@ -24,11 +26,11 @@ public class NumberSentence {
                 Objects.equals(operators, that.operators);
     }
 
-    Queue<String> getOperators() {
+    Queue<Operator> getOperators() {
         return operators;
     }
 
-    List<Integer> getNumbers() {
+    List<Number> getNumbers() {
         return numbers;
     }
 }

@@ -1,49 +1,30 @@
 package domain;
 
-import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Queue;
 
 public class Calculator {
-    public int calculateNumberSentence(NumberSentence numberSentence) {
-        Queue<String> operators = numberSentence.getOperators();
-        List<Integer> numbers = numberSentence.getNumbers();
+    public Number calculateNumberSentence(NumberSentence numberSentence) {
+        Queue<Operator> operators = numberSentence.getOperators();
+        List<Number> numbers = numberSentence.getNumbers();
         int size = operators.size();
-        int result = numbers.get(0);
+        Number result = numbers.get(Converter.FIRST_INDEX);
 
         for (int i = 0; i < size; i++) {
-            String operator = operators.poll();
-            result = calculate(result, numbers.get(i+1), operator);
+            result = calculate(result, numbers.get(i + 1), operators.poll());
         }
         return result;
     }
 
-    private int calculate(int first, int second, String operator) {
-        if (operator.equals("+")) {
-            return add(first, second);
+    private Number calculate(Number first, Number second, Operator operator) {
+        if (operator == Operator.PLUS) {
+            return first.add(second);
+        } else if (operator == Operator.MINUS) {
+            return first.substract(second);
+        } else if (operator == Operator.MULTIPLIFICATION) {
+            return first.multiply(second);
+        } else {
+            return first.divide(second);
         }
-        if (operator.equals("-")) {
-            return substract(first, second);
-        }
-        if (operator.equals("*")) {
-            return multiply(first, second);
-        }
-        return divide(first, second);
-    }
-
-    private int add(int first, int second) {
-        return first + second;
-    }
-
-    private int substract(int first, int second) {
-        return first - second;
-    }
-
-    private int multiply(int first, int second) {
-        return first * second;
-    }
-
-    private int divide(int first, int second) {
-        return first / second;
     }
 }

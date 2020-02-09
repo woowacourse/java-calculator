@@ -1,32 +1,26 @@
 package view;
 
-import domain.NumberSentence;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.*;
+import java.util.Scanner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class InputViewTest {
     private Scanner scanner;
     private final ByteArrayOutputStream outView = new ByteArrayOutputStream();
     private InputView inputView;
-    @BeforeEach
-    void init() {
-        System.setOut(new PrintStream(outView));
-    }
 
     @Test
-    void getNumberSentenceWithProperInput() {
-        String input = "2 + 3 * 4";
+    void receiveInput() {
+        String input = "2 + 3 / 4";
+        System.setOut(new PrintStream(outView));
         inputView = createInputViewForTest(input);
 
-        assertThat(inputView.getNumberSentence()).isEqualTo(new NumberSentence(Arrays.asList(2,3,4),new LinkedList<>(Arrays.asList("+", "*"))));
+        assertThat(inputView.receiveInput()).isEqualTo(input);
     }
 
     private InputView createInputViewForTest(String input) {
