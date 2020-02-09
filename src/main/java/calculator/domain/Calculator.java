@@ -5,14 +5,32 @@ import calculator.view.OutputView;
 
 public class Calculator {
     private static final int INDEX_INIT = 1;
+    private static final int FIRST_VALUE_INDEX = 0;
     private static final int EVEN = 0;
     private static final int ODD = 1;
+    private static final String DELIMITER = " ";
     static double returnValue;
     static String nowSign;
 
+    public void setNowSign(String sign){
+        this.nowSign = sign;
+    }
+
+    public void setReturnValue(double returnValue){
+        this.returnValue = returnValue;
+    }
+
+    public double getReturnValue(){
+        return this.returnValue;
+    }
+
+    public String getNowSign(){
+        return this.nowSign;
+    }
+
     public static void run() {
-        String[] values = InputView.inputHandler().split(" ");
-        returnValue = Double.parseDouble(values[0]);
+        String[] values = InputView.inputHandler().split(DELIMITER);
+        returnValue = Double.parseDouble(values[FIRST_VALUE_INDEX]);
         selectOddNumberOrEvenNumber(values);
         OutputView.printResult(returnValue);
     }

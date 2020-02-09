@@ -30,7 +30,6 @@ public class ExceptionHandlerTest {
         assertThat(checkString(inputStrings)).isTrue();
     }
 
-
     @Test
     @DisplayName("숫자인지 체크해주는 테스트")
     void checkNumberTest() {
@@ -47,8 +46,8 @@ public class ExceptionHandlerTest {
 
     @Test
     @DisplayName("0으로 나누었을 때의 예외처리를 해주는 테스트")
-    void isUndefinedValueTest() {
+    void checkUndefinedValueTest() {
         String str = "0 / 0";
-        assertThat(isUndefinedValue(str)).isFalse();
+        assertThat(checkUndefinedValue(str)).isFalse();
     }
 }

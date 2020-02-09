@@ -10,6 +10,7 @@ import static calculator.view.InputView.*;
 public class ExceptionHandler {
     private static final int EVEN = 0;
     private static final int ODD = 1;
+    private static final String DELIMITER = " ";
     private static final String BLANK = " ";
     private static final String EMPTY_STRING = "";
     private static final String NUMBER_FORMAT = "-?\\d+(\\.\\d+)?";
@@ -18,7 +19,7 @@ public class ExceptionHandler {
 
 
     public static String checkInputHandler(String input) {
-        if (checkString(input.split(BLANK)) == true && checkUndefinedValue(input) == true) {
+        if (checkString(input.split(DELIMITER)) == true && checkUndefinedValue(input) == true) {
             return input;
         }
         throw new IllegalArgumentException();

@@ -1,65 +1,67 @@
 package calculator;
 
+import calculator.domain.Calculator;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static calculator.domain.Calculator.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
     static final double TEST_RETURN_VALUE_INIT = 10;
-    static double returnValue;
-    static String nowSign;
+    static final String TEST_NOW_SIGN_INIT = "+";
+    Calculator calculator = new Calculator();
 
     @BeforeEach
     void setUp() {
-        returnValue = TEST_RETURN_VALUE_INIT;
+        calculator.setReturnValue(TEST_RETURN_VALUE_INIT);
+        calculator.setNowSign(TEST_NOW_SIGN_INIT);
+    }
+
+    static Stream<Arguments> stringArrayProvider() {
+        return Stream.of(
+            Arguments.of(new String[]{"4", "*", "3", "/", "5", "-", "20"}, -17.6),
+            Arguments.of(new String[]{"2", "-", "1", "*", "3", "+", "2"}, 5)
+        );
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:+:5:10", "2:+:10:20", "4:-:8:2", "6:*:2:20", "8:/:2:5"}, delimiter = ':')
-    void checkTest(int i, String sign, String input, double expected) {
-        nowSign = sign;
-        check(i, input);
-        assertThat(returnValue).isEqualTo(expected);
+    @MethodSource("stringArrayProvider")
+    @DisplayName("문자열을 받아 계산하는 메서드")
+    void selectOddNumberOrEvenNumberTest(String[] values, double expected){
+        calculator.setReturnValue(Double.parseDouble(values[0]));
+        selectOddNumberOrEvenNumber(values);
+        assertThat(calculator.getReturnValue()).isEqualTo(expected);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5:+:15", "5:-:5", "5:*:50", "5:/:2"}, delimiter = ':')
-    void calculateTest(double input, String sign, double expected) {
-        nowSign = sign;
-        calculate(input);
-        assertThat(returnValue).isEqualTo(expected);
+    @CsvSource(value = {"0:-:+", "1:*:*", "3:-:-"}, delimiter = ':')
+    @DisplayName("인덱스가 홀수면 부호를 저장하는 메서드")
+    void calculateOddNumberTest(int index, String value, String expected){
+        calculator.calculateOddNumber(index, value);
+        assertThat(calculator.getNowSign()).isEqualTo(expected);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5:15", "10:20", "33:43"}, delimiter = ':')
-    void plusTest(double input, double expected) {
-        plus(input);
-        System.out.println(input);
-        System.out.println(expected);
-        assertThat(returnValue).isEqualTo(expected);
+    @CsvSource(value = {"0:1:11", "2:2.3:12.3", "3:4.0:10"}, delimiter = ':')
+    @DisplayName("인덱스가 짝수면 계산하는 메서드")
+    void calculateEvenNumberTest(int index, String value, double expected){
+        calculator.calculateEvenNumber(index, value);
+        assertThat(calculator.getReturnValue()).isEqualTo(expected);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5:5", "10:0", "33:-23"}, delimiter = ':')
-    void minusTest(double input, double expected) {
-        minus(input);
-        assertThat(returnValue).isEqualTo(expected);
+    @CsvSource(value = {"1:11", "2.3:12.3", "4.0:14.0"}, delimiter = ':')
+    @DisplayName("연산자에 따라 계산하는 메서드")
+    void selectOperatorsTest(double value, double expected){
+        calculator.selectOperators(value);
+        assertThat(calculator.getReturnValue()).isEqualTo(expected);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"5:50", "10:100", "33:330"}, delimiter = ':')
-    void multiplyTest(double input, double expected) {
-        multiply(input);
-        assertThat(returnValue).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"5:2", "10:1", "4:2.5"}, delimiter = ':')
-    void divideTest(double input, double expected) {
-        divide(input);
-        assertThat(returnValue).isEqualTo(expected);
-    }
 }

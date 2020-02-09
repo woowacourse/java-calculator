@@ -2,7 +2,7 @@ package calculator.domain;
 
 import java.util.function.Function;
 
-enum Operator {
+public enum Operator {
     PLUS("+", nowNumber -> Calculator.returnValue += nowNumber),
     MINUS("-", nowNumber -> Calculator.returnValue -= nowNumber),
     MULTIPLY("*", nowNumber -> Calculator.returnValue *= nowNumber),
