@@ -37,7 +37,8 @@ public class InputValidator {
             separateNumbersAndOperators(input[i], i);
         }
         List<Boolean> isNumberCheck = numbers.stream().map(this::numberCheck).collect(Collectors.toList());
-        return isNumberCheck.contains(false);
+        List<Boolean> isOperatorCheck = operators.stream().map(this::operatorCheck).collect(Collectors.toList());
+        return isNumberCheck.contains(false) || isOperatorCheck.contains(false);
     }
 
     private void separateNumbersAndOperators(String input, int index) {
@@ -46,6 +47,11 @@ public class InputValidator {
             return;
         }
         operators.add(input);
+    }
+
+    private boolean operatorCheck(String operator) {
+        System.out.println(!operator.matches("^[0-9]"));
+        return !operator.matches("^[0-9]");
     }
 
     private boolean numberCheck(String number) {
