@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class InputExceptionTest {
+public class InputValidationTest {
 
     private static String[] str = {"3", "+", "4", "/","10","/","10"};
 

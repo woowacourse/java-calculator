@@ -1,12 +1,28 @@
 package Model;
 
-public enum Operator {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/");
+public enum Operator implements Operation {
+    PLUS("+") {
+        public double compute(double result, int number) {
+            return result + number;
+        }
+    },
+    MINUS("-") {
+        public double compute(double result, int number) {
+            return result - number;
+        }
+    },
+    MULTIPLY("*") {
+        public double compute(double result, int number) {
+            return result * number;
+        }
+    },
+    DIVIDE("/") {
+        public double compute(double result, int number) {
+            return result / number;
+        }
+    };
 
-    private String sign;
+    private final String sign;
 
     Operator(String sign) {
         this.sign = sign;
@@ -16,30 +32,7 @@ public enum Operator {
         return this.sign.equals(sign);
     }
 
-    public double compute(double result, int number) {
-        if (this == PLUS) {
-            result += number;
-            return result;
-        }
-
-        if (this == MINUS) {
-            result -= number;
-            return result;
-        }
-
-        if (this == MULTIPLY) {
-            result *= number;
-            return result;
-        }
-
-        if (this == DIVIDE) {
-            result /= number;
-            return result;
-        }
-        return result;
-    }
-
-    public static Operator getEnumFromString(String sign) {
+    public static Operator from(String sign) {
         for (Operator op : Operator.values()) {
             if (op.sign.equals(sign)) {
                 return op;
@@ -48,4 +41,8 @@ public enum Operator {
         return null;
     }
 
+}
+
+interface Operation {
+    double compute(double result, int number);
 }

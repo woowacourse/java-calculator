@@ -1,8 +1,8 @@
 package Controller;
 
-import Model.Operator;
 import View.InputView;
 import View.OutputView;
+import Model.Operator;
 
 public class InputValidation {
 
