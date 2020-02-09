@@ -13,7 +13,7 @@
 
 package calculator;
 
-public class Multiply implements Calculator {
+public class Multiply implements Operator {
     public double getOperatedValue(double x, double y) {
         return x * y;
     }

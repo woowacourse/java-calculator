@@ -27,21 +27,21 @@ public class CalculatorTest {
 
     @Test
     void testPlus() {
-        Assertions.assertEquals(7.0, op.getOperator("+").getOperatedValue(2.0, 5.0));
+        Assertions.assertEquals(7.0, op.getOperator("+").Operate(2.0, 5.0));
     }
 
     @Test
     void testMinus() {
-        Assertions.assertEquals(-3.0, op.getOperator("-").getOperatedValue(2.0, 5.0));
+        Assertions.assertEquals(-3.0, op.getOperator("-").Operate(2.0, 5.0));
     }
 
     @Test
     void testMul() {
-        Assertions.assertEquals(10.0, op.getOperator("*").getOperatedValue(2.0, 5.0));
+        Assertions.assertEquals(10.0, op.getOperator("*").Operate(2.0, 5.0));
     }
 
     @Test
     void testDiv() {
-        Assertions.assertEquals(0.4, op.getOperator("/").getOperatedValue(2.0, 5.0));
+        Assertions.assertEquals(0.4, op.getOperator("/").Operate(2.0, 5.0));
     }
 }

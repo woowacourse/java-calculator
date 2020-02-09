@@ -13,7 +13,7 @@
 
 package calculator;
 
-public class Minus implements Calculator {
+public class Minus implements Operator {
     public double getOperatedValue(double x, double y) {
         return x - y;
     }
