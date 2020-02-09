@@ -6,7 +6,7 @@ import View.OutputView;
 
 public class InputValidation {
 
-    public static String[] checkException() {
+    public static String[] checkValidation() {
         OutputView.printInputMessage();
         String[] inputs = InputView.input();
         try {
@@ -18,7 +18,7 @@ public class InputValidation {
         } catch (Exception e) {
             OutputView.printInputExceptionMessage(e);
         }
-        return checkException();
+        return checkValidation();
     }
 
     private static void validateSpace(String[] inputs) throws Exception {
