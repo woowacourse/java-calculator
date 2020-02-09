@@ -5,9 +5,13 @@ public class Main {
         Input input = new Input();
         Calculator calculator = new Calculator();
         Output output = new Output();
+        String[] splitString;
 
-        String[] splitString = input.splitString();
-        double result = calculator.calculate(splitString);
-        output.printResult(result);
+        try {
+            splitString = input.inputFormula();
+            output.printResult(calculator.calculate(splitString));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
     }
 }
