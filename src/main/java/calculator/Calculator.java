@@ -10,19 +10,18 @@ public class Calculator {
     }
 
     public double calculateByOperator(double left, double right, String operator) {
-        double result = 0d;
-        if (operator.equals("+")) {
-            result = left + right;
+        if (Operator.PLUS.getOperator().equals(operator)) {
+            return left + right;
         }
-        if (operator.equals("-")) {
-            result = left - right;
+        if (Operator.MINUS.getOperator().equals(operator)) {
+            return left - right;
         }
-        if (operator.equals("*")) {
-            result = left * right;
+        if (Operator.MULTIPLY.getOperator().equals(operator)) {
+            return left * right;
         }
-        if (operator.equals("/")) {
-            result = left / right;
+        if (Operator.DIVIDE.getOperator().equals(operator)) {
+            return left / right;
         }
-        return result;
+        throw new IllegalArgumentException("Operator exception.");
     }
 }
