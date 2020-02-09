@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class InputValues {
-    private static String value;
-    private static String[] values;
+    private String value;
+    private String[] values;
 
     public InputValues() {
         System.out.print("문자열 수식을 입력해주세요: ");
@@ -53,7 +53,6 @@ public class InputValues {
             throw new IllegalArgumentException("연산자와 숫자가 맞지 않습니다.");
     }
 
-    public static String getValueByIndex(int index) {
     boolean isNumberIndex(int index) {
         if (index < 0)
             return false;
@@ -70,10 +69,11 @@ public class InputValues {
         return false;
     }
 
+    public String getValueByIndex(int index) {
         return values[index];
     }
 
-    public static int getValuesLength() {
+    public int getValuesLength() {
         return values.length;
     }
 }

@@ -3,7 +3,7 @@ public class Main {
         InputValues inputValues = new InputValues();
         Calculator calculator = new Calculator();
 
-        calculator.calculate();
+        calculator.calculate(inputValues);
         calculator.printResult();
     }
 }
