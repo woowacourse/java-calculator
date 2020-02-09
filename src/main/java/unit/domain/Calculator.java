@@ -11,7 +11,7 @@ public class Calculator {
 		Operator operator;
 		Number number2;
 
-		while (expression.size() >= MIN_SIZE_OF_TOKENS) {
+		while (canCalculate(expression)) {
 			number1 = (Number)expression.pop();
 			operator = (Operator)expression.pop();
 			number2 = (Number)expression.pop();
@@ -25,8 +25,12 @@ public class Calculator {
 	}
 
 	private static void checkValidation(Expression expression) {
-		if (expression.size() < MIN_SIZE_OF_TOKENS) {
+		if (!canCalculate(expression)) {
 			throw new IllegalArgumentException("식은 최소 3자 이상이어야 합니다.");
 		}
+	}
+
+	private static boolean canCalculate(Expression expression) {
+		return expression.isSizeGreaterThanOrEqualTo(MIN_SIZE_OF_TOKENS);
 	}
 }
