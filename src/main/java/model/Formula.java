@@ -18,14 +18,12 @@ import validator.InputValidator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculatedValue {
+public class Formula {
     private String input;
-    private boolean isCorrectValue;
     private List<Double> numbers = new ArrayList<>();
     private List<String> operators = new ArrayList<>();
-    private final InputValidator inputValidator = new InputValidator();
 
-    public CalculatedValue(String input) {
+    public Formula(String input) {
         this.input = input;
     }
 
