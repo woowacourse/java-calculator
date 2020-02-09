@@ -5,7 +5,7 @@ import java.io.InputStream;
 import org.junit.jupiter.api.Test;
 
 public class RunnerTest {
-    Runner runner = new Runner();
+    private Runner runner = new Runner();
 
     @Test
     public void run() {
