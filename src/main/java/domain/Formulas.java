@@ -13,7 +13,7 @@ public class Formulas {
 
     public Queue<String> getOperators() {
         Queue<String> operators = new LinkedList<>();
-        for (int index = 1; index < formulas.size(); index +=2) {
+        for (int index = 1; index < formulas.size(); index += 2) {
             operators.add(formulas.get(index));
         }
         return operators;
@@ -21,7 +21,7 @@ public class Formulas {
 
     public Queue<Double> getOperands() {
         Queue<Double> operands = new LinkedList<>();
-        for (int index = 0; index < formulas.size(); index +=2) {
+        for (int index = 0; index < formulas.size(); index += 2) {
             operands.add(Double.parseDouble(formulas.get(index)));
         }
         return operands;

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Formula {
     private static final String BLANK = " ";
-    private static final String[] OPERATORS = {"+", "-", "*", "/"};
+    private static final List<String> OPERATORS = Arrays.asList(new String[]{"+", "-", "*", "/"});
     private static final String NOT_NUMBER = "피연산자가 숫자가 아닙니다. %s";
     private static final String WRONG_OPERATOR = "연산자가 잘못되었습니다. %s";
 
@@ -33,10 +33,9 @@ public class Formula {
     }
 
     private void validOperator(String operator) {
-        Arrays.stream(OPERATORS)
-                .filter(o -> o.equals(operator))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(String.format(WRONG_OPERATOR ,operator)));
+       if (!OPERATORS.contains(operator)) {
+           throw new IllegalArgumentException(String.format(WRONG_OPERATOR ,operator));
+       }
     }
 
     public List<String> toList() {

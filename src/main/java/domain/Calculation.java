@@ -12,6 +12,9 @@ public enum Calculation {
         return num1 / num2;
     });
 
+    private static final String CAN_NOT_DIVIDE_ZERO = "0으로 나눌 수 없습니다.";
+    private static final String NO_MATCHING_OPERATOR = "일치하는 연산자가 없습니다.";
+
     private String operator;
     private BiFunction<Double, Double, Double>  expression;
 
@@ -20,9 +23,9 @@ public enum Calculation {
         this.expression = expression;
     }
 
-    private static void validDivideZero(double num) {
-        if (num == 0) {
-            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+    private static void validDivideZero(double secondOperand) {
+        if (secondOperand == 0) {
+            throw new IllegalArgumentException(CAN_NOT_DIVIDE_ZERO);
         }
     }
 
@@ -30,7 +33,7 @@ public enum Calculation {
         return Arrays.stream(Calculation.values())
                 .filter(calculation -> calculation.operator.equals(operator))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("일치하는 연산자가 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException(NO_MATCHING_OPERATOR));
     }
 
     public double calculate(double num1, double num2) {

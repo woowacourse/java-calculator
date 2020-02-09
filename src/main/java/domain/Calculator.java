@@ -6,13 +6,13 @@ public class Calculator {
     public static int calculateByFormulas(Formulas formulas) {
         Queue<String> operators = formulas.getOperators();
         Queue<Double> operands = formulas.getOperands();
-        double accumulationValue = operands.poll();
+        double stackUpValue = operands.poll();
 
         while (!operators.isEmpty()) {
             Calculation calculation = Calculation.findByOperator(operators.poll());
-            accumulationValue = calculation.calculate(accumulationValue, operands.poll());
+            stackUpValue = calculation.calculate(stackUpValue, operands.poll());
         }
-        return (int) accumulationValue;
+        return (int) stackUpValue;
     }
 
 }
