@@ -1,95 +1,67 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Expression {
-    private String[] expression;
+    private final List<String> readOnlyElements;
 
-    public Expression(String inputString) {
-        String[] inputStringArray = splitInput(inputString);
+    public Expression(String userInput) {
+        String[] userInputArray = userInput.split(" ");
 
-        if (!isCorrectStringArray(inputStringArray)) {
-            throw new IllegalArgumentException("입력은 다음과 같은 규칙을 따라야 합니다.\n"
-                + " * 1번째, 3번째, 5번째 등 홀수번 째 문자는 숫자여야합니다.\n"
-                + " * 2번째, 4번째, 6번째 등 짝수번 째 문자는 연산자(+, -, *, /)여야 합니다.\n"
-                + " * 마지막 문자는 숫자여야 합니다.\n"
-                + " * 각 문자들 사이에는 한 칸의 공백이 존재해야 하며, "
-                + "문장의 시작과 끝에는 공백이 없어야 합니다.\n");
+        if (isNotCorrectExpression(userInputArray)) {
+            throw new IllegalArgumentException(
+                    "※ 문자열 입력 규칙에 맞게 다시 입력해 주시기 바랍니다."
+            );
         }
 
-        this.expression = inputStringArray;
+        readOnlyElements = Arrays.asList(userInputArray);
     }
 
-    private String[] splitInput(String input) {
-        return input.split(" ");
+    public List<String> getReadOnlyElements() {
+        return readOnlyElements;
     }
 
-    private boolean isCorrectStringArray(String[] input) {
-        return isOperatorAtOddIndex(input) && isNumberAtEvenIndex(input) && isOddLength(input);
+    private boolean isNotCorrectExpression(String[] userInputArray) {
+        return isNotNumberAtOddPosition(userInputArray) || isNotOperatorAtEvenPosition(userInputArray) || isNotNumberAtLastPosition(userInputArray);
     }
 
-    private boolean isOperatorAtOddIndex(String[] input) {
-        boolean ret = true;
-
-        for (int i = 1; i < input.length && ret == true; i += 2) {
-            ret = isOperator(input[i]);
+    private boolean isNotOperatorAtEvenPosition(String[] userInputArray) {
+        for (int i = 1; i < userInputArray.length; i += 2) {
+            String inputAtOddIndex = userInputArray[i];
+            if (Operator.isNotOperator(inputAtOddIndex)) {
+                return true;
+            }
         }
 
-        return ret;
+        return false;
     }
 
-    private boolean isOperator(String input) {
-        return input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/");
-    }
-
-    private boolean isNumberAtEvenIndex(String[] input) {
-        boolean ret = true;
-
-        for (int i = 0; i < input.length && ret == true; i += 2) {
-            ret = isNumber(input[i]);
+    private boolean isNotNumberAtOddPosition(String[] userInputArray) {
+        for (int i = 0; i < userInputArray.length; i += 2) {
+            String inputAtEvenIndex = userInputArray[i];
+            if (isNotNumber(inputAtEvenIndex)) {
+                return true;
+            }
         }
 
-        return ret;
+        return false;
     }
 
-    private boolean isNumber(String input) {
+    private boolean isNotNumber(String input) {
         try {
             Double.parseDouble(input);
         } catch (NumberFormatException e) {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
-    private boolean isOddLength(String[] input) {
-        return input.length % 2 == 1;
-    }
-
-    public Operand getOperand(int position) {
-        int indexByPosition = getOperandIndexByPosition(position);
-
-        if (indexByPosition >= expression.length || indexByPosition < 0) {
-            return null;
-        }
-
-        return new Operand(expression[indexByPosition]);
-    }
-
-    private int getOperandIndexByPosition(int position) {
-        return (position - 1) * 2;
-    }
-
-    public Operator getOperator(int position) {
-        int indexByPosition = getOperatorIndexByPosition(position);
-
-        if (indexByPosition >= expression.length || indexByPosition <= 0) {
-            return null;
-        }
-
-        return new Operator(expression[indexByPosition]);
-    }
-
-    private int getOperatorIndexByPosition(int position) {
-        return (position - 1) * 2 + 1;
+    private boolean isNotNumberAtLastPosition(String[] userInputArray) {
+        int lastIndex = userInputArray.length - 1;
+        String inputAtLastIndex = userInputArray[lastIndex];
+        return isNotNumber(inputAtLastIndex);
     }
 
 }
