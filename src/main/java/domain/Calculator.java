@@ -5,7 +5,6 @@ import utils.InputValidation;
 import view.InputView;
 import view.OutputView;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.function.BiFunction;
 
@@ -40,7 +39,7 @@ public class Calculator {
         for (int i = ZERO; i < formulas.length; i++) {
             String temp = formulas[i];
             if (i % EVEN == ZERO) {
-                Operand.addOperand(InputValidation.checkIsNumber(formulas[i]));
+                OperandRepository.addOperand(InputValidation.checkIsNumber(formulas[i]));
                 continue;
             }
             OperatorRepository.addOperator(Operator.getOperatorForChar(InputValidation.checkIsOperator(formulas[i])));
@@ -48,7 +47,7 @@ public class Calculator {
     }
 
     private double calculate() {
-        List<Double> operands = Operand.getOperands();
+        List<Double> operands = OperandRepository.getOperands();
         List<Operator> operators = OperatorRepository.getOperatorList();
 
         int numberIndex = 1;
