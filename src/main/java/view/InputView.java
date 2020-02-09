@@ -1,8 +1,8 @@
-package calculator;
+package view;
 
 import java.util.Scanner;
 
-public class StringHandler {
+public class InputView {
     public static Scanner scanner = new Scanner(System.in);
 
     public static String[] getInputAndSplit() {
@@ -11,9 +11,5 @@ public class StringHandler {
         String[] inputs = input.split(" ");
 
         return inputs;
-    }
-
-    public static void printResult(double result) {
-        System.out.println("result: " + result);
     }
 }
