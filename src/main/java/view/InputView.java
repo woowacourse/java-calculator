@@ -2,7 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-import domain.errors.InvalidInputException;
+import errors.InvalidInputException;
 
 public class InputView {
     private Scanner scanner;

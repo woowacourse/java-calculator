@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import domain.errors.InvalidInputException;
+import errors.InvalidInputException;
 
 public class Converter {
     public static final int FIRST_INDEX = 0;

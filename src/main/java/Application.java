@@ -2,7 +2,7 @@ import domain.Calculator;
 import domain.Converter;
 import domain.NumberSentence;
 import domain.Number;
-import domain.errors.InvalidInputException;
+import errors.InvalidInputException;
 import view.InputView;
 import view.OutputView;
 
@@ -16,7 +16,7 @@ public class Application {
         Number result = calculator.calculateNumberSentence(numberSentence);
 
         OutputView outputView = new OutputView();
-        outputView.showCalculateResult(result);
+        outputView.showCalculateResult(result.toString());
     }
 
     private static NumberSentence createNumberSentence() {
