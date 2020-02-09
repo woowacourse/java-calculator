@@ -16,6 +16,7 @@ public enum Operator {
         return result;
     });
 
+    public static final String OPERATOR_VALUE = "^[\\+\\-\\*\\/]$";
     private String operator;
     private BiFunction<Double, Double, Double> expression;
 
@@ -32,7 +33,7 @@ public enum Operator {
     }
 
     public static boolean isOperator(String userInput) {
-        if (!userInput.matches("^[\\+\\-\\*\\/]$")) {
+        if (!userInput.matches(OPERATOR_VALUE)) {
             return false;
         }
         return true;
