@@ -9,18 +9,27 @@ public class InputValues {
         Scanner scanner = new Scanner(System.in);
 
         value = scanner.nextLine();
-        values = value.split(" ");
-        validateDouble();
-        validateOperator();
-        validateEndWithOperator();
+        validateValue(value);
     }
 
     public InputValues(String value){
         this.value = value;
-        values = value.split(" ");
+        validateValue(value);
     }
 
-    void validateDouble() {
+    void validateValue(String value) {
+        values = value.split(" ");
+
+        validateEndWithOperator();
+        for (int i = 0; i < values.length; i++) {
+            if (isNumberIndex(i))
+                validateDouble(values[i]);
+            if (isOperatorIndex(i))
+                validateOperator(values[i]);
+        }
+    }
+
+    void validateDouble(String value) {
         int length = values.length;
 
         for (int i = 0; i < length; i += 2) {
@@ -33,12 +42,8 @@ public class InputValues {
 
     }
 
-    void validateOperator() {
-        int length = values.length;
-
-        for (int i = 1; i < length; i += 2) {
-            Operator.getOperatorByString(values[i]);
-        }
+    void validateOperator(String value) {
+        Operator.getOperatorByString(value);
     }
 
     void validateEndWithOperator() {
@@ -49,6 +54,22 @@ public class InputValues {
     }
 
     public static String getValueByIndex(int index) {
+    boolean isNumberIndex(int index) {
+        if (index < 0)
+            return false;
+        if (index % 2 == 0)
+            return true;
+        return false;
+    }
+
+    boolean isOperatorIndex(int index) {
+        if (index < 0)
+            return false;
+        if (index % 2 == 1)
+            return true;
+        return false;
+    }
+
         return values[index];
     }
 
