@@ -14,6 +14,6 @@ class NumberTest {
 
         assertThatThrownBy(() -> new Number(value))
                 .isInstanceOf(NumberFormatException.class)
-                .hasMessage("적절한 수를 입력해 주십시요.");
+                .hasMessage("유효한 숫자 형식이 아닙니다.");
     }
 }

@@ -13,7 +13,7 @@ public class Number {
         try {
             return Double.parseDouble(number);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("적절한 수를 입력해 주십시요.");
+            throw new NumberFormatException("유효한 숫자 형식이 아닙니다.");
         }
     }
 

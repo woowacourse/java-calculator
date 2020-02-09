@@ -10,6 +10,7 @@ public enum Operator {
     MULTIPLICATION("*", (firstOperand, secondOperand) -> firstOperand * secondOperand);
 
     private static final double ZERO = 0d;
+    private static final String DIVISION_OPERATOR = "/";
 
     private String operator;
     private BinaryOperator<Double> expression;
@@ -26,12 +27,15 @@ public enum Operator {
                 .orElseThrow(() -> new IllegalArgumentException("유효한 연산자 형식이 아닙니다."));
     }
 
-    public Double calculate(Double firstOperand, Double secondOperand) {
-        checkDivision(secondOperand);
+    public Double calculate(final Double firstOperand,final Double secondOperand) {
+        checkDivideByZero(secondOperand);
         return expression.apply(firstOperand, secondOperand);
     }
 
-    private void checkDivision(final Double secondOperand) {
+    private void checkDivideByZero(final Double secondOperand) {
+        if (!DIVISION_OPERATOR.equals(operator)) {
+            return;
+        }
         if (secondOperand == ZERO) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }

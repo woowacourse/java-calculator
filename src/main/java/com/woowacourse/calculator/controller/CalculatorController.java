@@ -21,6 +21,7 @@ public class CalculatorController {
             final String inputExpression = inputView.inputExpression();
             return ExpressionFactory.generate(inputExpression);
         } catch (IllegalArgumentException e) {
+            outputView.printExceptionMessage(e.getMessage());
             return generateExpression();
         }
     }
@@ -30,7 +31,7 @@ public class CalculatorController {
             final Double calculateResult = expression.calculate();
             outputView.printCalculateResult(calculateResult);
         } catch (IllegalArgumentException e) {
-            calculateExpression();
+            outputView.printExceptionMessage(e.getMessage());
         }
     }
 }

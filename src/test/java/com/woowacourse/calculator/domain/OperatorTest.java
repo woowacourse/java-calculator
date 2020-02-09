@@ -33,7 +33,7 @@ class OperatorTest {
 
     @DisplayName("Operator - checkDivision() Test")
     @Test
-    void testCheckDivision() {
+    void testCheckDivideByZero() {
         final String division = "/";
         Operator operator = Operator.Of(division);
 
