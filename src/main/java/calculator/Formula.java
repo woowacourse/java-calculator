@@ -1,33 +1,34 @@
 package calculator;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Formula {
-    private Queue<FormulaElement> formula;
+    private List<FormulaElement> formula;
+
+    private static final int FIRST_ELEMENT = 0;
+    private static final int SECOND_ELEMENT = 1;
 
     public Formula(String[] inputs) {
         validateSizeOfInputsIsOdds(inputs);
-        formula = new LinkedList<>();
+        formula = new ArrayList<>();
         generateFormula(inputs);
     }
 
     public double calculateFormula() {
-        Operand operand1 = formula.poll().getOperand();
-        double result = operand1.getOperand();
+        Operand result = formula.get(FIRST_ELEMENT).getOperand();
 
-        while (formula.size() > 0) {
-            Operator operator = formula.poll().getOperator();
-            Operand operand2 = formula.poll().getOperand();
-            result = operator.calculate(operand1, operand2);
-            operand1 = new Operand(result);
+        for (int i = SECOND_ELEMENT; i < formula.size(); i++) {
+            Operator operator = formula.get(i).getOperator();
+            Operand operand = formula.get(i).getOperand();
+            result = new Operand(operator.calculate(result, operand));
         }
-        return result;
+        return result.getOperand();
     }
 
     private void generateFormula(String[] inputs) {
         for (String input : inputs) {
-            formula.offer(generateFormulaElement(input));
+            formula.add(generateFormulaElement(input));
         }
     }
 
