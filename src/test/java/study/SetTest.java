@@ -21,9 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author K.S.KIM
  * @version 1.0
  * <p>
- * 날짜 : 2020.02.05 수요일
+ * 날짜 : 2020/02/05
  */
-
 public class SetTest {
     private Set numbers;
 

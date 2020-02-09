@@ -11,12 +11,11 @@ import org.assertj.core.api.Assertions;
  * @author K.S.KIM
  * @version 1.0
  * <p>
- * 날짜 : 2020.02.05 수요일
+ * 날짜 : 2020/02/05
  */
-
 public class StringTest {
     @Test
-    @DisplayName("String Test")
+    @DisplayName("split test")
     void split() {
         String value = "1,2";
         String[] result = value.split(",");
@@ -26,7 +25,7 @@ public class StringTest {
     }
 
     @Test
-    @DisplayName("substring Test")
+    @DisplayName("substring test")
     void substring() {
         String value = "(1, 2)";
         String result = value.substring(1, value.length() - 1);
@@ -34,14 +33,14 @@ public class StringTest {
     }
 
     @Test
-    @DisplayName("charAt Test")
+    @DisplayName("charAt test")
     void charAt() {
         Assertions.assertThatThrownBy(() -> {
             String value = "abc";
-            char charOfIndexZero = value.charAt(0);
-            char charOfIndexOne = value.charAt(1);
-            char charOfIndexTwo = value.charAt(2);
-            char charOfIndexThree = value.charAt(3);
+            value.charAt(0);
+            value.charAt(1);
+            value.charAt(2);
+            value.charAt(3);
         }).isInstanceOf(StringIndexOutOfBoundsException.class)
                 .hasMessageContaining("String index out of range: 3");
     }
