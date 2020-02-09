@@ -35,7 +35,6 @@ public class Calculator {
 
     private void splitFormula(String formula) {
         String[] formulas = InputValidation.trimSpace(formula.split(" ", ZERO));
-
         for (int i = ZERO; i < formulas.length; i++) {
             String temp = formulas[i];
             if (i % EVEN == ZERO) {
@@ -50,13 +49,13 @@ public class Calculator {
         List<Double> operands = OperandRepository.getOperands();
         List<Operator> operators = OperatorRepository.getOperatorList();
 
-        int numberIndex = 1;
-        double result = operands.get(0);
+        int numberIndex = ZERO;
+        double result = operands.get(ZERO);
         for (Operator operator : operators) {
+            numberIndex++;
             result = calculateFunctionMap
                     .get(operator)
                     .apply(result, operands.get(numberIndex));
-            numberIndex++;
         }
         return result;
     }
