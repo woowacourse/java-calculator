@@ -1,45 +1,41 @@
 package calculator;
 
-public class Operator {
-    private String value;
+import java.util.function.BiFunction;
 
-    public Operator(String input) {
-        value = input;
+public enum Operator {
+    PLUS("+", (x, y) -> x + y),
+    SUBTRACT("-", (x, y) -> x - y),
+    MULTIPLY("*", (x, y) -> x * y),
+    DIVIDE("/", (x, y) -> x / y);
+
+    private String shape;
+    private BiFunction<Double, Double, Double> function;
+
+    Operator(String shape, BiFunction<Double, Double, Double> function) {
+        this.shape = shape;
+        this.function = function;
     }
 
-    public boolean isAdd() {
-
-        if (value.equals("+")) {
+    public static boolean isNotOperator(String input) {
+        try {
+            getOperator(input);
+        } catch (IllegalArgumentException e) {
             return true;
         }
-
         return false;
     }
 
-    public boolean isSubtract() {
-
-        if (value.equals("-")) {
-            return true;
+    public static Operator getOperator(String input) {
+        Operator[] operators = Operator.values();
+        for (Operator operator : operators) {
+            if (operator.shape.equals(input)) {
+                return operator;
+            }
         }
-
-        return false;
+        throw new IllegalArgumentException("입력값과 같은 연산 기호가 없습니다.");
     }
 
-    public boolean isMultiply() {
-
-        if (value.equals("*")) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean isDivide() {
-
-        if (value.equals("/")) {
-            return true;
-        }
-
-        return false;
+    public Double apply(double firstElement, double secondElement) {
+        return this.function.apply(firstElement, secondElement);
     }
 }
