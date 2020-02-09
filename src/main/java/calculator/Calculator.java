@@ -20,7 +20,7 @@ public class Calculator {
 		double accumulatedNumber = Integer.parseInt(tokens.get(ZERO));
 		for (int i = 1; i < tokens.size(); i += 2) {
 			Validator.checkIsNumber(tokens.get(i + 1));
-			accumulatedNumber = operate(accumulatedNumber, tokens.get(i), Integer.parseInt(tokens.get(i + 1)));
+			accumulatedNumber = operate(accumulatedNumber, tokens.get(i), Double.parseDouble(tokens.get(i + 1)));
 		}
 		return Double.toString(accumulatedNumber);
 	}
