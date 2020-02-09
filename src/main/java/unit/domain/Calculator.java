@@ -1,7 +1,7 @@
 package unit.domain;
 
 public class Calculator {
-	private static final int MIN_SIZE_OF_TOKENS = 3;
+	private static final int MIN_SIZE_OF_EXPRESSION = 3;
 
 	public static double calculate(Expression expression) {
 		checkValidation(expression);
@@ -31,6 +31,6 @@ public class Calculator {
 	}
 
 	private static boolean canCalculate(Expression expression) {
-		return expression.isSizeGreaterThanOrEqualTo(MIN_SIZE_OF_TOKENS);
+		return expression.isSizeGreaterThanOrEqualTo(MIN_SIZE_OF_EXPRESSION);
 	}
 }
