@@ -26,7 +26,7 @@ public class InputValues {
         for (int i = 0; i < length; i += 2) {
             try {
                 Double.parseDouble(values[i]);
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("피연산자가 잘못되었습니다.");
             }
         }
