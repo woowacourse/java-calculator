@@ -3,31 +3,24 @@ package calculator;
 import calculator.domain.Equation;
 import calculator.filter.EquationFilter;
 import calculator.spliter.StringSplitter;
-import calculator.view.InputView;
 import calculator.view.OutputView;
 import calculator.view.dto.RawEquationDTO;
 
 import java.util.List;
 
 public class Calculator {
-    private final InputView inputView;
     private RawEquationDTO equation;
 
-    public Calculator(InputView inputView) {
-        this.inputView = inputView;
+    public double run(RawEquationDTO inputEquation) {
+        init(inputEquation);
+        return operate();
     }
 
-    public void run() {
-        init();
-        OutputView.showResult(operate());
-    }
-
-    private void init() {
+    private void init(RawEquationDTO inputEquation) {
         try {
-            this.equation = inputView.inputEquation();
+            this.equation = inputEquation;
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
-            init();
         }
     }
 
