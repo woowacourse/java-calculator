@@ -7,39 +7,20 @@ public class Operator {
         value = input;
     }
 
-    public boolean isAdd() {
+    public double operate(double firstValue, double secondValue) {
 
         if (value.equals("+")) {
-            return true;
+            return firstValue + secondValue;
         }
-
-        return false;
-    }
-
-    public boolean isSubtract() {
 
         if (value.equals("-")) {
-            return true;
+            return firstValue - secondValue;
         }
-
-        return false;
-    }
-
-    public boolean isMultiply() {
 
         if (value.equals("*")) {
-            return true;
+            return firstValue * secondValue;
         }
 
-        return false;
-    }
-
-    public boolean isDivide() {
-
-        if (value.equals("/")) {
-            return true;
-        }
-
-        return false;
+        return firstValue / secondValue;
     }
 }

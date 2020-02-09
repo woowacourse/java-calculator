@@ -27,19 +27,6 @@ public class Calculator {
 
     private static double calculateBinomialByRawData(double firstOperand,
             Operator operator, double secondOperand) {
-
-        if (operator.isAdd()) {
-            return firstOperand + secondOperand;
-        }
-
-        if (operator.isSubtract()) {
-            return firstOperand - secondOperand;
-        }
-
-        if (operator.isMultiply()) {
-            return firstOperand * secondOperand;
-        }
-
-        return firstOperand / secondOperand;
+        return operator.operate(firstOperand, secondOperand);
     }
 }
