@@ -13,20 +13,21 @@
 
 package calculator;
 
+import model.OperatorType;
+
 public class Calculator {
-    public double plus(double x, double y) {
-        return x + y;
+    private OperatorType operatorType;
+
+    public void setOperatorType(String operator) {
+        for (OperatorType op : OperatorType.values()) {
+            if (operator.equals(op.toString())) {
+                operatorType = op;
+            }
+        }
     }
 
-    public double minus(double x, double y) {
-        return x - y;
-    }
-
-    public double mul(double x, double y) {
-        return x * y;
-    }
-
-    public double div(double x, double y) {
-        return x / y;
+    public double calculate(double number1, double number2) {
+        return operatorType.calculate(number1, number2);
     }
 }
+

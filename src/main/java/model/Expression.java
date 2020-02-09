@@ -24,6 +24,7 @@ public class Expression {
 
     public Expression(String expression) {
         this.expression = expression;
+        setValueList();
     }
 
     public void setValueList() {

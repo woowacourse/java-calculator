@@ -13,8 +13,9 @@
 
 package validator;
 
+import model.OperatorType;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class InputValidator {
@@ -61,18 +62,24 @@ public class InputValidator {
     }
 
     public boolean isRightOperatorAllElements(List<String> oddIndexOfExpression) {
-        final List<String> fourOperators = Arrays.asList("+","-","*","/");
+        List<String> fourOperators = new ArrayList<>();
+
+        for (OperatorType op : OperatorType.values()) {
+            fourOperators.add(op.toString());
+        }
+
         for (String operator : oddIndexOfExpression) {
             if (!fourOperators.contains(operator)) {
                 return false;
             }
         }
+
         return true;
     }
 
     public boolean isNotDivideByZero(String[] expression) {
         for (int i = 2; i < expression.length; i += 2) {
-            if (ZERO.equals(expression[i]) && expression[i - 1].equals("/")) {
+            if (ZERO.equals(expression[i]) && expression[i - 1].equals(OperatorType.DIV.toString())) {
                 return false;
             }
         }

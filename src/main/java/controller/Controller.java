@@ -15,7 +15,6 @@ package controller;
 
 import calculator.Calculator;
 import model.Expression;
-import model.Operator;
 import validator.InputValidator;
 import view.InputView;
 import view.OutputView;
@@ -33,7 +32,6 @@ public class Controller {
         } while (!inputValidator.validateExpression(input));
 
         Expression expression = new Expression(input);
-        expression.setValueList();
 
         double sum = calculate(expression);
 
@@ -43,25 +41,15 @@ public class Controller {
     private double calculate(Expression expression) {
         List<Double> numbers = expression.getNumbers();
         List<String> operators = expression.getOperators();
-        double sum = numbers.get(0);
 
+        double result = numbers.get(0);
         Calculator calculator = new Calculator();
 
         for (int i = 0; i < operators.size(); i++) {
-            if (operators.get(i).equals(Operator.PLUS.toString())) {
-                sum = calculator.plus(sum, numbers.get(i + 1));
-            }
-            if (operators.get(i).equals(Operator.MINUS.toString())) {
-                sum = calculator.minus(sum, numbers.get(i + 1));
-            }
-            if (operators.get(i).equals(Operator.MUL.toString())) {
-                sum = calculator.mul(sum, numbers.get(i + 1));
-            }
-            if (operators.get(i).equals(Operator.DIV.toString())) {
-                sum = calculator.div(sum, numbers.get(i + 1));
-            }
+            calculator.setOperatorType(operators.get(i));
+            result = calculator.calculate(result, numbers.get(i + 1));
         }
 
-        return sum;
+        return result;
     }
 }
