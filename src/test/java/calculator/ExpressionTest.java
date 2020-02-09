@@ -3,8 +3,8 @@ package calculator;
 import org.junit.jupiter.api.Test;
 
 public class ExpressionTest {
-    final String CORRECT_CASE = "2 + 3 * 2";
-    final String WRONG_CASE = "2 + 3 *2";
+    private final String CORRECT_CASE = "2 + 3 * 2";
+    private final String WRONG_CASE = "2 + 3 *2";
 
     @Test
     public void constructor() {
