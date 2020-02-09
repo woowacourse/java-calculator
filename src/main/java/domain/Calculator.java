@@ -30,7 +30,7 @@ public class Calculator {
 
     public void run() {
         splitFormula(InputView.inputFormula());
-        OutputView.printResult(calculate());
+        OutputView.printResult(calculate(OperandRepository.getOperands(), OperatorRepository.getOperatorList()));
     }
 
     private void splitFormula(String formula) {
@@ -45,10 +45,7 @@ public class Calculator {
         }
     }
 
-    private double calculate() {
-        List<Double> operands = OperandRepository.getOperands();
-        List<Operator> operators = OperatorRepository.getOperatorList();
-
+    private double calculate(List<Double> operands, List<Operator> operators) {
         int numberIndex = ZERO;
         double result = operands.get(ZERO);
         for (Operator operator : operators) {
