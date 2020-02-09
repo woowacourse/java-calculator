@@ -21,8 +21,13 @@ public enum Operator {
         this.expression = expression;
     }
 
-    public String getOperator() {
-        return operator;
+    public static Operator findOperator(String operator) {
+        for (Operator compareOperator : Operator.values()) {
+            if (compareOperator.operator.equals(operator)) {
+                return compareOperator;
+            }
+        }
+        throw new IllegalArgumentException("올바른 연산자를 입력하지 않으셨습니다. (입력한 연산자 : " + operator + ")");
     }
 
     public double calculate(double operand1, double operand2) {
