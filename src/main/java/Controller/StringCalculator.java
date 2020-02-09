@@ -3,14 +3,11 @@ package Controller;
 import View.OutputView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class StringCalculator {
     private List<Integer> numbers = new ArrayList<>();
     private List<Operator> operators = new ArrayList<>();
-    private double result;
 
     public void run() {
         initializeInputs();
@@ -32,9 +29,9 @@ public class StringCalculator {
     }
 
     public double calculate() {
-        result = numbers.remove(0);
+        double result = numbers.get(0);
         for (int i = 0; i < operators.size(); i++) {
-            result = operators.get(i).compute(result, numbers.get(i));
+            result = operators.get(i).compute(result, numbers.get(i+1));
         }
         return result;
     }

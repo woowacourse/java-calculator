@@ -30,9 +30,9 @@ public class StringCalculatorTest {
     @DisplayName("문자열 식 계산")
     @Test
     void calculate() {
-        double result = numbers.remove(0);
+        double result = numbers.get(0);
         for (int i = 0; i < operators.size(); i++){
-            result = operators.get(i).compute(result, numbers.get(i));
+            result = operators.get(i).compute(result, numbers.get(i+1));
         }
         assertThat(result).isEqualTo(0);
     }
