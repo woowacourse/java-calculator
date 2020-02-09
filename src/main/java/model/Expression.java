@@ -26,10 +26,6 @@ public class Expression {
         this.expression = expression;
     }
 
-    public boolean isValidator() {
-        return new InputValidator().validateExpression(expression);
-    }
-
     public void setValueList() {
         String[] componentOfExpression = expression.split(InputValidator.BLANK);
         for (int i = 0; i < componentOfExpression.length; i++) {

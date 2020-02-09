@@ -15,6 +15,7 @@ package controller;
 
 import calculator.Calculator;
 import model.Expression;
+import validator.InputValidator;
 import view.InputView;
 import view.OutputView;
 
@@ -27,11 +28,14 @@ public class Controller {
     private static final String DIV = "/";
 
     public void run() {
-        Expression expression;
+        String input;
+        InputValidator inputValidator = new InputValidator();
+
         do {
-            String input = InputView.inputStringFromUser();
-            expression = new Expression(input);
-        } while (!expression.isValidator());
+            input = InputView.inputStringFromUser();
+        } while (!inputValidator.validateExpression(input));
+
+        Expression expression = new Expression(input);
         expression.setValueList();
 
         double sum = calculate(expression);
