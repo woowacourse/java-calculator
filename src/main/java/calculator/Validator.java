@@ -1,11 +1,32 @@
 package calculator;
 
 public class Validator {
+    public static final String ZERO = "0";
+    public static final String BLANK = " ";
+
     public boolean isValidInput(String input) {
         if (isNull(input) || isBlank(input) || isEmpty(input)) {
             return false;
         }
+        String[] splitInput = input.split(BLANK);
+        if (!IsDoubleNumber(splitInput[0])) {
+            return false;
+        }
+        for (int i = 1; i < splitInput.length; i = i + 2) {
+            String operator = splitInput[i];
+            String number = splitInput[i + 1];
+            if (!IsOperator(operator) || !IsDoubleNumber(number) || isDivideZero(operator, number)) {
+                return false;
+            }
+        }
         return true;
+    }
+
+    private boolean isDivideZero(String operator, String number) {
+        if (!Operator.DIVIDE.getOperator().equals(operator)) {
+            return false;
+        }
+        return ZERO.equals(number);
     }
 
     private boolean isNull(String input) {
@@ -20,22 +41,6 @@ public class Validator {
         return input.equals("");
     }
 
-    public boolean isValidSplitedInput(String[] splitedInput) {
-        if (!IsDoubleNumber(splitedInput[0])) {
-            return false;
-        }
-        for (int i = 1; i < splitedInput.length; i = i + 2) {
-            String operator = splitedInput[i];
-            String number = splitedInput[i + 1];
-            if (operator.equals("/") && number.equals("0")) {
-                return false;
-            }
-            if (!IsOperator(operator) || !IsDoubleNumber(number)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     private boolean IsDoubleNumber(String s) {
         try {
@@ -47,8 +52,8 @@ public class Validator {
     }
 
     private boolean IsOperator(String operator) {
-        for (Operator o : Operator.values()){
-            if (o.getOperator().equals(operator)){
+        for (Operator o : Operator.values()) {
+            if (o.getOperator().equals(operator)) {
                 return true;
             }
         }
