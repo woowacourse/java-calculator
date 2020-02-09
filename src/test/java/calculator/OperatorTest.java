@@ -2,48 +2,69 @@ package calculator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class OperatorTest {
-    private static List<String> operatorStrings = Arrays.asList("+", "-", "*", "/");
-    private static List<String> notOperatorStrings = Arrays.asList("", "a", "++");
-    List<Operator> operators = Arrays.asList(Operator.ADDITION, Operator.SUBTRACTION, Operator.MULTIPLICATION, Operator.DIVISION);
-
     @Test
-    void getOperator() {
-        for (int i = 0; i < operatorStrings.size(); i++) {
-            for (int j = 0; j < operators.size(); j++) {
-                if (i == j) {
-                    Assertions.assertThat(Operator.getOperator(operatorStrings.get(i))).isEqualTo(operators.get(j));
-                }
-                if (i != j) {
-                    Assertions.assertThat(Operator.getOperator(operatorStrings.get(i))).isNotEqualTo(operators.get(j));
-                }
-
-            }
-        }
-
-        for (String notOperator : notOperatorStrings) {
-            Assertions.assertThatThrownBy(() -> {
-                Operator.getOperator(notOperator);
-            }).isInstanceOf(IllegalArgumentException.class);
+    void toString_ForLearningTest() {
+        for (Operator operator : Operator.values()) {
+            System.out.println(operator);
         }
     }
 
-    @Test
-    void calculate() {
-        double a = 3;
-        double b = 3;
-        double zero = 0;
+    @ParameterizedTest
+    @CsvSource(value = {
+            "+,ADDITION",
+            "-,SUBTRACTION",
+            "*,MULTIPLICATION",
+            "/,DIVISION"
+    })
+    void getOperator_ShouldReturnTrueForValidSymbol(String symbol, String expect) {
+        Assertions.assertThat(Operator.getOperator(symbol).toString())
+                .isEqualTo(expect);
+    }
 
-        Assertions.assertThat(Operator.ADDITION.calculate(a, b)).isEqualTo(a + b);
-        Assertions.assertThat(Operator.SUBTRACTION.calculate(a, b)).isEqualTo(a - b);
-        Assertions.assertThat(Operator.MULTIPLICATION.calculate(a, b)).isEqualTo(a * b);
-        Assertions.assertThat(Operator.DIVISION.calculate(a, b)).isEqualTo(a / b);
-        Assertions.assertThatThrownBy(() -> {
-            Operator.DIVISION.calculate(a, zero);
-        }).isInstanceOf(IllegalArgumentException.class);
+    @ParameterizedTest
+    @ValueSource(strings = {"", "++", "a"})
+    void getOperator_ShouldGenerateIllegalArgumentExceptionForInvalidSymbol(String symbol) {
+        Assertions.assertThatThrownBy(() -> Operator.getOperator(symbol))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3,3,6", "3,-4,-1"})
+    void calculate_ForADDITION(double a, double b, double result) {
+        Assertions.assertThat(Operator.ADDITION.calculate(a, b))
+                .isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3,3,0", "3,-4,7"})
+    void calculate_ForSUBTRACTION(double a, double b, double result) {
+        Assertions.assertThat(Operator.SUBTRACTION.calculate(a, b))
+                .isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3,3,9", "3,-4,-12", "3,0,0"})
+    void calculate_ForMULTIPLICATION(double a, double b, double result) {
+        Assertions.assertThat(Operator.MULTIPLICATION.calculate(a, b))
+                .isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3,3,1", "12,-4,-3"})
+    void calculate_ForDIVISION(double a, double b, double result) {
+        Assertions.assertThat(Operator.DIVISION.calculate(a, b))
+                .isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {3, 0})
+    void calculate_ShouldGenerateIllegalArgumentExceptionForDIVISION(int dividend) {
+        Assertions.assertThatThrownBy(() -> Operator.DIVISION.calculate(dividend, 0))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
