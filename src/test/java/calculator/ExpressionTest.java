@@ -7,12 +7,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class SourceForCalculatingTest {
-    private SourceForCalculating sourceForCalculating;
+public class ExpressionTest {
+    private Expression expression;
 
     void setUp_SourceForCalculating(String[] inputs) {
         try {
-            sourceForCalculating = new SourceForCalculating(inputs);
+            expression = new Expression(inputs);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -23,7 +23,7 @@ public class SourceForCalculatingTest {
         String[] inputs = {"1", "+", "2"};
         setUp_SourceForCalculating(inputs);
 
-        double result = sourceForCalculating.calculateInputs();
+        double result = expression.calculateInputs();
         assertThat(result).isEqualTo(3);
     }
 
@@ -32,7 +32,7 @@ public class SourceForCalculatingTest {
         String[] inputs = {"1", "+", "2", "/", "3"};
         setUp_SourceForCalculating(inputs);
 
-        double result = sourceForCalculating.calculateInputs();
+        double result = expression.calculateInputs();
         assertThat(result).isEqualTo(1);
     }
 
@@ -41,7 +41,7 @@ public class SourceForCalculatingTest {
         String[] inputs = {"10", "-", "2", "/", "4", "*", "5"};
         setUp_SourceForCalculating(inputs);
 
-        double result = sourceForCalculating.calculateInputs();
+        double result = expression.calculateInputs();
         assertThat(result).isEqualTo(10);
     }
 
@@ -50,7 +50,7 @@ public class SourceForCalculatingTest {
         String[] inputs = {"4"};
         setUp_SourceForCalculating(inputs);
 
-        double result = sourceForCalculating.calculateInputs();
+        double result = expression.calculateInputs();
         assertThat(result).isEqualTo(4);
     }
 
@@ -59,7 +59,7 @@ public class SourceForCalculatingTest {
     void notOddSizeOfInputs_ShouldThrowException(String input) {
         String[] inputs = input.split(" ");
         assertThatThrownBy(() -> {
-            sourceForCalculating.validateSizeOfInputsIsOdds(inputs);
+            expression.validateSizeOfInputsIsOdds(inputs);
         }).isInstanceOf(Exception.class)
                 .hasMessageMatching("inputs의 사이즈가 홀수가 아님");
     }
@@ -70,7 +70,7 @@ public class SourceForCalculatingTest {
         System.out.println(input);
         String[] inputs = input.split(" ");
         assertThatThrownBy(() -> {
-            sourceForCalculating.validateSizeOfInputsIsOdds(inputs);
+            expression.validateSizeOfInputsIsOdds(inputs);
         }).isInstanceOf(Exception.class);
     }
 }

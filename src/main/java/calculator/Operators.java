@@ -4,17 +4,17 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Operators {
-    private Queue<CalculatorType> operators;
+    private Queue<Operator> operators;
 
     public Operators() {
         this.operators = new LinkedList<>();
     }
 
-    public void add(CalculatorType operator) {
+    public void add(Operator operator) {
         operators.offer(operator);
     }
 
-    public CalculatorType remove() {
+    public Operator remove() {
         return operators.poll();
     }
 

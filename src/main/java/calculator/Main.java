@@ -19,8 +19,8 @@ public class Main {
         String input = InputView.getInput();
         String[] inputs = InputHandler.splitInput(input);
 
-        SourceForCalculating source = new SourceForCalculating(inputs);
-        OutputView.printResult(source.calculateInputs());
+        Expression expression = new Expression(inputs);
+        OutputView.printResult(expression.calculateInputs());
     }
 }
 

@@ -1,16 +1,16 @@
 package calculator;
 
-public class SourceForCalculating {
+public class Expression {
     private Operands operands;
     private Operators operators;
 
-    public SourceForCalculating(String[] inputs) throws Exception {
+    public Expression(String[] inputs) throws Exception {
         operands = new Operands();
         operators = new Operators();
-        generateSource(inputs);
+        generateExpression(inputs);
     }
 
-    public void generateSource(String[] inputs) throws Exception {
+    public void generateExpression(String[] inputs) throws Exception {
         validateSizeOfInputsIsOdds(inputs);
         validateInputsByIndex(inputs);
     }
@@ -18,9 +18,9 @@ public class SourceForCalculating {
     public double calculateInputs() {
         Double result = operands.remove();
         while (!operators.isEmpty()) {
-            CalculatorType operator = operators.remove();
+            Operator operator = operators.remove();
             Double operand = operands.remove();
-            result = CalculatorType.calculate(result, operator, operand);
+            result = Operator.calculate(result, operator, operand);
         }
         return result;
     }
@@ -48,7 +48,7 @@ public class SourceForCalculating {
         }
 
         if (isOddNumber(index)) {
-            CalculatorType operator = CalculatorType.validateOperator(input);
+            Operator operator = Operator.validateOperator(input);
             operators.add(operator);
         }
     }
