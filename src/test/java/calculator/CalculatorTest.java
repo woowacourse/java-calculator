@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
-    @DisplayName("validation 테스트 - 성공편")
+    @DisplayName("validation 테스트")
     @ParameterizedTest
     @CsvSource(value = {"1 + 2, 3"
             , "2 + 3 * 4 / 2, 10"
@@ -19,6 +19,8 @@ public class CalculatorTest {
             , "+10 - -10, 20"
             , "100 + 10.0.0, 110"
             , "100 / 0, 1"
+            , "100  + 10, 110"
+            , "100     +    10, 110"
     })
     void calculateParameterTest(String formula, int expected) {
         try {

@@ -17,5 +17,4 @@ public class CastNumber {
     public int getValue() {
         return value;
     }
-
 }

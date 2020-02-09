@@ -16,7 +16,6 @@ public class StringTest {
         assertThat(result).contains("2");
     }
 
-
     @Test
     void substring() {
         String value = "(1,2)";
