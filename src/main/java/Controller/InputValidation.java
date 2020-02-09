@@ -21,7 +21,7 @@ public class InputValidation {
         return checkException();
     }
 
-    public static void validateSpace(String[] inputs) throws Exception {
+    private static void validateSpace(String[] inputs) throws Exception {
         for (int i = 0; i < inputs.length; i++) {
             if (inputs[i].isEmpty()) {
                 throw new Exception("식이 정상적으로 입력되지 않았습니다. 숫자와 연산자 사이에 띄어쓰기를 한 번 해주세요.");
@@ -35,7 +35,7 @@ public class InputValidation {
      * @param inputs
      * @throws Exception
      */
-    public static void validateFirstAndLast(String[] inputs) throws Exception {
+    private static void validateFirstAndLast(String[] inputs) throws Exception {
         if (!(isInteger(inputs[0]) && isInteger(inputs[inputs.length - 1]))) {
             throw new Exception("식의 처음과 마지막은 숫자여야 합니다.");
         }
@@ -61,15 +61,15 @@ public class InputValidation {
      * @param inputs
      * @throws Exception
      */
-    public static void validateOperators(String[] inputs) throws Exception {
+    private static void validateOperators(String[] inputs) throws Exception {
         for (int i = 1; i < inputs.length; i += 2) {
-            if (Operator.getEnumFromString(inputs[i]) == null) {
+            if (Operator.from(inputs[i]) == null) {
                 throw new Exception("올바른 연산자가 아닙니다.");
             }
         }
     }
 
-    public static boolean isInteger(String value) {
+    private static boolean isInteger(String value) {
         try {
             Integer.parseInt(value);
             return true;
