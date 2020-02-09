@@ -1,6 +1,7 @@
 package domain;
 
 public class Calculator {
+
     private final Formulas formulas;
 
     public Calculator(Formulas formulas) {
@@ -12,7 +13,7 @@ public class Calculator {
         int formulasSize = formulas.size();
         for (int index = 1; index < formulasSize; index += 2) {
             result = calculate(formulas.get(index),
-                    result, (double) new CastNumber(formulas.get(index + 1)).getValue());
+                result, (double) new CastNumber(formulas.get(index + 1)).getValue());
         }
         return (int) result;
     }
@@ -25,7 +26,8 @@ public class Calculator {
             sameOperator = (sameOperator || compareOperator.isSameOperator(operator));
         }
         if (sameOperator == false) {
-            throw new IllegalArgumentException("올바른 연산자를 입력하지 않으셨습니다. (입력한 연산자 : " + operator + ")");
+            throw new IllegalArgumentException(
+                "올바른 연산자를 입력하지 않으셨습니다. (입력한 연산자 : " + operator + ")");
         }
         return result;
     }

@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class OperatorTest {
+
     private static int TEST_COUNTS = 10;
 
     @DisplayName("PLUS TEST")
@@ -54,8 +55,9 @@ public class OperatorTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/testData.csv")
     void divideZero(Double operand1) {
-        assertThatThrownBy(() -> Operator.DIVIDE.calculate(operand1, 0.0)).isInstanceOf(IllegalArgumentException.class)
-                                                                          .hasMessageContaining("0으로 나눌 수 없습니다.");
+        assertThatThrownBy(() -> Operator.DIVIDE.calculate(operand1, 0.0))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("0으로 나눌 수 없습니다.");
     }
 
     @BeforeEach
