@@ -37,7 +37,7 @@ public class InputValidator {
             separateNumbersAndOperators(input[i], i);
         }
         List<Boolean> isNumberCheck = numbers.stream().map(this::numberCheck).collect(Collectors.toList());
-        return isNumberCheck.contains(true);
+        return isNumberCheck.contains(false);
     }
 
     private void separateNumbersAndOperators(String input, int index) {
@@ -52,8 +52,8 @@ public class InputValidator {
         try {
             Double.parseDouble(number);
         } catch (NumberFormatException e) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }
