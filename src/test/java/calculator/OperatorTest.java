@@ -9,7 +9,7 @@ import java.util.List;
 public class OperatorTest {
     private static List<String> operatorStrings = Arrays.asList("+", "-", "*", "/");
     private static List<String> notOperatorStrings = Arrays.asList("", "a", "++");
-    List<Operator> operators = Arrays.asList(Operator.addition, Operator.subtraction, Operator.multiplication, Operator.division);
+    List<Operator> operators = Arrays.asList(Operator.ADDITION, Operator.SUBTRACTION, Operator.MULTIPLICATION, Operator.DIVISION);
 
     @Test
     void getOperator() {
@@ -38,12 +38,12 @@ public class OperatorTest {
         double b = 3;
         double zero = 0;
 
-        Assertions.assertThat(Operator.addition.calculate(a, b)).isEqualTo(a + b);
-        Assertions.assertThat(Operator.subtraction.calculate(a, b)).isEqualTo(a - b);
-        Assertions.assertThat(Operator.multiplication.calculate(a, b)).isEqualTo(a * b);
-        Assertions.assertThat(Operator.division.calculate(a, b)).isEqualTo(a / b);
+        Assertions.assertThat(Operator.ADDITION.calculate(a, b)).isEqualTo(a + b);
+        Assertions.assertThat(Operator.SUBTRACTION.calculate(a, b)).isEqualTo(a - b);
+        Assertions.assertThat(Operator.MULTIPLICATION.calculate(a, b)).isEqualTo(a * b);
+        Assertions.assertThat(Operator.DIVISION.calculate(a, b)).isEqualTo(a / b);
         Assertions.assertThatThrownBy(() -> {
-            Operator.division.calculate(a, zero);
+            Operator.DIVISION.calculate(a, zero);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

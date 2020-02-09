@@ -5,10 +5,10 @@ import view.ErrorView;
 import java.util.function.BinaryOperator;
 
 public enum Operator {
-    addition(Double::sum, "+"),
-    subtraction(Operator::subtract, "-"),
-    multiplication(Operator::multiply, "*"),
-    division(Operator::divide, "/");
+    ADDITION(Double::sum, "+"),
+    SUBTRACTION(Operator::subtract, "-"),
+    MULTIPLICATION(Operator::multiply, "*"),
+    DIVISION(Operator::divide, "/");
 
     private BinaryOperator<Double> operate;
     private String symbol;
