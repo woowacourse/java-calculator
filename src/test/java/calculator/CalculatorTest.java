@@ -11,7 +11,7 @@ public class CalculatorTest {
     @CsvFileSource(resources = "/SpittedString/clusteredStrings.csv", numLinesToSkip = 1)
     void testClustered(String input) {
         Assertions.assertThatThrownBy(() -> {
-            tester.setSplittedStrings(input);
+            tester.splitMathExpression(input);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageEndingWith("가 연속되면 안됩니다");
     }
@@ -20,7 +20,7 @@ public class CalculatorTest {
     @CsvFileSource(resources = "/SpittedString/stringStartingWithSymbols.csv", numLinesToSkip = 1)
     void testSymbolStarter(String input) {
         Assertions.assertThatThrownBy(() -> {
-            tester.setSplittedStrings(input);
+            tester.splitMathExpression(input);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자로 시작해야 합니다");
     }
@@ -28,7 +28,7 @@ public class CalculatorTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/calculation.csv", numLinesToSkip = 1)
     void testCalculator(String input, String expected) {
-        tester.setSplittedStrings(input);
+        tester.splitMathExpression(input);
         Assertions.assertThat(tester.calculate()).isEqualTo(Integer.parseInt(expected));
     }
 }
