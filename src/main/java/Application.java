@@ -20,22 +20,18 @@ public class Application {
     }
 
     private static NumberSentence createNumberSentence() {
-        NumberSentence numberSentence = null;
-
         try {
             InputView inputView = new InputView(new Scanner(System.in));
             String sentence = inputView.receiveInput();
 
             Converter converter = new Converter();
-            numberSentence = converter.getNumberSentence(sentence);
+            return converter.getNumberSentence(sentence);
         } catch (NumberFormatException e) {
             System.out.println("There is something not number in number place");
-            createNumberSentence();
+            return createNumberSentence();
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());
-            createNumberSentence();
+            return createNumberSentence();
         }
-
-        return numberSentence;
     }
 }

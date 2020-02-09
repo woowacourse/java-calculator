@@ -33,4 +33,8 @@ public class NumberSentence {
     List<Number> getNumbers() {
         return numbers;
     }
+
+    public String toString() {
+        return numbers.get(0).toString() + operators.peek().toString();
+    }
 }

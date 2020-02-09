@@ -1,18 +1,22 @@
 package domain;
 
 enum Operator {
-    PLUS('+'),
-    MINUS('-'),
-    MULTIPLIFICATION('*'),
-    DIVISION('/');
+    PLUS("+"),
+    MINUS("-"),
+    MULTIPLIFICATION("*"),
+    DIVISION("/");
 
-    char operator;
+    String operator;
 
-    Operator(char operator) {
+    Operator(String operator) {
         this.operator = operator;
     }
 
-    public boolean equals(char operator) {
-        return this.operator == operator;
+    public boolean equals(String operator) {
+        return this.operator.equals(operator);
+    }
+
+    public String toString() {
+        return operator;
     }
 }

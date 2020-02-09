@@ -13,37 +13,30 @@ public class Converter {
     public static final int SECOND_INDEX = 1;
 
     public NumberSentence getNumberSentence(String sentence) throws InvalidInputException {
-        validate(sentence);
-
         String[] arguments = sentence.split(" ");
         List<String> arg = Arrays.asList(arguments);
+
+        validate(arg);
 
         return creatNumberSentence(arg);
     }
 
-    private void validate(String sentence) throws InvalidInputException {
-        if (sentence.isEmpty()) {
-            throw new InvalidInputException("Input is empty");
-        }
-
-        for (int i = 0; i < sentence.length(); i++) {
-            validateEachChar(i, sentence.charAt(i));
+    private void validate(List<String> arguments) throws InvalidInputException {
+        for (int i = 0; i < arguments.size(); i++) {
+            validateEachString(i, arguments.get(i));
         }
     }
 
-    private void validateEachChar(int index, char character) throws InvalidInputException {
-        if (index % 2 != 0 && character != ' ') {
-            throw new InvalidInputException("Input does not fit input standard");
+    private void validateEachString(int index, String argument) throws InvalidInputException {
+        if (index % 2 == 0) {
+            int num = Integer.parseInt(argument);
         }
-        if (index % 4 == 0) {
-            int num = Integer.parseInt(String.valueOf(character));
-        }
-        if ((index % 4 != 0 && index % 2 == 0) && !isOperator(character)) {
+        if (index % 2 != 0 && !isOperator(argument)) {
             throw new InvalidInputException("There something not operator in operator place");
         }
     }
 
-    private boolean isOperator(char operator) {
+    private boolean isOperator(String operator) {
         return Operator.PLUS.equals(operator) || Operator.MINUS.equals(operator) ||
                 Operator.MULTIPLIFICATION.equals(operator) || Operator.DIVISION.equals(operator);
     }
@@ -57,14 +50,14 @@ public class Converter {
         }
 
         for (int i = SECOND_INDEX; i < arguments.size(); i += 2) {
-            Operator operator = getOperator(arguments.get(i).charAt(FIRST_INDEX));
+            Operator operator = getOperator(arguments.get(i));
             operators.add(operator);
         }
 
         return new NumberSentence(numbers, operators);
     }
 
-    private Operator getOperator(char operator) {
+    private Operator getOperator(String operator) {
         if (Operator.PLUS.equals(operator)) {
             return Operator.PLUS;
         } else if (Operator.MINUS.equals(operator)) {
