@@ -31,7 +31,7 @@ public class OperatorTypeTest {
 	@ParameterizedTest
 	@DisplayName("미리 정의된 연산자에 해당하지 않는 문자열 인자를 받은 경우")
 	@ValueSource(strings = {"1", "\\", "s", " ", ""})
-	void of_Should_ThrowIllegalArgumentException_When_UnexpectedString(String value) {
+	void of_UnexpectedString_IllegalArgumentExceptionThrown(String value) {
 		Assertions.assertThatThrownBy(() -> OperatorType.of(value))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("연산자에 포함되지 않습니다.");
@@ -71,7 +71,7 @@ public class OperatorTypeTest {
 
 	@Test
 	@DisplayName("0으로 나누는 시도를 하는 경우")
-	void calculate_Divide_Should_ArithmeticException_When_DivideByZero() {
+	void calculate_Divide_DivideByZero_ArithmeticExceptionThrown() {
 		Assertions.assertThatThrownBy(() -> {
 			OperatorType divide = OperatorType.DIVIDE;
 			divide.calculate(3D, 0D);
@@ -81,7 +81,7 @@ public class OperatorTypeTest {
 
 	@Test
 	@DisplayName("연산 오버플로우 테스트")
-	void calculate_Should_PositiveInfinity_When_ExceedDoubleRange() {
+	void calculate_ExceedDoubleRange_OverflowInfinityExceptionThrown() {
 		OperatorType plus = OperatorType.PLUS;
 		Assertions.assertThatThrownBy(() -> plus.calculate(Double.MAX_VALUE, Double.MAX_VALUE))
 				.isInstanceOf(InfinityException.class);
@@ -89,7 +89,7 @@ public class OperatorTypeTest {
 
 	@Test
 	@DisplayName("연산 언더플로우 테스트")
-	void calculate_Should_NegativeInfinity_When_ExceedDoubleRange() {
+	void calculate_ExceedDoubleRange_UnderflowInfinityExceptionThrown() {
 		OperatorType minus = OperatorType.MINUS;
 		Assertions.assertThatThrownBy(() -> minus.calculate(-Double.MAX_VALUE, Double.MAX_VALUE))
 				.isInstanceOf(InfinityException.class);

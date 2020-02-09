@@ -66,7 +66,7 @@ public class ExpressionTest {
 
 	@Test
 	@DisplayName("생성자의 인자 numbers 크기가 operators 수와 동일한 경우")
-	void constructor_NumbersSizeEqualsOperatorsSize_IllegalArgumentException() {
+	void constructor_NumbersSizeEqualsOperatorsSize_IllegalArgumentExceptionThrown() {
 		Assertions.assertThatThrownBy(() -> {
 			List<Double> numbers = Arrays.asList(1D, 2D);
 			List<OperatorType> operators = Arrays.asList(OperatorType.PLUS, OperatorType.MINUS);
@@ -77,7 +77,7 @@ public class ExpressionTest {
 
 	@Test
 	@DisplayName("생성자의 인자 numbers 크기가 operators + 1 보다 작은 경우")
-	void constructor_NumbersSizeLessThanOperatorsSizePlusOne_IllegalArgumentException() {
+	void constructor_NumbersSizeLessThanOperatorsSizePlusOne_IllegalArgumentExceptionThrown() {
 		Assertions.assertThatThrownBy(() -> {
 			List<Double> numbers = Arrays.asList(1D, 2D);
 			List<OperatorType> operators = Arrays.asList(OperatorType.PLUS, OperatorType.MINUS, OperatorType.DIVIDE);
