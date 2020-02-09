@@ -25,10 +25,6 @@ public class SourceForCalculating {
         return result;
     }
 
-    public void printResult(double result) {
-        System.out.println(result);
-    }
-
     public void validateSizeOfInputsIsOdds(String[] inputs) throws IllegalArgumentException {
         if (!isOddNumber(inputs.length)) {
             throw new IllegalArgumentException("inputs의 사이즈가 홀수가 아님");

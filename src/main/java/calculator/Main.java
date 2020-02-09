@@ -20,7 +20,7 @@ public class Main {
         String[] inputs = InputHandler.splitInput(input);
 
         SourceForCalculating source = new SourceForCalculating(inputs);
-        source.printResult(source.calculateInputs());
+        OutputView.printResult(source.calculateInputs());
     }
 }
 
