@@ -4,9 +4,6 @@ public class SourceForCalculating {
     private Operands operands;
     private Operators operators;
 
-    public SourceForCalculating() {
-    }
-
     public SourceForCalculating(String[] inputs) throws Exception {
         operands = new Operands();
         operators = new Operators();
@@ -20,7 +17,7 @@ public class SourceForCalculating {
 
     public double calculateInputs() {
         Double result = operands.remove();
-        while (operators.isEmpty()) {
+        while (!operators.isEmpty()) {
             CalculatorType operator = operators.remove();
             Double operand = operands.remove();
             result = CalculatorType.calculate(result, operator, operand);
