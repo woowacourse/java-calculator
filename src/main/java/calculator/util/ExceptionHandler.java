@@ -5,21 +5,15 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static calculator.view.InputView.*;
+
 public class ExceptionHandler {
     private static final int EVEN = 0;
     private static final int ODD = 1;
     private static final int INDEX_INIT = 0;
-    private static Scanner scanner = new Scanner(System.in);
 
-    public static String inputHandler() {
-        try {
-            return checkInputHandler(scanner.nextLine());
-        } catch (InputMismatchException | IllegalArgumentException e) {
-            System.out.println("입력값을 확인해주세요.");
-            scanner = new Scanner(System.in);
-            return inputHandler();
-        }
-    }
+
+
 
     public static String checkInputHandler(String input) {
         if (checkString(input.split(" ")) == true && isUndefinedValue(input) == true) {

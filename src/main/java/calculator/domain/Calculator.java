@@ -1,6 +1,8 @@
 package calculator.domain;
 
 import calculator.util.ExceptionHandler;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class Calculator {
     private static final int INDEX_INIT = 1;
@@ -9,26 +11,32 @@ public class Calculator {
     static double returnValue;
     static String nowSign;
 
-    public static void main(String args[]) {
-        String[] values = ExceptionHandler.inputHandler().split(" ");
-        returnValue = Double.parseDouble(values[0]);
-        for (int i = INDEX_INIT; i < values.length; i++) {
-            check(i, values[i]);
-        }
+    public static void run() {
 
-        if (returnValue == Math.round(returnValue)) {
-            System.out.println(Math.round(returnValue));
-            return;
-        }
-        System.out.println(returnValue);
+        String[] values = InputView.inputHandler().split(" ");
+        returnValue = Double.parseDouble(values[0]);
+
+        calculateNumber(values);
+
+        OutputView.printResult(returnValue);
     }
 
-    public static void check(int i, String value) {
-        if (i % 2 == EVEN) {
-            calculate(Double.parseDouble(value));
+    public static void calculateNumber(String[] values) {
+        for (int i = INDEX_INIT; i < values.length; i++) {
+            calculateEvenNumber(i, values[i]);
+            calculateOddNumber(i,values[i]);
         }
-        if (i % 2 == ODD) {
+    }
+
+    public static void calculateOddNumber(int index, String value){
+        if (index % 2 == ODD) {
             nowSign = value;
+        }
+    }
+
+    public static void calculateEvenNumber(int index, String value){
+        if (index % 2 == EVEN) {
+            calculate(Double.parseDouble(value));
         }
     }
 
