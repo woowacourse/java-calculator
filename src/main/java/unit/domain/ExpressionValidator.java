@@ -16,12 +16,15 @@ public class ExpressionValidator {
 		}
 	}
 
-	private static boolean isInvalidSize(List<Token> tokens) {
+	private static boolean isInvalidSize(final List<Token> tokens) {
 		return tokens.size() < MIN_SIZE_OF_TOKENS;
 	}
 
-	private static boolean isUnbalanced(List<Token> tokens) {
-		for (int i = 0; i < tokens.size(); i++) {
+	private static boolean isUnbalanced(final List<Token> tokens) {
+		if (isEndWithOperator(tokens)) {
+			return true;
+		}
+		for (int i = 0; i < tokens.size() - 1; i++) {
 			if (isNumberTurn(i) && isNumber(tokens.get(i))) {
 				continue;
 			}
@@ -33,19 +36,24 @@ public class ExpressionValidator {
 		return false;
 	}
 
-	public static boolean isNumberTurn(int indexOfTokens) {
+	private static boolean isEndWithOperator(final List<Token> tokens) {
+		final Token lastToken = tokens.get(tokens.size() - 1);
+		return isOperator(lastToken);
+	}
+
+	private static boolean isOperator(final Token token) {
+		return token.getClass() == Operator.class;
+	}
+
+	public static boolean isNumberTurn(final int indexOfTokens) {
 		return indexOfTokens % 2 == STATUS_OF_NUMBER;
 	}
 
-	public static boolean isOperatorTurn(int indexOfTokens) {
+	public static boolean isOperatorTurn(final int indexOfTokens) {
 		return indexOfTokens % 2 == STATUS_OF_OPERATOR;
 	}
 
-	private static boolean isNumber(Token token) {
+	private static boolean isNumber(final Token token) {
 		return token.getClass() == Number.class;
-	}
-
-	private static boolean isOperator(Token token) {
-		return token.getClass() == Operator.class;
 	}
 }
