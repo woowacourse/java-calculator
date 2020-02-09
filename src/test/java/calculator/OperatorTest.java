@@ -9,7 +9,7 @@ public class OperatorTest {
     @CsvFileSource(resources = "/Operator/calculation.csv", numLinesToSkip = 1)
     void testCalculation(String operator, String arg1, String arg2, String result) {
         Operator tester = Operator.getOperatorByString(operator);
-        Assertions.assertThat(tester.apply(Double.parseDouble(arg1), Double.parseDouble(arg2)))
+        Assertions.assertThat(tester.calculate(Double.parseDouble(arg1), Double.parseDouble(arg2)))
                 .isEqualTo(Double.parseDouble(result));
     }
 
@@ -18,7 +18,7 @@ public class OperatorTest {
     void testInvalidSymbol(String operator, String arg1, String arg2) {
         Assertions.assertThatThrownBy(() -> {
             Operator tester = Operator.getOperatorByString(operator);
-            tester.apply(Double.parseDouble(arg1), Double.parseDouble(arg2));
+            tester.calculate(Double.parseDouble(arg1), Double.parseDouble(arg2));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("사칙연산 연산자만 계산 가능합니다");
     }
@@ -28,7 +28,7 @@ public class OperatorTest {
     void testZeroDivider(String operator, String arg1, String arg2) {
         Assertions.assertThatThrownBy(() -> {
             Operator tester = Operator.getOperatorByString(operator);
-            tester.apply(Double.parseDouble(arg1), Double.parseDouble(arg2));
+            tester.calculate(Double.parseDouble(arg1), Double.parseDouble(arg2));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("0으로 나눌 수 없습니다.");
     }

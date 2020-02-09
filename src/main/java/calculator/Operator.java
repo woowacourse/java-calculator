@@ -2,41 +2,29 @@ package calculator;
 
 import java.util.function.BiFunction;
 
-public enum Operator implements BiFunction<Double, Double, Double> {
-    PLUS("+") {
-        @Override
-        public Double apply(Double input1, Double input2) {
-            return input1 + input2;
-        }
-    },
-    MINUS("-") {
-        @Override
-        public Double apply(Double input1, Double input2) {
-            return input1 - input2;
-        }
-    },
-    MULTIPLY("*") {
-        @Override
-        public Double apply(Double input1, Double input2) {
-            return input1 * input2;
-        }
-    },
-    DIVIDE("/") {
-        @Override
-        public Double apply(Double input1, Double input2) {
-            checkZero(input2);
-            return input1 / input2;
-        }
-    };
+public enum Operator{
+    PLUS("+", (left, right) -> left + right),
+    MINUS("-", (left, right) -> left - right),
+    MULTIPLY("*", (left, right) -> left * right),
+    DIVIDE("/", (left, right) -> {
+        checkZero(right);
+        return left / right;
+    });
 
     private final String symbol;
+    private final BiFunction<Double, Double, Double> operate;
 
-    Operator(String symbol) {
+    Operator(String symbol, BiFunction<Double, Double, Double> operate) {
         this.symbol = symbol;
+        this.operate = operate;
     }
 
     public String toString() {
         return this.symbol;
+    }
+
+    public double calculate(double left, double right) {
+        return this.operate.apply(left, right);
     }
 
     public static Operator getOperatorByString(String input) {

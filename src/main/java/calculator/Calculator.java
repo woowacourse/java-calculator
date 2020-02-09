@@ -102,7 +102,7 @@ public class Calculator {
             double nextNumber = Double.parseDouble(splittedStrings.get(operatorIndex + INDEX_ONE));
             try {
                 Operator currentOperator = Operator.getOperatorByString(splittedStrings.get(operatorIndex));
-                intermediateState = currentOperator.apply(intermediateState, nextNumber);
+                intermediateState = currentOperator.calculate(intermediateState, nextNumber);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 enterMathematicalExpression();
