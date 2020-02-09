@@ -8,6 +8,7 @@ public class Calculator {
 
     private Queue<String> operatorQueue = new LinkedList<>();
     private Queue<Double> numberQueue = new LinkedList<>();
+    private String equationDelimiter = " ";
 
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
@@ -63,7 +64,7 @@ public class Calculator {
         while(true) {
             try {
                 String equation = scanner.nextLine();
-                equations = equation.split(" ");
+                equations = equation.split(equationDelimiter);
                 checkEquationElementValue(equations);
                 break;
             } catch(NumberFormatException e) {
