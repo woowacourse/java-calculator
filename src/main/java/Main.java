@@ -4,6 +4,5 @@ public class Main {
         Calculator calculator = new Calculator();
 
         calculator.calculate();
-        calculator.printResult();
     }
 }

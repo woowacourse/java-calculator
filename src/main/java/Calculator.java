@@ -13,10 +13,7 @@ public class Calculator {
             nextNumber = Double.parseDouble(InputValues.getValueByIndex(i + 1));
             result = nowOperator.operate(result, nextNumber);
         }
-    }
 
-
-    void printResult() {
-        System.out.print("결과: " + result);
+        OutView.printResult(result);
     }
 }
