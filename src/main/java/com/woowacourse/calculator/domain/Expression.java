@@ -15,6 +15,7 @@ import java.util.Objects;
 
 public class Expression {
     private static final int START_INDEX = 0;
+
     private final List<Double> numbers;
     
     private final List<OperatorType> operators;
