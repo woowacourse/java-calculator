@@ -1,33 +1,28 @@
 package domain;
 
+import java.util.stream.Stream;
+
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class CalculatorTest {
 	private Calculator calculator = new Calculator();
 
-	@Test
-	void plus() {
-		Assertions.assertThat(calculator.run("1 + 2".split(" "))).isEqualTo(3);
+	@ParameterizedTest(name = "{2}")
+	@MethodSource("validParameters")
+	void validCalculatorTest(String input, double expected, String message) {
+		Assertions.assertThat(calculator.run(input.split(" "))).isEqualTo(expected);
 	}
 
-	@Test
-	void minus() {
-		Assertions.assertThat(calculator.run("1 - 2".split(" "))).isEqualTo(-1);
-	}
-
-	@Test
-	void multiply() {
-		Assertions.assertThat(calculator.run("2 * 3".split(" "))).isEqualTo(6);
-	}
-
-	@Test
-	void divide() {
-		Assertions.assertThat(calculator.run("4 / 2".split(" "))).isEqualTo(2);
-	}
-
-	@Test
-	void manyOperatorsWorksProperly() {
-		Assertions.assertThat(calculator.run("1 + 3 * 4 / 2 - 7 - 3".split(" "))).isEqualTo(-2);
+	static Stream<Arguments> validParameters() throws Throwable {
+		return Stream.of(
+			Arguments.of("1 + 2", 3, "plus works"),
+			Arguments.of("1 - 2", -1, "minus works"),
+			Arguments.of("2 * 3", 6, "multiply works"),
+			Arguments.of("4 / 2", 2, "divide works"),
+			Arguments.of("1 + 3 * 4 / 2 - 7 - 3", -2, "many operators work properly")
+		);
 	}
 }
