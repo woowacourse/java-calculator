@@ -8,10 +8,7 @@ public class Validator {
 	private static final int ZERO = 0;
 
 	public static boolean isValidSize(List<String> tokens) {
-		if ((tokens.size() & ONE) == ONE) {
-			return true;
-		}
-		return false;
+		return (tokens.size() & ONE) == ONE;
 	}
 
 	public static void checkDivideByZero(double number) {
