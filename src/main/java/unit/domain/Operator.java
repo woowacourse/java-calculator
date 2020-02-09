@@ -25,17 +25,20 @@ public class Operator implements Token {
 	}
 
 	public double calculate(Number number1, Number number2) {
-		if (operator.equals(PLUS)) {
+		if (PLUS.equals(operator)) {
 			return number1.getNumber() + number2.getNumber();
 		}
-		if (operator.equals(MINUS)) {
+		if (MINUS.equals(operator)) {
 			return number1.getNumber() - number2.getNumber();
 		}
-		if (operator.equals(DIVIDE)) {
+		if (DIVIDE.equals(operator)) {
 			checkDivider(number2);
 			return number1.getNumber() / number2.getNumber();
 		}
-		return number1.getNumber() * number2.getNumber();
+		if (MULTIPLY.equals(operator)) {
+			return number1.getNumber() * number2.getNumber();
+		}
+		throw new IllegalStateException("정의 되지 않은 연산입니다.");
 	}
 
 	private void checkDivider(Number number2) {
