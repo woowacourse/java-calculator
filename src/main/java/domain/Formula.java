@@ -36,7 +36,7 @@ public class Formula {
         Arrays.stream(OPERATORS)
                 .filter(o -> o.equals(operator))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(String.format(WORNG_OPERATOR ,operator)));
+                .orElseThrow(() -> new IllegalArgumentException(String.format(WRONG_OPERATOR ,operator)));
     }
 
     public List<String> toList() {
