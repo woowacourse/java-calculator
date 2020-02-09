@@ -1,16 +1,19 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class CalculatorException {
+    private static final String EXPRESSION_DELIMITER = " ";
     private static final int INDEX_START = 0;
     private static final int INDEX_ONE = 1;
 
-    public static void checkValidSplit (List<String> input) {
-        checkClusteredElements(input);
-        checkIfStartWithSymbol(input);
-        checkIfEndWithSymbol(input);
+    public static void checkValidInput(String input) {
+        List<String> splittedInput = Arrays.asList(input.split(EXPRESSION_DELIMITER));
+        checkClusteredElements(splittedInput);
+        checkIfStartWithSymbol(splittedInput);
+        checkIfEndWithSymbol(splittedInput);
     }
 
     private static void checkIfStartWithSymbol(List<String> input) {

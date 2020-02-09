@@ -13,14 +13,14 @@ public class ApplicationTest {
     @Test
     void testGivenString() {
         String givenSample = "2 + 3 * 4 / 2";
-        tester.splitMathExpression(givenSample);
-        Assertions.assertThat(tester.calculate()).isEqualTo(10);
+        tester.calculate(givenSample);
+        Assertions.assertThat(tester.getResult()).isEqualTo(10);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/calculation.csv", numLinesToSkip = 1)
     void testCalculator(String input, String expected) {
-        tester.splitMathExpression(input);
-        Assertions.assertThat(tester.calculate()).isEqualTo(Integer.parseInt(expected));
+        tester.calculate(input);
+        Assertions.assertThat(tester.getResult()).isEqualTo(Double.parseDouble(expected));
     }
 }
