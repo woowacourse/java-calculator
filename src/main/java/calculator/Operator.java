@@ -4,7 +4,7 @@ public class Operator extends FormulaElement {
     private final OperatorType operator;
 
     public Operator(String input) {
-        this.operator = OperatorType.validateOperator(input);
+        this.operator = OperatorType.createOperator(input);
     }
 
     public double calculate(Operand operand1, Operand operand2) {

@@ -17,11 +17,11 @@ enum OperatorType {
         this.operator = operator;
     }
 
-    public static OperatorType validateOperator(String input) {
+    public static OperatorType createOperator(String operator) {
         return Arrays.stream(OperatorType.values())
-                .filter(c -> c.operator.equals(input))
+                .filter(o -> o.operator.equals(operator))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(input + " is not valid operator"));
+                .orElseThrow(() -> new IllegalArgumentException(operator + " is not valid operator"));
     }
 
     public double calculate(Operand operand1, Operand operand2) {
