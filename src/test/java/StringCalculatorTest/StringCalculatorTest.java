@@ -1,7 +1,9 @@
 package StringCalculatorTest;
 
 import Controller.Operator;
+import Controller.OperatorMap;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -20,11 +22,12 @@ public class StringCalculatorTest {
         numbers.add(1);
         numbers.add(2);
         numbers.add(3);
-        operators.add(Operator.getEnumFromString("+"));
-        operators.add(Operator.getEnumFromString("-"));
-        operators.add(Operator.getEnumFromString("*"));
+        operators.add(OperatorMap.getOperatorByString("+"));
+        operators.add(OperatorMap.getOperatorByString("-"));
+        operators.add(OperatorMap.getOperatorByString("*"));
     }
 
+    @DisplayName("문자열 식 계산")
     @Test
     void calculate() {
         double result = numbers.remove(0);

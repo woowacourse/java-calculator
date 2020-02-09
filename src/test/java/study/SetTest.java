@@ -2,6 +2,7 @@ package study;
 
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,7 +17,7 @@ public class SetTest {
 
     private Set numbers;
 
-    @BeforeEach  // 각각의 테스트함수를 실행하기 직전에 매번 수행된다.
+    @BeforeEach
     void setUp(){
         numbers = new HashSet<>();
         numbers.add(1);
@@ -25,30 +26,21 @@ public class SetTest {
         numbers.add(3);
     }
 
-    /**
-     * 요구사항 1. set size 테스트
-     */
     @Test
+    @DisplayName("1. set size test")
     void size(){
         int size = numbers.size();
         assertThat(size).isEqualTo(3);
     }
 
-    /**
-     * 요구사항 2. set contain 테스트
-     * @param input
-     */
+    @DisplayName("2. set contain test")
     @ParameterizedTest
     @ValueSource(ints = {1,2,3})
     void contain(Integer input) {
         assertThat(numbers.contains(input)).isTrue();
     }
 
-    /**
-     * 요구사항 3. set value match 테스트
-     * @param input
-     * @param expected
-     */
+    @DisplayName("3. set value match test")
     @ParameterizedTest
     @CsvSource(value = {"1:true", "2:true", "3:true", "4:false"}, delimiter = ':')
     void pairValue(int input, Boolean expected){
