@@ -10,9 +10,8 @@ import java.util.Objects;
  * @author K.S.KIM
  * @version 1.0
  * <p>
- * 날짜 : 2020.02.06 목요일
+ * 날짜 : 2020/02/06
  */
-
 public class Expression {
     private static final int START_INDEX = 0;
 

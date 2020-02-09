@@ -12,9 +12,8 @@ import com.woowacourse.calculator.view.OutputView;
  * @author K.S.KIM
  * @version 1.0
  * <p>
- * 날짜 : 2020.02.06 목요일
+ * 날짜 : 2020/02/06
  */
-
 public class CalculatorController {
     public void run() {
         Expression expression = makeExpression();
