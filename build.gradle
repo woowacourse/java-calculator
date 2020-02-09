@@ -14,3 +14,9 @@ dependencies {
     implementation 'junit:junit:4.12'
     implementation 'junit:junit:4.12'
 }
+
+jar {
+    manifest{
+        attributes 'Main-Class':'calculator.Application'
+    }
+}
