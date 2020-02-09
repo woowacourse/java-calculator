@@ -7,7 +7,7 @@ public class Formula {
     private static final String BLANK = " ";
     private static final String[] OPERATORS = {"+", "-", "*", "/"};
     private static final String NOT_NUMBER = "피연산자가 숫자가 아닙니다. %s";
-    private static final String WORNG_OPERATOR = "연산자가 잘못되었습니다. %s";
+    private static final String WRONG_OPERATOR = "연산자가 잘못되었습니다. %s";
 
     private final String formula;
 
