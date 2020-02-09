@@ -10,16 +10,10 @@ class NumberTest {
     @DisplayName("Number - Number() Test")
     @Test
     void testNumber() {
-        final String intUpperOverflowNumber = "2147483648";
+        final String value = "+";
 
-        assertThatThrownBy(() -> new Number(intUpperOverflowNumber))
+        assertThatThrownBy(() -> new Number(value))
                 .isInstanceOf(NumberFormatException.class)
-                .hasMessage("유효한 범위의 숫자를 입력해 주세요");
-
-        final String intLowerOverflowNumber = "-2147483649";
-
-        assertThatThrownBy(() -> new Number(intLowerOverflowNumber))
-                .isInstanceOf(NumberFormatException.class)
-                .hasMessage("유효한 범위의 숫자를 입력해 주세요");
+                .hasMessage("적절한 수를 입력해 주십시요.");
     }
 }

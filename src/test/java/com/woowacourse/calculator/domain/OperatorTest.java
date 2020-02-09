@@ -9,11 +9,11 @@ import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("Operator Test")
 class OperatorTest {
-    @DisplayName("Operator - Operator() Test")
+    @DisplayName("Operator - Of() Test")
     @ParameterizedTest
     @CsvSource(value = {"%", "$", "A", "@"})
     void testOperator(final String invalidOperator) {
-        assertThatThrownBy(() -> new Operator(invalidOperator))
+        assertThatThrownBy(() -> Operator.Of(invalidOperator))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("유효한 연산자 형식이 아닙니다.");
     }
@@ -21,10 +21,12 @@ class OperatorTest {
     @DisplayName("Operator - calculate() Test")
     @ParameterizedTest
     @CsvSource(value = {"+, 1,2,3", "-, 1,2,-1", "/, 2,1,2", "*, 2,3,6"})
-    void testCalculate(final String inputOperator, final String inputNumber1, final String inputNumber2, final int expected) {
-        Operator operator = new Operator(inputOperator);
+    void testCalculate(final String inputOperator, final String firstOperand, final String secondOperand, final Double expected) {
+        Operator operator = Operator.Of(inputOperator);
 
-        int actual = operator.calculate(new Number(inputNumber1), new Number(inputNumber2));
+        final Double firstOperandNumber = new Number(firstOperand).getNumber();
+        final Double secondOperandNumber = new Number(secondOperand).getNumber();
+        final Double actual = operator.calculate(firstOperandNumber, secondOperandNumber);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -33,12 +35,12 @@ class OperatorTest {
     @Test
     void testCheckDivision() {
         final String division = "/";
-        Operator operator = new Operator(division);
+        Operator operator = Operator.Of(division);
 
         assertThatThrownBy(() -> {
-            final String number = "1";
-            final String Zero = "0";
-            operator.calculate(new Number(number), new Number(Zero));
+            final Double firstOperand = new Number("1").getNumber();
+            final Double zero = new Number("0").getNumber();
+            operator.calculate(firstOperand, zero);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("0으로 나눌 수 없습니다.");
     }

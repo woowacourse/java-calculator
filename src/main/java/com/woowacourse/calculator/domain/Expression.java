@@ -1,6 +1,7 @@
 package com.woowacourse.calculator.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Expression {
     private static final int MIN_EXPRESSION_NUMBERS_SIZE = 2;
@@ -34,5 +35,19 @@ public class Expression {
             calculateResult = operator.calculate(calculateResult, nextOperand);
         }
         return calculateResult;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expression that = (Expression) o;
+        return Objects.equals(numbers, that.numbers) &&
+                Objects.equals(operators, that.operators);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers, operators);
     }
 }
