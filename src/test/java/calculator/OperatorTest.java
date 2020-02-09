@@ -3,6 +3,7 @@ package calculator;
 import domain.Operator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class OperatorTest {
     private static int TEST_COUNTS = 10;
@@ -45,29 +47,26 @@ public class OperatorTest {
     @CsvFileSource(resources = "/testData.csv")
     void divide(Double operand1, Double operand2) {
         double expected = operand1 / operand2;
-        try {
-            assertThat(Operator.DIVIDE.calculate(operand1, operand2)).isEqualTo(expected);
-        } catch (IllegalArgumentException iae) {
-            assertThat(iae.getMessage()).isEqualTo("0으로 나눌 수 없습니다.");
-        }
+        assertThat(Operator.DIVIDE.calculate(operand1, operand2)).isEqualTo(expected);
+    }
+
+    @DisplayName("DIVIDE TEST / 0")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/testData.csv")
+    void divideZero(Double operand1) {
+        assertThatThrownBy(() -> Operator.DIVIDE.calculate(operand1, 0.0)).isInstanceOf(IllegalArgumentException.class)
+                                                                          .hasMessageContaining("0으로 나눌 수 없습니다.");
     }
 
     @BeforeEach
-    void createCSV() {
+    void createCSV() throws Exception {
         Random random = new Random();
-        double data1 = 0.0, data2 = 0.0;
-        try {
-            BufferedWriter fw = new BufferedWriter(new FileWriter("out/test/classes/testData.csv"));
-            for (int i = 0; i < TEST_COUNTS; i++) {
-                fw.write(data1 + ", " + data2);
-                fw.newLine();
-                data1 = random.nextDouble();
-                data2 = random.nextDouble();
-            }
-            fw.flush();
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        BufferedWriter fw = new BufferedWriter(new FileWriter("out/test/classes/testData.csv"));
+        for (int i = 0; i < TEST_COUNTS; i++) {
+            fw.write(random.nextDouble() + ", " + random.nextDouble());
+            fw.newLine();
         }
+        fw.flush();
+        fw.close();
     }
 }
