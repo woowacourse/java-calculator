@@ -7,6 +7,12 @@ public class Validator {
 	private static final int ONE = 1;
 	private static final int ZERO = 0;
 
+	public static void checkIsBlank(String input) {
+		if (input.length() == 0) {
+			throw new IllegalArgumentException("입력값이 없습니다.");
+		}
+	}
+
 	public static boolean isValidSize(List<String> tokens) {
 		return (tokens.size() & ONE) == ONE;
 	}
