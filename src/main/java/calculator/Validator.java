@@ -1,21 +1,11 @@
 package calculator;
 
-import java.util.ArrayList;
-
 public class Validator {
-    private static final ArrayList<String> operators = new ArrayList<>();
-
-    public Validator() {
-        operators.add("+");
-        operators.add("-");
-        operators.add("*");
-        operators.add("/");
-    }
-
-    public void isValidInput(String input) {
+    public boolean isValidInput(String input) {
         if (isNull(input) || isBlank(input) || isEmpty(input)) {
-            throw new IllegalArgumentException("Handled Exception : Null or Blank or Empty exception.");
+            return false;
         }
+        return true;
     }
 
     private boolean isNull(String input) {
@@ -30,30 +20,38 @@ public class Validator {
         return input.equals("");
     }
 
-    public void isValidSplitedInput(String[] splitedInput) {
-        checkIsDoubleNumber(splitedInput[0]);
+    public boolean isValidSplitedInput(String[] splitedInput) {
+        if (!IsDoubleNumber(splitedInput[0])) {
+            return false;
+        }
         for (int i = 1; i < splitedInput.length; i = i + 2) {
             String operator = splitedInput[i];
             String number = splitedInput[i + 1];
             if (operator.equals("/") && number.equals("0")) {
-                throw new IllegalArgumentException("Handled Exception : Cannot divide zero.");
+                return false;
             }
-            checkIsOperator(operator);
-            checkIsDoubleNumber(number);
+            if (!IsOperator(operator) || !IsDoubleNumber(number)) {
+                return false;
+            }
         }
+        return true;
     }
 
-    private void checkIsDoubleNumber(String s) {
+    private boolean IsDoubleNumber(String s) {
         try {
             Double.valueOf(s);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Handled Exception : Cannot convert to double.");
+            return false;
         }
+        return true;
     }
 
-    private void checkIsOperator(String s) {
-        if (!operators.contains(s)) {
-            throw new IllegalArgumentException("Handled Exception : Operator check exception.");
+    private boolean IsOperator(String operator) {
+        for (Operator o : Operator.values()){
+            if (o.getOperator().equals(operator)){
+                return true;
+            }
         }
+        return false;
     }
 }
