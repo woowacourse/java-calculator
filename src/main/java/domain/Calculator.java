@@ -10,9 +10,10 @@ public class Calculator {
         int size = operators.size();
         Number result = numbers.get(Converter.FIRST_INDEX);
 
-        for (int i = 0; i < size; i++) {
+        for (int i = Converter.FIRST_INDEX; i < size; i++) {
             result = calculate(result, numbers.get(i + 1), operators.poll());
         }
+
         return result;
     }
 

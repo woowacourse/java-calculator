@@ -18,27 +18,27 @@ class CalculatorTest {
     void calculateAdd() {
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(new Number(first), new Number(second)), new LinkedList<>(Collections.singletonList(Operator.PLUS)));
 
-        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(first + second);
+        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(new Number(first + second));
     }
 
     @Test
     void calculateSubstract() {
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(new Number(first), new Number(second)), new LinkedList<>(Collections.singletonList(Operator.MINUS)));
 
-        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(first - second);
+        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(new Number(first - second));
     }
 
     @Test
     void calculateMultiple() {
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(new Number(first), new Number(second)), new LinkedList<>(Collections.singletonList(Operator.MULTIPLIFICATION)));
 
-        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(first * second);
+        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(new Number(first * second));
     }
 
     @Test
     void calculateDivide() {
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(new Number(first), new Number(second)), new LinkedList<>(Collections.singletonList(Operator.DIVISION)));
 
-        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(first / second);
+        assertThat(calculator.calculateNumberSentence(numberSentence)).isEqualTo(new Number(first / second));
     }
 }
