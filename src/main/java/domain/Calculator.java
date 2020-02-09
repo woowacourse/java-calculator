@@ -19,6 +19,7 @@ public class Calculator {
 			String nextNumber = tokens.get(i + 1);
 
 			Validator.checkIsNumber(nextNumber);
+			Validator.checkDivideByZero(operator, Double.parseDouble(nextNumber));
 			accumulatedNumber = Operator.isEqual(operator).operate(accumulatedNumber, Double.parseDouble(nextNumber));
 		}
 		return Double.toString(accumulatedNumber);

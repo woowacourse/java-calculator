@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Validator {
 	private static final String MINUS = "-";
+	private static final String DIVIDE = "/";
 	private static final int ONE = 1;
 	private static final int ZERO = 0;
 
@@ -17,8 +18,8 @@ public class Validator {
 		return (tokens.size() & ONE) == ONE;
 	}
 
-	public static void checkDivideByZero(double number) {
-		if (number == ZERO) {
+	public static void checkDivideByZero(String operator, double number) {
+		if (operator.equals(DIVIDE) && number == ZERO) {
 			throw new ArithmeticException("0으로 나눌 수는 없습니다.");
 		}
 	}
