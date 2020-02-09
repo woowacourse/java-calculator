@@ -15,6 +15,7 @@ package controller;
 
 import calculator.Calculator;
 import model.Expression;
+import model.Operator;
 import validator.InputValidator;
 import view.InputView;
 import view.OutputView;
@@ -22,10 +23,6 @@ import view.OutputView;
 import java.util.List;
 
 public class Controller {
-    private static final String PLUS = "+";
-    private static final String MINUS = "-";
-    private static final String MUL = "*";
-    private static final String DIV = "/";
 
     public void run() {
         String input;
@@ -51,16 +48,16 @@ public class Controller {
         Calculator calculator = new Calculator();
 
         for (int i = 0; i < operators.size(); i++) {
-            if (operators.get(i).equals(PLUS)) {
+            if (operators.get(i).equals(Operator.PLUS.toString())) {
                 sum = calculator.plus(sum, numbers.get(i + 1));
             }
-            if (operators.get(i).equals(MINUS)) {
+            if (operators.get(i).equals(Operator.MINUS.toString())) {
                 sum = calculator.minus(sum, numbers.get(i + 1));
             }
-            if (operators.get(i).equals(MUL)) {
+            if (operators.get(i).equals(Operator.MUL.toString())) {
                 sum = calculator.mul(sum, numbers.get(i + 1));
             }
-            if (operators.get(i).equals(DIV)) {
+            if (operators.get(i).equals(Operator.DIV.toString())) {
                 sum = calculator.div(sum, numbers.get(i + 1));
             }
         }
