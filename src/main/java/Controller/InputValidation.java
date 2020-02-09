@@ -4,7 +4,7 @@ import Model.Operator;
 import View.InputView;
 import View.OutputView;
 
-public class InputException {
+public class InputValidation {
 
     public static String[] checkException() {
         OutputView.printInputMessage();
