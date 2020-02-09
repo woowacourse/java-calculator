@@ -13,7 +13,7 @@
 
 package controller;
 
-import calculator.Calculator;
+import calculator.CalculatorMap;
 import model.CalculatedValue;
 import view.InputView;
 import view.OutputView;
@@ -44,21 +44,10 @@ public class Controller {
         List<String> operatorList = stringInput.getOperatorList();
         double sum = numberList.get(0);
 
-        Calculator calculator = new Calculator();
+        CalculatorMap op = new CalculatorMap();
 
         for (int i = 0; i < operatorList.size(); i++) {
-            if (operatorList.get(i).equals(PLUS)) {
-                sum = calculator.plus(sum, numberList.get(i + 1));
-            }
-            if (operatorList.get(i).equals(MINUS)) {
-                sum = calculator.minus(sum, numberList.get(i + 1));
-            }
-            if (operatorList.get(i).equals(MUL)) {
-                sum = calculator.mul(sum, numberList.get(i + 1));
-            }
-            if (operatorList.get(i).equals(DIV)) {
-                sum = calculator.div(sum, numberList.get(i + 1));
-            }
+            sum = op.getOperator(operatorList.get(i)).getOperatedValue(sum, numberList.get(i + 1));
         }
 
         return sum;

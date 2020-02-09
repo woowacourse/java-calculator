@@ -18,30 +18,30 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class CalculatorTest {
-    static Calculator calculator;
+    static CalculatorMap op;
 
     @BeforeAll
     static void setUp() {
-        calculator = new Calculator();
+        op = new CalculatorMap();
     }
 
     @Test
     void testPlus() {
-        Assertions.assertEquals(7.0, calculator.plus(2.0,5.0));
+        Assertions.assertEquals(7.0, op.getOperator("+").getOperatedValue(2.0, 5.0));
     }
 
     @Test
     void testMinus() {
-        Assertions.assertEquals(-3.0, calculator.minus(2.0,5.0));
+        Assertions.assertEquals(-3.0, op.getOperator("-").getOperatedValue(2.0, 5.0));
     }
 
     @Test
     void testMul() {
-        Assertions.assertEquals(10.0, calculator.mul(2.0,5.0));
+        Assertions.assertEquals(10.0, op.getOperator("*").getOperatedValue(2.0, 5.0));
     }
 
     @Test
     void testDiv() {
-        Assertions.assertEquals(0.4, calculator.div(2.0,5.0));
+        Assertions.assertEquals(0.4, op.getOperator("/").getOperatedValue(2.0, 5.0));
     }
 }

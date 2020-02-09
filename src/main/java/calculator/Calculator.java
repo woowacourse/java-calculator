@@ -13,20 +13,21 @@
 
 package calculator;
 
-public class Calculator {
-    public double plus(double x, double y) {
-        return x + y;
-    }
-
-    public double minus(double x, double y) {
-        return x - y;
-    }
-
-    public double mul(double x, double y) {
-        return x * y;
-    }
-
-    public double div(double x, double y) {
-        return x / y;
-    }
+public interface Calculator {
+    double getOperatedValue(double x, double y);
+//    public double plus(double x, double y) {
+//        return x + y;
+//    }
+//
+//    public double minus(double x, double y) {
+//        return x - y;
+//    }
+//
+//    public double mul(double x, double y) {
+//        return x * y;
+//    }
+//
+//    public double div(double x, double y) {
+//        return x / y;
+//    }
 }
