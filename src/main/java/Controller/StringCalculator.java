@@ -3,7 +3,9 @@ package Controller;
 import View.OutputView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StringCalculator {
     private List<Integer> numbers = new ArrayList<>();
@@ -24,7 +26,7 @@ public class StringCalculator {
             try {
                 numbers.add(Integer.parseInt(val));
             } catch (Exception e) {
-                operators.add(Operator.getEnumFromString(val));
+                operators.add(OperatorMap.getOperatorByString(val));
             }
         }
     }

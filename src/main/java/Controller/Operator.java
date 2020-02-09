@@ -34,13 +34,4 @@ public enum Operator {
 
     public abstract double compute(double num1, double num2);
 
-    public static Operator getEnumFromString(String sign) {
-        for (Operator op : Operator.values()) {
-            if (op.sign.equals(sign)) {
-                return op;
-            }
-        }
-        return null;
-    }
-
 }

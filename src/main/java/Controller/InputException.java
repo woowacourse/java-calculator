@@ -66,7 +66,7 @@ public class InputException {
      */
     public static void validateOperators(String[] inputs) throws Exception {
         for (int i = 1; i < inputs.length; i += 2) {
-            if (Operator.getEnumFromString(inputs[i]) == null) {
+            if (OperatorMap.getOperatorByString(inputs[i]) == null) {
                 throw new Exception("올바른 연산자가 아닙니다.");
             }
         }
