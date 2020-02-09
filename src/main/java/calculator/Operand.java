@@ -11,7 +11,7 @@ public class Operand {
         this(Double.parseDouble(input));
     }
 
-    public double getOperand() {
+    public double getOperandValue() {
         return operand;
     }
 }

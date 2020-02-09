@@ -23,7 +23,7 @@ public class Formula {
             Operand operand = formula.get(i).getOperand();
             result = new Operand(operator.calculate(result, operand));
         }
-        return result.getOperand();
+        return result.getOperandValue();
     }
 
     private void generateFormula(String[] inputs) {

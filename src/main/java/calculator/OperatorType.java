@@ -25,6 +25,6 @@ enum OperatorType {
     }
 
     public double calculate(Operand operand1, Operand operand2) {
-        return expression.apply(operand1.getOperand(), operand2.getOperand());
+        return expression.apply(operand1.getOperandValue(), operand2.getOperandValue());
     }
 }
