@@ -21,11 +21,6 @@ import view.OutputView;
 import java.util.List;
 
 public class Controller {
-    private final String PLUS = "+";
-    private final String MINUS = "-";
-    private final String MUL = "*";
-    private final String DIV = "/";
-
     public void run() {
         CalculatedValue stringInput;
         do {
