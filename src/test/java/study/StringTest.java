@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 
 public class StringTest {
     @Test
-    void split() {
+    @DisplayName("특정한 토큰을 통해 문자열 나누기")
+    void splitStringTest() {
         String value = "1,2";
         String[] result = value.split(",");
         Assertions.assertThat(result).contains("1");
@@ -15,14 +16,15 @@ public class StringTest {
     }
 
     @Test
-    void split2() {
+    @DisplayName("문자열에 없는 토큰으로 문자열 나누기")
+    void splitStringErrorTest() {
         String value = "1";
         String[] result = value.split(",");
         Assertions.assertThat(result).containsExactly("1");
     }
 
     @Test
-    @DisplayName("subString테스트")
+    @DisplayName("subString 메서드 테스트")
     void subStringTest() {
         String value = "(1,2)";
         value = value.substring(1, value.length() - 1);
