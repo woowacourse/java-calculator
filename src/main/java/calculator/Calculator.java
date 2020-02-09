@@ -47,6 +47,7 @@ public class Calculator {
         if (validateString(inputString)) {
             System.out.println(EMPTY_ERROR_MESSAGE);
             start();
+            return;
         }
         Queue<String> equation = makeQueue(inputString);
         try {
@@ -138,6 +139,6 @@ public class Calculator {
      * @throws ArithmeticException      만약 0으로 나누는 연산 발생 시 예외를 throw한다.
      */
     public int calculate(int result, String operator, int operand) throws ArithmeticException, IllegalArgumentException {
-        return CalculatorType.operate(result, operator, operand);
+        return OperatorType.operate(result, operator, operand);
     }
 }
