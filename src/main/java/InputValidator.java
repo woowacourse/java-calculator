@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class InputValidator {
 
@@ -33,11 +32,17 @@ public class InputValidator {
     }
 
     private boolean validateAfterSplit(String[] input) {
+        List<Boolean> isNumberCheck = new ArrayList<>();
+        List<Boolean> isOperatorCheck = new ArrayList<>();
         for (int i = 0; i < input.length; i++) {
             separateNumbersAndOperators(input[i], i);
         }
-        List<Boolean> isNumberCheck = numbers.stream().map(this::numberCheck).collect(Collectors.toList());
-        List<Boolean> isOperatorCheck = operators.stream().map(this::operatorCheck).collect(Collectors.toList());
+        for (String number : numbers) {
+            isNumberCheck.add(numberCheck(number));
+        }
+        for (String operator : operators) {
+            isOperatorCheck.add(operatorCheck(operator));
+        }
         return isNumberCheck.contains(false) || isOperatorCheck.contains(false);
     }
 
@@ -50,7 +55,6 @@ public class InputValidator {
     }
 
     private boolean operatorCheck(String operator) {
-        System.out.println(!operator.matches("^[0-9]"));
         return !operator.matches("^[0-9]");
     }
 
