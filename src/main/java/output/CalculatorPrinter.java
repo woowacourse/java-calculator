@@ -5,7 +5,7 @@ import calculator.expression.MathematicalExpression;
 
 public class CalculatorPrinter {
 
-    private static final String RESULT_FORMATTED_STRING = "결과: %f";
+    private static final String RESULT_FORMATTED_STRING = "결과: %.2f";
 
     public static void printIntroduction() {
         System.out.println("계산기를 실행해주셔서 감사합니다.");
