@@ -27,8 +27,7 @@ public enum Operator {
     }
 
     public static Operator getOperator(String symbol) throws IllegalArgumentException {
-        List<Operator> results =
-                Arrays.stream(Operator.values())
+        List<Operator> results = Arrays.stream(Operator.values())
                 .filter(t -> t.getSymbol().equals(symbol))
                 .collect(Collectors.toUnmodifiableList());
 
