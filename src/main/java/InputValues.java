@@ -1,17 +1,36 @@
 import java.util.Scanner;
+class Input{
+    String value;
+    String[] values;
 
+    public Input(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("문자열 수식을 입력해주세요 : ");
+        value = scanner.nextLine();
+        values = value.split(" ");
+    }
+
+    public Input(String input){
+        this.value = input;
+        this.values = value.split(" ");
+    }
+
+    public int getValuesLength(){
+        return values.length;
+    }
+
+    public String getValueByIndex(int index){
+        return values[index];
+    }
+}
 public class InputValues {
     private static final int ZERO = 0;
 
-    private String value;
-    private String[] values;
+    Input input;
 
-    public InputValues() throws IllegalArgumentException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("문자열 수식을 입력해주세요: ");
-        value = scanner.nextLine();
-        values = value.split(" ");
-        int valueLength = values.length;
+    public InputValues(Input input) throws IllegalArgumentException {
+        this.input = input;
+        int valueLength = input.getValuesLength();
 
         validateEndWithOperator(valueLength);
         for (int i = 0; i < valueLength; i++) {
@@ -21,19 +40,18 @@ public class InputValues {
     }
 
     public InputValues(String value) {
-        this.value = value;
-        values = value.split(" ");
+        Input input = new Input(value);
     }
 
     void validateValues(int index) throws IllegalArgumentException{
         if (index % 2 == ZERO) {
             try {
-                Double.parseDouble(values[index]);
+                Double.parseDouble(input.getValueByIndex(index));
             } catch (NumberFormatException ne) {
                 throw new IllegalArgumentException("피연산자가 잘못되었습니다.");
             }
         } else{
-            Operator.getOperatorByString(values[index]);
+            Operator.getOperatorByString(input.getValueByIndex(index));
         }
     }
 
@@ -43,11 +61,7 @@ public class InputValues {
         }
     }
 
-    public String getValueByIndex(int index) {
-        return values[index];
-    }
-
-    public int getValuesLength() {
-        return values.length;
+    Input getInput(){
+        return input;
     }
 }

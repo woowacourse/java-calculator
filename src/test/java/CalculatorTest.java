@@ -9,11 +9,13 @@ public class CalculatorTest {
     @DisplayName("입력이 올바른지 검증")
     @CsvSource(value = {"1.9 * 6.2:true", "5 * 6 * 7 * 9:true", "0 / 0:true"}
     , delimiter = ':')
-    void validateValuesTest(String input, boolean expected) {
+    void validateValuesTest(String value, boolean expected) {
         boolean actualResult = true;
         try {
-            int length = input.split(" ").length;
+            Input input = new Input(value);
             InputValues inputValues = new InputValues(input);
+            int length = input.getValuesLength();
+
             for (int i = 0; i < length; i++) {
                 inputValues.validateValues(i);
             }
@@ -28,10 +30,12 @@ public class CalculatorTest {
     @ParameterizedTest
     @DisplayName("올바르지 않은 연산자가 오는 경우 에러메세지 검증")
     @ValueSource(strings = {"3 ! 3 * 3", "3 3 3", "5 ) 9"})
-    void validateValuesTest2(String input) {
+    void validateValuesTest2(String value) {
         Assertions.assertThatThrownBy(() -> {
-            int length = input.split(" ").length;
+            Input input = new Input(value);
             InputValues inputValues = new InputValues(input);
+            int length = input.getValuesLength();
+
             for (int i = 0; i < length; i++) {
                 inputValues.validateValues(i);
             }
@@ -41,11 +45,13 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @DisplayName("올바르지 않은 피연산자가 오는 경우 에러메세지 검증")
-    @ValueSource(strings = {"! * 3 * 3", "a / 3", "5 * * 9"})
-    void validateValuesTest3(String input) {
+    @ValueSource(strings = {"! * 3 * 3", "a / 3", "5 * * + 6"})
+    void validateValuesTest3(String value) {
         Assertions.assertThatThrownBy(() -> {
-            int length = input.split(" ").length;
+            Input input = new Input(value);
             InputValues inputValues = new InputValues(input);
+            int length = input.getValuesLength();
+
             for (int i = 0; i < length; i++) {
                 inputValues.validateValues(i);
             }
@@ -56,11 +62,13 @@ public class CalculatorTest {
     @ParameterizedTest
     @DisplayName("연산자로 수식이 끝나는 경우 검증")
     @CsvSource(value = {"2 + 3 * 5 / 2:true", "2 +:false", "2 + 3 *:false"}, delimiter = ':')
-    void validateEndWithOperatorTest(String input, boolean expected) {
+    void validateEndWithOperatorTest(String value, boolean expected) {
         boolean actualResult = true;
         try {
-            int length = input.split(" ").length;
+            Input input = new Input(value);
             InputValues inputValues = new InputValues(input);
+            int length = input.getValuesLength();
+
             inputValues.validateEndWithOperator(length);
         } catch (IllegalArgumentException ie) {
             actualResult = false;
@@ -71,10 +79,12 @@ public class CalculatorTest {
     @ParameterizedTest
     @DisplayName("연산자로 수식이 끝나는 경우 에러메세지 검증")
     @ValueSource(strings = {"2 + 3 *", "2 +", "2 + 3 -"})
-    void validateEndWithOperatorTest2(String input) {
+    void validateEndWithOperatorTest2(String value) {
         Assertions.assertThatThrownBy(() -> {
-            int length = input.split(" ").length;
+            Input input = new Input(value);
             InputValues inputValues = new InputValues(input);
+            int length = input.getValuesLength();
+
             inputValues.validateEndWithOperator(length);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageMatching(
                 "연산자와 숫자가 맞지 않습니다.");
@@ -84,10 +94,10 @@ public class CalculatorTest {
     @DisplayName("연산자 enum 이 올바른지 검증")
     @CsvSource(value = {"3:false", "+:true", "/:true",
             "문자입력:false", "):false"}, delimiter = ':')
-    void getOperatorByStringTest(String input, boolean expected) {
+    void getOperatorByStringTest(String value, boolean expected) {
         boolean actualResult = true;
         try {
-            Operator.getOperatorByString(input);
+            Operator.getOperatorByString(value);
         } catch (IllegalArgumentException e) {
             actualResult = false;
         }

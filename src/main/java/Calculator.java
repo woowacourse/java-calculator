@@ -4,15 +4,16 @@ public class Calculator {
     private double result = 0;
 
     void calculate(InputValues inputValues) {
-        int length = inputValues.getValuesLength();
+        Input input = inputValues.getInput();
+        int length = input.getValuesLength();
         double nextNumber;
 
-        result = Double.parseDouble(inputValues.getValueByIndex(FIRST));
+        result = Double.parseDouble(input.getValueByIndex(FIRST));
         Operator nowOperator;
         for (int i = 1; i < length; i += TWO) {
             nowOperator =
-                    Operator.getOperatorByString(inputValues.getValueByIndex(i));
-            nextNumber = Double.parseDouble(inputValues.getValueByIndex(i + 1));
+                    Operator.getOperatorByString(input.getValueByIndex(i));
+            nextNumber = Double.parseDouble(input.getValueByIndex(i + 1));
             result = nowOperator.operate(result, nextNumber);
         }
     }

@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) throws IllegalArgumentException{
-        InputValues inputValues = new InputValues();
+        Input input = new Input();
+        InputValues inputValues = new InputValues(input);
         Calculator calculator = new Calculator();
 
         calculator.calculate(inputValues);
