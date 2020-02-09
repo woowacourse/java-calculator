@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import calculator.util.ExceptionHandler;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -12,16 +11,13 @@ public class Calculator {
     static String nowSign;
 
     public static void run() {
-
         String[] values = InputView.inputHandler().split(" ");
         returnValue = Double.parseDouble(values[0]);
-
-        calculateNumber(values);
-
+        selectOddNumberOrEvenNumber(values);
         OutputView.printResult(returnValue);
     }
 
-    public static void calculateNumber(String[] values) {
+    public static void selectOddNumberOrEvenNumber(String[] values) {
         for (int i = INDEX_INIT; i < values.length; i++) {
             calculateEvenNumber(i, values[i]);
             calculateOddNumber(i,values[i]);
@@ -36,42 +32,22 @@ public class Calculator {
 
     public static void calculateEvenNumber(int index, String value){
         if (index % 2 == EVEN) {
-            calculate(Double.parseDouble(value));
+            selectOperators(Double.parseDouble(value));
         }
     }
 
-    public static void calculate(double nowNumber) {
-        if (nowSign.equals("+")) {
-            plus(nowNumber);
-            return;
-        }
-        if (nowSign.equals("-")) {
-            minus(nowNumber);
-            return;
-        }
-        if (nowSign.equals("*")) {
-            multiply(nowNumber);
-            return;
-        }
-        if (nowSign.equals("/")) {
-            divide(nowNumber);
-            return;
+    public static void selectOperators(double nowNumber) {
+        for(Operator operators : Operator.values()){
+            calculateNumber(operators, nowNumber);
         }
     }
 
-    public static void plus(double nowNumber) {
-        returnValue += nowNumber;
+    public static void calculateNumber(Operator operators, double nowNumber){
+        if(operators.getOperator().equals(nowSign)){
+            operators.calculate(nowNumber);
+        }
     }
 
-    public static void minus(double nowNumber) {
-        returnValue -= nowNumber;
-    }
 
-    public static void multiply(double nowNumber) {
-        returnValue *= nowNumber;
-    }
 
-    public static void divide(double nowNumber) {
-        returnValue /= nowNumber;
-    }
 }
