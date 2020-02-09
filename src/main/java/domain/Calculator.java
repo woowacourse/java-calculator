@@ -9,10 +9,6 @@ public class Calculator {
 	private static final int ZERO = 0;
 	private static final int ONE = 1;
 	private static final int TWO = 2;
-	private static final BiFunction<Double, Double, Double> PLUS = (aDouble, aDouble2) -> aDouble + aDouble2;
-	private static final BiFunction<Double, Double, Double> MINUS = (aDouble, aDouble2) -> aDouble - aDouble2;
-	private static final BiFunction<Double, Double, Double> MULTIPLICATION = (aDouble, aDouble2) -> aDouble * aDouble2;
-	private static final BiFunction<Double, Double, Double> DIVISION = (aDouble, aDouble2) -> aDouble / aDouble2;
 
 	private List<String> expression;
 	private Map<String, BiFunction<Double, Double, Double>> functions;
@@ -21,10 +17,10 @@ public class Calculator {
 		this.expression = expression;
 		functions = new HashMap<>();
 
-		functions.put("+", PLUS);
-		functions.put("-", MINUS);
-		functions.put("*", MULTIPLICATION);
-		functions.put("/", DIVISION);
+		functions.put("+", (aDouble, aDouble2) -> aDouble + aDouble2);
+		functions.put("-", (aDouble, aDouble2) -> aDouble - aDouble2);
+		functions.put("*", (aDouble, aDouble2) -> aDouble * aDouble2);
+		functions.put("/", ((aDouble, aDouble2) -> aDouble / aDouble2));
 	}
 
 	public double calculate() {
