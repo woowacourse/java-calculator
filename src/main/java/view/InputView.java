@@ -5,6 +5,6 @@ import java.util.Scanner;
 public class InputView {
     public static String input() {
         System.out.print("계산식을 입력하세요 : ");
-        return new Scanner(System.in).nextLine().trim().replaceAll("  *"," ");
+        return new Scanner(System.in).nextLine();
     }
 }

@@ -8,6 +8,8 @@ public class Formulas {
     private static final String BLANK = " ";
 
     public Formulas(String formula) {
+        formula = formula.trim()
+                .replaceAll("  *", BLANK);
         this.formulas = Arrays.asList(formula.split(BLANK));
     }
 
