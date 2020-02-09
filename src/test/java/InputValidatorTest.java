@@ -1,6 +1,11 @@
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class InputValidatorTest {
 	private InputValidator inputValidator = new InputValidator();
@@ -10,43 +15,22 @@ public class InputValidatorTest {
 		assertThat(inputValidator.validate("1 + 2 + 3 + 4.0")).isFalse();
 	}
 
-	@Test
-	void returnTrueIfInputIncludesInvalidCharacters() {
-		assertThat(inputValidator.validate("1 + 2 + 3 + 4.0 + ^")).isTrue();
+	@ParameterizedTest(name = "{1}")
+	@MethodSource("invalidParameters")
+	void returnTrueIfInputIsInvalid(String input, String message) {
+		assertThat(inputValidator.validate(input)).isTrue();
 	}
 
-	@Test
-	void returnTrueIfInputEndsWithOperator() {
-		assertThat(inputValidator.validate("1 + 2 + 3 + 4.0 +")).isTrue();
-	}
-
-	@Test
-	void returnTrueIfInputStartsWithOperator() {
-		assertThat(inputValidator.validate("+ 1 - 5 / 6")).isTrue();
-	}
-
-	@Test
-	void returnTrueIfSplittedInputStartsWithInvalidOperator() {
-		assertThat(inputValidator.validate("1 + *3 + /2 + 3 + 3")).isTrue();
-	}
-
-	@Test
-	void returnTrueIfSplittedInputElementContainsNumberAndOperator() {
-		assertThat(inputValidator.validate("1+2 + 123")).isTrue();
-	}
-
-	@Test
-	void returnTrueIfNumberOrOperatorRepeats() {
-		assertThat(inputValidator.validate("1 1 - 2 + + 3")).isTrue();
-	}
-
-	@Test
-	void returnTrueIfZeroDivisionExists() {
-		assertThat(inputValidator.validate("1 + 2 / 0")).isTrue();
-	}
-
-	@Test
-	void returnTrueIfInputExceedsRangeOfDouble() {
-		assertThat(inputValidator.validate(Double.MAX_VALUE + "+ 2")).isTrue();
+	static Stream<Arguments> invalidParameters() throws Throwable {
+		return Stream.of(
+			Arguments.of("1 + 2 + 3 + 4.0 + ^", "If Input Includes Invalid Character"),
+			Arguments.of("1 + 2 + 3 + 4.0 +", "If Input Ends With Operator"),
+			Arguments.of("+ 1 - 5 / 6", "If Input Starts With Operator"),
+			Arguments.of("1 + *3 + /2 + 3 + 3", "If Splitted Input Starts With Invalid Operator"),
+			Arguments.of("1+2 + 123", "If Splitted Input Element Contains Number And Operator"),
+			Arguments.of("1 1 - 2 + + 3", "If Number Or Operator Repeats"),
+			Arguments.of("1 + 2 / 0", "If Zero Division Exists"),
+			Arguments.of("Double.MAX_VALUE + \"+ 2", "If Input Exceeds Range Of Double")
+		);
 	}
 }
