@@ -1,6 +1,6 @@
 package calculator;
 
-public class Operator extends FormulaElement {
+public class Operator {
     private final OperatorType operator;
 
     public Operator(OperatorType operator) {

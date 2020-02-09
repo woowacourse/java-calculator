@@ -13,12 +13,12 @@ public class Formula {
     }
 
     public double calculateFormula() {
-        Operand operand1 = (Operand) formula.poll();
+        Operand operand1 = formula.poll().getOperand();
         double result = operand1.getOperand();
 
         while (formula.size() > 0) {
-            Operator operator = (Operator) formula.poll();
-            Operand operand2 = (Operand) formula.poll();
+            Operator operator = formula.poll().getOperator();
+            Operand operand2 = formula.poll().getOperand();
             result = operator.calculate(operand1, operand2);
             operand1 = new Operand(result);
         }
@@ -33,9 +33,11 @@ public class Formula {
 
     private FormulaElement generateFormulaElement(String input) {
         if (isOperandTurn()) {
-            return new Operand(input);
+            Operand operand = new Operand(input);
+            return new FormulaElement(operand);
         }
-        return new Operator(input);
+        Operator operator = new Operator(input);
+        return new FormulaElement(operator);
     }
 
     private boolean isOperandTurn() {
@@ -54,4 +56,22 @@ public class Formula {
 }
 
 class FormulaElement {
+    private Operand operand;
+    private Operator operator;
+
+    FormulaElement(Operand operand) {
+        this.operand = operand;
+    }
+
+    FormulaElement(Operator operator) {
+        this.operator = operator;
+    }
+
+    public Operand getOperand() {
+        return operand;
+    }
+
+    public Operator getOperator() {
+        return operator;
+    }
 }
