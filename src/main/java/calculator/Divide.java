@@ -14,7 +14,7 @@
 package calculator;
 
 public class Divide implements Operator {
-    public double getOperatedValue(double x, double y) {
+    public double Operate(double x, double y) {
         return x / y;
     }
 }
