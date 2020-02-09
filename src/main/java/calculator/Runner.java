@@ -3,14 +3,13 @@ package calculator;
 import java.util.Scanner;
 
 public class Runner {
-    Expression expression;
-    final int ONE_TIME_INPUT_SUCCESS = 1;
-    final int ONE_TIME_INPUT_FAILED = 2;
-
     public void run() {
+        Expression expression = null;
 
-        // 입력값이 조건에 맞지 않는 경우 사용자에게 다시 입력을 요청함
-        while (oneTimeInput(getInput()) == ONE_TIME_INPUT_FAILED);
+        // 입력값이 올바른 연산식(expression)이 아닐 경우 사용자에게 다시 입력을 요청함
+        do {
+            expression = oneTimeInput(getInput());
+        } while (expression == null);
 
         View.printResult(Calculator.calculate(expression));
     }
@@ -21,15 +20,14 @@ public class Runner {
         return scanner.nextLine();
     }
 
-    private int oneTimeInput(String inputString) {
+    private Expression oneTimeInput(String inputString) {
 
         try {
-            expression = new Expression(inputString);
+            return new Expression(inputString);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return ONE_TIME_INPUT_FAILED;
+            return null;
         }
 
-        return ONE_TIME_INPUT_SUCCESS;
     }
 }
