@@ -39,17 +39,17 @@ public class Formula {
     }
 
     private boolean isOperandTurn() {
-        return !isOddNumber(formula.size());
+        return isEvenNumber(formula.size());
     }
 
     private void validateSizeOfInputsIsOdds(String[] inputs) {
-        if (!isOddNumber(inputs.length)) {
+        if (isEvenNumber(inputs.length)) {
             throw new IllegalArgumentException(inputs.length + "(length of inputs) is not odd");
         }
     }
 
-    private boolean isOddNumber(int number) {
-        return number % 2 == 1;
+    private boolean isEvenNumber(int number) {
+        return number % 2 == 0;
     }
 }
 
