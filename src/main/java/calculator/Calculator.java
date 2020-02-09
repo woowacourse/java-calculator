@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class Calculator {
-
+    private Operator op = new Operator();
     private Queue<String> operatorQueue = new LinkedList<>();
     private Queue<Double> numberQueue = new LinkedList<>();
     private String equationDelimiter = " ";
@@ -39,23 +39,11 @@ public class Calculator {
         for(int i = 0; i < size; i++) {
             String operator = operatorQueue.poll();
             double nextNumber = numberQueue.poll();
-            result = distinguishOperator(result, operator, nextNumber);
+            result = op.operate(operator, result, nextNumber);
         }
 
         return result;
     }
-
-    public double distinguishOperator(double prevNumber, String operator, double nextNumber) {
-        double result = 0.0;
-
-        if(operator.equals("+")) { result = prevNumber + nextNumber; }
-        if(operator.equals("-")) { result = prevNumber - nextNumber; }
-        if(operator.equals("*")) { result = prevNumber * nextNumber; }
-        if(operator.equals("/")) { result = prevNumber / nextNumber; }
-
-        return result;
-    }
-
 
     private String[] getInputEquation() {
         Scanner scanner = new Scanner(System.in);
