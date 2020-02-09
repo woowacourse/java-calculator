@@ -45,6 +45,15 @@ public class SourceForCalculatingTest {
         assertThat(result).isEqualTo(10);
     }
 
+    @Test
+    void sourceWithOneOperands_ShouldReturnThatOperands() {
+        String[] inputs = {"4"};
+        setUp_SourceForCalculating(inputs);
+
+        double result = sourceForCalculating.calculateInputs();
+        assertThat(result).isEqualTo(4);
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2 +", "1 / 3 + 4 *", "4 4"})
     void notOddSizeOfInputs_ShouldThrowException(String input) {
