@@ -9,7 +9,7 @@ public class Calculator {
 	private static final String BLANK = " ";
 	private static final int ZERO = 0;
 
-	static public String calculate(String expression) {
+	static public Double calculate(String expression) {
 		List<String> tokens = Arrays.asList(expression.split(BLANK));
 		Validator.checkIsValidExpression(tokens);
 
@@ -22,7 +22,7 @@ public class Calculator {
 			Validator.checkDivideByZero(operator, Double.parseDouble(nextNumber));
 			accumulatedNumber = Operator.isEqual(operator).operate(accumulatedNumber, Double.parseDouble(nextNumber));
 		}
-		return Double.toString(accumulatedNumber);
+		return accumulatedNumber;
 	}
 
 }

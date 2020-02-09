@@ -13,7 +13,7 @@ public class Application {
 		try {
 			String input = InputView.inputExpression();
 			Validator.checkIsBlank(input);
-			String result = Calculator.calculate(input);
+			Double result = Calculator.calculate(input);
 			OutputView.printResult(result);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
