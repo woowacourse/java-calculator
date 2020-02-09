@@ -37,8 +37,8 @@ public class Converter {
     }
 
     private boolean isOperator(String operator) {
-        return Operator.PLUS.equals(operator) || Operator.MINUS.equals(operator) ||
-                Operator.MULTIPLIFICATION.equals(operator) || Operator.DIVISION.equals(operator);
+        return Operator.PLUS.toString().equals(operator) || Operator.MINUS.toString().equals(operator) ||
+                Operator.MULTIPLIFICATION.toString().equals(operator) || Operator.DIVISION.toString().equals(operator);
     }
 
     private NumberSentence creatNumberSentence(List<String> arguments) {
@@ -58,11 +58,11 @@ public class Converter {
     }
 
     private Operator getOperator(String operator) {
-        if (Operator.PLUS.equals(operator)) {
+        if (Operator.PLUS.toString().equals(operator)) {
             return Operator.PLUS;
-        } else if (Operator.MINUS.equals(operator)) {
+        } else if (Operator.MINUS.toString().equals(operator)) {
             return Operator.MINUS;
-        } else if (Operator.MULTIPLIFICATION.equals(operator)) {
+        } else if (Operator.MULTIPLIFICATION.toString().equals(operator)) {
             return Operator.MULTIPLIFICATION;
         } else {
             return Operator.DIVISION;

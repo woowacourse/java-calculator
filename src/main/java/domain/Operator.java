@@ -12,10 +12,19 @@ enum Operator {
         this.operator = operator;
     }
 
-    public boolean equals(String operator) {
-        return this.operator.equals(operator);
+    public boolean isPlus() {
+        return this == PLUS;
     }
 
+    public boolean isMinus() {
+        return this == MINUS;
+    }
+
+    public boolean isMultiplification() {
+        return this == MULTIPLIFICATION;
+    }
+
+    @Override
     public String toString() {
         return operator;
     }

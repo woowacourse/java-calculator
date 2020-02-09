@@ -18,11 +18,11 @@ public class Calculator {
     }
 
     private Number calculate(Number first, Number second, Operator operator) {
-        if (operator == Operator.PLUS) {
+        if (operator.isPlus()) {
             return first.add(second);
-        } else if (operator == Operator.MINUS) {
+        } else if (operator.isMinus()) {
             return first.substract(second);
-        } else if (operator == Operator.MULTIPLIFICATION) {
+        } else if (operator.isMultiplification()) {
             return first.multiply(second);
         } else {
             return first.divide(second);
