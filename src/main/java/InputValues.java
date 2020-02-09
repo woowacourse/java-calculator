@@ -1,58 +1,53 @@
 import java.util.Scanner;
 
 public class InputValues {
-    private static String value;
-    private static String[] values;
+    private static final int ZERO = 0;
 
-    public InputValues() {
-        System.out.print("문자열 수식을 입력해주세요: ");
+    private String value;
+    private String[] values;
+
+    public InputValues() throws IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
-
+        System.out.print("문자열 수식을 입력해주세요: ");
         value = scanner.nextLine();
         values = value.split(" ");
-        validateDouble();
-        validateOperator();
-        validateEndWithOperator();
+        int valueLength = values.length;
+
+        validateEndWithOperator(valueLength);
+        for (int i = 0; i < valueLength; i++) {
+            validateValues(i);
+        }
+
     }
 
-    public InputValues(String value){
+    public InputValues(String value) {
         this.value = value;
         values = value.split(" ");
     }
 
-    void validateDouble() {
-        int length = values.length;
-
-        for (int i = 0; i < length; i += 2) {
+    void validateValues(int index) throws IllegalArgumentException{
+        if (index % 2 == ZERO) {
             try {
-                Double.parseDouble(values[i]);
-            } catch (Exception e) {
+                Double.parseDouble(values[index]);
+            } catch (NumberFormatException ne) {
                 throw new IllegalArgumentException("피연산자가 잘못되었습니다.");
             }
-        }
-
-    }
-
-    void validateOperator() {
-        int length = values.length;
-
-        for (int i = 1; i < length; i += 2) {
-            Operator.getOperatorByString(values[i]);
+        } else{
+            Operator.getOperatorByString(values[index]);
         }
     }
 
-    void validateEndWithOperator() {
-        int length = values.length;
-
-        if (length % 2 == 0)
+    void validateEndWithOperator(int valueLength) throws IllegalArgumentException{
+        if (valueLength % 2 == ZERO) {
             throw new IllegalArgumentException("연산자와 숫자가 맞지 않습니다.");
+        }
     }
 
-    public static String getValueByIndex(int index) {
+    public String getValueByIndex(int index) {
         return values[index];
     }
 
-    public static int getValuesLength() {
+    public int getValuesLength() {
         return values.length;
     }
 }
