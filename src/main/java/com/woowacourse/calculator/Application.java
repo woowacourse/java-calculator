@@ -12,8 +12,8 @@ import com.woowacourse.calculator.controller.CalculatorController;
  * 날짜 : 2020/02/06
  */
 public class Application {
-    public static void main(String[] args) {
-        CalculatorController calculatorController = new CalculatorController();
-        calculatorController.run();
-    }
+	public static void main(String[] args) {
+		CalculatorController calculatorController = new CalculatorController();
+		calculatorController.run();
+	}
 }

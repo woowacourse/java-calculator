@@ -24,34 +24,34 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * 날짜 : 2020/02/05
  */
 public class SetTest {
-    private Set numbers;
+	private Set numbers;
 
-    @BeforeEach
-    void setUp() {
-        numbers = new HashSet<>();
-        numbers.add(1);
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
-    }
+	@BeforeEach
+	void setUp() {
+		numbers = new HashSet<>();
+		numbers.add(1);
+		numbers.add(1);
+		numbers.add(2);
+		numbers.add(3);
+	}
 
-    @Test
-    @DisplayName("size test")
-    void size() {
-        Assertions.assertEquals(numbers.size(), 3);
-    }
+	@Test
+	@DisplayName("size test")
+	void size() {
+		Assertions.assertEquals(numbers.size(), 3);
+	}
 
-    @ParameterizedTest
-    @DisplayName("contains test")
-    @ValueSource(ints = {1, 2, 3})
-    void contains(int number) {
-        assertTrue(numbers.contains(number));
-    }
+	@ParameterizedTest
+	@DisplayName("contains test")
+	@ValueSource(ints = {1, 2, 3})
+	void contains(int number) {
+		assertTrue(numbers.contains(number));
+	}
 
-    @ParameterizedTest
-    @DisplayName("contains test 2")
-    @CsvSource(value = {"1:true", "2: true", "3:true", "4:false"}, delimiter = ':')
-    void contains_CanCheckTrueAndFalse(int index, boolean expected) {
-        assertThat(numbers.contains(index)).isEqualTo(expected);
-    }
+	@ParameterizedTest
+	@DisplayName("contains test 2")
+	@CsvSource(value = {"1:true", "2: true", "3:true", "4:false"}, delimiter = ':')
+	void contains_CanCheckTrueAndFalse(int index, boolean expected) {
+		assertThat(numbers.contains(index)).isEqualTo(expected);
+	}
 }

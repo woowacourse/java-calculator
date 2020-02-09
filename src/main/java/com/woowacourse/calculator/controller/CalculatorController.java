@@ -17,29 +17,29 @@ import com.woowacourse.calculator.view.OutputView;
  * 날짜 : 2020/02/06
  */
 public class CalculatorController {
-    public void run() {
-        Expression expression = makeExpression();
-        calculate(expression);
-    }
+	public void run() {
+		Expression expression = makeExpression();
+		calculate(expression);
+	}
 
-    private Expression makeExpression() {
-        try {
-            String input = InputView.inputEquation();
-            return ExpressionFactory.create(input);
-        } catch (Exception e) {
-            OutputView.printRetryMessage();
-            return makeExpression();
-        }
-    }
+	private Expression makeExpression() {
+		try {
+			String input = InputView.inputEquation();
+			return ExpressionFactory.create(input);
+		} catch (Exception e) {
+			OutputView.printRetryMessage();
+			return makeExpression();
+		}
+	}
 
-    private void calculate(final Expression expression) {
-        try {
-            double result = expression.calculate();
-            OutputView.printAnswer(result);
-        } catch (InfinityException e) {
-            OutputView.printInfinityMessage();
-        } catch (DivideByZeroException e) {
-            OutputView.printDivideByZeroMessage();
-        }
-    }
+	private void calculate(final Expression expression) {
+		try {
+			double result = expression.calculate();
+			OutputView.printAnswer(result);
+		} catch (InfinityException e) {
+			OutputView.printInfinityMessage();
+		} catch (DivideByZeroException e) {
+			OutputView.printDivideByZeroMessage();
+		}
+	}
 }
