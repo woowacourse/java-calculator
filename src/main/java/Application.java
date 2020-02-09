@@ -14,7 +14,7 @@ public class Application {
         try {
             Formula formula = new Formula(InputView.input());
             Formulas formulas = new Formulas(formula);
-            return Calculator.startCalculate(formulas);
+            return Calculator.calculateByFormulas(formulas);
         } catch (IllegalArgumentException e) {
             OutputView.exceptionMessage(e.getMessage());
             return calculateByInput();
