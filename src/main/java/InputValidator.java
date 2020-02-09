@@ -6,7 +6,7 @@ public class InputValidator {
     private List<String> numbers = new ArrayList<>();
     private List<String> operators = new ArrayList<>();
 
-    public boolean validate(String input) {
+    public boolean isReenterWithInvalidValue(String input) {
         String[] splittedInput = input.split(" ");
         if (!validateWithRegex(input)) {
             askAgainBeforeSplit();
