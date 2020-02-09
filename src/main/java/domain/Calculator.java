@@ -10,8 +10,8 @@ import java.util.function.BiFunction;
 
 public class Calculator {
 
-    private final int ZERO = 0;
-    private final int EVEN = 2;
+    private final static int ZERO = 0;
+    private final static int EVEN = 2;
 
     private final List<Double> numbers = new ArrayList<>();
     private final List<Operator> operators = new ArrayList<>();
