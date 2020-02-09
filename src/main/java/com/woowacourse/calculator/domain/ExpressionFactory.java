@@ -47,7 +47,7 @@ public class ExpressionFactory {
 
     private static List<Double> makeNumbers(final List<String> tokens) {
         List<Double> numbers = new ArrayList<>();
-        for (int index = NUMBER_START_INDEX; index < tokens.size(); index += LOOP_JUMP_COUNT) {
+        for (int index = NUMBER_START_INDEX, end = tokens.size(); index < end; index += LOOP_JUMP_COUNT) {
             numbers.add(Double.valueOf(tokens.get(index)));
         }
         return numbers;
@@ -55,7 +55,7 @@ public class ExpressionFactory {
 
     private static List<OperatorType> makeOperators(final List<String> tokens) {
         List<OperatorType> operators = new ArrayList<>();
-        for (int index = OPERATION_START_INDEX; index < tokens.size(); index += LOOP_JUMP_COUNT) {
+        for (int index = OPERATION_START_INDEX, end = tokens.size(); index < end; index += LOOP_JUMP_COUNT) {
             operators.add(OperatorType.of(tokens.get(index)));
         }
         return operators;
