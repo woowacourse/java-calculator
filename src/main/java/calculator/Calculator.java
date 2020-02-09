@@ -9,10 +9,8 @@ import java.util.stream.IntStream;
 
 public class Calculator {
     private static final String BLANK = " ";
-    List<String> splittedStrings;
 
-    Calculator() {
-    }
+    List<String> splittedStrings;
 
     //테스트용 setter메서드
     public void setSplittedStrings(String input) {
@@ -23,19 +21,12 @@ public class Calculator {
 
     public List<String> enterMathematicalExpression() {
         try {
-            splittedStrings = Arrays.asList(InputView.enterMathematicalExpression().split(BLANK));
-            checkClusteredElements();
-            checkIfStartWithSymbol();
+            String input = InputView.enterMathematicalExpression();
+            setSplittedStrings(input);
             return splittedStrings;
         } catch (IllegalArgumentException e) {
             OutputView.print(e.getMessage());
             return enterMathematicalExpression();
-        }
-    }
-
-    private void checkIfStartWithSymbol() {
-        if (!isNumber(splittedStrings.get(0))) {
-            throw new IllegalArgumentException("숫자로 시작해야 합니다");
         }
     }
 
@@ -53,6 +44,12 @@ public class Calculator {
             throw new IllegalArgumentException("연산자가 연속되면 안됩니다");
         }
         return;
+    }
+
+    private void checkIfStartWithSymbol() {
+        if (!isNumber(splittedStrings.get(0))) {
+            throw new IllegalArgumentException("숫자로 시작해야 합니다");
+        }
     }
 
     private Boolean isNumber(String input) {
