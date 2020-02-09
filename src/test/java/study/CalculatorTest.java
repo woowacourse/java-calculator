@@ -24,12 +24,13 @@ public class CalculatorTest {
     @Test
     @DisplayName("계산기 전체 동작 확인")
     public static void main(String args[]) {
+
         String[] values = ExceptionHandlerTest.inputHandler().split(" ");
         returnValue = Double.parseDouble(values[0]);
         for (int i = INDEX_INIT; i < values.length; i++) {
             check(i, values[i]);
         }
-        if (returnValue == (int) returnValue) {
+        if (returnValue == Math.rint(returnValue)) {
             System.out.println((int) returnValue);
             return;
         }

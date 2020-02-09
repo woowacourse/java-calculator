@@ -5,17 +5,13 @@ public class Calculator {
     static double returnValue;
     static String nowSign;
 
-    public static void main(String args[]) {
-        String[] values = ExceptionHandler.inputHandler().split(" ");
+    public static double run(String input) {
+        String[] values = input.split(" ");
         returnValue = Double.parseDouble(values[0]);
         for (int i = INDEX_INIT; i < values.length; i++) {
             check(i, values[i]);
         }
-        if (returnValue == (int) returnValue) {
-            System.out.println((int) returnValue);
-            return;
-        }
-        System.out.println(returnValue);
+        return returnValue;
     }
 
     private static void check(int i, String value) {
