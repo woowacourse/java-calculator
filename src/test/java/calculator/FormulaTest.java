@@ -27,7 +27,7 @@ public class FormulaTest {
         String[] inputs = input.split(" ");
         assertThatThrownBy(() -> formula = new Formula(inputs))
                 .isInstanceOf(InvalidOperatorException.class)
-                .hasMessageMatching(".+ is not valid operator");
+                .hasMessageMatching(".+ is not valid operator\nOnly \\+, -, \\*, / is permitted");
     }
 
     @ParameterizedTest
