@@ -18,7 +18,7 @@ class ExpressionParserTest {
 		//given
 		String rawExpression = "10";
 		//when
-		Expression expression = ExpressionParser.parse(rawExpression);
+		Expression expression = ExpressionFactory.parse(rawExpression);
 		//then
 		assertThat(expression).isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(10))),
 			new Operators(new LinkedList<>())));
@@ -30,7 +30,7 @@ class ExpressionParserTest {
 		//given
 		String rawExpression = "1 + 5";
 		//when
-		Expression expression = ExpressionParser.parse(rawExpression);
+		Expression expression = ExpressionFactory.parse(rawExpression);
 		//then
 		assertThat(expression)
 			.isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(1, 5))),
@@ -43,7 +43,7 @@ class ExpressionParserTest {
 		//given
 		String rawExpression = "0 + 0 + 0 + 0";
 		//when
-		Expression expression = ExpressionParser.parse(rawExpression);
+		Expression expression = ExpressionFactory.parse(rawExpression);
 		//then
 		assertThat(expression)
 			.isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(0, 0, 0, 0))),
@@ -56,7 +56,7 @@ class ExpressionParserTest {
 		//given
 		String rawExpression = "1 + 2 - 3 * 4 / 5";
 		//when
-		Expression expression = ExpressionParser.parse(rawExpression);
+		Expression expression = ExpressionFactory.parse(rawExpression);
 		//then
 		assertThat(expression)
 			.isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5))),
@@ -69,7 +69,7 @@ class ExpressionParserTest {
 		//given
 		String rawExpression = "10 / 10 / 10 / 10";
 		//when
-		Expression expression = ExpressionParser.parse(rawExpression);
+		Expression expression = ExpressionFactory.parse(rawExpression);
 		//then
 		assertThat(expression)
 			.isEqualTo(new Expression(new Operands(new LinkedList<>(Arrays.asList(10, 10, 10, 10))),
@@ -81,6 +81,6 @@ class ExpressionParserTest {
 	@ValueSource(strings = {"", "1 + k * 3 ; 4", "1 3 3 * 3 / 4", "+ + 3 * 3 ; 4", "1 + 3 * 3 / 4 +", "+"})
 	public void parseExpressionExceptionTest(String expression) {
 		assertThatExceptionOfType(RuntimeException.class)
-			.isThrownBy(() -> ExpressionParser.parse(expression));
+			.isThrownBy(() -> ExpressionFactory.parse(expression));
 	}
 }

@@ -5,9 +5,10 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class ExpressionParser {
+public class ExpressionFactory {
 	private static final String SPLIT_REGEX = " ";
 
 	private static final int TWO = 2;
@@ -18,6 +19,8 @@ public class ExpressionParser {
 	private static final int OPERATOR_START_IDX = 1;
 	private static final int OPERAND_IDX = 2;
 	private static final int OPERATOR_IDX = 2;
+
+	private static final Pattern OPERAND_PATTERN = Pattern.compile("-?[1-9][0-9]{0,7}||0");
 
 	private static final String EXPRESSION_SIZE_EXCEPTION_MESSAGE = "계산식의 성분은 %d이(가) 될 수 없습니다.";
 	private static final String EXPRESSION_POSITION_EXCEPTION_MESSAGE = "계산식중 일부 위치에 부적절한 값이 있습니다.";
@@ -60,13 +63,8 @@ public class ExpressionParser {
 		}
 	}
 
-	private static boolean isOperand(String expressionArg) {
-		try {
-			Integer.parseInt(expressionArg);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		return true;
+	 static boolean isOperand(String expressionArg) {
+		return OPERAND_PATTERN.matcher(expressionArg).matches();
 	}
 
 	private static void validateOperatorPosition(List<String> expression) {
@@ -85,7 +83,7 @@ public class ExpressionParser {
 
 	private static Operands getOperands(List<String> expression) {
 		Deque<Integer> operandsDeque = expression.stream()
-			.filter(ExpressionParser::isOperand)
+			.filter(ExpressionFactory::isOperand)
 			.map(Integer::parseInt)
 			.collect(Collectors.toCollection(LinkedList::new));
 		return new Operands(operandsDeque);
@@ -93,7 +91,7 @@ public class ExpressionParser {
 
 	private static Operators getOperators(List<String> expression) {
 		Queue<String> operatorsQueue = expression.stream()
-			.filter(ExpressionParser::isOperator)
+			.filter(ExpressionFactory::isOperator)
 			.collect(Collectors.toCollection(LinkedList::new));
 		return new Operators(operatorsQueue);
 	}

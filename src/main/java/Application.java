@@ -1,5 +1,5 @@
 import domain.Calculator;
-import domain.ExpressionParser;
+import domain.ExpressionFactory;
 import view.InputView;
 import view.OutputView;
 
@@ -12,7 +12,7 @@ public class Application {
 
 	private static int getCalculateResult(Calculator calculator) {
 		try {
-			return calculator.calculate(ExpressionParser.parse(InputView.inputExpression()));
+			return calculator.calculate(ExpressionFactory.parse(InputView.inputExpression()));
 		} catch (RuntimeException ex) {
 			System.out.println(ex.getMessage());
 			return getCalculateResult(calculator);
