@@ -2,9 +2,9 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.Calculator;
 import org.junit.jupiter.api.Test;
 
+import domain.Calculator;
 import domain.Formula;
 import domain.Formulas;
 
