@@ -16,11 +16,9 @@ import com.woowacourse.calculator.view.OutputView;
  */
 
 public class CalculatorController {
-
     public void run() {
         Expression expression = makeExpression();
-        double result = expression.calculate();
-        OutputView.printAnswer(result);
+        calculate(expression);
     }
 
     private Expression makeExpression() {
@@ -30,6 +28,15 @@ public class CalculatorController {
         } catch (Exception e) {
             OutputView.printRetryMessage();
             return makeExpression();
+        }
+    }
+
+    private void calculate(final Expression expression) {
+        try {
+            double result = expression.calculate();
+            OutputView.printAnswer(result);
+        } catch (IllegalArgumentException e) {
+            OutputView.printDivideByZero();
         }
     }
 }

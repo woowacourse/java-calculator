@@ -15,17 +15,34 @@ import java.util.Objects;
 
 public class Expression {
     private static final int START_INDEX = 0;
+
     private final List<Double> numbers;
     private final List<OperatorType> operators;
 
     public Expression(final List<Double> numbers, final List<OperatorType> operators) {
-        this.numbers = Objects.requireNonNull(numbers);
-        this.operators = Objects.requireNonNull(operators);
+        validateExpression(numbers, operators);
+        this.numbers = numbers;
+        this.operators = operators;
+    }
+
+    public void validateExpression(final List<Double> numbers, final List<OperatorType> operators) {
+        Objects.requireNonNull(numbers);
+        Objects.requireNonNull(operators);
+        validateExpressionLength(numbers, operators);
+    }
+
+    public void validateExpressionLength(final List<Double> numbers, final List<OperatorType> operators) {
+        if (numbers.size() == 0) {
+            throw new IllegalArgumentException("수식은 최소한 하나의 숫자를 가져야 합니다.");
+        }
+        if (numbers.size() != operators.size() + 1) {
+            throw new IllegalArgumentException("피연산자의 개수는 연산자의 개수보다 반드시 하나 더 있어야 합니다.");
+        }
     }
 
     public double calculate() {
         double answer = numbers.get(START_INDEX);
-        for (int index = START_INDEX; index < operators.size(); ++index) {
+        for (int index = START_INDEX, end = operators.size(); index < end; ++index) {
             OperatorType operator = operators.get(index);
             answer = operator.calculate(answer, numbers.get(index + 1));
         }

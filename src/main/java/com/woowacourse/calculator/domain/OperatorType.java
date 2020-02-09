@@ -16,7 +16,12 @@ import java.util.function.BinaryOperator;
 public enum OperatorType {
     PLUS("+", Double::sum),
     MINUS("-", (firstOperand, secondOperand) -> firstOperand - secondOperand),
-    DIVIDE("/", (firstOperand, secondOperand) -> firstOperand / secondOperand),
+    DIVIDE("/", (firstOperand, secondOperand) -> {
+        if (secondOperand == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+        return firstOperand / secondOperand;
+    }),
     MULTIPLY("*", (firstOperand, secondOperand) -> firstOperand * secondOperand);
 
     private String operator;
