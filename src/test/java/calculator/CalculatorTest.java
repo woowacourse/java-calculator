@@ -26,7 +26,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"        ", "q + w + e", "1+2+3", "+ + 2", "1 abcd 2", "2 * 65 / 0"})
+    @ValueSource(strings = {"        ", "q + w + e", "1+2+3", "+ + 2", "1 abcd 2", "2 * 65 / 0", "2 + 3/", "/1 + 55", "1 + a3"})
     public void checkCanConvertUserInputToNumberAndOperatorTest(String input) {
         String[] splitData = input.split(Constant.BLANK);
         Assertions.assertThatThrownBy(() -> {

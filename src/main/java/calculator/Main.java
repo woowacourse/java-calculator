@@ -10,7 +10,7 @@ public class Main {
             String[] splitString = userInputScanner.splitUserInputString();
             double result = calculator.calculate(splitString);
             output.printResult(result);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
