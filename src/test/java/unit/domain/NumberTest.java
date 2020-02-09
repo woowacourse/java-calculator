@@ -1,17 +1,24 @@
 package unit.domain;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 class NumberTest {
 	@Test
-	void testNumber() {
-		final String overflowNumber = "2147483648";
-		assertThatThrownBy(() -> {
-			new Number(overflowNumber);
-		}).isInstanceOf(NumberFormatException.class)
-			.hasMessage("유효한 범위의 숫자를 입력해 주세요");
+	void testGetNumber() {
+		Number one = new Number("1");
+
+		final double expected = 1;
+		final double actual = one.getNumber();
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	void testEquals() {
+		Number one1 = new Number("1");
+		Number one2 = new Number("1");
+
+		assertEquals(one1, one2);
 	}
 }
