@@ -14,7 +14,7 @@ class ExpressionTest {
 	@CsvSource(value = {"10:10", "1 + 2 * 3 / 4:2", "1 + 3 + 3 / 4:1", "3 + 4:7", "11 + 57 - 10:58",
 		"1 - 10:-9"}, delimiter = ':')
 	public void getResultTest(String rawExpression, int expected) {
-		Expression expression = ExpressionParser.parseExpression(rawExpression);
+		Expression expression = ExpressionParser.parse(rawExpression);
 		int actual = expression.getResult();
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -25,7 +25,7 @@ class ExpressionTest {
 	public void getResultExceptionTest(String rawExpression) {
 		assertThatExceptionOfType(RuntimeException.class)
 			.isThrownBy(() -> {
-				Expression expression = ExpressionParser.parseExpression(rawExpression);
+				Expression expression = ExpressionParser.parse(rawExpression);
 				expression.getResult();
 			});
 	}
@@ -34,7 +34,7 @@ class ExpressionTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"1 + 5 * 3 / 0", "1 / 0", "0 / 0", "1 / 0 * 3 / 4"})
 	public void getResultDivideExceptionTest(String rawExpression) {
-		Expression expression = ExpressionParser.parseExpression(rawExpression);
+		Expression expression = ExpressionParser.parse(rawExpression);
 		assertThatExceptionOfType(ArithmeticException.class)
 			.isThrownBy(() -> expression.getResult());
 	}

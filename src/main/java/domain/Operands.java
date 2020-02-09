@@ -14,8 +14,8 @@ public class Operands {
 		return operands.poll();
 	}
 
-	void offerFirst(Integer value) {
-		operands.offerFirst(value);
+	void offerFirst(Integer operand) {
+		operands.offerFirst(operand);
 	}
 
 	@Override

@@ -20,19 +20,19 @@ public enum Operator {
 		this.operation = operation;
 	}
 
-	static Operator getOperatorOf(String value) {
+	static Operator getOf(String value) {
 		return Arrays.stream(values())
 			.filter(operator -> value.equals(operator.symbol))
 			.findFirst()
 			.orElseThrow(() -> new NoSuchElementException(NO_SUCH_OPERATOR_EXCEPTION_MESSAGE));
 	}
 
-	int calculate(int operand1, int operand2) {
-		return operation.apply(operand1, operand2);
-	}
-
 	static boolean isOperator(String value) {
 		return Arrays.stream(Operator.values())
 			.anyMatch(operator -> value.equals(operator.symbol));
+	}
+
+	int calculate(int operand1, int operand2) {
+		return operation.apply(operand1, operand2);
 	}
 }

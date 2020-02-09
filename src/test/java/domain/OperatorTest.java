@@ -64,28 +64,28 @@ class OperatorTest {
 	@DisplayName("덧셈 Operator 객체 탐색 테스트")
 	@Test
 	public void getOperatorOfPlusTest() {
-		Operator expected = Operator.getOperatorOf("+");
+		Operator expected = Operator.getOf("+");
 		assertThat(expected).isEqualTo(Operator.ADD);
 	}
 
 	@DisplayName("뺄셈 Operator 객체 탐색 테스트")
 	@Test
 	public void getOperatorOfSubtractTest() {
-		Operator expected = Operator.getOperatorOf("-");
+		Operator expected = Operator.getOf("-");
 		assertThat(expected).isEqualTo(Operator.SUBTRACT);
 	}
 
 	@DisplayName("곱셈 Operator 객체 탐색 테스트")
 	@Test
 	public void getOperatorOfMultiplyTest() {
-		Operator expected3 = Operator.getOperatorOf("*");
+		Operator expected3 = Operator.getOf("*");
 		assertThat(expected3).isEqualTo(Operator.MULTIPLY);
 	}
 
 	@DisplayName("나눗셈 Operator 객체 탐색 테스트")
 	@Test
 	public void getOperatorOfDivideTest() {
-		Operator expected4 = Operator.getOperatorOf("/");
+		Operator expected4 = Operator.getOf("/");
 		assertThat(expected4).isEqualTo(Operator.DIVIDE);
 	}
 
@@ -94,6 +94,6 @@ class OperatorTest {
 	@ValueSource(strings = {"abc", "dsjk", "2", "ㄹㅁ", "&"})
 	public void getOperatorOfExceptionTest(String operator) {
 		assertThatExceptionOfType(NoSuchElementException.class)
-			.isThrownBy(() -> Operator.getOperatorOf(operator));
+			.isThrownBy(() -> Operator.getOf(operator));
 	}
 }

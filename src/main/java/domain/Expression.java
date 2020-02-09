@@ -13,9 +13,9 @@ public class Expression {
 
 	int getResult() {
 		while (!operators.isEmpty()) {
-			Operator operator = Operator.getOperatorOf(operators.poll());
-			int result = operator.calculate(operands.poll(), operands.poll());
-			operands.offerFirst(result);
+			Operator operator = Operator.getOf(operators.poll());
+			int calculateResult = operator.calculate(operands.poll(), operands.poll());
+			operands.offerFirst(calculateResult);
 		}
 		return operands.poll();
 	}
