@@ -13,4 +13,11 @@ class CalculatorTest {
 		assertThat(Calculator.calculate(expression)).isEqualTo(expected);
 	}
 
+	@ParameterizedTest
+	@CsvSource(value = {"2 / 0", "1 2 3", "1&2* + 5", "1+2+3"})
+	void inValidExpression(String expression) {
+		assertThatExceptionOfType(Exception.class).isThrownBy(() -> {
+			Calculator.calculate(expression);
+		});
+	}
 }
