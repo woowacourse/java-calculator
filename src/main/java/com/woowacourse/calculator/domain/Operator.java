@@ -1,62 +1,39 @@
 package com.woowacourse.calculator.domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.function.BinaryOperator;
 
-public class Operator implements Token {
-    private static final String PLUS = "+";
-    private static final String MINUS = "-";
-    private static final String DIVISION = "/";
-    private static final String MULTIPLICATION = "*";
+public enum Operator {
+    PLUS("+", Double::sum),
+    MINUS("-", (firstOperand, secondOperand) -> firstOperand - secondOperand),
+    DIVISION("/", (firstOperand, secondOperand) -> firstOperand / secondOperand),
+    MULTIPLICATION("*", (firstOperand, secondOperand) -> firstOperand * secondOperand);
 
-    private final String operator;
+    private static final double ZERO = 0d;
 
-    public Operator(final String operator) {
-        checkValidation(operator);
+    private String operator;
+    private BinaryOperator<Double> expression;
+
+    Operator(final String operator, final BinaryOperator<Double> expression) {
         this.operator = operator;
+        this.expression = expression;
     }
 
-    private void checkValidation(String operator) {
-        final List<String> validOperators = Arrays.asList(PLUS, MINUS, DIVISION, MULTIPLICATION);
-
-        if (!validOperators.contains(operator)) {
-            throw new IllegalArgumentException("유효한 연산자 형식이 아닙니다.");
-        }
+    public static Operator Of(final String operator) {
+        return Arrays.stream(Operator.values())
+                .filter(value -> value.operator.equals(operator))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("유효한 연산자 형식이 아닙니다."));
     }
 
-    public int calculate(Number number1, Number number2) {
-        if (operator.equals(PLUS)) {
-            return number1.getNumber() + number2.getNumber();
-        }
-        if (operator.equals(MINUS)) {
-            return number1.getNumber() - number2.getNumber();
-        }
-        if (operator.equals(DIVISION)) {
-            checkDivision(number2);
-            return number1.getNumber() / number2.getNumber();
-        }
-        return number1.getNumber() * number2.getNumber();
+    public Double calculate(Double firstOperand, Double secondOperand) {
+        checkDivision(secondOperand);
+        return expression.apply(firstOperand, secondOperand);
     }
 
-    private void checkDivision(Number number2) {
-        if (number2.getNumber() == 0) {
+    private void checkDivision(final Double secondOperand) {
+        if (secondOperand == ZERO) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Operator operator1 = (Operator) o;
-        return Objects.equals(operator, operator1.operator);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(operator);
     }
 }
