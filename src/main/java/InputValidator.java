@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class InputValidator {
     private static final int EVEN = 0;
     private static final int ODD = 1;
+
     public static String checkInputHandler(String input) {
         if (checkString(input.split(" ")) == true && isUndefinedValue(input) == true) {
             return input;
@@ -31,10 +32,7 @@ public class InputValidator {
         if (i % 2 == EVEN) {
             return checkNumber(inputString);
         }
-        if (i % 2 == ODD) {
-            return checkSign(inputString);
-        }
-        return false;
+        return checkSign(inputString);
     }
 
     private static boolean checkNumber(String inputString) {
@@ -42,18 +40,7 @@ public class InputValidator {
     }
 
     private static boolean checkSign(String inputString) {
-        if (inputString.equals("+")) {
-            return true;
-        }
-        if (inputString.equals("-")) {
-            return true;
-        }
-        if (inputString.equals("*")) {
-            return true;
-        }
-        if (inputString.equals("/")) {
-            return true;
-        }
-        return false;
+        return Arrays.stream(Operator.values())
+                .anyMatch(x-> (x.isExistOperator(inputString)));
     }
 }

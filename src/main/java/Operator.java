@@ -25,4 +25,8 @@ public enum Operator {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException());
     }
+
+    public boolean isExistOperator(String input){
+        return this.operator.equals(input);
+    }
 }
