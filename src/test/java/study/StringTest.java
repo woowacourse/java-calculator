@@ -1,34 +1,35 @@
 package study;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class StringTest {
+import static org.assertj.core.api.Assertions.*;
 
+public class StringTest {
     @Test
     void split() {
-        String value = "1,2";
-        String[] result = value.split(",");
-        assertThat(result).contains("1");
-        assertThat(result).contains("2");
+        String testCase1 = "1,2";
+        String testCase2 = "1";
+        assertThat(testCase1.split(",")).contains("1")
+                .contains("2")
+                .containsExactly("1", "2");
+        assertThat(testCase2.split(",")).contains("1")
+                .containsExactly("1");
     }
 
     @Test
     void substring() {
-        String value = "(1,2)";
-        String result = value.substring(1, 4);
-        assertThat(result).isEqualTo("1,2");
+        String testCase = "(1,2)";
+        assertThat(testCase.substring(1,4)).isEqualTo("1,2");
     }
 
-    @DisplayName("charAt 테스트")
+    @DisplayName("charAt Test, 범위를 넘어갔을 때 예외가 잘 발생하는지 확인")
     @Test
     void charAt() {
-        String value = "abc";
-        assertThat(value.charAt(1)).isEqualTo('b');
-        assertThatThrownBy(() -> value.charAt(-1)).isInstanceOf(IndexOutOfBoundsException.class)
-                .hasMessageContaining("String index out of range");
+        String testCase = "abc";
+        assertThatThrownBy(() -> testCase.charAt(4)).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("index out of range");
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> testCase.charAt(4)).withMessageContaining("index out of range");
     }
 }
