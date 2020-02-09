@@ -40,14 +40,14 @@ public class Controller {
     }
 
     private double calculate(CalculatedValue stringInput) {
-        List<Double> numberList = stringInput.getNumberList();
-        List<String> operatorList = stringInput.getOperatorList();
-        double sum = numberList.get(0);
+        List<Double> numbers = stringInput.getNumberList();
+        List<String> operators = stringInput.getOperatorList();
+        double sum = numbers.get(0);
 
         CalculatorMap op = new CalculatorMap();
 
-        for (int i = 0; i < operatorList.size(); i++) {
-            sum = op.getOperator(operatorList.get(i)).getOperatedValue(sum, numberList.get(i + 1));
+        for (int i = 0; i < operators.size(); i++) {
+            sum = op.getOperator(operators.get(i)).getOperatedValue(sum, numbers.get(i + 1));
         }
 
         return sum;
