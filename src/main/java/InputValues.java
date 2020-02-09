@@ -1,24 +1,22 @@
 import java.util.Scanner;
 
 public class InputValues {
-    private String value;
     private String[] values;
 
     public InputValues() {
         System.out.print("문자열 수식을 입력해주세요: ");
         Scanner scanner = new Scanner(System.in);
 
-        value = scanner.nextLine();
-        validateValue(value);
+        String input = scanner.nextLine();
+        validateValue(input);
     }
 
-    public InputValues(String value){
-        this.value = value;
-        validateValue(value);
+    public InputValues(String input){
+        validateValue(input);
     }
 
-    void validateValue(String value) {
-        values = value.split(" ");
+    void validateValue(String input) {
+        values = input.split(" ");
 
         validateEndWithOperator();
         for (int i = 0; i < values.length; i++) {
