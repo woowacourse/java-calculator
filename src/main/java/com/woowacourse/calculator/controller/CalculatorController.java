@@ -2,6 +2,8 @@ package com.woowacourse.calculator.controller;
 
 import com.woowacourse.calculator.domain.Expression;
 import com.woowacourse.calculator.domain.ExpressionFactory;
+import com.woowacourse.calculator.exception.DivideByZeroException;
+import com.woowacourse.calculator.exception.InfinityException;
 import com.woowacourse.calculator.view.InputView;
 import com.woowacourse.calculator.view.OutputView;
 
@@ -34,8 +36,10 @@ public class CalculatorController {
         try {
             double result = expression.calculate();
             OutputView.printAnswer(result);
-        } catch (IllegalArgumentException e) {
-            OutputView.printDivideByZero();
+        } catch (InfinityException e) {
+            OutputView.printInfinityMessage();
+        } catch (DivideByZeroException e) {
+            OutputView.printDivideByZeroMessage();
         }
     }
 }

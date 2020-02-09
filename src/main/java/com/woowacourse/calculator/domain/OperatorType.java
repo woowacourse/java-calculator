@@ -3,6 +3,9 @@ package com.woowacourse.calculator.domain;
 import java.util.Arrays;
 import java.util.function.BinaryOperator;
 
+import com.woowacourse.calculator.exception.DivideByZeroException;
+import com.woowacourse.calculator.exception.InfinityException;
+
 /**
  * 클래스 이름 : OperatorType.java
  *
@@ -17,7 +20,7 @@ public enum OperatorType {
     MINUS("-", (firstOperand, secondOperand) -> firstOperand - secondOperand),
     DIVIDE("/", (firstOperand, secondOperand) -> {
         if (secondOperand == 0) {
-            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+            throw new DivideByZeroException();
         }
         return firstOperand / secondOperand;
     }),
@@ -38,7 +41,11 @@ public enum OperatorType {
                 .orElseThrow(() -> new IllegalArgumentException("연산자에 포함되지 않습니다."));
     }
 
-    public double calculate(final Double firstOperand, final Double secondOperand) {
-        return expression.apply(firstOperand, secondOperand);
+    public Double calculate(final Double firstOperand, final Double secondOperand) {
+        Double result = expression.apply(firstOperand, secondOperand);
+        if (result.isInfinite()) {
+            throw new InfinityException();
+        }
+        return result;
     }
 }

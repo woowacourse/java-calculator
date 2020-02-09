@@ -47,4 +47,20 @@ public class Expression {
         }
         return answer;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Expression that = (Expression)o;
+        return Objects.equals(numbers, that.numbers) &&
+                Objects.equals(operators, that.operators);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers, operators);
+    }
 }
