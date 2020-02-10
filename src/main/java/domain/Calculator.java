@@ -14,5 +14,4 @@ public class Calculator {
         }
         return (int) stackUpValue;
     }
-
 }
