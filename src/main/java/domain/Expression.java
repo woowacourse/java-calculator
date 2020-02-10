@@ -1,7 +1,5 @@
 package domain;
 
-import calculator.calculate.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,30 +7,31 @@ public class Expression {
     private static final String DELIMITER = " ";
 
     private List<Double> numbers = new ArrayList<>();
-    private List<Calculatable> operators = new ArrayList<>();
+    private List<Operator> operators = new ArrayList<>();
 
     public Expression(String expression) {
         String[] tokens = expression.split(DELIMITER);
 
         validate(tokens);
-        parseTokens(tokens);
+
+        for (int i = 0; i < tokens.length; i++) {
+            parseToken(i, tokens[i]);
+        }
     }
 
-    private void parseTokens(String[] tokens) {
-        for (int i = 0; i < tokens.length; i++) {
-            if (isNumberIndex(i)) {
-                numbers.add(tokenToDouble(tokens[i]));
-            }
-            if (isOperatorIndex(i)) {
-                operators.add(tokenToOperator(tokens[i]));
-            }
+    private void parseToken(int index, String token) {
+        if (isNumberIndex(index)) {
+            numbers.add(tokenToDouble(token));
+        }
+        if (isOperatorIndex(index)) {
+            operators.add(tokenToOperator(token));
         }
     }
 
     public double getResult() {
         Double prev = numbers.get(0);
         for (int i = 0; i < operators.size(); i++) {
-            Calculatable operator = operators.get(i);
+            Operator operator = operators.get(i);
             Double next = numbers.get(i + 1);
             prev = operator.calculate(prev, next);
         }
@@ -61,19 +60,7 @@ public class Expression {
         }
     }
 
-    private Calculatable tokenToOperator(String token) {
-        if (Operator.PLUS.isPlusSymbol(token)) {
-            return new Plus();
-        }
-        if (Operator.MINUS.isMinusSymbol(token)) {
-            return new Minus();
-        }
-        if (Operator.MULTIPLY.isMultiplySymbol(token)) {
-            return new Multiply();
-        }
-        if (Operator.DIVIDE.isDivideSymbol(token)) {
-            return new Divide();
-        }
-        throw new IllegalArgumentException("올바른 연산자가 아닙니다.");
+    private Operator tokenToOperator(String token) {
+        return Operator.hasOperator(token);
     }
 }

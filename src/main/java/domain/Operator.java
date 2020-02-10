@@ -1,27 +1,38 @@
 package domain;
 
+import java.util.function.BiFunction;
+
 public enum Operator {
-    PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/");
+    PLUS("+", (prev, next) -> prev + next),
+    MINUS("-", (prev, next) -> prev - next),
+    MULTIPLY("*", (prev, next) -> prev * next),
+    DIVIDE("/", (prev, next) -> prev / next);
 
     private String symbol;
+    private BiFunction<Double, Double, Double> operate;
 
-    Operator(String symbol) {
+    Operator(String symbol, BiFunction<Double, Double, Double> operate) {
         this.symbol = symbol;
+        this.operate = operate;
     }
 
-    public boolean isPlusSymbol(String symbol) {
-        return PLUS.symbol.equals(symbol);
+    public static Operator hasOperator(String symbol) {
+        if (Operator.PLUS.symbol.equals(symbol)) {
+            return Operator.PLUS;
+        }
+        if (Operator.MINUS.symbol.equals(symbol)) {
+            return Operator.MINUS;
+        }
+        if (Operator.MULTIPLY.symbol.equals(symbol)) {
+            return Operator.MULTIPLY;
+        }
+        if (Operator.DIVIDE.symbol.equals(symbol)) {
+            return Operator.DIVIDE;
+        }
+        throw new IllegalArgumentException("올바른 연산자가 아닙니다.");
     }
 
-    public boolean isMinusSymbol(String symbol) {
-        return MINUS.symbol.equals(symbol);
-    }
-
-    public boolean isMultiplySymbol(String symbol) {
-        return MULTIPLY.symbol.equals(symbol);
-    }
-
-    public boolean isDivideSymbol(String symbol) {
-        return DIVIDE.symbol.equals(symbol);
+    public double calculate(double prev, double next) {
+        return operate.apply(prev, next);
     }
 }
