@@ -18,7 +18,7 @@ public class StringCalculator {
      * 입력값 예외처리 후 숫자와 연산자를 분리
      */
     public void initializeInputs() {
-        String[] inputs = InputValidation.checkException();
+        String[] inputs = InputValidation.getValidatedInput();
         for (String val : inputs) {
             try {
                 numbers.add(Integer.parseInt(val));
