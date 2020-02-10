@@ -8,27 +8,19 @@ import java.util.List;
 
 public class MathematicalExpression {
 
+    private static final String NUMBER_OPERATOR_DELIMITER = " ";
+
     private List<Double> numbers = new ArrayList<>();
     private List<Operator> operators = new ArrayList<>();
 
     public MathematicalExpression(String expression) {
-        String[] tokens = expression.split(" ");
+        String[] tokens = expression.split(NUMBER_OPERATOR_DELIMITER);
 
         validate(tokens);
 
         for (int i = 0; i < tokens.length; i++) {
             parseComponent(i, tokens[i]);
         }
-    }
-
-    public double getResult() {
-        Double prev = numbers.get(0);
-        for (int i = 0; i < operators.size(); i++) {
-            Operator operator = operators.get(i);
-            Double next = numbers.get(i + 1);
-            prev = operator.calculate(prev, next);
-        }
-        return prev;
     }
 
     private void validate(String[] tokens) {
@@ -69,4 +61,15 @@ public class MathematicalExpression {
             throw new InvalidMathematicalExpressionException(InvalidMathematicalExpressionException.WRONG_OPERATOR);
         }
     }
+
+    public double getResult() {
+        Double prev = numbers.get(0);
+        for (int i = 0; i < operators.size(); i++) {
+            Operator operator = operators.get(i);
+            Double next = numbers.get(i + 1);
+            prev = operator.calculate(prev, next);
+        }
+        return prev;
+    }
+
 }
