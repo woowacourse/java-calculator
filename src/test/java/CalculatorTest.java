@@ -6,17 +6,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class CalculatorTest {
     @ParameterizedTest
     @DisplayName("올바른 숫자를 입력하였는지 검증")
-    @CsvSource(value = {"3 + ! + 4:false", "1.9 * 6.2:true", "+ + 4:false",
-            "5 * 6 * 7 * 9:true", "0 / 0:true"}, delimiter = ':')
+    @CsvSource(value = {"3 + 0 + 4:true", "1.9 * 6.2:true", "10 + 1 + 4:true",
+            "0 / 0:true"}, delimiter = ':')
     void validateDoubleTest(String input, boolean expected) {
-        boolean actualResult = true;
-        try {
-            InputValues inputValues = new InputValues(input);
-            inputValues.validateDouble();
-        } catch (Exception e) {
-            actualResult = false;
-        }
-        Assertions.assertThat(actualResult).isEqualTo(expected);
+        StringValue stringValue = new StringValue(input);
+        InputValidation inputValidation = new InputValidation();
+        inputValidation.InputValidationDouble();
+
+        Assertions.assertThat(true).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -27,7 +24,7 @@ public class CalculatorTest {
         boolean actualResult = true;
         try {
             InputValues inputValues = new InputValues(input);
-            inputValues.validateOperator();
+            inputValues.InputValidationOperator();
         } catch (Exception e) {
             actualResult = false;
         }
@@ -41,7 +38,7 @@ public class CalculatorTest {
         boolean actualResult = true;
         try {
             InputValues inputValues = new InputValues(input);
-            inputValues.validateEndWithOperator();
+            inputValues.InputValidationEndWithOperator();
         } catch (Exception e) {
             actualResult = false;
         }

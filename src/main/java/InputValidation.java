@@ -4,6 +4,7 @@ public class InputValidation {
     static final int DIGIT_START = 0;
     static final int OPERATOR_START = 1;
 
+
     public void validateDouble(String[] values) {
         int length = values.length;
 

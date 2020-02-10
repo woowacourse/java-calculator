@@ -3,14 +3,14 @@ public class Calculator {
     private double result = 0;
 
     void calculate() {
-        int length = InputValues.getValuesLength();
+        int length = StringValue.getValuesLength();
         double nextNumber = 0;
 
-        result = Double.parseDouble(InputValues.getValueByIndex(FIRST));
+        result = Double.parseDouble(StringValue.getValueByIndex(FIRST));
         Operator nowOperator = null;
         for (int i = 1; i < length; i += 2) {
-            nowOperator = Operator.getOperatorByString(InputValues.getValueByIndex(i));
-            nextNumber = Double.parseDouble(InputValues.getValueByIndex(i + 1));
+            nowOperator = Operator.getOperatorByString(StringValue.getValueByIndex(i));
+            nextNumber = Double.parseDouble(StringValue.getValueByIndex(i + 1));
             result = nowOperator.operate(result, nextNumber);
         }
 

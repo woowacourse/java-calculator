@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        InputValues inputValues = new InputValues();
+        StringValue stringValue = new StringValue();
         Calculator calculator = new Calculator();
 
         calculator.calculate();
