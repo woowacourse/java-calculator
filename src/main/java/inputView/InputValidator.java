@@ -1,3 +1,5 @@
+package inputView;
+
 public class InputValidator {
 
 	public boolean isNotValid(String input) {

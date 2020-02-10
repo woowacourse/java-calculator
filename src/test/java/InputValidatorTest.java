@@ -7,12 +7,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import inputView.InputValidator;
+
 public class InputValidatorTest {
 	private InputValidator inputValidator = new InputValidator();
 
 	@Test
 	void returnFalseIfInputIsValid() {
-		assertThat(inputValidator.isNotValid("1 + 2 + 3 + 4.0")).isFalse();
+		assertThat(inputValidator.isNotValid("1 + 2 / 0.2 + 3 + 4.0")).isFalse();
 	}
 
 	@ParameterizedTest(name = "{1}")
