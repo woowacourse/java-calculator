@@ -14,20 +14,6 @@ public class Operator {
         operatings.put("/", (beforeOperand, afterOperand) -> beforeOperand / afterOperand);
     }
 
-    private enum OperatorType {
-        ADD("+"), SUBTRACT("-"), MULTIPLY("*"), DIVIDE("/");
-
-        private String operatorType;
-
-        OperatorType(String operatorType) {
-            this.operatorType = operatorType;
-        }
-
-        public String getOperatorType() {
-            return this.operatorType;
-        }
-    }
-
     public Operator(String input) {
         value = input;
     }
