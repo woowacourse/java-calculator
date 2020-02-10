@@ -1,5 +1,6 @@
 package domain;
 
+import domain.errors.UnAcceptableOperatorException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -7,6 +8,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
@@ -40,5 +42,16 @@ class CalculatorTest {
         NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList("/")));
 
         assertThat(calculator.calculate(numberSentence)).isEqualTo(first / second);
+    }
+
+    @Test
+    void calculateUnacceptableOperator() {
+        String unAcceptableOperator = "{";
+        NumberSentence numberSentence = new NumberSentence(Arrays.asList(first, second), new LinkedList<>(Collections.singletonList(unAcceptableOperator)));
+
+        assertThatExceptionOfType(UnAcceptableOperatorException.class)
+                .isThrownBy(() -> {
+                    calculator.calculate(numberSentence);
+                });
     }
 }
