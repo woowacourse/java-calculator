@@ -1,17 +1,18 @@
 package calculator;
 
 import domain.Expression;
-
-import static io.Input.inputExpression;
-import static io.Output.printResult;
+import io.ConsoleInput;
+import io.ConsoleOutput;
 
 public class Calculator {
-    public void run() {
-        String userExpression = inputExpression();
+    public void run(ConsoleInput input, ConsoleOutput output) {
+        output.printStartMessage();
+        String userExpression = input.inputExpression();
 
         Expression expression = new Expression(userExpression);
         Double userResult = expression.getResult();
 
-        printResult(userResult);
+        output.printResult(userResult);
+        output.printEndMessage();
     }
 }

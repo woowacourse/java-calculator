@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
+    private static final String DELIMITER = " ";
+
     private List<Double> numbers = new ArrayList<>();
     private List<Calculatable> operators = new ArrayList<>();
 
     public Expression(String expression) {
-        String[] tokens = expression.split(" ");
+        String[] tokens = expression.split(DELIMITER);
 
         validate(tokens);
         parseTokens(tokens);
