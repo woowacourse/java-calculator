@@ -3,18 +3,13 @@ package calculator;
 import view.ErrorView;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.BinaryOperator;
-import java.util.stream.Collectors;
 
 public enum Operator {
     ADDITION(OperatorRepository::add, "+"),
     SUBTRACTION(OperatorRepository::subtract, "-"),
     MULTIPLICATION(OperatorRepository::multiply, "*"),
     DIVISION(OperatorRepository::divide, "/");
-
-    private static final Integer ZERO_INDEX = 0;
-    private static final Integer ONE_SIZE = 1;
 
     private BinaryOperator<Double> operate;
     private String symbol;

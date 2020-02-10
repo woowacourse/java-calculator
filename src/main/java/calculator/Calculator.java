@@ -36,7 +36,6 @@ public class Calculator {
         if (isValidSize(tokens)) {
             return;
         }
-
         throw new IllegalArgumentException(ErrorView.INVALID_EXPRESSION_ERROR_STR);
     }
 
