@@ -12,23 +12,26 @@ public class Calculator {
     private static final Integer NEXT_OPERATOR_STEP = 2;
 
     public static String calculate(String expression) throws IllegalArgumentException {
+        double result;
         List<String> tokens = Arrays.asList(expression.split(DELIMITER));
 
         checkIsValidSize(tokens);
         checkIsNumber(tokens.get(ZERO_INDEX));
+        result = calculateTokens(tokens);
+        return Double.toString(result);
+    }
 
+    private static double calculateTokens(List<String> tokens) throws IllegalArgumentException {
         double result = Integer.parseInt(tokens.get(ZERO_INDEX));
         for (int i = FIRST_OPERATOR_INDEX; i < tokens.size(); i += NEXT_OPERATOR_STEP) {
             checkIsNumber(tokens.get(i + FIRST_OPERATOR_INDEX));
             result = operate(result, tokens.get(i), Integer.parseInt(tokens.get(i + FIRST_OPERATOR_INDEX)));
         }
-
-        return Double.toString(result);
+        return result;
     }
 
     private static double operate(double prev, String term, double next) throws IllegalArgumentException {
         Operator operator = Operator.getOperator(term);
-
         return operator.calculate(prev, next);
     }
 
@@ -62,7 +65,6 @@ public class Calculator {
                 return false;
             }
         }
-
         return true;
     }
 
