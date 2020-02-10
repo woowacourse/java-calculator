@@ -30,7 +30,7 @@ public class StringCalculator {
         }
     }
 
-    private double calculate() {
+    public double calculate() {
         double result = numbers.remove(0);
         for (int i = 0; i < operators.size(); i++) {
             result = operators.get(i).compute(result, numbers.get(i));

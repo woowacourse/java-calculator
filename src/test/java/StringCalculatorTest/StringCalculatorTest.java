@@ -20,9 +20,9 @@ public class StringCalculatorTest {
         numbers.add(1);
         numbers.add(2);
         numbers.add(3);
-        operators.add(Operator.getEnumFromString("+"));
-        operators.add(Operator.getEnumFromString("-"));
-        operators.add(Operator.getEnumFromString("*"));
+        operators.add(Operator.from("+"));
+        operators.add(Operator.from("-"));
+        operators.add(Operator.from("*"));
     }
 
     @Test

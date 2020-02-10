@@ -35,10 +35,11 @@ public class InputValidation {
      * @param inputs
      * @throws Exception
      */
-    private static void validateFirstAndLast(String[] inputs) throws Exception {
+    public static boolean validateFirstAndLast(String[] inputs) throws Exception {
         if (!(isInteger(inputs[0]) && isInteger(inputs[inputs.length - 1]))) {
             throw new Exception("식의 처음과 마지막은 숫자여야 합니다.");
         }
+        return true;
     }
 
     /**
@@ -47,12 +48,13 @@ public class InputValidation {
      * @param inputs
      * @throws Exception
      */
-    private static void validateRepeat(String[] inputs) throws Exception {
+    public static boolean validateRepeat(String[] inputs) throws Exception {
         for (int i = 1; i < inputs.length; i++) {
             if (!(isInteger(inputs[i - 1]) ^ isInteger(inputs[i]))) {
                 throw new Exception("연속된 숫자 또는 연산자입니다.");
             }
         }
+        return true;
     }
 
     /**
@@ -61,12 +63,13 @@ public class InputValidation {
      * @param inputs
      * @throws Exception
      */
-    private static void validateOperators(String[] inputs) throws Exception {
+    public static boolean validateOperators(String[] inputs) throws Exception {
         for (int i = 1; i < inputs.length; i += 2) {
             if (Operator.from(inputs[i]) == null) {
                 throw new Exception("올바른 연산자가 아닙니다.");
             }
         }
+        return true;
     }
 
     private static boolean isInteger(String value) {
