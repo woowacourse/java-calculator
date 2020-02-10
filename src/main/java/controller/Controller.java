@@ -15,7 +15,8 @@ package controller;
 
 import calculator.CalculatorMap;
 import model.Formula;
-import validator.InputValidator;
+import model.Number;
+import model.Operator;
 import view.InputView;
 import view.OutputView;
 
@@ -23,13 +24,7 @@ import java.util.List;
 
 public class Controller {
     public void run() {
-        InputValidator inputValidator = new InputValidator();
-        String input;
-
-        do {
-            input = InputView.inputStringFromUser();
-        } while (!inputValidator.checkInput(input));
-
+        String input = InputView.inputStringFromUser();
         Formula stringInput = new Formula(input);
         stringInput.setValueList();
         double sum = calculate(stringInput);
@@ -37,14 +32,14 @@ public class Controller {
     }
 
     private double calculate(Formula stringInput) {
-        List<Double> numbers = stringInput.getNumberList();
-        List<String> operators = stringInput.getOperatorList();
-        double sum = numbers.get(0);
+        List<Number> numbers = stringInput.getNumberList();
+        List<Operator> operators = stringInput.getOperatorList();
+        double sum = numbers.get(0).getNumber();
 
         CalculatorMap op = new CalculatorMap();
 
         for (int i = 0; i < operators.size(); i++) {
-            sum = op.calculate(operators.get(i), sum, numbers.get(i + 1));
+            sum = op.calculate(operators.get(i).getOperator(), sum, numbers.get(i + 1).getNumber());
         }
 
         return sum;

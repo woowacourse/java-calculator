@@ -16,7 +16,7 @@ package calculator;
 import java.util.HashMap;
 
 public class CalculatorMap {
-    private static HashMap<String, Operator> operator = new HashMap<>();
+    private static HashMap<String, Operators> operator = new HashMap<>();
 
     {
         operator.put("+", new Plus());

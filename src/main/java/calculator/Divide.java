@@ -13,7 +13,7 @@
 
 package calculator;
 
-public class Divide implements Operator {
+public class Divide implements Operators {
     public double Operate(double x, double y) {
         return x / y;
     }

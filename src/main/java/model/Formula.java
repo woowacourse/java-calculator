@@ -13,37 +13,45 @@
 
 package model;
 
-import validator.InputValidator;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Formula {
-    private String input;
-    private List<Double> numbers = new ArrayList<>();
-    private List<String> operators = new ArrayList<>();
+    private String[] inputSplit;
+    private List<Number> numbers = new ArrayList<>();
+    private List<Operator> operators = new ArrayList<>();
 
     public Formula(String input) {
-        this.input = input;
+        this.inputSplit = toFormula(input.split(" "));
+    }
+
+    private String[] toFormula(String[] input) {
+        try {
+            if (input.length < 3 || input.length % 2 == 0) {
+                throw new IllegalArgumentException();
+            }
+            return input;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("잘못된 계산식 입니다. 다시 입력해 주세요.");
+        }
     }
 
     public void setValueList() {
-        String[] inputSplit = this.input.split(" ");
         for (int i = 0; i < inputSplit.length; i++) {
             if (i % 2 == 0) {
-                numbers.add(Double.parseDouble(inputSplit[i]));
+                numbers.add(new Number(inputSplit[i]));
             }
             if (i % 2 == 1) {
-                operators.add(inputSplit[i]);
+                operators.add(new Operator(inputSplit[i]));
             }
         }
     }
 
-    public List<Double> getNumberList() {
+    public List<Number> getNumberList() {
         return numbers;
     }
 
-    public List<String> getOperatorList() {
+    public List<Operator> getOperatorList() {
         return operators;
     }
 }
