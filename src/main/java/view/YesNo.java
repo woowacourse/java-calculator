@@ -5,13 +5,15 @@ import java.util.Collections;
 import java.util.List;
 
 public enum YesNo {
-    YES(Arrays.asList("y", "Y", "yes", "Yes", "YES")),
-    NO(Arrays.asList("n", "N", "no", "No", "NO")),
-    EMPTY(Collections.EMPTY_LIST);
+    YES(true, Arrays.asList("y", "Y", "yes", "Yes", "YES")),
+    NO(false, Arrays.asList("n", "N", "no", "No", "NO")),
+    EMPTY(false, Collections.EMPTY_LIST);
 
+    public boolean trueOrFalse;
     private List<String> sameMeanings;
 
-    YesNo(List<String> sameMeanings) {
+    YesNo(boolean trueOfFalse, List<String> sameMeanings) {
+        this.trueOrFalse = trueOfFalse;
         this.sameMeanings = sameMeanings;
     }
 
@@ -22,10 +24,7 @@ public enum YesNo {
                 .orElse(EMPTY);
     }
 
-    public boolean toBoolean() {
-        if (this == YES) {
-            return true;
-        }
-        return false;
+    public boolean toBoolean(){
+        return this.trueOrFalse;
     }
 }

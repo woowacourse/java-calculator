@@ -19,9 +19,9 @@ public enum Operator implements DoubleBinaryOperator {
         this.expression = expression;
     }
 
-    public String toString() {
-        return this.symbol;
-    }
+//    public String toString() {
+//        return this.symbol;
+//    }
 
     public static Operator findOperatorBySymbol(String symbol) {
         return Arrays.stream(values())
@@ -31,7 +31,7 @@ public enum Operator implements DoubleBinaryOperator {
     }
 
     public double operate(double input1, double input2) {
-        checkIfOperator(symbol);
+        //checkIfOperator(symbol);
         if (this == DIVIDE) {
             checkZero(input2);
         }
@@ -44,15 +44,15 @@ public enum Operator implements DoubleBinaryOperator {
         }
     }
 
-    public static void checkIfOperator(String symbol) {
-        Operator[] operators = Operator.values();
-        for (Operator operator : operators) {
-            if (operator.toString().equals(symbol)) {
-                return;
-            }
-        }
-        throw new IllegalArgumentException("사칙연산 연산자만 계산 가능합니다");
-    }
+//    public static void checkIfOperator(String symbol) {
+//        Operator[] operators = Operator.values();
+//        for (Operator operator : operators) {
+//            if (operator.toString().equals(symbol)) {
+//                return;
+//            }
+//        }
+//        throw new IllegalArgumentException("사칙연산 연산자만 계산 가능합니다");
+//    }
 
     @Override
     public double applyAsDouble(final double left, final double right) {
