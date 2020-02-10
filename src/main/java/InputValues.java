@@ -51,7 +51,7 @@ public class InputValues {
             throw new IllegalArgumentException("연산자와 숫자가 맞지 않습니다.");
     }
 
-    boolean isNumberIndex(int index) {
+    static boolean isNumberIndex(int index) {
         if (index < 0)
             return false;
         if (index % 2 == 0)
@@ -59,7 +59,7 @@ public class InputValues {
         return false;
     }
 
-    boolean isOperatorIndex(int index) {
+    static boolean isOperatorIndex(int index) {
         if (index < 0)
             return false;
         if (index % 2 == 1)
