@@ -8,13 +8,13 @@ public class InputValidation {
     private final static int ZERO = 0;
     private final static int ONE = 1;
 
-    public static boolean checkNullOroSpace(String input) {
+    public static boolean checkNullOrSpace(String input) {
         if ("".equals(input))
             Exit.sendErrorMessage("공백을 입력하셨습니다.");
         return false;
     }
 
-    public static double checkIsNumber(String stringNumber) {
+    public static double isNumber(String stringNumber) {
         try {
             return Double.parseDouble(stringNumber);
         } catch (Exception e) {
@@ -23,7 +23,7 @@ public class InputValidation {
         return -1;
     }
 
-    public static char checkIsOperator(String stringOperator) {
+    public static char isOperator(String stringOperator) {
         char operator = stringOperator.charAt(ZERO);
         List<Character> operators = new ArrayList<>();
         operators.add('+');
