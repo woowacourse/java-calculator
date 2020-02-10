@@ -61,4 +61,35 @@ public class StringTest {
                 .withMessageContaining("range: " + value.length());
     }
 
+    @Test
+    public void 문자열_길이_구하기() throws Exception {
+        String name = "박재성";
+        assertThat(name.length()).isEqualTo(3);
+    }
+
+    @Test
+    public void 문자열_더하기() throws Exception {
+        String name = "박재성";
+        String welcome = "안녕!";
+        assertThat(welcome.concat(name)).isEqualTo("안녕!박재성");
+    }
+
+    @Test
+    public void 문자열을_문자_단위로_출력() throws Exception {
+        String name = "박재성";
+        char[] expected = {'박', '재', '성'};
+        assertThat(name.toCharArray()).isEqualTo(expected);
+    }
+
+    @Test
+    public void 문자열_뒤집기() throws Exception {
+        String name = "박재성";
+        String reverseName = "";
+        char[] charArr = name.toCharArray();
+
+        for (int i = charArr.length - 1; i >= 0; i--) {
+            reverseName += charArr[i];
+        }
+        assertThat(reverseName).isEqualTo("성재박");
+    }
 }

@@ -6,7 +6,7 @@ public class ConsoleOutput {
     }
 
     public void printResult(Double result) {
-        System.out.println("결과 : " + result);
+        System.out.println("결과 : " + String.format("%.3f", result));
     }
 
     public void printEndMessage() {
