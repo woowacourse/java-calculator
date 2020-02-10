@@ -23,5 +23,12 @@ public enum Operator {
 	public DoubleBinaryOperator getFunction() {
 		return function;
 	}
+
+	public double findAndExecute(double result, double operand, String symbol) {
+		if (getSymbol().equals(symbol)) {
+			return getFunction().applyAsDouble(result, operand);
+		}
+		return result;
+	}
 }
 

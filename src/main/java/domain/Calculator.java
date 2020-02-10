@@ -13,13 +13,7 @@ public class Calculator {
 
 	private void calculate(double operand, String symbol) {
 		for (Operator operator : Operator.values()) {
-			findAndExecute(operand, symbol, operator);
-		}
-	}
-
-	private void findAndExecute(double operand, String symbol, Operator operator) {
-		if (operator.getSymbol().equals(symbol)) {
-			result = operator.getFunction().applyAsDouble(result, operand);
+			result = operator.findAndExecute(result, operand, symbol);
 		}
 	}
 }
