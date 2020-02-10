@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class OperatorRepository {
+public class OperatorList {
     private static List<Operator> operators = new ArrayList<>();
 
     public static void addOperator(Operator operator) {

@@ -10,7 +10,7 @@ import java.util.*;
 public class Calculator {
     public void run() {
         splitFormula(InputView.inputFormula());
-        OutputView.printResult(calculate(OperandRepository.getOperands(), OperatorRepository.getOperatorList()));
+        OutputView.printResult(calculate(OperandList.getOperands(), OperatorList.getOperatorList()));
     }
 
     private void splitFormula(String formula) {
@@ -22,11 +22,11 @@ public class Calculator {
 
     private void divideOddAndEven(String formula, int index) {
         if (ValueValidation.isZeroOrEven(index) && InputValidation.isNumber(formula)) {
-            OperandRepository.addOperand(Double.parseDouble(formula));
+            OperandList.addOperand(Double.parseDouble(formula));
             return;
         }
         if (ValueValidation.isOdd(index) && InputValidation.isOperator(formula)) {
-            OperatorRepository.addOperator(Operator.getOperatorForString(formula));
+            OperatorList.addOperator(Operator.getOperatorForString(formula));
             return;
         }
         throw new IllegalArgumentException("잘못된 수식을 입력했습니다.");

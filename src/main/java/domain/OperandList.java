@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class OperandRepository {
+public class OperandList {
     private final static List<Double> operands = new ArrayList<>();
 
     public static void addOperand(double operand) {
