@@ -7,9 +7,12 @@ import java.util.List;
 
 public class Calculator {
     private static final String DELIMITER = " ";
-    private static final Integer ZERO_INDEX = 0;
-    private static final Integer FIRST_OPERATOR_INDEX = 1;
-    private static final Integer STEP_TO_NEXT_OPERATOR = 2;
+    private static final int ZERO_INDEX = 0;
+    private static final int FIRST_OPERATOR_INDEX = 1;
+    private static final int STEP_TO_NEXT_OPERATOR = 2;
+
+//    private Calculator() {
+//    }
 
     public static String calculate(String expression) throws IllegalArgumentException {
         double result;

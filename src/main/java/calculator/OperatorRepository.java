@@ -3,7 +3,10 @@ package calculator;
 import view.ErrorView;
 
 public class OperatorRepository {
-    private static final Double ZERO = 0d;
+    private static final double ZERO = 0d;
+
+//    private OperatorRepository() {
+//    }
 
     public static double add(double a, double b) {
         return Double.sum(a, b);
