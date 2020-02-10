@@ -1,13 +1,8 @@
 package utils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class InputValidation {
-    private final static int ZERO = 0;
-    private final static int ONE = 1;
-
     public static boolean checkNullOrSpace(String input) {
         if ("".equals(input))
             Exit.sendErrorMessage("공백을 입력하셨습니다.");
