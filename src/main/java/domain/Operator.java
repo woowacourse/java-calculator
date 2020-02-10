@@ -20,8 +20,9 @@ public enum Operator {
         calculateFunctionMap.put(Operator.MINUS, (x, y) -> x - y);
         calculateFunctionMap.put(Operator.MULTIPLY, (x, y) -> x * y);
         calculateFunctionMap.put(Operator.DIVISION, (x, y) -> {
-            if (y == 0)
-                new IllegalArgumentException("0으로 나눌 수 없습니다.");
+            if (y == 0) {
+                throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+            }
             return x / y;
         });
         stringOperatorToOperatorMap.put("+", Operator.PLUS);
