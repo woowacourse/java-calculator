@@ -44,7 +44,7 @@ public class Controller {
         CalculatorMap op = new CalculatorMap();
 
         for (int i = 0; i < operators.size(); i++) {
-            sum = op.getOperator(operators.get(i)).Operate(sum, numbers.get(i + 1));
+            sum = op.calculate(operators.get(i), sum, numbers.get(i + 1));
         }
 
         return sum;

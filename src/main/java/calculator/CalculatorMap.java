@@ -25,7 +25,7 @@ public class CalculatorMap {
         operator.put("/", new Divide());
     }
 
-    public Operator getOperator(String op) {
-        return operator.get(op);
+    public double calculate(String op, double x, double y) {
+        return operator.get(op).Operate(x, y);
     }
 }
