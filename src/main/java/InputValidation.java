@@ -1,5 +1,6 @@
 public class InputValidation {
     static final int GAP = 2;
+    static final int EVEN = 2;
     static final int DIGIT_START = 0;
     static final int OPERATOR_START = 1;
 
@@ -27,7 +28,8 @@ public class InputValidation {
     public void validateEndWithOperator(String[] values) {
         int length = values.length;
 
-        if (length % 2 == 0)
+        // 짝수로 끝난다면 연산자로 끝나는 경우
+        if (length % EVEN == 0)
             throw new IllegalArgumentException("연산자와 숫자가 맞지 않습니다.");
     }
 }
