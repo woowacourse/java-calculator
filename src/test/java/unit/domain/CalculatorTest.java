@@ -2,44 +2,42 @@ package unit.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
-	private List<Token> tokens;
+	private Numbers numbers;
+	private Operators operators;
 
 	@BeforeEach
 	void init() {
-		tokens = new ArrayList<>();
+		numbers = new Numbers(new Stack<>());
+		operators = new Operators(new Stack<>());
 	}
 
 	@Test
 	void testCalculateForThreeTokens() {
-		tokens.add(new Number("1"));
-		tokens.add(new Operator("+"));
-		tokens.add(new Number("2"));
-		Expression expression = new Expression(tokens);
+		numbers.push(new Number(1));
+		operators.push("+");
+		numbers.push(new Number(2));
 
 		final double expected = 3;
-		final double actual = Calculator.calculate(expression);
+		final double actual = Calculator.calculate(numbers, operators);
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	void testCalculateForFiveTokens() {
-		tokens.add(new Number("1"));
-		tokens.add(new Operator("+"));
-		tokens.add(new Number("2"));
-		tokens.add(new Operator("/"));
-		tokens.add(new Number("2"));
-
-		Expression expression = new Expression(tokens);
+		numbers.push(new Number(2));
+		operators.push("/");
+		numbers.push(new Number(2));
+		operators.push("+");
+		numbers.push(new Number(1));
 
 		final double expected = 1.5;
-		final double actual = Calculator.calculate(expression);
+		final double actual = Calculator.calculate(numbers, operators);
 		assertEquals(expected, actual);
 	}
 }

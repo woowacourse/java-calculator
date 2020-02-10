@@ -3,34 +3,27 @@ package unit.domain;
 public class Calculator {
 	private static final int MIN_SIZE_OF_EXPRESSION = 3;
 
-	public static double calculate(Expression expression) {
-		checkValidation(expression);
-
+	public static double calculate(Numbers numbers, Operators operators) {
 		double result = 0;
 		Number number1;
-		Operator operator;
 		Number number2;
 
-		while (canCalculate(expression)) {
-			number1 = (Number)expression.pop();
-			operator = (Operator)expression.pop();
-			number2 = (Number)expression.pop();
+		while (canCalculate(numbers, operators)) {
+			number1 = numbers.pop();
+			number2 = numbers.pop();
 
-			result = operator.calculate(number1, number2);
+			final String letter = operators.pop();
+			final Operator currentOperator = Operator.of(letter);
+			result = currentOperator.operate(number1, number2);
 
-			expression.push(new Number(Double.toString(result)));
+			numbers.push(new Number(result));
 		}
 
 		return result;
 	}
 
-	private static void checkValidation(Expression expression) {
-		if (!canCalculate(expression)) {
-			throw new IllegalArgumentException("식은 최소 3자 이상이어야 합니다.");
-		}
-	}
-
-	private static boolean canCalculate(Expression expression) {
-		return expression.isSizeGreaterThanOrEqualTo(MIN_SIZE_OF_EXPRESSION);
+	private static boolean canCalculate(Numbers numbers, Operators operators) {
+		final int expressionSize = numbers.size() + operators.size();
+		return expressionSize >= MIN_SIZE_OF_EXPRESSION;
 	}
 }
