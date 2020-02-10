@@ -25,7 +25,10 @@ public class CalculatorTest {
 
         calculator.splitFormula(formula);
 
-        double[] targetNumbers = calculator.getNumbers().stream().mapToDouble(Double::doubleValue).toArray();
+        double[] targetNumbers = calculator.getNumbers()
+                .stream()
+                .mapToDouble(Double::doubleValue)
+                .toArray();
         Assertions.assertThat(numbers).isEqualTo(targetNumbers);
 
         char[] targetOperators = new char[calculator.getOperators().size()];
