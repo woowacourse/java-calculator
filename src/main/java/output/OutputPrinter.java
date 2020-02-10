@@ -11,17 +11,17 @@ public class OutputPrinter {
             "저희 계산기는 연산자의 우선순위 없이 순서대로 계산되니 정확한 연산에는 사용을 피해주세요.";
     private static final String RESULT_FORMATTED_STRING = "결과: %.2f";
 
-    public void printIntroduction() {
+    public static void printIntroduction() {
         System.out.println(INTRO_STATEMENT);
         System.out.println();
     }
 
-    public void printExpression(MathematicalExpression expression) {
+    public static void printExpression(MathematicalExpression expression) {
         System.out.println(String.format(RESULT_FORMATTED_STRING, expression.getResult()));
         System.out.println();
     }
 
-    public void printException(InvalidMathematicalExpressionException iee) {
+    public static void printException(InvalidMathematicalExpressionException iee) {
         System.out.println();
         System.out.println("!!!!!!!!!!!!!!!!!경고!!!!!!!!!!!!!!!");
         System.out.println(iee.getMessage());

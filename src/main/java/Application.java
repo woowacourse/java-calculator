@@ -1,4 +1,5 @@
 import calculator.Calculator;
+import calculator.expression.MathematicalExpression;
 import input.InputScanner;
 import output.OutputPrinter;
 
@@ -6,9 +7,9 @@ public class Application {
 
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        InputScanner inputScanner = new InputScanner();
-        OutputPrinter outputPrinter = new OutputPrinter();
-        outputPrinter.printIntroduction();
-        calculator.run(inputScanner, outputPrinter);
+        OutputPrinter.printIntroduction();
+        String expressionInputFromUser = InputScanner.getExpression();
+        MathematicalExpression expression = calculator.run(expressionInputFromUser);
+        OutputPrinter.printExpression(expression);
     }
 }
