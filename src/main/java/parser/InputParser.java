@@ -2,12 +2,11 @@ package parser;
 
 import domain.OperatorGroup;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class InputParser {
     private final static String SPACE = " ";
+    private final static Map<String, OperatorGroup> map = new HashMap<>();
 
     public static String[] split(String input) {
         return input.split(SPACE);
@@ -25,6 +24,7 @@ public class InputParser {
     }
 
     public static List<OperatorGroup> extractOperator(String[] input) {
+        init();
         List<OperatorGroup> operators = new ArrayList<>();
         int numberIndex = 2;
         for (int i = 0; i < input.length; i++) {
@@ -33,5 +33,12 @@ public class InputParser {
             }
         }
         return Collections.unmodifiableList(operators);
+    }
+
+    private static void init() {
+        map.put("+", OperatorGroup.PLUS);
+        map.put("-", OperatorGroup.MINUS);
+        map.put("*", OperatorGroup.MULTIPLY);
+        map.put("/", OperatorGroup.DIVIDE);
     }
 }

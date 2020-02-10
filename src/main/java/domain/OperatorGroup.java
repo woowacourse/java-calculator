@@ -1,10 +1,13 @@
 package domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum OperatorGroup {
     PLUS("+") {
         @Override
         public double calculate(double x, double y) {
-            return Double.sum(x,y);
+            return Double.sum(x, y);
         }
     },
     MINUS("-") {
@@ -31,22 +34,18 @@ public enum OperatorGroup {
     }
 
     private String letter;
+    private final static Map<String, OperatorGroup> map = new HashMap<>();
 
     public static OperatorGroup stringToOperator(String operator) {
-        if (operator.equals(PLUS.letter)) {
-            return OperatorGroup.PLUS;
-        }
-        if (operator.equals(MINUS.letter)) {
-            return OperatorGroup.MINUS;
-        }
-        if (operator.equals(MULTIPLY.letter)) {
-            return OperatorGroup.MULTIPLY;
-        }
-        if (operator.equals(DIVIDE.letter)) {
-            return OperatorGroup.DIVIDE;
-        }
-        throw new IllegalStateException("잘못된 연산자가 입력되었습니다.");
+        return map.get(operator);
     }
 
     public abstract double calculate(double x, double y);
+
+    static {
+        map.put("+", OperatorGroup.PLUS);
+        map.put("-", OperatorGroup.MINUS);
+        map.put("*", OperatorGroup.MULTIPLY);
+        map.put("/", OperatorGroup.DIVIDE);
+    }
 }
