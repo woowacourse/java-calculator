@@ -5,6 +5,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static calculator.domain.Calculator.isEven;
+import static calculator.domain.Calculator.isOdd;
 import static calculator.view.InputView.*;
 
 public class ExceptionHandler {
@@ -14,9 +16,7 @@ public class ExceptionHandler {
     private static final String BLANK = " ";
     private static final String EMPTY_STRING = "";
     private static final String NUMBER_FORMAT = "-?\\d+(\\.\\d+)?";
-
-
-
+    private static final String DIVIDE_ZERO_STRING = "/0";
 
     public static String checkInputHandler(String input) {
         if (checkString(input.split(DELIMITER)) == true && checkUndefinedValue(input) == true) {
@@ -26,7 +26,7 @@ public class ExceptionHandler {
     }
 
     public static boolean checkUndefinedValue(String str) {
-        if (str.replace(BLANK, EMPTY_STRING).contains("/0")) {
+        if (str.replace(BLANK, EMPTY_STRING).contains(DIVIDE_ZERO_STRING)) {
             return false;
         }
         return true;
@@ -43,10 +43,10 @@ public class ExceptionHandler {
     }
 
     public static boolean checkIndividual(int i, String inputString) {
-        if (i % 2 == EVEN) {
+        if (isEven(i)) {
             return checkNumber(inputString);
         }
-        if (i % 2 == ODD) {
+        if (isOdd(i)) {
             return checkSign(inputString);
         }
         return false;

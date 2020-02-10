@@ -16,11 +16,11 @@ public enum Operator {
         this.expression = expression;
     }
 
-    public double calculate(double nowNumber){
+    public double calculate(double nowNumber) {
         return expression.apply(nowNumber);
     }
 
-    public String getOperator(){
+    public String getOperator() {
         return this.operator;
     }
 
