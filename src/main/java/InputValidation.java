@@ -1,8 +1,12 @@
 public class InputValidation {
+    static final int GAP = 2;
+    static final int DIGIT_START = 0;
+    static final int OPERATOR_START = 1;
+
     public void validateDouble(String[] values) {
         int length = values.length;
 
-        for (int i = 0; i < length; i += 2) {
+        for (int i = DIGIT_START; i < length; i += GAP) {
             try {
                 Double.parseDouble(values[i]);
             } catch (Exception e) {
@@ -15,7 +19,7 @@ public class InputValidation {
     public void validateOperator(String[] values) {
         int length = values.length;
 
-        for (int i = 1; i < length; i += 2) {
+        for (int i = OPERATOR_START; i < length; i += GAP) {
             Operator.getOperatorByString(values[i]);
         }
     }
