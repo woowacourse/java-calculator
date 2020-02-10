@@ -8,4 +8,7 @@ public class Calculator {
         return new MathematicalExpression(inputFromUser);
     }
 
+    public Double calculate(MathematicalExpression expression) {
+        return expression.getResult();
+    }
 }

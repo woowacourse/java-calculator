@@ -16,8 +16,8 @@ public class OutputPrinter {
         System.out.println();
     }
 
-    public static void printExpression(MathematicalExpression expression) {
-        System.out.println(String.format(RESULT_FORMATTED_STRING, expression.getResult()));
+    public static void printResult(double result) {
+        System.out.println(String.format(RESULT_FORMATTED_STRING, result));
         System.out.println();
     }
 

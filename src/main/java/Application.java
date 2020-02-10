@@ -10,6 +10,7 @@ public class Application {
         OutputPrinter.printIntroduction();
         String expressionInputFromUser = InputScanner.getExpression();
         MathematicalExpression expression = calculator.createExpression(expressionInputFromUser);
-        OutputPrinter.printExpression(expression);
+        Double result = calculator.calculate(expression);
+        OutputPrinter.printResult(result);
     }
 }
