@@ -24,11 +24,21 @@ import java.util.List;
 
 public class Controller {
     public void run() {
-        String input = InputView.inputStringFromUser();
-        Formula stringInput = new Formula(input);
-        stringInput.setValueList();
+        Formula stringInput = setInput();
         double sum = calculate(stringInput);
         OutputView.print(sum);
+    }
+
+    private Formula setInput() {
+        String input;
+        while (true) {
+            try {
+                input = InputView.inputStringFromUser();
+                return new Formula(input);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private double calculate(Formula stringInput) {
