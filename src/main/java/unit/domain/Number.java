@@ -2,19 +2,11 @@ package unit.domain;
 
 import java.util.Objects;
 
-public class Number implements Token {
+public class Number {
 	private final double number;
 
-	public Number(final String number) {
-		this.number = toDouble(number);
-	}
-
-	private double toDouble(final String number) {
-		try {
-			return Double.parseDouble(number);
-		} catch (NumberFormatException e) {
-			throw new NumberFormatException("유효한 범위의 숫자를 입력해 주세요");
-		}
+	public Number(final double number) {
+		this.number = number;
 	}
 
 	public double getNumber() {
@@ -30,7 +22,6 @@ public class Number implements Token {
 		Number number1 = (Number)o;
 		return number == number1.number;
 	}
-
 
 	@Override
 	public int hashCode() {
