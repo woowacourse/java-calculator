@@ -70,7 +70,7 @@ public class Calculator {
 
     public static void calculateNumber(Operator operators, double nowNumber) {
         if (operators.getOperator().equals(nowSign)) {
-            operators.calculate(nowNumber);
+            returnValue = operators.calculate(nowNumber, returnValue);
         }
     }
 }

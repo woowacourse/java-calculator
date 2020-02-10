@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.domain.Calculator;
 import calculator.domain.Operator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OperatorTest {
     static final double TEST_RETURN_VALUE_INIT = 10;
     static final double TEST_NOW_NUMBER = 5;
-    Calculator calculator = new Calculator();
     private Operator plusOperator;
     private Operator minusOperator;
     private Operator multiplyOperator;
@@ -19,7 +17,6 @@ public class OperatorTest {
 
     @BeforeEach
     void setUp() {
-        calculator.setReturnValue(TEST_RETURN_VALUE_INIT);
         plusOperator = Operator.PLUS;
         minusOperator = Operator.MINUS;
         multiplyOperator = Operator.MULTIPLY;
@@ -29,25 +26,25 @@ public class OperatorTest {
     @Test
     @DisplayName("더하기 연산자 메서드 테스트")
     void plusOperatorTest() {
-        assertThat(plusOperator.calculate(TEST_NOW_NUMBER)).isEqualTo(TEST_RETURN_VALUE_INIT + TEST_NOW_NUMBER);
+        assertThat(plusOperator.calculate(TEST_NOW_NUMBER, TEST_RETURN_VALUE_INIT)).isEqualTo(TEST_RETURN_VALUE_INIT + TEST_NOW_NUMBER);
     }
 
     @Test
     @DisplayName("빼기 연산자 메서드 테스트")
     void minusOperatorTest() {
-        assertThat(minusOperator.calculate(TEST_NOW_NUMBER)).isEqualTo(TEST_RETURN_VALUE_INIT - TEST_NOW_NUMBER);
+        assertThat(minusOperator.calculate(TEST_NOW_NUMBER, TEST_RETURN_VALUE_INIT)).isEqualTo(TEST_RETURN_VALUE_INIT - TEST_NOW_NUMBER);
     }
 
     @Test
     @DisplayName("곱하기 연산자 메서드 테스트")
     void multiplyOperatorTest() {
-        assertThat(multiplyOperator.calculate(TEST_NOW_NUMBER)).isEqualTo(TEST_RETURN_VALUE_INIT * TEST_NOW_NUMBER);
+        assertThat(multiplyOperator.calculate(TEST_NOW_NUMBER, TEST_RETURN_VALUE_INIT)).isEqualTo(TEST_RETURN_VALUE_INIT * TEST_NOW_NUMBER);
     }
 
     @Test
     @DisplayName("나누기 연산자 메서드 테스트")
     void divideOperatorTest() {
-        assertThat(divideOperator.calculate(TEST_NOW_NUMBER)).isEqualTo(TEST_RETURN_VALUE_INIT / TEST_NOW_NUMBER);
+        assertThat(divideOperator.calculate(TEST_NOW_NUMBER, TEST_RETURN_VALUE_INIT)).isEqualTo(TEST_RETURN_VALUE_INIT / TEST_NOW_NUMBER);
     }
 
 }

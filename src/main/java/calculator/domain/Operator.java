@@ -1,23 +1,23 @@
 package calculator.domain;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", nowNumber -> Calculator.returnValue += nowNumber),
-    MINUS("-", nowNumber -> Calculator.returnValue -= nowNumber),
-    MULTIPLY("*", nowNumber -> Calculator.returnValue *= nowNumber),
-    DIVIDE("/", nowNumber -> Calculator.returnValue /= nowNumber);
+    PLUS("+", (nowNumber, returnValue) -> returnValue + nowNumber),
+    MINUS("-", (nowNumber, returnValue) -> returnValue - nowNumber),
+    MULTIPLY("*", (nowNumber, returnValue) -> returnValue * nowNumber),
+    DIVIDE("/", (nowNumber, returnValue) -> returnValue / nowNumber);
 
     private String operator;
-    private Function<Double, Double> expression;
+    private BiFunction<Double, Double, Double> expression;
 
-    Operator(String operator, Function<Double, Double> expression) {
+    Operator(String operator, BiFunction<Double, Double, Double> expression) {
         this.operator = operator;
         this.expression = expression;
     }
 
-    public double calculate(double nowNumber) {
-        return expression.apply(nowNumber);
+    public double calculate(double nowNumber, double returnValue) {
+        return expression.apply(nowNumber, returnValue);
     }
 
     public String getOperator() {
