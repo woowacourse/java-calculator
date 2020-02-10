@@ -22,3 +22,27 @@
 
 ## 우아한테크코스 코드리뷰
 * [온라인 코드 리뷰 과정](https://github.com/woowacourse/woowacourse-docs/blob/master/maincourse/README.md)
+
+##첫 코드리뷰 코멘트
+###Calculator.java
+- [x] 존재할 가능성이 큰 것으로부터 사용되는 것이 안전합니다.
+- [x] 각 단계에서 명시적 반환을 한다면 불필요한 선언은 필요없습니다.
+- [x] 주석을 남기지 않습니다.
+- [x] nums에서 개체를 제거하는 것과 계산하는 로직을 분리합니다.
+- [x] 실행부는 Main 클래스를 생성합니다.
+- [x] 클래스 네이밍과 하는 일이 맞지 않습니다. Exception은 자바의 고유한 클래스 네이밍입니다.
+
+###Input.java
+- [x] 메소드를 나누어 봅시다.
+
+###ExceptionTest.java
+- [x] opers는 테스트마다 쌓여 갯수가 늘어납니다.
+###해결 방법
+- equals를 호출 할 때, 인자 자리에 변수가 들어가게끔 합니다.
+- result의 선언문을 제거하고, 각 연산에 대한 값을 반환합니다. 이 때, 연산자가 아닌 경우에 대한 해결책이 필요합니다.
+- 주석을 모두 제거하였습니다. 또한, 변수명 등에 대한 줄임말을 제거하였습니다.
+- nums에서 개체를 제거하는 것을 함수 호출 전에 진행하여 매개변수로 전달하였습니다.
+- Main 클래스를 생성하였습니다.
+- Exception 클래스명을 ValidationCheck 으로 바꾸었습니다. 이에 맞춰 ExceptionTest 또한 ValidationCheckTest로 바꾸었습니다.
+- inputValue 메소드를 각 inputValue, divideNumsAndOpers, addNumbersOrOperators 메소드를 나누었습니다.
+- 각 테스트를 진행하기 이전에, 연산자 배열을 초기화하는 것을 추가하였습니다.
