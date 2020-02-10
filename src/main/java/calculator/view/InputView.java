@@ -5,7 +5,7 @@ import calculator.ElementValidator;
 import java.util.Scanner;
 
 public class InputView {
-    private static final String equationDelimiter = " ";
+    private static final String EQUATION_DELIMITER = " ";
     private ElementValidator validator = new ElementValidator();
 
     public String[] getInputEquation() {
@@ -15,7 +15,7 @@ public class InputView {
         while(true) {
             try {
                 String equation = scanner.nextLine();
-                equations = equation.split(equationDelimiter);
+                equations = equation.split(EQUATION_DELIMITER);
                 validator.checkEquationElementValue(equations);
                 break;
             } catch(NumberFormatException e) {
