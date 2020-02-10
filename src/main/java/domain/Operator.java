@@ -29,7 +29,7 @@ public enum Operator {
         if (Operator.DIVIDE.symbol.equals(symbol)) {
             return Operator.DIVIDE;
         }
-        throw new IllegalArgumentException("올바른 연산자가 아닙니다.");
+        throw new ExpressionException(ExpressionException.INVALID_OPERATION);
     }
 
     public double calculate(double prev, double next) {

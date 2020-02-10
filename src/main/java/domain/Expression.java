@@ -56,7 +56,7 @@ public class Expression {
         try {
             return Double.parseDouble(token);
         } catch (NumberFormatException ne) {
-            throw new IllegalArgumentException("항의 자리엔 숫자가 와야합니다.");
+            throw new ExpressionException(ExpressionException.NOT_A_NUMBER);
         }
     }
 
