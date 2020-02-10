@@ -1,7 +1,6 @@
 package view;
 
 import domain.NumberSentence;
-import domain.NumberSentenceTranslatorImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,6 @@ import java.io.PrintStream;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class InputViewTest {
     private Scanner scanner;
