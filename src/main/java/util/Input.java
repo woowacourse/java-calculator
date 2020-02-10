@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import exception.Exception;
+import exception.ValidationCheck;
 
 public class Input {
-    static Scanner sc = new Scanner(System.in);
-    private List<String> nums;
-    private List<String> opers;
-    List<List> expressions = new ArrayList<>();
-    private String value;
-    private Exception exception = new Exception();
+    private Scanner sc = new Scanner(System.in);
+    private List<String> numbers;
+    private List<String> operators;
+    private ValidationCheck validationCheck = new ValidationCheck();
+
+    public List<List> expressions = new ArrayList<>();
 
     public List<List> inputValue() {
-        nums = new ArrayList<>();
-        opers = new ArrayList<>();
+        String value;
+
+        numbers = new ArrayList<>();
+        operators = new ArrayList<>();
 
         System.out.println("Enter Value : ");
         value = sc.nextLine();
@@ -24,25 +26,38 @@ public class Input {
         String[] valueMembers = value.split(" ");
         divideNumsAndOpers(valueMembers);
 
-        if (!exception.isNumber(nums)) {
-            System.out.println("not numbers");
-            return inputValue();
-        } else if (!exception.isValidOperator(opers)) {
-            System.out.println("not opers");
-            return inputValue();
-        }
-        expressions.add(nums);
-        expressions.add(opers);
+        if(!isValid()) { return inputValue(); }
+
+        expressions.add(numbers);
+        expressions.add(operators);
         return expressions;
     }
 
     private void divideNumsAndOpers(String[] valueMembers) {
         for (int i = 0; i < valueMembers.length; i++) {
-            if (i % 2 == 0) {
-                nums.add(valueMembers[i]);
-            } else if (i % 2 == 1) {
-                opers.add(valueMembers[i]);
-            }
+            addNumbersOrOperators(i, valueMembers);
+        }
+    }
+
+    private boolean isValid(){
+        if (!validationCheck.isNumber(numbers)) {
+            System.out.println("not numbers");
+            return false;
+        } else if (!validationCheck.isValidOperator(operators)) {
+            System.out.println("not opers");
+            return false;
+        }
+        return true;
+    }
+
+    private void addNumbersOrOperators(int i, String[] valueMembers){
+        boolean isNumberPlace = (i % 2 == 0);
+        boolean isOperatorPlace = (i%2 == 1);
+
+        if (isNumberPlace) {
+            numbers.add(valueMembers[i]);
+        } else if (isOperatorPlace) {
+            operators.add(valueMembers[i]);
         }
     }
 }

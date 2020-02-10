@@ -6,12 +6,11 @@ import java.util.ArrayList;
 
 public class Calculator {
     private Scanner sc = new Scanner(System.in);
-    List<List> expressions = new ArrayList<>();
 
-    List<String> initOpers() {
+    List<String> initOpers(List<List> expressions) {
         return expressions.get(1);
     }
-    List<Integer> initNums() {
+    List<Integer> initNums(List<List> expressions) {
         List<String> numbers = expressions.get(0);
         List<Integer> nums = new ArrayList<>();
         for(String number : numbers) {
@@ -20,26 +19,26 @@ public class Calculator {
         return nums;
     }
 
-    private int operation(int currNum, String oper, List<Integer> nums) {
-       int result = 0;
+    private int operation(int currNum, String oper, int target) {
        if("+".equals(oper)) {
-           result = currNum + nums.remove(0);
+           return currNum + target;
        }
        else if("-".equals(oper)) {
-           result = currNum - nums.remove(0);
+           return currNum - target;
        }
         else if("*".equals(oper)) {
-           result = currNum * nums.remove(0);
+           return currNum * target;
         }
         else if("/".equals(oper)) {
-           result = currNum / nums.remove(0);
+           return currNum / target;
         }
-        return result;
+        return 0; // TODO
     }
 
     public int calculate(int answer, List<Integer> nums, List<String> opers){
         for (int i = 0; i < opers.size(); i++) {
-            answer = operation(answer, opers.get(i), nums);
+            int target = nums.remove(0);
+            answer = operation(answer, opers.get(i), target);
         }
         return answer;
     }

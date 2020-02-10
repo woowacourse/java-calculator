@@ -5,8 +5,6 @@ import util.Input;
 import java.util.ArrayList;
 import java.util.List;
 
-import static calculator.Calculator.*;
-
 public class Main {
     public static void main(String[] args) {
         Input input = new Input();
@@ -17,8 +15,8 @@ public class Main {
         List<List> expressions = new ArrayList<>();
 
         expressions = input.inputValue();
-        nums = calculator.initNums();
-        opers = calculator.initOpers();
+        nums = calculator.initNums(expressions);
+        opers = calculator.initOpers(expressions);
         int answer = nums.remove(0);
         answer = calculator.calculate(answer, nums, opers);
         System.out.println("Answer is " + answer);
