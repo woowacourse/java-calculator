@@ -11,8 +11,8 @@ public class Calculator {
     private static final int FIRST_OPERATOR_INDEX = 1;
     private static final int STEP_TO_NEXT_OPERATOR = 2;
 
-//    private Calculator() {
-//    }
+    private Calculator() {
+    }
 
     public static String calculate(String expression) throws IllegalArgumentException {
         double result;
