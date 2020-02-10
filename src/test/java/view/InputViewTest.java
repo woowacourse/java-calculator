@@ -36,6 +36,6 @@ class InputViewTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         scanner = new Scanner(System.in);
 
-        return new InputView(scanner, new NumberSentenceTranslatorImpl());
+        return new InputView(scanner);
     }
 }
