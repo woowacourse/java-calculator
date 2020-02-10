@@ -6,7 +6,7 @@ public enum Operator {
     ADD("+", (int number1, int number2) ->  number1 + number2),
     SUBSTRACT("-", (int number1, int number2) -> number1 - number2),
     MULTIPLY("*", (int number1, int number2) ->  number1 * number2),
-    DIVIDE(" /", (int number1, int number2) -> number1 / number2);
+    DIVIDE("/", (int number1, int number2) -> number1 / number2);
 
     private String pattern;
     private Operation operation;
@@ -16,10 +16,10 @@ public enum Operator {
         this.operation = operation;
     }
 
-    public Operation getOperationByPattern(String pattern) {
+    public static Operation getOperationByPattern(String pattern) {
         for (Operator operator : values()) {
             if (operator.matchPattern(pattern)) {
-                return getOperation();
+                return operator.getOperation();
             }
         }
 

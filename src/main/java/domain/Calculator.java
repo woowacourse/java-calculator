@@ -12,27 +12,11 @@ public class Calculator {
         int result = numbers.get(0);
 
         for (int i = 0; i < size; i++) {
-            Operation operation = recognizeOperation(operators.poll());
+            Operation operation = Operator.getOperationByPattern(operators.poll());
             result = operation.operate(result, numbers.get(i + 1));
         }
 
         return result;
 
-    }
-
-    private Operation recognizeOperation(String operator) {
-        if ("+".equals(operator)) {
-            return new AddOperation();
-        }
-
-        if ("-".equals(operator)) {
-            return new SubstractOperation();
-        }
-
-        if ("*".equals(operator)) {
-            return new MultiplyOperation();
-        }
-
-        return new DivideOperation();
     }
 }
