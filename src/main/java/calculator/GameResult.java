@@ -17,8 +17,6 @@ public class GameResult {
         result = Operator.map.get(Operator.of(operator)).apply(result, Double.parseDouble(number));
     }
 
-    void setResult(double result) { this.result = result;}
-    double getResult() {return result;}
     double getFinalResult() {
         return result;
     }

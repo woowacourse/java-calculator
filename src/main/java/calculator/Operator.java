@@ -22,12 +22,12 @@ public enum Operator {
         map.put(Operator.PLUS, (a, b) -> a + b);
         map.put(Operator.SUBTRACT, (a, b) -> a - b);
         map.put(Operator.MULTIPLY, (a, b) -> a * b);
-        map.put(Operator.DIVIDE, (a,b) -> divideBiFunction(a,b));
+        map.put(Operator.DIVIDE, (a, b) -> divideBiFunction(a, b));
     }
 
     public static double divideBiFunction(double a, double b) {
-        if (b==0) throw new ArithmeticException("0으로 나눌 수 없습니다.");
-        return a/b;
+        if (b == 0) throw new ArithmeticException("0으로 나눌 수 없습니다.");
+        return a / b;
     }
 
     public static Operator of(String operator) throws IllegalAccessException {
