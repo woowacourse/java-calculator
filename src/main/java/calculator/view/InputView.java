@@ -1,7 +1,5 @@
 package calculator.view;
 
-import calculator.util.ExceptionHandler;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

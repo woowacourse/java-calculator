@@ -23,5 +23,4 @@ public enum Operator {
     public String getOperator() {
         return this.operator;
     }
-
 }

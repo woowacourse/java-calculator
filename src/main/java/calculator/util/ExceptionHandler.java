@@ -1,22 +1,21 @@
 package calculator.util;
 
+
 import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static calculator.domain.Calculator.isEven;
 import static calculator.domain.Calculator.isOdd;
-import static calculator.view.InputView.*;
 
 public class ExceptionHandler {
     private static final int EVEN = 0;
-    private static final int ODD = 1;
     private static final String DELIMITER = " ";
     private static final String BLANK = " ";
     private static final String EMPTY_STRING = "";
     private static final String NUMBER_FORMAT = "-?\\d+(\\.\\d+)?";
     private static final String DIVIDE_ZERO_STRING = "/0";
+    private static List<String> operatorList = Arrays.asList("+", "-", "*", "/");
 
     public static String checkInputHandler(String input) {
         if (checkString(input.split(DELIMITER)) == true && checkUndefinedValue(input) == true) {
@@ -57,16 +56,7 @@ public class ExceptionHandler {
     }
 
     public static boolean checkSign(String inputString) {
-        if (inputString.equals("+")) {
-            return true;
-        }
-        if (inputString.equals("-")) {
-            return true;
-        }
-        if (inputString.equals("*")) {
-            return true;
-        }
-        if (inputString.equals("/")) {
+        if (operatorList.contains(inputString)) {
             return true;
         }
         return false;

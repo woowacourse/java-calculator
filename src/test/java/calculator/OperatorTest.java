@@ -18,7 +18,7 @@ public class OperatorTest {
     private Operator divideOperator;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         calculator.setReturnValue(TEST_RETURN_VALUE_INIT);
         plusOperator = Operator.PLUS;
         minusOperator = Operator.MINUS;
@@ -28,25 +28,25 @@ public class OperatorTest {
 
     @Test
     @DisplayName("더하기 연산자 메서드 테스트")
-    void plusOperatorTest(){
+    void plusOperatorTest() {
         assertThat(plusOperator.calculate(TEST_NOW_NUMBER)).isEqualTo(TEST_RETURN_VALUE_INIT + TEST_NOW_NUMBER);
     }
 
     @Test
     @DisplayName("빼기 연산자 메서드 테스트")
-    void minusOperatorTest(){
+    void minusOperatorTest() {
         assertThat(minusOperator.calculate(TEST_NOW_NUMBER)).isEqualTo(TEST_RETURN_VALUE_INIT - TEST_NOW_NUMBER);
     }
 
     @Test
     @DisplayName("곱하기 연산자 메서드 테스트")
-    void multiplyOperatorTest(){
+    void multiplyOperatorTest() {
         assertThat(multiplyOperator.calculate(TEST_NOW_NUMBER)).isEqualTo(TEST_RETURN_VALUE_INIT * TEST_NOW_NUMBER);
     }
 
     @Test
     @DisplayName("나누기 연산자 메서드 테스트")
-    void divideOperatorTest(){
+    void divideOperatorTest() {
         assertThat(divideOperator.calculate(TEST_NOW_NUMBER)).isEqualTo(TEST_RETURN_VALUE_INIT / TEST_NOW_NUMBER);
     }
 

@@ -73,5 +73,4 @@ public class Calculator {
             operators.calculate(nowNumber);
         }
     }
-
 }
