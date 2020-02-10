@@ -8,7 +8,7 @@ public class Exception {
     private static final String PATTERN = "(^[0-9]*$)";
     private static final String PATTS = "^[+\\-\\*/]$";
 
-    public static boolean isNumber(List<String> nums) {             // 숫자가 들어갈 인덱스에 숫자 외의 값이 들어가 있는지 확인.
+    public static boolean isNumber(List<String> nums) {
         boolean check = true;
         for (String num : nums) {
             check = check && isMatch(PATTERN, num);
