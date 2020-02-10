@@ -23,7 +23,7 @@ public enum Operator {
         return matcher;
     }
 
-    Operator(String name, BiFunction<Double,Double, Double> operate) {
+    Operator(String name, BiFunction<Double, Double, Double> operate) {
         this.name = name;
         this.operate = operate;
     }

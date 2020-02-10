@@ -2,19 +2,18 @@ package calculator;
 
 import calculator.expression.InvalidMathematicalExpressionException;
 import calculator.expression.MathematicalExpression;
-import input.CalculatorInputScanner;
-import output.CalculatorPrinter;
+import input.InputScanner;
+import output.OutputPrinter;
 
 public class Calculator {
 
-    public void run() {
-        CalculatorPrinter.printIntroduction();
+    public void run(InputScanner inputScanner, OutputPrinter outputPrinter) {
         try {
-            String userExpressionInput = CalculatorInputScanner.getExpression();
+            String userExpressionInput = inputScanner.getExpression();
             MathematicalExpression expression = new MathematicalExpression(userExpressionInput);
-            CalculatorPrinter.printExpression(expression);
-        } catch (InvalidMathematicalExpressionException iee) {
-            CalculatorPrinter.printException(iee);
+            outputPrinter.printExpression(expression);
+        } catch (InvalidMathematicalExpressionException ime) {
+            outputPrinter.printException(ime);
         }
     }
 
