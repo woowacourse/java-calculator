@@ -14,28 +14,20 @@ public class InputValidation {
         return false;
     }
 
-    public static double isNumber(String stringNumber) {
+    public static boolean isNumber(String stringNumber) {
         try {
-            return Double.parseDouble(stringNumber);
-        } catch (Exception e) {
-            Exit.sendErrorMessage("잘못된 식을 입력하셨습니다.");
+            Double.parseDouble(stringNumber);
+        } catch (IllegalArgumentException e) {
+            return false;
         }
-        return -1;
+        return true;
     }
 
-    public static char isOperator(String stringOperator) {
-        char operator = stringOperator.charAt(ZERO);
-        List<Character> operators = new ArrayList<>();
-        operators.add('+');
-        operators.add('-');
-        operators.add('*');
-        operators.add('/');
-
-        if (!operators.contains(operator)
-                || stringOperator.length() != ONE) {
-            Exit.sendErrorMessage("잘못된 식을 입력하셨습니다.");
-        }
-        return operator;
+    public static boolean isOperator(String stringOperator) {
+        return "+".equals(stringOperator)
+                || "-".equals(stringOperator)
+                || "*".equals(stringOperator)
+                || "/".equals(stringOperator);
     }
 
     public static String[] removeSpaceElement(String[] formulas) {
