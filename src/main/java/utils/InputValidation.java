@@ -38,10 +38,9 @@ public class InputValidation {
         return operator;
     }
 
-    public static String[] trimSpace(String[] formulas) {
+    public static String[] removeSpaceElement(String[] formulas) {
         return Arrays.stream(formulas)
-                .filter(x -> !x.equals(""))
+                .filter(x -> !"".equals(x))
                 .toArray(String[]::new);
     }
-
 }

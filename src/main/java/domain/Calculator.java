@@ -34,7 +34,7 @@ public class Calculator {
     }
 
     private void splitFormula(String formula) {
-        String[] formulas = InputValidation.trimSpace(formula.split(" ", ZERO));
+        String[] formulas = InputValidation.removeSpaceElement(formula.split(" ", ZERO));
         for (int i = ZERO; i < formulas.length; i++) {
             String temp = formulas[i];
             if (i % EVEN == ZERO) {
