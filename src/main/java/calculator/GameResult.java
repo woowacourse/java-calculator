@@ -11,9 +11,6 @@ public class GameResult {
     }
 
     void resultCalculator(String operator, String number) throws IllegalAccessException {
-        if (operator.equals("/") && number.equals("0")) {
-            throw new ArithmeticException();
-        }
         result = Operator.map.get(Operator.of(operator)).apply(result, Double.parseDouble(number));
     }
 
