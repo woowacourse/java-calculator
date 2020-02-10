@@ -1,5 +1,3 @@
-import jdk.internal.util.xml.impl.Input;
-
 public class Calculator {
     private final int FIRST = 0;
     private double result = 0;
@@ -17,6 +15,7 @@ public class Calculator {
         }
     }
 
+    double getResult() { return result; }
 
     void printResult() {
         System.out.print("결과: " + result);
