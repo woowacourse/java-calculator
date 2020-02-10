@@ -9,7 +9,7 @@ public class Application {
         Calculator calculator = new Calculator();
         OutputPrinter.printIntroduction();
         String expressionInputFromUser = InputScanner.getExpression();
-        MathematicalExpression expression = calculator.run(expressionInputFromUser);
+        MathematicalExpression expression = calculator.createExpression(expressionInputFromUser);
         OutputPrinter.printExpression(expression);
     }
 }

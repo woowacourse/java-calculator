@@ -4,7 +4,7 @@ import calculator.expression.MathematicalExpression;
 
 public class Calculator {
 
-    public MathematicalExpression run(String inputFromUser) {
+    public MathematicalExpression createExpression(String inputFromUser) {
         return new MathematicalExpression(inputFromUser);
     }
 
