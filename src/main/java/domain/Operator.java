@@ -6,34 +6,36 @@ import java.util.Map;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS('+'),
-    MINUS('-'),
-    MULTIPLY('*'),
-    DIVISION('/');
+    PLUS("+"),
+    MINUS("-"),
+    MULTIPLY("*"),
+    DIVISION("/");
 
     private final static Map<Operator, BiFunction<Double, Double, Double>> calculateFunctionMap = new HashMap<>();
-    private char symbol;
+    private final static Map<String, Operator> stringOperatorToOperatorMap = new HashMap<>();
+    private String symbol;
 
     static {
         calculateFunctionMap.put(Operator.PLUS, (x, y) -> x + y);
         calculateFunctionMap.put(Operator.MINUS, (x, y) -> x - y);
         calculateFunctionMap.put(Operator.MULTIPLY, (x, y) -> x * y);
         calculateFunctionMap.put(Operator.DIVISION, (x, y) -> x / y);
+        stringOperatorToOperatorMap.put("+", Operator.PLUS);
+        stringOperatorToOperatorMap.put("-", Operator.MINUS);
+        stringOperatorToOperatorMap.put("*", Operator.MULTIPLY);
+        stringOperatorToOperatorMap.put("/", Operator.DIVISION);
     }
 
-    Operator(char symbol) {
+    Operator(String symbol) {
         this.symbol = symbol;
     }
 
-    public char getSymbol() {
+    public String getSymbol() {
         return symbol;
     }
 
-    public static Operator getOperatorForChar(char charOperator) {
-        return Arrays.stream(Operator.values())
-                .filter(x -> x.symbol == charOperator)
-                .findAny()
-                .orElseThrow(IllegalArgumentException::new);
+    public static Operator getOperatorForString(String stringOperator) {
+        return stringOperatorToOperatorMap.get(stringOperator);
     }
 
     public double intermediateCalculation(double prev, double next) {
