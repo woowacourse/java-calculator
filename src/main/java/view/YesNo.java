@@ -12,8 +12,8 @@ public enum YesNo {
     public boolean trueOrFalse;
     private List<String> sameMeanings;
 
-    YesNo(boolean trueOfFalse, List<String> sameMeanings) {
-        this.trueOrFalse = trueOfFalse;
+    YesNo(boolean trueOrFalse, List<String> sameMeanings) {
+        this.trueOrFalse = trueOrFalse;
         this.sameMeanings = sameMeanings;
     }
 
@@ -22,9 +22,5 @@ public enum YesNo {
                 .filter(yesNo -> yesNo.sameMeanings.stream().anyMatch(sameMeaning -> sameMeaning.equals(string)))
                 .findAny()
                 .orElse(EMPTY);
-    }
-
-    public boolean toBoolean(){
-        return this.trueOrFalse;
     }
 }

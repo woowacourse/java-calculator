@@ -14,13 +14,4 @@ public class Calculator {
         }
         return state;
     }
-
-    private static Boolean isNumber(String input) {
-        try {
-            Double.parseDouble(input);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-    }
 }

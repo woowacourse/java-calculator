@@ -39,16 +39,10 @@ public class Application {
         } catch (IllegalArgumentException e) {
             errorCount++;
             exitProgramIfDoNotInputCorrectExpressionFiveTimes();
-            OutputView.printErrorMessageAndErrorCount(e.getMessage(),errorCount);
+            OutputView.printErrorMessageAndErrorCount(e.getMessage(), errorCount);
             return repeatRequestingCorrectMathematicalExpression();
         }
     }
-
-//    private static void setSplittedStrings(String input) {
-//        splittedStrings = Arrays.asList(input.split(BLANK));
-//        checkClusteredElements();
-//        checkIfStartWithSymbol();
-//    }
 
     public static void checkClusteredElements(List<String> splittedStrings) {
         IntStream.range(START_INDEX, splittedStrings.size() - 1).forEach(i -> {
@@ -65,7 +59,7 @@ public class Application {
         }
     }
 
-    public static void checkIsNumberOfListOdd(List<String> splittedStrings){
+    public static void checkIsNumberOfListOdd(List<String> splittedStrings) {
         if (splittedStrings.size() % 2 == 0) {
             throw new IllegalArgumentException("적절하지 않은 수식입니다");
         }
@@ -86,8 +80,8 @@ public class Application {
         }
     }
 
-    private static void exitProgramIfDoNotInputCorrectExpressionFiveTimes(){
-        if(errorCount == MAXIMUM_ERROR){
+    private static void exitProgramIfDoNotInputCorrectExpressionFiveTimes() {
+        if (errorCount == MAXIMUM_ERROR) {
             OutputView.printExitMessage();
             System.exit(0);
         }
