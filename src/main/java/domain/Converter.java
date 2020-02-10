@@ -11,9 +11,10 @@ import errors.InvalidInputException;
 public class Converter {
     public static final int FIRST_INDEX = 0;
     public static final int SECOND_INDEX = 1;
+    public static final String DELIMITER = " ";
 
     public NumberSentence getNumberSentence(String sentence) throws InvalidInputException {
-        String[] arguments = sentence.split(" ");
+        String[] arguments = sentence.split(DELIMITER);
         List<String> arg = Arrays.asList(arguments);
 
         validate(arg);
@@ -37,8 +38,8 @@ public class Converter {
     }
 
     private boolean isOperator(String operator) {
-        return Operator.PLUS.toString().equals(operator) || Operator.MINUS.toString().equals(operator) ||
-                Operator.MULTIPLIFICATION.toString().equals(operator) || Operator.DIVISION.toString().equals(operator);
+        return Arrays.stream(Operator.values())
+                .anyMatch(o -> o.toString().equals(operator));
     }
 
     private NumberSentence creatNumberSentence(List<String> arguments) {
@@ -58,14 +59,9 @@ public class Converter {
     }
 
     private Operator getOperator(String operator) {
-        if (Operator.PLUS.toString().equals(operator)) {
-            return Operator.PLUS;
-        } else if (Operator.MINUS.toString().equals(operator)) {
-            return Operator.MINUS;
-        } else if (Operator.MULTIPLIFICATION.toString().equals(operator)) {
-            return Operator.MULTIPLIFICATION;
-        } else {
-            return Operator.DIVISION;
-        }
+        return Arrays.stream(Operator.values())
+                .filter(o -> o.toString().equals(operator))
+                .findFirst()
+                .get();
     }
 }

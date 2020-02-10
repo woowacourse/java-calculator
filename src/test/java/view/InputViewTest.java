@@ -7,7 +7,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import errors.InvalidInputException;
 
 class InputViewTest {
     private Scanner scanner;
@@ -15,7 +18,8 @@ class InputViewTest {
     private InputView inputView;
 
     @Test
-    void receiveInput() {
+    @DisplayName("receiveInput() : return input from user")
+    void receiveInput() throws InvalidInputException {
         String input = "2 + 3 / 4";
         System.setOut(new PrintStream(outView));
         inputView = createInputViewForTest(input);
