@@ -8,6 +8,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputValidationTest {
 
+    /**
+     *
+     * 테스트 공통적으로, 참인지 판단하는 경우가 아니면
+     * 예외처리가 되어야 정상작동
+     */
+
 
     @Test
     void validateFirstAndLast() throws Exception {
