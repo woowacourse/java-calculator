@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum OperatorGroup {
     PLUS("+") {
         public double apply(double a, double b) {
@@ -30,19 +33,16 @@ public enum OperatorGroup {
 
     public abstract double apply(double a, double b);
 
+    private final static Map<String, OperatorGroup> operatorStringMap = new HashMap<>();
+
+    static {
+        operatorStringMap.put("+", OperatorGroup.PLUS);
+        operatorStringMap.put("-", OperatorGroup.MINUS);
+        operatorStringMap.put("*", OperatorGroup.MULTIPLY);
+        operatorStringMap.put("/", OperatorGroup.DIVIDE);
+    }
+
     public static OperatorGroup stringToOperator(String operator) {
-        if (operator.equals(PLUS.letter)) {
-            return OperatorGroup.PLUS;
-        }
-        if (operator.equals(MINUS.letter)) {
-            return OperatorGroup.MINUS;
-        }
-        if (operator.equals(MULTIPLY.letter)) {
-            return OperatorGroup.MULTIPLY;
-        }
-        if (operator.equals(DIVIDE.letter)) {
-            return OperatorGroup.DIVIDE;
-        }
-        throw new IllegalStateException("잘못된 연산자가 입력되었습니다.");
+        return operatorStringMap.get(operator);
     }
 }
