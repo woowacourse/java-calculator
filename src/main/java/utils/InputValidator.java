@@ -6,24 +6,24 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class InputValidator {
-    private static final int EVEN = 0;
+    private static final String DIVIDE_BY_ZERO = "/0";
 
     public static String checkInputHandler(String input) {
-        if (checkString(input.split(" ")) == true && isUndefinedValue(input) == true) {
+        if (checkString(input.split(" ")) && isUndefinedValue(input)) {
             return input;
         }
         throw new IllegalArgumentException();
     }
 
     public static boolean isUndefinedValue(String str) {
-        if (str.replace(" ", "").contains("/0")) {
+        if (str.replace(" ", "").contains(DIVIDE_BY_ZERO)) {
             return false;
         }
         return true;
     }
 
     private static boolean checkString(String[] inputStrings) {
-        if (inputStrings.length % 2 == EVEN) {
+        if (EvenChecker.isEven(inputStrings.length)) {
             return false;
         }
         AtomicInteger index = new AtomicInteger();
@@ -32,7 +32,7 @@ public class InputValidator {
     }
 
     private static boolean checkIndividual(int i, String inputString) {
-        if (i % 2 == EVEN) {
+        if (EvenChecker.isEven(i)) {
             return checkNumber(inputString);
         }
         return checkSign(inputString);
