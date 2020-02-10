@@ -27,7 +27,7 @@ public class InputValidation {
      * @throws Exception
      */
     public static void validateSpace(String[] inputs) throws Exception {
-        if (inputs[0].isEmpty()) {
+        if (inputs[0].isEmpty() || inputs == null) {
             throw new Exception("식이 입력되지 않았습니다.");
         }
     }
@@ -50,7 +50,7 @@ public class InputValidation {
      * @param inputs
      * @throws Exception
      */
-    private static void validateRepeat(String[] inputs) throws Exception {
+    public static void validateRepeat(String[] inputs) throws Exception {
         for (int i = 1; i < inputs.length; i++) {
             if (!(isInteger(inputs[i - 1]) ^ isInteger(inputs[i]))) {
                 throw new Exception("연속된 숫자 또는 연산자입니다.");
