@@ -1,4 +1,4 @@
-package unit.domain;
+package unit.util;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -15,11 +15,11 @@ class TokenizerTest {
 	@Test
 	void testTokenize() {
 		final String inputLine = "1 + 2";
-		final List<Token> actual = Tokenizer.tokenize(inputLine);
-		final List<Token> expected = new ArrayList<>();
-		expected.add(new Number("1"));
-		expected.add(new Operator("+"));
-		expected.add(new Number("2"));
+		final List<String> actual = Tokenizer.tokenize(inputLine);
+		final List<String> expected = new ArrayList<>();
+		expected.add("1");
+		expected.add("+");
+		expected.add("2");
 
 		assertThat(actual).isEqualTo(expected);
 	}
