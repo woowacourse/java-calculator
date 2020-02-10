@@ -20,7 +20,7 @@ public enum Operator {
 		this.expression = expression;
 	}
 
-	public static Operator Of(final String operator) {
+	public static Operator of(final String operator) {
 		return Arrays.stream(Operator.values())
 			.filter(value -> value.operator.equals(operator))
 			.findFirst()

@@ -51,7 +51,7 @@ public class ExpressionFactory {
 
 	private static Operator toOperator(final String token) {
 		try {
-			return Operator.Of(token);
+			return Operator.of(token);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("유효한 연산식이 아닙니다.");
 		}
