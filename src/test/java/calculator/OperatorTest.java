@@ -27,35 +27,35 @@ public class OperatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", "++", "a"})
+    @ValueSource(strings = {"", "++", "a", "1"})
     void getOperator_ShouldGenerateIllegalArgumentExceptionForInvalidSymbol(String symbol) {
         Assertions.assertThatThrownBy(() -> Operator.getOperator(symbol))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"3,3,6", "3,-4,-1"})
+    @CsvSource(value = {"3,3,6", "3,-4,-1", "0,0,0"})
     void calculate_ForADDITION(double a, double b, double result) {
         Assertions.assertThat(Operator.ADDITION.calculate(a, b))
                 .isEqualTo(result);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"3,3,0", "3,-4,7"})
+    @CsvSource(value = {"3,3,0", "3,-4,7", "0,0,0"})
     void calculate_ForSUBTRACTION(double a, double b, double result) {
         Assertions.assertThat(Operator.SUBTRACTION.calculate(a, b))
                 .isEqualTo(result);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"3,3,9", "3,-4,-12", "3,0,0"})
+    @CsvSource(value = {"3,3,9", "3,-4,-12", "3,0,0", "0,0,0"})
     void calculate_ForMULTIPLICATION(double a, double b, double result) {
         Assertions.assertThat(Operator.MULTIPLICATION.calculate(a, b))
                 .isEqualTo(result);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"3,3,1", "12,-4,-3"})
+    @CsvSource(value = {"3,3,1", "12,-4,-3", "0,4,0"})
     void calculate_ForDIVISION(double a, double b, double result) {
         Assertions.assertThat(Operator.DIVISION.calculate(a, b))
                 .isEqualTo(result);
