@@ -44,6 +44,6 @@ public class FormulaTest {
     void calculateFormula_ShouldCalculateProperly(String input, double expected) {
         String[] inputs = input.split(" ");
         formula = new Formula(inputs);
-        assertThat(formula.calculateFormula()).isEqualTo(expected);
+        assertThat(Calculator.calculateFormula(formula)).isEqualTo(expected);
     }
 }

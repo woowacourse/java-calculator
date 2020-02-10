@@ -2,49 +2,48 @@ package calculator;
 
 import exceptions.NotOddLengthInputsException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Formula {
-    private static final int FIRST_ELEMENT = 0;
-
-    private List<FormulaElement> formula;
+    private Queue<Operand> operands;
+    private Queue<Operator> operators;
 
     public Formula(String[] inputs) {
         validateSizeOfInputsIsOdds(inputs);
-        formula = new ArrayList<>();
+        operands = new LinkedList<>();
+        operators = new LinkedList<>();
         generateFormula(inputs);
     }
 
-    public double calculateFormula() {
-        int index = FIRST_ELEMENT;
-        Operand result = formula.get(index++).getOperand();
+    public int size() {
+        return operands.size() + operators.size();
+    }
 
-        while (index < formula.size()) {
-            Operator operator = formula.get(index++).getOperator();
-            Operand operand = formula.get(index++).getOperand();
-            result = new Operand(operator.calculate(result, operand));
-        }
-        return result.getOperandValue();
+    public Operand getOperand() {
+        return operands.poll();
+    }
+
+    public Operator getOperator() {
+        return operators.poll();
     }
 
     private void generateFormula(String[] inputs) {
         for (String input : inputs) {
-            formula.add(generateFormulaElement(input));
+            generateFormulaElement(input);
         }
     }
 
-    private FormulaElement generateFormulaElement(String input) {
+    private void generateFormulaElement(String input) {
         if (isOperandTurn()) {
-            Operand operand = new Operand(input);
-            return new FormulaElement(operand);
+            operands.offer(new Operand(input));
+            return;
         }
-        Operator operator = new Operator(input);
-        return new FormulaElement(operator);
+        operators.offer(new Operator(input));
     }
 
     private boolean isOperandTurn() {
-        return isEvenNumber(formula.size());
+        return isEvenNumber(size());
     }
 
     private void validateSizeOfInputsIsOdds(String[] inputs) {
@@ -55,26 +54,5 @@ public class Formula {
 
     private boolean isEvenNumber(int number) {
         return number % 2 == 0;
-    }
-}
-
-class FormulaElement {
-    private Operand operand;
-    private Operator operator;
-
-    FormulaElement(Operand operand) {
-        this.operand = operand;
-    }
-
-    FormulaElement(Operator operator) {
-        this.operator = operator;
-    }
-
-    public Operand getOperand() {
-        return operand;
-    }
-
-    public Operator getOperator() {
-        return operator;
     }
 }
