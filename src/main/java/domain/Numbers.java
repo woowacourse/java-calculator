@@ -6,7 +6,7 @@ import java.util.List;
 public class Numbers {
     private final List<String> values;
 
-    public Numbers(ArrayList<String> inputs) {
+    public Numbers(List<String> inputs) {
         values = new ArrayList<>();
         add(inputs);
     }
@@ -15,7 +15,7 @@ public class Numbers {
         values.add(number);
     }
 
-    public void add(ArrayList<String> numbers) {
+    public void add(List<String> numbers) {
         numbers.stream()
                 .forEach(s -> add(s));
     }

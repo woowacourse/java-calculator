@@ -7,6 +7,7 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Calculator {
     private final static int ZERO = 0;
@@ -17,14 +18,14 @@ public class Calculator {
 
         String[] expression = InputParser.split(input);
         Numbers numbers = new Numbers(InputParser.extractNumber(expression));
-        ArrayList<OperatorGroup> operators = InputParser.extractOperator(expression);
+        List<OperatorGroup> operators = InputParser.extractOperator(expression);
 
         double result = calculate(numbers, operators);
 
         OutputView.printCalculate(result);
     }
 
-    static double calculate(Numbers numbers, ArrayList<OperatorGroup> operators) {
+    static double calculate(Numbers numbers, List<OperatorGroup> operators) {
         double result = Double.parseDouble(numbers.get(ZERO));
         int numberIndex = ONE;
         int operatorIndex = ZERO;
