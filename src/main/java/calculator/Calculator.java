@@ -5,8 +5,13 @@ import java.util.Queue;
 
 public class Calculator {
 
-    private Queue<String> operatorQueue = new LinkedList<>();
-    private Queue<Double> numberQueue = new LinkedList<>();
+    private Queue<String> operatorQueue;
+    private Queue<Double> numberQueue;
+
+    public Calculator() {
+        this.operatorQueue = new LinkedList<>();
+        this.numberQueue = new LinkedList<>();
+    }
 
     public int divideEquationIntoOperandsOperator(String[] equation) {
         for(int i = 0; i < equation.length; i += 2) {
@@ -29,7 +34,7 @@ public class Calculator {
         return result;
     }
 
-    private double calculateEquation(double result, String operator, double operand) {
+    public double calculateEquation(double result, String operator, double operand) {
         Operator currentOperator = Operator.createOperatorByString(operator);
         return currentOperator.calculate(result, operand);
     }
