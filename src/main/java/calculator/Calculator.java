@@ -1,11 +1,15 @@
 package calculator;
 
+import calculator.view.InputView;
+import calculator.view.OutputView;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Calculator {
     private Operator op = new Operator();
-    private UserInput input = new UserInput();
+    private OutputView output = new OutputView();
+    private InputView input = new InputView();
     private Queue<String> operatorQueue = new LinkedList<>();
     private Queue<Double> numberQueue = new LinkedList<>();
 
@@ -16,7 +20,7 @@ public class Calculator {
 
     private void run() {
         String[] equations = input.getInputEquation();
-        System.out.println(calculateEquation(equations));
+        output.showResult(calculateEquation(equations));
     }
 
     public Double calculateEquation(String[] equation) {
@@ -39,6 +43,7 @@ public class Calculator {
             String operator = operatorQueue.poll();
             double nextNumber = numberQueue.poll();
             result = op.operate(operator, result, nextNumber);
+
         }
 
         return result;

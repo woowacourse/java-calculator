@@ -1,6 +1,6 @@
 package calculator;
 
-public class Check {
+public class ElementValidator {
     public void checkEquationElementValue(String[] equations) {
         checkOperatorValue(equations);
         checkNumberValue(equations);

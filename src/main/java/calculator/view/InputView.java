@@ -1,10 +1,12 @@
-package calculator;
+package calculator.view;
+
+import calculator.ElementValidator;
 
 import java.util.Scanner;
 
-public class UserInput {
-    private Check ch = new Check();
-    private String equationDelimiter = " ";
+public class InputView {
+    private static final String equationDelimiter = " ";
+    private ElementValidator validator = new ElementValidator();
 
     public String[] getInputEquation() {
         Scanner scanner = new Scanner(System.in);
@@ -14,7 +16,7 @@ public class UserInput {
             try {
                 String equation = scanner.nextLine();
                 equations = equation.split(equationDelimiter);
-                ch.checkEquationElementValue(equations);
+                validator.checkEquationElementValue(equations);
                 break;
             } catch(NumberFormatException e) {
                 System.out.println("다시 입력해주세요");
