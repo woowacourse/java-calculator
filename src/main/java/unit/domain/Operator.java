@@ -1,64 +1,42 @@
 package unit.domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.function.BinaryOperator;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
-public class Operator implements Token {
-	private static final String PLUS = "+";
-	private static final String MINUS = "-";
-	private static final String DIVIDE = "/";
-	private static final String MULTIPLY = "*";
+public enum Operator {
+	PLUS("+", Double::sum),
+	MINUS("-", (number1, number2) -> number1 - number2),
+	DIVIDE("/", (number1, number2) -> number1 / number2),
+	MULTIPLY("*", (number1, number2) -> number1 * number2);
 
-	private final String operator;
+	private final String letter;
+	private final BinaryOperator<Double> operator;
 
-	public Operator(final String operator) {
-		checkValidation(operator);
+	Operator(final String letter, final BinaryOperator<Double> operator) {
+		this.letter = letter;
 		this.operator = operator;
 	}
 
-	private void checkValidation(String operator) {
-		final List<String> validOperators = Arrays.asList(PLUS, MINUS, DIVIDE, MULTIPLY);
-		if (!validOperators.contains(operator)) {
-			throw new IllegalArgumentException("유효한 연산자 형식이 아닙니다.");
-		}
+	public double operate(final Number number1, final Number number2) {
+		final double firstNumber = number1.getNumber();
+		final double secondNumber = number2.getNumber();
+		return operator.apply(firstNumber, secondNumber);
 	}
 
-	public double calculate(Number number1, Number number2) {
-		if (PLUS.equals(operator)) {
-			return number1.getNumber() + number2.getNumber();
-		}
-		if (MINUS.equals(operator)) {
-			return number1.getNumber() - number2.getNumber();
-		}
-		if (DIVIDE.equals(operator)) {
-			checkDivider(number2);
-			return number1.getNumber() / number2.getNumber();
-		}
-		if (MULTIPLY.equals(operator)) {
-			return number1.getNumber() * number2.getNumber();
-		}
-		throw new IllegalStateException("정의 되지 않은 연산입니다.");
+	public static boolean isIn(final String token) {
+		return Stream.of(Operator.values())
+			.anyMatch(isOperatorEquals(token));
 	}
 
-	private void checkDivider(Number number2) {
-		if (number2.getNumber() == 0) {
-			throw new IllegalArgumentException("0 으로 나눌 수 없습니다.");
-		}
+	private static Predicate<Operator> isOperatorEquals(final String token) {
+		return value -> value.letter.equals(token);
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		Operator operator1 = (Operator)o;
-		return Objects.equals(operator, operator1.operator);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(operator);
+	public static Operator of(final String token) {
+		return Stream.of(Operator.values())
+			.filter(isOperatorEquals(token))
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException("정의되지 않은 연산자 입니다."));
 	}
 }
