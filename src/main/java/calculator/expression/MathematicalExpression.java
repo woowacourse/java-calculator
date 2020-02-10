@@ -71,5 +71,4 @@ public class MathematicalExpression {
         }
         return prev;
     }
-
 }
