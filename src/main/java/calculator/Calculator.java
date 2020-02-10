@@ -9,7 +9,7 @@ public class Calculator {
     private static final String DELIMITER = " ";
     private static final Integer ZERO_INDEX = 0;
     private static final Integer FIRST_OPERATOR_INDEX = 1;
-    private static final Integer NEXT_OPERATOR_STEP = 2;
+    private static final Integer STEP_TO_NEXT_OPERATOR = 2;
 
     public static String calculate(String expression) throws IllegalArgumentException {
         double result;
@@ -23,7 +23,7 @@ public class Calculator {
 
     private static double calculateTokens(List<String> tokens) throws IllegalArgumentException {
         double result = Integer.parseInt(tokens.get(ZERO_INDEX));
-        for (int i = FIRST_OPERATOR_INDEX; i < tokens.size(); i += NEXT_OPERATOR_STEP) {
+        for (int i = FIRST_OPERATOR_INDEX; i < tokens.size(); i += STEP_TO_NEXT_OPERATOR) {
             checkIsNumber(tokens.get(i + FIRST_OPERATOR_INDEX));
             result = operate(result, tokens.get(i), Integer.parseInt(tokens.get(i + FIRST_OPERATOR_INDEX)));
         }
