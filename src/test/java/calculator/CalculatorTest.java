@@ -1,65 +1,41 @@
 package calculator;
 
 import domain.Calculator;
+import domain.Operator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class CalculatorTest {
     Calculator calculator = new Calculator();
 
-    @DisplayName("계산식 분할 테스트")
-    @Test
-    void splitFormula() {
-        String formula = "3 + 2 / 1";
-        double[] numbers = {3, 2, 1};
-        char[] operators = {'+', '-'};
-
-        calculator.splitFormula(formula);
-
-        double[] targetNumbers = calculator.getNumbers()
-                .stream()
-                .mapToDouble(Double::doubleValue)
-                .toArray();
-        Assertions.assertThat(numbers).isEqualTo(targetNumbers);
-
-        char[] targetOperators = new char[calculator.getOperators().size()];
-        for (int i = 0; i < calculator.getOperators().size(); i++) {
-            targetOperators[i] = calculator.getOperators().get(i);
-        }
-        Assertions.assertThat(operators).isEqualTo(targetOperators);
-    }
-
-    @DisplayName("컬랙션 분할 후 계산 테스트")
+    @DisplayName("계산 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"1 + 2 + 3,6", "3 * 6 + 3,21", "3 * 3 / 3,3", "3 + 2 - 5,0"})
-    public void calculate(String formula, double expect) {
-        calculator.splitFormula(formula);
-
-        double result = calculator.calculate();
-        Assertions.assertThat(result).isEqualTo(expect);
+    @MethodSource("createOprandAndOperator")
+    public void calculate(List<Double> operands, List<Operator> operators, double result) {
+        double testValue = new Calculator().calculate(operands, operators);
+        Assertions.assertThat(result).isEqualTo(testValue);
     }
 
-    @DisplayName("종료 상황 테스트")
-    @Test
-    void SendErrorMessage() {
-        String value = "프로그램을 종료합니다.\r\n";
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        String string = "1 + 3 / 0";
-        InputStream in = new ByteArrayInputStream(string.getBytes());
-        System.setIn(in);
-        calculator.run();
-
-        Assertions.assertThat(outContent.toString()).isEqualTo(value);
+    private static Stream<Arguments> createOprandAndOperator() {
+        return Stream.of(
+                Arguments.of(List.of(3.0, 5.0, 7.0), List.of(Operator.PLUS, Operator.MINUS), 1),
+                Arguments.of(List.of(1.0, 5.0, 7.0), List.of(Operator.PLUS, Operator.PLUS), 13),
+                Arguments.of(List.of(10.0, 2.0, 4.0), List.of(Operator.MULTIPLY, Operator.DIVISION), 5));
     }
 }

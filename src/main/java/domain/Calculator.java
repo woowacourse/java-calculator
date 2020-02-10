@@ -1,6 +1,7 @@
 package domain;
 
 import utils.InputValidation;
+import utils.ValueValidation;
 import view.InputView;
 import view.OutputView;
 
@@ -20,25 +21,16 @@ public class Calculator {
     }
 
     private void divideOddAndEven(String formula, int index) {
-        if (isEven(index) && InputValidation.isNumber(formula)) {
+        if (ValueValidation.isZeroOrEven(index) && InputValidation.isNumber(formula)) {
             OperandRepository.addOperand(Double.parseDouble(formula));
             return;
         }
-        if (isOdd(index) && InputValidation.isOperator(formula)) {
+        if (ValueValidation.isOdd(index) && InputValidation.isOperator(formula)) {
             OperatorRepository.addOperator(Operator.getOperatorForString(formula));
             return;
         }
         throw new IllegalArgumentException("잘못된 수식을 입력했습니다.");
     }
-
-    private boolean isOdd(int index) {
-        return index % 2 == 1;
-    }
-
-    private boolean isEven(int index) {
-        return index % 2 == 0;
-    }
-
 
     private double calculate(List<Double> operands, List<Operator> operators) {
         int numberIndex = 0;
