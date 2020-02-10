@@ -1,34 +1,23 @@
-public enum Operator {
-    PLUS("+") {
-        double operate(double num1, double num2) {
-            return num1 + num2;
-        }
-    },
-    MINUS("-") {
-        double operate(double num1, double num2) {
-            return num1 - num2;
-        }
-    },
-    MUL("*") {
-        double operate(double num1, double num2) {
-            return num1 * num2;
-        }
-    },
-    DIV("/") {
-        double operate(double num1, double num2) {
-            double result = num1 / num2;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
-            if (Double.isInfinite(result) || Double.isNaN(result)) {
+public enum Operator {
+    PLUS("+", (num1, num2) -> num1 + num2 ),
+    MINUS("-", (num1, num2) -> num1 - num2 ),
+    MUL("*", (num1, num2) -> num1 * num2 ),
+    DIV("/",  (num1, num2) -> {
+            if (Double.isInfinite(num1 / num2) || Double.isNaN(num1 / num2)) {
                 throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
             }
-            return result;
-        }
-    };
+            return num1 / num2;
+    });
 
     private String stringOperator;
+    private BiFunction<Double, Double, Double> calculate;
 
-    Operator(String stringOperator) {
+    Operator(String stringOperator, BiFunction<Double, Double, Double> calculate) {
         this.stringOperator = stringOperator;
+        this.calculate = calculate;
     }
 
     static Operator getOperatorByString(String stringOperator) {
@@ -42,5 +31,7 @@ public enum Operator {
         throw new IllegalArgumentException("연산자가 잘못되었습니다.");
     }
 
-    abstract double operate(double num1, double num2);
+    double operate(double num1, double num2) {
+        return calculate.apply(num1, num2);
+    }
 }
