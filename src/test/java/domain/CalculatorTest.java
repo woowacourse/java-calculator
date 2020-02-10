@@ -3,6 +3,8 @@ package domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
+import static org.assertj.core.api.Assertions.*;
+
 public class CalculatorTest {
     private Calculator calculator;
 
@@ -37,6 +39,14 @@ public class CalculatorTest {
     @DisplayName("많은 연산이 존재할 때 연산 성공")
     void manyOperatorsWorksProperly() {
         Assertions.assertThat(calculator.run("1 + 3 * 4 / 2 - 7 - 3".split(" "))).isEqualTo(-2);
+    }
+
+    @Test
+    @DisplayName("0으로 나누기를 수행하는 경우 재입력 여부를 true 출력")
+    void returnTrueIfZeroDivisionExists() {
+        assertThatThrownBy(() -> {
+            calculator.run("1 + 2 / 0".split(" "));
+        }).isInstanceOf(ArithmeticException.class);
     }
 
     @AfterEach

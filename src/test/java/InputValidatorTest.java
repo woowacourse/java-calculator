@@ -56,12 +56,6 @@ public class InputValidatorTest {
     }
 
     @Test
-    @DisplayName("0으로 나누기를 수행하는 경우 재입력 여부를 true 출력")
-    void returnTrueIfZeroDivisionExists() {
-        assertThat(inputValidator.isReenterWithInvalidValue("1 + 2 / 0")).isTrue();
-    }
-
-    @Test
     @DisplayName("double값의 범위가 넘어가는 값이 들어올 경우 재입력 여부를 true 출력")
     void returnTrueIfInputExceedsRangeOfDouble() {
         assertThat(inputValidator.isReenterWithInvalidValue(Double.MAX_VALUE + "+ 2")).isTrue();
