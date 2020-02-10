@@ -1,37 +1,48 @@
 package domain;
 
-import utils.Exit;
 import utils.InputValidation;
 import view.InputView;
 import view.OutputView;
 
 import java.util.*;
-import java.util.function.BiFunction;
 
 public class Calculator {
-
-    private final static int ZERO = 0;
-    private final static int EVEN = 2;
-
     public void run() {
         splitFormula(InputView.inputFormula());
         OutputView.printResult(calculate(OperandRepository.getOperands(), OperatorRepository.getOperatorList()));
     }
 
     private void splitFormula(String formula) {
-        String[] formulas = InputValidation.removeSpaceElement(formula.split(" ", ZERO));
-        for (int i = ZERO; i < formulas.length; i++) {
-            if (i % EVEN == ZERO) {
-                OperandRepository.addOperand(InputValidation.checkIsNumber(formulas[i]));
-                continue;
-            }
-            OperatorRepository.addOperator(Operator.getOperatorForChar(InputValidation.checkIsOperator(formulas[i])));
+        String[] formulas = InputValidation.removeSpaceElement(formula.split(" "));
+        for (int i = 0; i < formulas.length; i++) {
+            divideOddAndEven(formulas[i], i);
         }
     }
 
+    private void divideOddAndEven(String formula, int index) {
+        if (isEven(index) && InputValidation.isNumber(formula)) {
+            OperandRepository.addOperand(Double.parseDouble(formula));
+            return;
+        }
+        if (isOdd(index) && InputValidation.isOperator(formula)) {
+            OperatorRepository.addOperator(Operator.getOperatorForString(formula));
+            return;
+        }
+        throw new IllegalArgumentException("잘못된 수식을 입력했습니다.");
+    }
+
+    private boolean isOdd(int index) {
+        return index % 2 == 1;
+    }
+
+    private boolean isEven(int index) {
+        return index % 2 == 0;
+    }
+
+
     private double calculate(List<Double> operands, List<Operator> operators) {
-        int numberIndex = ZERO;
-        double result = operands.get(ZERO);
+        int numberIndex = 0;
+        double result = operands.get(0);
         for (Operator operator : operators) {
             numberIndex++;
             result = operator.intermediateCalculation(result, operands.get(numberIndex));
