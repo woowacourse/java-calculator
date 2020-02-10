@@ -6,9 +6,10 @@ public class Application {
     public static void main(String[] args) {
         try {
             CalculatorModel model = new CalculatorModel();
-            model.runCalculator();
+            model.run();
         } catch (Exception e) {
             OutputView.programError();
+            OutputView.printWhichException(e);
             main(args);
         }
     }

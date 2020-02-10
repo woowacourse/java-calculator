@@ -10,6 +10,10 @@ public class OutputView {
     }
 
     public static void programError() {
-        System.out.println("문제가 생겼으니 담당자에게 전화 부탁드립니다.");
+        System.out.println("문제가 생겼습니다. 다시 입력해주세요.");
+    }
+
+    public static void printWhichException(Exception e) {
+        System.out.println("문제: " + e.getMessage());
     }
 }

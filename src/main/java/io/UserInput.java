@@ -20,7 +20,7 @@ public class UserInput {
 
     private boolean checkAllInputError() {
         String[] inputArray = userInput.split(BLANK);
-        if (!((inputArray.length % 2) == 1) || !isNumber(inputArray[0]))
+        if ((inputArray.length % 2 == 0) || !isNumber(inputArray[0]))
             return false;
         for (int i = 1; i < inputArray.length; i += 2) {
             if (!isOperator(inputArray[i]) || !isNumber(inputArray[i + 1]))
@@ -39,7 +39,6 @@ public class UserInput {
     }
 
     private boolean isOperator(String target) {
-//        return target.equals(Operator.PLUS) || target.equals(Operator.SUBTRACT) || target.equals(Operator) || target.equals("/");
         try {
             Operator.of(target);
         } catch (Exception e) {

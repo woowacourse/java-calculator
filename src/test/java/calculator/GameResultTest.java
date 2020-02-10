@@ -1,6 +1,7 @@
 package calculator;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -12,40 +13,46 @@ class GameResultTest {
     private static GameResult calculator = null;
 
     /**
-     * 기준 값을 0으로 설정하였습니다. (계산 전 초기화 된 값을 의미합니다.)
+     * 기준 값을 3으로 설정하였습니다. (계산 전 초기화 된 값을 의미합니다.)
      */
+
+    @DisplayName("계산식에서 첫번째 값을 설정")
     @BeforeEach
-    public void 계산식에서_첫번째_값을_설정() {
+    public void initializeCalculator() {
         calculator = new GameResult("3");
     }
 
-
+    @DisplayName("더하기 계산이 올바르게 되는지 확인")
     @Test
-    public void 더하기_계산이_옳바르게_되는지() throws IllegalAccessException {
+    public void testAdd() throws IllegalAccessException {
         calculator.resultCalculator("+", "3");
         assertThat(calculator.getFinalResult()).isEqualTo(6);
     }
 
+    @DisplayName("빼기 계산이 올바르게 되는지 확인")
     @Test
-    public void 빼기_계산이_옳바르게_되는지() throws IllegalAccessException {
+    public void testSubtract() throws IllegalAccessException {
         calculator.resultCalculator("-", "3");
         assertThat(calculator.getFinalResult()).isEqualTo(0);
     }
 
+    @DisplayName("곱하기 계산이 올바르게 되는지 확인")
     @Test
-    public void 곱셈_계산이_옳바르게_되는지() throws IllegalAccessException {
+    public void testMultiply() throws IllegalAccessException {
         calculator.resultCalculator("*", "3");
         assertThat(calculator.getFinalResult()).isEqualTo(9);
     }
 
+    @DisplayName("나누기 계산이 올바르게 되는지 확인")
     @Test
-    public void 나눗셈_계산이_옳바르게_되는지() throws IllegalAccessException {
+    public void testDivide() throws IllegalAccessException {
         calculator.resultCalculator("/", "3");
         assertThat(calculator.getFinalResult()).isEqualTo(1);
     }
 
+    @DisplayName("나누기 0 계산이 예외를 올바르게 뱉어내는지 확인")
     @Test
-    public void 나누기0이_예외를_뱉어내는지() throws IllegalAccessException {
+    public void testDivideZero() throws IllegalAccessException {
         assertThatThrownBy(() -> {
             calculator.resultCalculator("/", "0");
         }).isInstanceOf(ArithmeticException.class);
