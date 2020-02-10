@@ -9,10 +9,10 @@ public class InputValidator {
             askAgain(ERROR_BEFORE_SPLIT_MESSAGE);
             return true;
         }
-        if (isZeroDivisionExists(input)) {
-            askAgain(ERROR_ZERO_DIVISION_MESSAGE);
-            return true;
-        }
+        //if (isZeroDivisionExists(input)) {
+        //    askAgain(ERROR_ZERO_DIVISION_MESSAGE);
+        //    return true;
+        //}
         return validateAfterSplit(splittedInput);
     }
 
@@ -25,9 +25,9 @@ public class InputValidator {
         return input.matches("[0-9+*/\\-.\\s]+[0-9]+$");
     }
 
-    private boolean isZeroDivisionExists(String input) {
-        return input.contains("/ 0");
-    }
+//    private boolean isZeroDivisionExists(String input) {
+//        return input.contains("/ 0");
+//    }
 
     private boolean validateAfterSplit(String[] input) {
         for (int i = 0; i < input.length; i++) {

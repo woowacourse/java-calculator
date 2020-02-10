@@ -22,6 +22,9 @@ public enum Operator {
     DIVISION("/") {
         @Override
         public double apply(double operand1, double operand2) {
+            if (Double.isInfinite(operand1 / operand2)) {
+                throw new ArithmeticException("0으로 나눌수 없습니다.");
+            }
             return operand1 / operand2;
         }
     },
