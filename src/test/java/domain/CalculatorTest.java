@@ -7,9 +7,7 @@ public class CalculatorTest {
     private Calculator calculator;
 
     @BeforeEach
-	void setUp(){
-    	calculator = new Calculator();
-	}
+    void setUp() { calculator = new Calculator(); }
 
     @Test
     @DisplayName("더하기 연산 성공")
@@ -42,7 +40,7 @@ public class CalculatorTest {
     }
 
     @AfterEach
-	void tearDown() {
-    	calculator = null;
-	}
+    void tearDown() {
+        calculator = null;
+    }
 }
