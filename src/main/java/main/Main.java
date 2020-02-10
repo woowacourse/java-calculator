@@ -1,5 +1,6 @@
 package main;
 
+import jdk.nashorn.internal.runtime.Context;
 import util.Input;
 import calculator.Calculator;
 
@@ -23,7 +24,6 @@ public class Main {
             System.out.println(calculator.runCalculator(nums, opers));
         } catch (ArithmeticException e) {
             System.err.println(ERR_CANT_DIVIDE_BY_ZERO);
-            e.printStackTrace();
         }
     }
 

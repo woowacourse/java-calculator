@@ -49,6 +49,6 @@ public class ExceptionHandlerTest {
     @ValueSource(strings = {"1", "123", "9843"})
     @DisplayName("Test isMatch method")
     public void isMatchTest(String target) {
-        assertThat(ExceptionHandler.isMatch(NUMBER_PATTERN, target)).isTrue();
+        assertThat(ExceptionHandler.isMatchNumber(target)).isTrue();
     }
 }
