@@ -1,8 +1,9 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.stream.Stream;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,7 +14,7 @@ public class CalculatorTest {
 	@ParameterizedTest(name = "{2}")
 	@MethodSource("validParameters")
 	void validCalculatorTest(String input, double expected, String message) {
-		Assertions.assertThat(calculator.run(input.split(" "))).isEqualTo(expected);
+		assertThat(calculator.run(input.split(" "))).isEqualTo(expected);
 	}
 
 	static Stream<Arguments> validParameters() throws Throwable {

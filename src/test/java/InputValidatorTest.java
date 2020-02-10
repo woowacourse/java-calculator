@@ -12,13 +12,13 @@ public class InputValidatorTest {
 
 	@Test
 	void returnFalseIfInputIsValid() {
-		assertThat(inputValidator.validate("1 + 2 + 3 + 4.0")).isFalse();
+		assertThat(inputValidator.isNotValid("1 + 2 + 3 + 4.0")).isFalse();
 	}
 
 	@ParameterizedTest(name = "{1}")
 	@MethodSource("invalidParameters")
 	void returnTrueIfInputIsInvalid(String input, String message) {
-		assertThat(inputValidator.validate(input)).isTrue();
+		assertThat(inputValidator.isNotValid(input)).isTrue();
 	}
 
 	static Stream<Arguments> invalidParameters() throws Throwable {
