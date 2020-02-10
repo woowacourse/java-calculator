@@ -5,58 +5,86 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class CalculatorTest {
     @ParameterizedTest
-    @DisplayName("올바른 숫자를 입력하였는지 검증")
+    @DisplayName("올바른 숫자를 입력하였는지 검증1")
     @CsvSource(value = {"3 + 0 + 4:true", "1.9 * 6.2:true", "10 + 1 + 4:true",
             "0 / 0:true"}, delimiter = ':')
-    void validateDoubleTest(String input, boolean expected) {
+    void validateDoubleTest1(String input, boolean expected) {
         StringValue stringValue = new StringValue(input);
-        InputValidation inputValidation = new InputValidation();
-        inputValidation.InputValidationDouble();
+        stringValue.validateDouble();
 
         Assertions.assertThat(true).isEqualTo(expected);
     }
 
     @ParameterizedTest
-    @DisplayName("올바른 연산자를 입력하였는지 검증")
-    @CsvSource(value = {"2 a 3:false", "2 * 3 + 4 +:true", "2 ! 3:false",
-            "2 2 2:false", ") ):false"}, delimiter = ':')
-    void validateOperatorTest(String input, boolean expected) {
-        boolean actualResult = true;
-        try {
-            InputValues inputValues = new InputValues(input);
-            inputValues.InputValidationOperator();
-        } catch (Exception e) {
-            actualResult = false;
-        }
-        Assertions.assertThat(actualResult).isEqualTo(expected);
+    @DisplayName("올바른 숫자를 입력하였는지 검증2")
+    @CsvSource(value = {"( + ! +:false", "*:false", "ans + 문:false"}, delimiter = ':')
+    void validateDoubleTest2(String input, boolean expected) {
+        Assertions.assertThatThrownBy(() -> {
+            StringValue stringValue = new StringValue(input);
+            stringValue.validateDouble();
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("피연산자가 잘못되었습니다.");
+
+        Assertions.assertThat(false).isEqualTo(expected);
     }
 
     @ParameterizedTest
-    @DisplayName("연산자로 수식이 끝나는 경우 검증")
-    @CsvSource(value = {"2 + 3 * 5 / 2:true", "2 +:false", "2 + 3 *:false"}, delimiter = ':')
-    void validateEndWithOperatorTest(String input, boolean expected) {
-        boolean actualResult = true;
-        try {
-            InputValues inputValues = new InputValues(input);
-            inputValues.InputValidationEndWithOperator();
-        } catch (Exception e) {
-            actualResult = false;
-        }
-        Assertions.assertThat(actualResult).isEqualTo(expected);
+    @DisplayName("올바른 연산자를 입력하였는지 검증1")
+    @CsvSource(value = {"2 * 3 + 4 +:true", "2 - 3:true", "2 * 2 * 2:true"}, delimiter = ':')
+    void validateOperatorTest1(String input, boolean expected) {
+        StringValue stringValue = new StringValue(input);
+        stringValue.validateOperator();
+
+        Assertions.assertThat(true).isEqualTo(expected);
     }
 
     @ParameterizedTest
-    @DisplayName("연산자 enum이 올바른지 검증")
-    @CsvSource(value = {"3:false", "+:true", "/:true",
-            "문자입력:false", "):false"}, delimiter = ':')
-    void getOperatorByStringTest(String input, boolean expected) {
-        boolean actualResult = true;
-        try {
+    @DisplayName("올바른 연산자를 입력하였는지 검증2")
+    @CsvSource(value = {"2 a 3:false", ") ):false"}, delimiter = ':')
+    void validateOperatorTest2(String input, boolean expected) {
+        Assertions.assertThatThrownBy(() -> {
+            StringValue stringValue = new StringValue(input);
+            stringValue.validateOperator();
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("연산자가 잘못되었습니다.");
+
+        Assertions.assertThat(false).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("연산자로 수식이 끝나는 경우 검증1")
+    @CsvSource(value = {"2 + 3 * 5 / 2:true", "2 + 3:true", "2 + 3 * 9:true"}, delimiter = ':')
+    void validateEndWithOperatorTest1(String input, boolean expected) {
+        StringValue stringValue = new StringValue(input);
+        stringValue.validateEndWithOperator();
+
+        Assertions.assertThat(true).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("연산자로 수식이 끝나는 경우 검증2")
+    @CsvSource(value = {"2 + 3 * 5 / :false", "2 + :false", "2 + 3 * :false"}, delimiter = ':')
+    void validateEndWithOperatorTest2(String input, boolean expected) {
+        Assertions.assertThatThrownBy(() -> {
+            StringValue stringValue = new StringValue(input);
+            stringValue.validateEndWithOperator();
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("연산자와 숫자가 맞지 않습니다.");
+
+        Assertions.assertThat(false).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("연산자 enum이 올바른지 검증1")
+    @CsvSource(value = {"+", "/", "*", " - "})
+    void getOperatorByStringTest1(String input) {
+        Operator.getOperatorByString(input);
+    }
+
+    @ParameterizedTest
+    @DisplayName("연산자 enum이 올바른지 검증2")
+    @CsvSource(value = {"3", "문자입력", ")"})
+    void getOperatorByStringTest2(String input) {
+        Assertions.assertThatThrownBy(() -> {
             Operator.getOperatorByString(input);
-        } catch (Exception e) {
-            actualResult = false;
-        }
-        Assertions.assertThat(actualResult).isEqualTo(expected);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("연산자가 잘못되었습니다.");
     }
 
     @ParameterizedTest

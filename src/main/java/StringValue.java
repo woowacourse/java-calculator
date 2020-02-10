@@ -14,7 +14,7 @@ public class StringValue {
     public StringValue(String value){
         InputValues inputValues = new InputValues();
 
-        inputValues.inputValue(value);
+        values = inputValues.inputValue(value);
     }
 
     public void validateDouble(){
