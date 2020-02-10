@@ -16,8 +16,7 @@ public class Numbers {
     }
 
     public void add(List<String> numbers) {
-        numbers.stream()
-                .forEach(s -> add(s));
+        numbers.forEach(this::add);
     }
 
     public String get(int index) {
