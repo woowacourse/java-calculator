@@ -1,48 +1,36 @@
 package domain;
 
 public enum OperatorGroup {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/");
+    PLUS("+") {
+        @Override
+        public double calculate(double x, double y) {
+            return Double.sum(x,y);
+        }
+    },
+    MINUS("-") {
+        @Override
+        public double calculate(double x, double y) {
+            return x - y;
+        }
+    },
+    MULTIPLY("*") {
+        @Override
+        public double calculate(double x, double y) {
+            return x * y;
+        }
+    },
+    DIVIDE("/") {
+        @Override
+        public double calculate(double x, double y) {
+            return x / y;
+        }
+    };
 
     OperatorGroup(String letter) {
         this.letter = letter;
     }
 
     private String letter;
-
-    private boolean isPlus() {
-        return this.letter.equals(OperatorGroup.PLUS.letter);
-    }
-
-    private boolean isMinus() {
-        return this.letter.equals(OperatorGroup.MINUS.letter);
-    }
-
-    private boolean isMultiply() {
-        return this.letter.equals(OperatorGroup.MULTIPLY.letter);
-    }
-
-    private boolean isDivide() {
-        return this.letter.equals(OperatorGroup.DIVIDE.letter);
-    }
-
-    public double calculateBy(double a, double b) {
-        if (isPlus()) {
-            return a + b;
-        }
-        if (isMinus()) {
-            return a - b;
-        }
-        if (isMultiply()) {
-            return a * b;
-        }
-        if (isDivide()) {
-            return a / b;
-        }
-        throw new IllegalStateException("잘못된 연산자가 입력되었습니다.");
-    }
 
     public static OperatorGroup stringToOperator(String operator) {
         if (operator.equals(PLUS.letter)) {
@@ -59,4 +47,6 @@ public enum OperatorGroup {
         }
         throw new IllegalStateException("잘못된 연산자가 입력되었습니다.");
     }
+
+    public abstract double calculate(double x, double y);
 }

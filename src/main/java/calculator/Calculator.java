@@ -6,7 +6,6 @@ import parser.InputParser;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
@@ -33,7 +32,7 @@ public class Calculator {
         while (operatorIndex < operators.size()) {
             OperatorGroup newOperator = operators.get(operatorIndex);
             Double newNumber = Double.parseDouble(numbers.get(numberIndex));
-            result = newOperator.calculateBy(result, newNumber);
+            result = newOperator.calculate(result, newNumber);
             numberIndex++;
             operatorIndex++;
         }
