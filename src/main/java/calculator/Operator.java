@@ -30,15 +30,10 @@ public enum Operator {
     }
 
     public static Operator getOperator(String symbol) throws IllegalArgumentException {
-        List<Operator> results = Arrays.stream(Operator.values())
+        return Arrays.stream(Operator.values())
                 .filter(t -> t.getSymbol().equals(symbol))
-                .collect(Collectors.toUnmodifiableList());
-
-        if (results.size() == ONE_SIZE) {
-            return results.get(ZERO_INDEX);
-        }
-
-        throw new IllegalArgumentException(ErrorView.INVALID_EXPRESSION_ERROR_STR);
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorView.INVALID_EXPRESSION_ERROR_STR));
     }
 
     public double calculate(double a, double b) {
