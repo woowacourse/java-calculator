@@ -12,7 +12,7 @@ public class InputView {
         String input = null;
         while (isException) {
             input = scanner.nextLine().trim();
-            isException = InputValidation.checkNullOroSpace(input);
+            isException = InputValidation.checkNullOrSpace(input);
         }
         return input;
     }
