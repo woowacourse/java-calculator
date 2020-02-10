@@ -62,7 +62,7 @@ public class OperatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {3, 0})
+    @ValueSource(ints = {3, 0, -3})
     void calculate_ShouldGenerateIllegalArgumentExceptionForDIVISION(int dividend) {
         Assertions.assertThatThrownBy(() -> Operator.DIVISION.calculate(dividend, 0))
                 .isInstanceOf(IllegalArgumentException.class);
