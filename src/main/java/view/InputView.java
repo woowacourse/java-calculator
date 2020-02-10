@@ -18,7 +18,7 @@ public class InputView {
     }
 
     private static void checkIsBlank(String input) throws IllegalArgumentException {
-        if (input.length() == 0) {
+        if (input.isEmpty()) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
     }

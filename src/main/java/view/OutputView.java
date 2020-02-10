@@ -1,10 +1,10 @@
 package view;
 
 public class OutputView {
-    private static String firstString = "결과 값은 ";
-    private static String endString = "입니다. @author 최근휘 kuenhwi@google.com";
+    private static final String FIRST_STRING = "결과 값은 ";
+    private static final String END_STRING = "입니다. @author 최근휘 kuenhwi@google.com";
 
     public static void printResult(String result) {
-        System.out.println(firstString + result + endString);
+        System.out.println(FIRST_STRING + result + END_STRING);
     }
 }

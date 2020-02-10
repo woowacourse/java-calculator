@@ -13,10 +13,13 @@ public enum Operator {
     MULTIPLICATION((a, b) -> a * b, "*"),
     DIVISION((a, b) -> {
         if (b == 0) {
-            throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
+            throw new IllegalArgumentException(ErrorView.INVALID_EXPRESSION_ERROR_STR);
         }
         return a / b;
     }, "/");
+
+    private static final Integer ZERO_INDEX = 0;
+    private static final Integer ONE_SIZE = 1;
 
     private BinaryOperator<Double> operate;
     private String symbol;
@@ -31,11 +34,11 @@ public enum Operator {
                 .filter(t -> t.getSymbol().equals(symbol))
                 .collect(Collectors.toUnmodifiableList());
 
-        if (results.size() == 1) {
-            return results.get(0);
+        if (results.size() == ONE_SIZE) {
+            return results.get(ZERO_INDEX);
         }
 
-        throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
+        throw new IllegalArgumentException(ErrorView.INVALID_EXPRESSION_ERROR_STR);
     }
 
     public double calculate(double a, double b) {

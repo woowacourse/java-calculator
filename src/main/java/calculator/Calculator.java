@@ -6,18 +6,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
-    private static String delimiter = " ";
+    private static final String DELIMITER = " ";
+    private static final Integer ZERO_INDEX = 0;
+    private static final Integer FIRST_OPERATOR_INDEX = 1;
+    private static final Integer NEXT_OPERATOR_STEP = 2;
 
     public static String calculate(String expression) throws IllegalArgumentException {
-        List<String> tokens = Arrays.asList(expression.split(delimiter));
+        List<String> tokens = Arrays.asList(expression.split(DELIMITER));
 
         checkIsValidSize(tokens);
-        checkIsNumber(tokens.get(0));
+        checkIsNumber(tokens.get(ZERO_INDEX));
 
-        double result = Integer.parseInt(tokens.get(0));
-        for (int i = 1; i < tokens.size(); i += 2) {
-            checkIsNumber(tokens.get(i + 1));
-            result = operate(result, tokens.get(i), Integer.parseInt(tokens.get(i + 1)));
+        double result = Integer.parseInt(tokens.get(ZERO_INDEX));
+        for (int i = FIRST_OPERATOR_INDEX; i < tokens.size(); i += NEXT_OPERATOR_STEP) {
+            checkIsNumber(tokens.get(i + FIRST_OPERATOR_INDEX));
+            result = operate(result, tokens.get(i), Integer.parseInt(tokens.get(i + FIRST_OPERATOR_INDEX)));
         }
 
         return Double.toString(result);
@@ -34,28 +37,28 @@ public class Calculator {
             return;
         }
 
-        throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
+        throw new IllegalArgumentException(ErrorView.INVALID_EXPRESSION_ERROR_STR);
     }
 
     private static boolean isValidSize(List<String> tokens) {
-        return (tokens.size() & 1) == 1;
+        return (tokens.size() & FIRST_OPERATOR_INDEX) == FIRST_OPERATOR_INDEX;
     }
 
     private static void checkIsNumber(String term) throws IllegalArgumentException {
         if (isNumber(term)) {
             return;
         }
-        throw new IllegalArgumentException(ErrorView.InvalidExpressionErrorStr);
+        throw new IllegalArgumentException(ErrorView.INVALID_EXPRESSION_ERROR_STR);
     }
 
     private static boolean isNumber(String term) {
-        int firstIndex = 0;
+        int startIndex = ZERO_INDEX;
 
         if (isFirstMinusMoreThanOneSize(term)) {
-            firstIndex = 1;
+            startIndex = FIRST_OPERATOR_INDEX;
         }
 
-        for (int i = firstIndex; i < term.length(); i++) {
+        for (int i = startIndex; i < term.length(); i++) {
             if (!Character.isDigit(term.charAt(i))) {
                 return false;
             }
@@ -65,6 +68,6 @@ public class Calculator {
     }
 
     private static boolean isFirstMinusMoreThanOneSize(String term) {
-        return term.startsWith("-") && term.length() > 1;
+        return term.startsWith("-") && term.length() > FIRST_OPERATOR_INDEX;
     }
 }
