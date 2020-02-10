@@ -3,9 +3,7 @@ package inputView;
 public class InputValidator {
 
 	public boolean isNotValid(String input) {
-		if (InputValidatorUtil.isNotValidWithinRegex(input)
-			|| InputValidatorUtil.zeroDivisionExists(input)
-			|| InputValidatorUtil.validateAfterSplit(input)) {
+		if (InputValidatorUtil.isNotValidWithinRegex(input) || InputValidatorUtil.validateAfterSplit(input)) {
 			askAgain();
 			return true;
 		}

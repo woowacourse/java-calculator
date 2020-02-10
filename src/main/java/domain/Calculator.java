@@ -12,9 +12,17 @@ public class Calculator {
 
 	public void run() {
 		do {
+			executeWithHandlingException();
+		} while (inputHandler.isStartingAgain());
+	}
+
+	private void executeWithHandlingException() {
+		try {
 			double result = getResult(inputHandler.getInput());
 			System.out.println("정답은 " + result + " 입니다.");
-		} while (inputHandler.isStartingAgain());
+		} catch (ArithmeticException e) {
+			System.out.println("0 으로는 나눌 수 없습니다.");
+		}
 	}
 
 	public double getResult(String[] input) {

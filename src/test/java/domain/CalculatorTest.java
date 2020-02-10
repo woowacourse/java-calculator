@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -28,5 +30,13 @@ public class CalculatorTest {
 			Arguments.of("4 / 0.2", 20, "divide works"),
 			Arguments.of("1 + 3 * 4 / 2 - 7 - 3", -2, "many operators work properly")
 		);
+	}
+
+	@Test
+	@DisplayName("zero division error throws exception")
+	void zeroDivisionExceptionTest() {
+		assertThatThrownBy(() -> {
+			calculator.getResult("4 / 0".split(" "));
+		}).isInstanceOf(ArithmeticException.class).hasMessageContaining("0으로 나눌 수 없습니다.");
 	}
 }
