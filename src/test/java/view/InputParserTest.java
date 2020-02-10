@@ -1,14 +1,16 @@
 package view;
 
+import domain.OperatorGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import parser.InputParser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-class InputParserTest {
+public class InputParserTest {
 
     @DisplayName("문자열 분리 테스트")
     @Test
@@ -22,7 +24,7 @@ class InputParserTest {
     @Test
     void extractNumber() {
         String[] splitted = {"2", "+", "3", "*", "5"};
-        ArrayList<String> result = InputParser.extractNumber(splitted);
+        List<String> result = InputParser.extractNumber(splitted);
         ArrayList<String> expected = new ArrayList<>();
         expected.add("2");
         expected.add("3");
@@ -30,11 +32,12 @@ class InputParserTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @DisplayName("연산자 추출 테스트")
     @Test
     void extractOperator() {
         String[] splitted = {"2", "+", "3", "*", "5"};
-        ArrayList<String> result = InputParser.extractOperator(splitted);
-        ArrayList<String> expected = new ArrayList<>();
+        List<OperatorGroup> result = InputParser.extractOperator(splitted);
+        List<String> expected = new ArrayList<>();
         expected.add("+");
         expected.add("*");
         assertThat(result).isEqualTo(expected);

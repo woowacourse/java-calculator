@@ -3,6 +3,7 @@ package parser;
 import domain.OperatorGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InputParser {
     private final static String SPACE = " ";
@@ -11,8 +12,8 @@ public class InputParser {
         return input.split(SPACE);
     }
 
-    public static ArrayList<String> extractNumber(String[] input) {
-        ArrayList<String> numbers = new ArrayList<>();
+    public static List<String> extractNumber(String[] input) {
+        List<String> numbers = new ArrayList<>();
         for (int i = 0; i < input.length; i++) {
             if (i % 2 == 0) {
                 numbers.add(input[i]);
@@ -21,8 +22,8 @@ public class InputParser {
         return numbers;
     }
 
-    public static ArrayList<OperatorGroup> extractOperator(String[] input) {
-        ArrayList<OperatorGroup> operators = new ArrayList<>();
+    public static List<OperatorGroup> extractOperator(String[] input) {
+        List<OperatorGroup> operators = new ArrayList<>();
         for (int i = 0; i < input.length; i++) {
             if (i % 2 != 0) {
                 operators.add(OperatorGroup.stringToOperator(input[i]));
