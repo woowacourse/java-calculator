@@ -27,7 +27,7 @@ public class InputValidation {
      * @throws Exception
      */
     public static void validateSpace(String[] inputs) throws Exception {
-        if (inputs.length == 0) {
+        if (inputs[0].isEmpty()) {
             throw new Exception("식이 입력되지 않았습니다.");
         }
     }
