@@ -17,7 +17,7 @@ public class ElementValidatorTest {
     @Test
     @DisplayName("숫자 위치에 숫자 이외의 문자가 입력됐을 때 True를 반환한다.")
     void checkNumberValueTest() {
-        String[] wrongEquations = {"1","+","a"};
+        String[] wrongEquations = {"1", "+", "a"};
 
         Assertions.assertThatThrownBy(() -> {
             elementValidator.checkNumberValue(wrongEquations);
@@ -26,30 +26,11 @@ public class ElementValidatorTest {
     }
 
     @Test
-    @DisplayName("나누기 연산자 바로뒤에 0이 있으면 True를 반환하고 아니면 False를 반환한다.")
-    void divideByZeroTest() {
-        String[] wrongEquations = {"1","/","0"};
-        String[] rightEquations = {"1","/","1"};
-        assertThat(elementValidator.isDividedByZero(wrongEquations,1)).isEqualTo(true);
-        assertThat(elementValidator.isDividedByZero(rightEquations,1)).isEqualTo(false);
-    }
-
-    @Test
     @DisplayName("식이 완성되지 않을 경우 True를 반환한다.")
     void invalidEquationTest() {
-        String[] wrongEquations = {"1","/","2","+"};
-        String[] rightEquations = {"1","/","5"};
+        String[] wrongEquations = {"1", "/", "2", "+"};
+        String[] rightEquations = {"1", "/", "5"};
         assertThat(elementValidator.isInvalidEquation(wrongEquations)).isEqualTo(true);
         assertThat(elementValidator.isInvalidEquation(rightEquations)).isEqualTo(false);
     }
-
-    @Test
-    @DisplayName("사칙연산 이외의 연산자가 입력됐을 때 True를 반환한다.")
-    void wrongOperatorTest() {
-        String[] wrongEquations = {"1","^","2"};
-        String[] rightEquations = {"1","/","5"};
-        assertThat(elementValidator.isWrongOperator(wrongEquations, 1)).isEqualTo(true);
-        assertThat(elementValidator.isWrongOperator(rightEquations, 1)).isEqualTo(false);
-    }
-
 }

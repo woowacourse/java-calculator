@@ -14,11 +14,11 @@ public class Calculator {
     }
 
     public int divideEquationIntoOperandsOperator(String[] equation) {
-        for(int i = 0; i < equation.length; i += 2) {
+        for (int i = 0; i < equation.length; i += 2) {
             numberQueue.add(Double.parseDouble(equation[i]));
         }
 
-        for(int i = 1; i < equation.length; i += 2) {
+        for (int i = 1; i < equation.length; i += 2) {
             operatorQueue.add(equation[i]);
         }
         return operatorQueue.size();
@@ -26,7 +26,7 @@ public class Calculator {
 
     public double checkOperatorAndCalculate(int queueSize) {
         double result = numberQueue.poll();
-        for(int i = 0; i < queueSize; i++) {
+        for (int i = 0; i < queueSize; i++) {
             String currentOperator = operatorQueue.poll();
             double currentOperand = numberQueue.poll();
             result = calculateEquation(result, currentOperator, currentOperand);

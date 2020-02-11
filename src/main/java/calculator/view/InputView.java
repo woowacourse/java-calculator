@@ -12,13 +12,13 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String[] equations;
 
-        while(true) {
+        while (true) {
             try {
                 String equation = scanner.nextLine();
                 equations = equation.split(EQUATION_DELIMITER);
                 validator.checkEquationElementValue(equations);
                 break;
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("다시 입력해주세요");
             }
         }
