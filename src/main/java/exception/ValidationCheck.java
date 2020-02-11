@@ -1,25 +1,44 @@
 package exception;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class ValidationCheck {
     private final String PATTERN = "(^[0-9]*$)";
     private final String PATTS = "^[+\\-\\*/]$";
 
-    public boolean isNumber(List<String> nums) {
-        boolean check = true;
-        for (String num : nums) {
-            check = check && isMatch(PATTERN, num);
+    public boolean isValid(String[] expressions) {
+        for(int i = 0; i < expressions.length; i++) {
+            if (checkValidation(expressions, i)) return false;
         }
-        return check;
+        return true;
     }
 
-    public boolean isValidOperator(List<String> opers) {
-        for(String oper : opers) {
-            if(!isMatch(PATTS, oper)){
+    private boolean checkValidation(String[] expressions, int i) {
+        if(i % 2 == 0) {
+            if(!isNumber(expressions[i])) {
+                System.out.println("not numbers");
                 return false;
             }
+        }
+        else if(i % 2 == 1) {
+            if(!isValidOperator(expressions[i])) {
+                System.out.println("not operators");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isNumber(String number) {
+        if(!isMatch(PATTERN, number)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidOperator(String operator) {
+        if(!isMatch(PATTS, operator)){
+            return false;
         }
         return true;
     }

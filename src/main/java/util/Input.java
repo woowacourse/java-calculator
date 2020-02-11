@@ -8,27 +8,26 @@ import exception.ValidationCheck;
 
 public class Input {
     private Scanner sc = new Scanner(System.in);
-    private List<String> numbers;
-    private List<String> operators;
+    private List<String> numbers = new ArrayList<>();
+    private List<String> operators = new ArrayList<>();
     private ValidationCheck validationCheck = new ValidationCheck();
 
     public List<List> expressions = new ArrayList<>();
 
     public List<List> inputValue() {
         String value;
-
-        numbers = new ArrayList<>();
-        operators = new ArrayList<>();
+        ValidationCheck validationCheck = new ValidationCheck();
 
         System.out.println("Enter Value : ");
         value = sc.nextLine();
 
         String[] valueMembers = value.split(" ");
-        divideNumsAndOpers(valueMembers);
 
-        if(!isValid()) {
+        if(!validationCheck.isValid(valueMembers)) {
             return inputValue();
         }
+
+        divideNumsAndOpers(valueMembers);
 
         expressions.add(numbers);
         expressions.add(operators);
@@ -41,16 +40,15 @@ public class Input {
         }
     }
 
-    private boolean isValid(){
-        if (!validationCheck.isNumber(numbers)) {
-            System.out.println("not numbers");
-            return false;
-        } else if (!validationCheck.isValidOperator(operators)) {
-            System.out.println("not opers");
-            return false;
-        }
-        return true;
-    }
+//    private boolean isValid(){
+//        if (!validationCheck.isNumber(numbers)) {
+//
+//            return false;
+//        } else if (!validationCheck.isValidOperator(operators)) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     private void addNumbersOrOperators(int i, String[] valueMembers){
         boolean isNumberPlace = (i % 2 == 0);

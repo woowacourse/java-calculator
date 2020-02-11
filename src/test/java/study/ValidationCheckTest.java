@@ -32,13 +32,16 @@ public class ValidationCheckTest {
     @Test
     @DisplayName("Exception isNumber Test")
     void isNumberCorrect(){ //numbers에 담긴 숫자가 숫자인지 테스트
-        assertThat(validationCheck.isNumber(numbers)).isTrue();
+        for(String number : numbers){
+            assertThat(validationCheck.isNumber(number)).isTrue();
+        }
     }
 
     @Test
     @DisplayName("Exception isValidOperator Test")
     void ValidOperaterTest(){   //opers에 담긴 문자가 사칙연산인지 테스트
-        assertThat(validationCheck.isValidOperator(operators)).isTrue();
+        for(String operator : operators)
+        assertThat(validationCheck.isValidOperator(operator)).isTrue();
     }
 
 }
