@@ -35,7 +35,11 @@ public class Calculator {
         return 0; // TODO
     }
 
-    public int calculate(int answer, List<Integer> nums, List<String> opers){
+    public int calculate(List<List> expressions){
+        List<Integer> nums = initNums(expressions);
+        List<String> opers = initOpers(expressions);
+        int answer = nums.remove(0);
+
         for (int i = 0; i < opers.size(); i++) {
             int target = nums.remove(0);
             answer = operation(answer, opers.get(i), target);
