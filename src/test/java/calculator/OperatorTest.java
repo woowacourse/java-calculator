@@ -1,22 +1,27 @@
 package calculator;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class OperatorTest {
     @Test
-    public void isOperator() {
-        final String CORRECT_CASE = "+";
-        final String WRONG_CASE = "+ ";
-
-        Assertions.assertThat(Operator.isOperator(CORRECT_CASE)).isEqualTo(true);
-        Assertions.assertThat(Operator.isOperator(WRONG_CASE)).isEqualTo(false);
+    @DisplayName("getOperatorByString 메서드에 정상적인 input을 넣는 경우")
+    public void getOperatorByStringAtCorrectUse() {
+        Assertions.assertThat(Operator.getOperatorByString("+")).isEqualTo(Operator.ADD);
+        Assertions.assertThat(Operator.getOperatorByString("-")).isEqualTo(Operator.SUBTRACT);
+        Assertions.assertThat(Operator.getOperatorByString("*")).isEqualTo(Operator.MULTIPLY);
+        Assertions.assertThat(Operator.getOperatorByString("/")).isEqualTo(Operator.DIVIDE);
     }
 
-    @Test
-    public void operate() {
-        Operator operator = new Operator("+");
-        operator.operate(2, 3);
-        Assertions.assertThat(operator.operate(2, 3)).isEqualTo(5);
+    @ParameterizedTest
+    @CsvSource({"aa", "+-", "0", "%"})
+    @DisplayName("getOperatorByString 메서드에 비정상적인 input을 넣는 경우")
+    public void getOperatorByStringAtAbnormalUse(String input) {
+        Assertions.assertThatThrownBy(
+            () -> System.out.println(input + ":" + Operator.getOperatorByString(input))
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }

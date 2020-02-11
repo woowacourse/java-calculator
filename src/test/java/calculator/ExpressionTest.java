@@ -1,19 +1,19 @@
 package calculator;
 
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ExpressionTest {
-    private final String CORRECT_CASE = "2 + 3 * 2";
-    private final String WRONG_CASE = "2 + 3 *2";
-
     @Test
-    public void constructor() {
-        System.out.println("correct testcase test start");
-        Expression correctTest = new Expression(CORRECT_CASE);
-        System.out.println("correct testcase test end");
+    @DisplayName("비정상적인 입력을 비정상으로 인식하는지")
+    public void abnormalInputTest() {
+        String[] abnormalCases = {"2 + 3 *2", "", "히히", "5 3"};
 
-        System.out.println("wrong testcase start");
-        Expression wrongTest = new Expression(WRONG_CASE);
-        System.out.println("correct testcase test end");
+        for (String testcase : abnormalCases) {
+            Assertions.assertThatThrownBy(()->new Expression(testcase))
+                .isInstanceOf(IllegalArgumentException.class);
+        }
+
     }
 }
