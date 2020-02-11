@@ -5,7 +5,6 @@ public class Expression {
 
     public Expression(String inputString) {
         String[] inputStringArray = splitInput(inputString);
-
         if (!isCorrectStringArray(inputStringArray)) {
             throw new IllegalArgumentException("입력은 다음과 같은 규칙을 따라야 합니다.\n"
                 + " * 1번째, 3번째, 5번째 등 홀수번 째 문자는 숫자여야합니다.\n"
@@ -14,7 +13,6 @@ public class Expression {
                 + " * 각 문자들 사이에는 한 칸의 공백이 존재해야 하며, "
                 + "문장의 시작과 끝에는 공백이 없어야 합니다.\n");
         }
-
         this.expression = inputStringArray;
     }
 
@@ -30,10 +28,20 @@ public class Expression {
         boolean ret = true;
 
         for (int i = 1; i < input.length && ret == true; i += 2) {
-            ret = Operator.isOperator(input[i]);
+            ret = isOperator(input, i);
         }
 
         return ret;
+    }
+
+    private boolean isOperator(String[] input, int index) {
+        try {
+            Operator.getOperatorByString(input[index]);
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
     }
 
     private boolean isNumberAtEvenIndex(String[] input) {
@@ -60,28 +68,23 @@ public class Expression {
         return input.length % 2 == 1;
     }
 
-    public Operand getOperand(int position) {
+    public double getOperand(int position) {
         int indexByPosition = getOperandIndexByPosition(position);
 
         if (indexByPosition >= expression.length || indexByPosition < 0) {
-            return null;
+            throw new ArrayIndexOutOfBoundsException();
         }
 
-        return new Operand(expression[indexByPosition]);
+        return Double.parseDouble(expression[indexByPosition]);
     }
 
     private int getOperandIndexByPosition(int position) {
         return (position - 1) * 2;
     }
 
-    public Operator getOperator(int position) {
+    public String getOperator(int position) {
         int indexByPosition = getOperatorIndexByPosition(position);
-
-        if (indexByPosition >= expression.length || indexByPosition <= 0) {
-            return null;
-        }
-
-        return new Operator(expression[indexByPosition]);
+        return expression[indexByPosition];
     }
 
     private int getOperatorIndexByPosition(int position) {
