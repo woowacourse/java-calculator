@@ -26,7 +26,9 @@ public class Input {
         String[] valueMembers = value.split(" ");
         divideNumsAndOpers(valueMembers);
 
-        if(!isValid()) { return inputValue(); }
+        if(!isValid()) {
+            return inputValue();
+        }
 
         expressions.add(numbers);
         expressions.add(operators);
