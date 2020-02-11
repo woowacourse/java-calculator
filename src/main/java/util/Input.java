@@ -54,11 +54,10 @@ public class Input {
 
     private void addNumbersOrOperators(int i, String[] valueMembers){
         boolean isNumberPlace = (i % 2 == 0);
-        boolean isOperatorPlace = (i%2 == 1);
 
         if (isNumberPlace) {
             numbers.add(valueMembers[i]);
-        } else if (isOperatorPlace) {
+        } else if (!isNumberPlace) {
             operators.add(valueMembers[i]);
         }
     }

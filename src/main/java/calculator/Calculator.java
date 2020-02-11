@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Calculator {
-    private Scanner sc = new Scanner(System.in);
-
     List<String> initOpers(List<List> expressions) {
         return expressions.get(1);
     }
