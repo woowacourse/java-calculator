@@ -10,7 +10,6 @@ public class Input {
     private Scanner sc = new Scanner(System.in);
     private List<String> numbers = new ArrayList<>();
     private List<String> operators = new ArrayList<>();
-    private ValidationCheck validationCheck = new ValidationCheck();
 
     public List<List> expressions = new ArrayList<>();
 
@@ -39,16 +38,6 @@ public class Input {
             addNumbersOrOperators(i, valueMembers);
         }
     }
-
-//    private boolean isValid(){
-//        if (!validationCheck.isNumber(numbers)) {
-//
-//            return false;
-//        } else if (!validationCheck.isValidOperator(operators)) {
-//            return false;
-//        }
-//        return true;
-//    }
 
     private void addNumbersOrOperators(int i, String[] valueMembers){
         boolean isNumberPlace = (i % 2 == 0);
