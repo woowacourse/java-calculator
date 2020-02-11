@@ -16,11 +16,12 @@ public class ValidationCheck {
     }
 
     public boolean isValidOperator(List<String> opers) {
-        boolean check = true;
         for(String oper : opers) {
-            check = check && isMatch(PATTS, oper);
+            if(!isMatch(PATTS, oper)){
+                return false;
+            }
         }
-        return check;
+        return true;
     }
 
     public boolean isMatch(String pattern, String target) {
